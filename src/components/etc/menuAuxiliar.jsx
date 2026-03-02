@@ -105,7 +105,7 @@ const NavbarAuxiliar = () => {
               </NavLink>
               <ul className="submenu-list">
                 <li><NavLink to={LOCAL_URL + "/auxiliar/reportes-por-tramite"} className="submenu-link">Por Trámite</NavLink></li>
-                <li><NavLink to={LOCAL_URL + "/auxiliar/reporte-consolidado"} className="submenu-link">Consolidado</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/auxiliar/reportes-consolidado"} className="submenu-link">Consolidado</NavLink></li>
               </ul>
             </div>
             <div className="nav-item-container has-submenu mt-4" >

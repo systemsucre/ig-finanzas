@@ -150,7 +150,7 @@ const NavbarGerente = () => {
               </NavLink>
               <ul className="submenu-list">
                 <li><NavLink to={LOCAL_URL + "/gerente/reportes-por-caja"} className="submenu-link">Por Caja</NavLink></li>
-                <li><NavLink to={LOCAL_URL + "/gerente/reporte-consolidado"} className="submenu-link">Consolidado</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/gerente/reportes-consolidado"} className="submenu-link">Consolidado</NavLink></li>
               </ul>
             </div>
             <div className="nav-item-container has-submenu mt-4" >

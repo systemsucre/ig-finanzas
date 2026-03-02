@@ -34,7 +34,6 @@ export function ListaTramites() {
                             Panel de control de gastos - {localStorage.getItem('entidad')} 
                         </p>
                     </div>
-
                 </div>
 
                 <div className="panel-custom bg-white rounded shadow-sm p-1">

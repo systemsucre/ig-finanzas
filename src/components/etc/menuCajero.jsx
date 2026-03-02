@@ -147,7 +147,7 @@ const NavbarCajero = () => {
               </NavLink>
               <ul className="submenu-list">
                 <li><NavLink to={LOCAL_URL + "/cajero/reportes-por-caja"} className="submenu-link">Por Caja</NavLink></li>
-                <li><NavLink to={LOCAL_URL + "/cajero/reporte-consolidado"} className="submenu-link">Consolidado</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/cajero/reportes-consolidado"} className="submenu-link">Consolidado</NavLink></li>
               </ul>
             </div>
 

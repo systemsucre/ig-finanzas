@@ -95,7 +95,7 @@ const FormularioSalida = () => {
                                         cambiarEstado={setters.setFechaSolicitud}
                                         tipo='date'
                                         name='fecha_solicitud'
-                                        etiqueta={'Fecha de Solicitud *'}
+                                        etiqueta={'Fecha de gasto *'}
                                     />
                                 </div>
 

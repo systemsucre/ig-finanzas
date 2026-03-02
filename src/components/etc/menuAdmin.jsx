@@ -159,7 +159,7 @@ const NavbarAdmin = () => {
               </NavLink>
               <ul className="submenu-list">
                 <li><NavLink to={LOCAL_URL + "/admin/reportes-por-Caja"} className="submenu-link">Por Caja</NavLink></li>
-                <li><NavLink to={LOCAL_URL + "/admin/reporte-consolidado"} className="submenu-link">Consolidado</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/admin/reportes-consolidado"} className="submenu-link">Consolidado</NavLink></li>
               </ul>
             </div>
 
