@@ -11,6 +11,7 @@ export const UseCustomIngresos = () => {
     // ESTADOS DEL FORMULARIO (Sin estado para ID, ya que el server lo genera al insertar)
     const [monto, setMonto] = useState({ campo: '', valido: null }); // Solo para edición
     const [tipo, setTipo] = useState({ campo: '', valido: null }); // tipo transferencia
+    const [idCliente, setIdCliente] = useState({ campo: '', valido: null });
     const [idIngreso, setIdIngreso] = useState({ campo: '', valido: null }); // Solo para edición
     const [idTramite, setIdTramite] = useState({ campo: '', valido: null });
     const [detalle, setDetalle] = useState({ campo: '', valido: null });
@@ -19,6 +20,7 @@ export const UseCustomIngresos = () => {
     // ESTADOS DE DATOS
     const [ingresos, setIngresos] = useState([]);
     const [ingresosFiltrados, setIngresosFiltrados] = useState([]);
+    const [listaClientes, setListaClientes] = useState([]);
     const [cargando, setCargando] = useState(false);
 
 
@@ -42,6 +44,7 @@ export const UseCustomIngresos = () => {
 
             setIdIngreso({ campo: data.id, valido: 'true' });
             setMonto({ campo: data.monto, valido: 'true' });
+            setIdCliente({ campo: data.id_cliente, valido: 'true' });
             setTipo({ campo: data.tipo, valido: 'true' });
             setIdTramite({ campo: data.id_tramite, valido: 'true' });
             setDetalle({ campo: data.detalle, valido: 'true' });
@@ -53,6 +56,11 @@ export const UseCustomIngresos = () => {
         setCargando(false);
     };
 
+    // 2. CARGAR AUXILIARES (Para los combobox del formulario)
+    const cargarAuxiliares = async ()=>  {
+        const resClientes = await start(`${URL}ingresos-cajero/listar-clientes`);
+        if (resClientes) setListaClientes(resClientes);
+    };
 
     // 4. GUARDAR (CREAR O ACTUALIZAR)
     const handleGuardar = async (e, esEdicion = false) => {
@@ -66,6 +74,7 @@ export const UseCustomIngresos = () => {
 
         const payload = {
             ...(esEdicion && { id: idIngreso.campo }),
+            id_cliente: idCliente.campo,
             id_tramite: idTramite.campo,
             monto: monto.campo,
             tipo: tipo.campo,
@@ -87,7 +96,7 @@ export const UseCustomIngresos = () => {
                 if (rol === 1) base = '/admin';
                 else if (rol === 2) base = '/gerente';
                 else if (rol === 3) base = '/cajero';
-                const rutaDestino = LOCAL_URL + '/'+base+'/listar-ingresos/' + idTramite.campo;
+                const rutaDestino = LOCAL_URL + '/' + base + '/listar-ingresos/' + idTramite.campo;
 
                 // console.log(rutaDestino, '   ruta destino')
                 setTimeout(() => {
@@ -145,7 +154,7 @@ export const UseCustomIngresos = () => {
         console.log("Iniciando exportación...", { output, row });
 
         const response = await ticketIngresoIndividual(output, { ingreso: row });
-        console.log(response, ' reponse')
+        // console.log(response, ' reponse')
         if (!response?.success) {
             alert(response?.message);
             return;
@@ -190,13 +199,15 @@ export const UseCustomIngresos = () => {
 
     return {
         ingresos, ingresosFiltrados, cargando,
-        estados: { idTramite, monto, tipo, detalle, fechaIngreso },
-        setters: { setIdTramite, setMonto, setTipo, setDetalle, setFechaIngreso },
+        estados: { idTramite, monto, idCliente, tipo, detalle, fechaIngreso },
+        setters: { setIdTramite, setMonto, setIdCliente, setTipo, setDetalle, setFechaIngreso },
         listarIngresos,
+        listaClientes,
         cargarIngresoPorId,
         handleGuardar,
         eliminarIngreso,
         handleSearch,
+        cargarAuxiliares,
         exportPDfIngresos,
         allListIngresos: () => setIngresosFiltrados(ingresos),
     };

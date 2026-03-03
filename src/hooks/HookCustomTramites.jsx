@@ -29,7 +29,6 @@ export const useTramites = () => {
     const [cargando, setCargando] = useState(false);
 
     // Listas para los Selects del formulario
-    const [listaClientes, setListaClientes] = useState([]);
     const [listaTipos, setListaTipos] = useState([]);
 
     // 1. LISTAR TRÁMITES (Principal)
@@ -48,9 +47,7 @@ export const useTramites = () => {
 
     // 2. CARGAR AUXILIARES (Para los combobox del formulario)
     const cargarAuxiliares = useCallback(async () => {
-        const resClientes = await start(`${URL}tramites/listar-clientes`);
         const resTipos = await start(`${URL}tramites/listar-tipo-tramites`);
-        if (resClientes) setListaClientes(resClientes);
         if (resTipos) setListaTipos(resTipos);
     }, []);
 
@@ -74,8 +71,7 @@ export const useTramites = () => {
             // console.log(res,' codigo', id)
             setTramites(res)
             setCodigo({ campo: res.codigo, valido: 'true' });
-            setIdCliente({ campo: res.id_cliente, valido: 'true' });
-            setIdTipoTramite({ campo: res.id_tipo_tramite, valido: 'true' });
+            setIdTipoTramite({ campo: res.id_tipo_tramite, valido: 'true' });  
             setFechaIngreso({ campo: res.fecha_ingreso.split('T')[0], valido: 'true' });
             setFechaFinalizacion({ campo: res.fecha_finalizacion.split('T')[0], valido: 'true' });
             setEstado({ campo: res.estado, valido: 'true' });
@@ -91,7 +87,6 @@ export const useTramites = () => {
 
 
         const data = { 
-            id_cliente: idCliente.campo,
             fecha_ingreso: fechaIngreso.campo,
             fecha_finalizacion: fechaFinalizacion.campo,
             plazo: plazo.campo,
@@ -247,7 +242,7 @@ export const useTramites = () => {
 
     return {
         tramitesFiltrados, tramites,
-        auxiliares: { listaClientes, listaTipos },
+        auxiliares: {  listaTipos },
         handleSearch,
         cargando,
         estados: {

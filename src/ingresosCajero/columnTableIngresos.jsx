@@ -13,6 +13,16 @@ export const ColumnsTableIngresos = [
         sortable: true,
     },
     {
+        label: 'empleador',
+        field: 'cliente_nombre', // Viene del CONCAT en el backend
+        render: (row) => (
+            <div>
+                <div className="fw-bold">{row.cliente_nombre}</div>
+                <small className="text-muted">ID EMPLEADOR: {row.id_cliente}</small>
+            </div>
+        )
+    },
+    {
         label: 'Concepto de Ingreso',
         field: 'detalle',
         render: (row) => (

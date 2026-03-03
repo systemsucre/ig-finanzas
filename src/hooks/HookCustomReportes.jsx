@@ -18,7 +18,7 @@ export const useReportes = () => {
 
     // 1. LISTAR TRÁMITES (Principal)
     const listarTramites = useCallback(async () => {
-        const res = await start(`${URL}comuun/listar-tramites`,);  
+        const res = await start(`${URL}comuun/listar-tramites`,);
         // alert()
         if (res) {
             // console.log(res, '  lista tramites')
@@ -51,10 +51,21 @@ export const useReportes = () => {
         const salidas = await start(`${URL}comuun/salidas-excel`, { id, desde, hasta });
         const tramite = (await start(`${URL}comuun/listar-tramites`, { id }))[0];
 
-        // Combinar y normalizar datos
+        // En tu hook useReportes, dentro de reporteGeneral:
         const mixto = [
-            ...ingresos.map(i => ({ ...i, tipo_mov: 'INGRESO', fecha: i.fecha_ingreso })),
-            ...salidas.map(s => ({ ...s, tipo_mov: 'SALIDA', fecha: s.fecha_solicitud }))
+            ...ingresos.map(i => ({
+                ...i,
+                tipo_mov: 'INGRESO',
+                fecha: i.fecha_ingreso,
+                // Usamos || para capturar el nombre venga como venga de la API
+                cliente: i.cliente || i.cliente_nombre || i.nombre_cliente
+            })),
+            ...salidas.map(s => ({
+                ...s,
+                tipo_mov: 'SALIDA',
+                fecha: s.fecha_solicitud,
+                cliente: null
+            }))
         ].sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
 
         await generarReporteFinanciero('GENERAL', mixto, tramite, { desde, hasta });

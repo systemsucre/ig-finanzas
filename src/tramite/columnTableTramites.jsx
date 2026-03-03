@@ -4,20 +4,18 @@ export const ColumnsTableTramites = [
         field: 'codigo',
         render: (row) => <>
             <div> <span className="fw-bold text-primary">{row.codigo}</span></div>
-            <small className="text-muted italic" style={{ fontSize: '0.7rem' }}>
-                {row.detalle?.substring(0, 30)}...
-            </small>
+
         </>
     },
+
     {
-        label: 'empleador',
-        field: 'cliente_nombre', // Viene del CONCAT en el backend
-        render: (row) => (
-            <div>
-                <div className="fw-bold">{row.cliente_nombre}</div>
-                <small className="text-muted">ID EMPLEADOR: {row.id_cliente}</small>
-            </div>
-        )
+        label: 'Detalle',
+        field: 'detalle',
+        render: (row) => <>
+            <small className="text-muted italic" style={{ fontSize: '0.7rem' }}>
+                {row.detalle?.substring(0, 60)}...
+            </small>
+        </>
     },
     {
         label: 'Tipo de Caja',
@@ -28,12 +26,13 @@ export const ColumnsTableTramites = [
             </span>
         )
     },
+
     {
         label: 'Estado',
         field: 'estado',
         render: (row) => (<>
             <span className={`badge ${row.estado === 1 ? 'bg-success' : 'bg-warning text-dark'}`}>
-                {row.estado === 1 ? 'EN CURSO' : row.estado ===2? 'PARALIZADO':'FINALIZADO'}
+                {row.estado === 1 ? 'EN CURSO' : row.estado === 2 ? 'PARALIZADO' : 'FINALIZADO'}
             </span> <br />
             <span className={`badge ${row.eliminado === 0 ? 'bg-danger' : 'bg-warning text-dark'}`}>
                 {row.eliminado === 0 ? 'Eliminado' : ''}

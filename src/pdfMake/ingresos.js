@@ -2,10 +2,10 @@ import createPdf from './base.js';
 
 const ticketIngresoIndividual = async (output, { ingreso }) => {
     // ingreso: es el objeto que viene de tu consulta SQL 'listarPorTramite'
-    
+
     const montoFormateado = ingreso?.monto ? parseFloat(ingreso.monto).toFixed(2) : "0.00";
     const numeroIngreso = ingreso?.numero || "S/N";
-    
+
     // Usamos fecha_ingreso de la tabla ingresos
     const fechaIngreso = ingreso?.fecha_ingreso
         ? new Date(ingreso.fecha_ingreso).toLocaleDateString()
@@ -52,6 +52,13 @@ const ticketIngresoIndividual = async (output, { ingreso }) => {
         },
         {
             text: [
+                { text: 'Empleador: ', style: 'tProductsHeader' },
+                { text: ingreso.cliente_nombre, style: 'text' }
+            ],
+            margin: [0, 5, 0, 5]
+        },
+        {
+            text: [
                 { text: 'Tipo de Ingreso: ', style: 'tProductsHeader' },
                 { text: ingreso.tipo || 'General', style: 'text' }
             ],
@@ -71,17 +78,17 @@ const ticketIngresoIndividual = async (output, { ingreso }) => {
                 widths: ['*', 'auto'],
                 body: [
                     [
-                        { 
-                            text: 'TOTAL RECIBIDO', 
-                            alignment: 'right', 
-                            margin: [0, 5, 0, 5], 
-                            bold: true 
+                        {
+                            text: 'TOTAL RECIBIDO',
+                            alignment: 'right',
+                            margin: [0, 5, 0, 5],
+                            bold: true
                         },
-                        { 
-                            text: `Bs. ${montoFormateado}`, 
-                            style: 'hc', 
-                            margin: [10, 5, 10, 5], 
-                            fillColor: '#f8f9fa' 
+                        {
+                            text: `Bs. ${montoFormateado}`,
+                            style: 'hc',
+                            margin: [10, 5, 10, 5],
+                            fillColor: '#f8f9fa'
                         }
                     ]
                 ]

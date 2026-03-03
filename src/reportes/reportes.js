@@ -1,126 +1,123 @@
-
-
-
-
-
-
-
 import ExcelJS from 'exceljs';
 
-export const generarReporteFinanciero = async (tipoReporte, data, tramiteInfo, filtros, ) => {
+export const generarReporteFinanciero = async (tipoReporte, data, tramiteInfo, filtros) => {
     const workbook = new ExcelJS.Workbook();
-    workbook.creator = 'System Sucre - 71166513';
+    const tipo = tipoReporte.trim().toUpperCase(); // Sanitización
 
     const sheet = workbook.addWorksheet('REPORTE', {
         pageSetup: { paperSize: 9, orientation: 'landscape' },
-        properties: { tabColor: { argb: '1bbec0' } }
     });
 
+    // DETECCIÓN MEJORADA: 
+    // Forzamos true si es reporte de ingresos, o si hay datos en la propiedad cliente
+    const mostrarColumnaCliente = tipo === 'INGRESOS' || data.some(item => item.cliente || item.cliente_nombre);
 
+    const totalColumnas = mostrarColumnaCliente ? 6 : 5;
 
-
-
-    // 1. TÍTULO DEL REPORTE
-    sheet.mergeCells('A1:E1');
+    // 1. TÍTULO
+    sheet.mergeCells(1, 1, 1, totalColumnas);
     const titleCell = sheet.getCell('A1');
-    titleCell.value = `REPORTE DE ${tipoReporte} - ${localStorage.getItem('entidad')}`;
-    titleCell.font = { name: 'Arial', size: 16, bold: true, color: { argb: 'FFFFFF' } };
-    titleCell.alignment = { vertical: 'middle', horizontal: 'center' };
-    titleCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '1B4F72' } };
+    titleCell.value = `REPORTE DE ${tipo} - ${localStorage.getItem('entidad') || 'SISTEMA'}`;
+    titleCell.style = {
+        font: { name: 'Arial', size: 16, bold: true, color: { argb: 'FFFFFF' } },
+        alignment: { vertical: 'middle', horizontal: 'center' },
+        fill: { type: 'pattern', pattern: 'solid', fgColor: { argb: '1B4F72' } }
+    };
 
     sheet.addRow([]);
 
-    // 2. BLOQUE DE INFORMACIÓN (Ajustado para evitar saltos dobles)
-    // Siempre escribimos el encabezado de sección para mantener la estructura simétrica
-    sheet.mergeCells('A2:B2');
-    const infoHeader = sheet.getCell('A2');
-    infoHeader.value = `INFORMACIÓN DE CAJA`;
-    infoHeader.font = { name: 'Arial', size: 10, bold: true, color: { argb: '1B4F72' } };
+    // 2. INFO DE CAJA
+    sheet.addRow(['CÓDIGO:', tramiteInfo.codigo || '-', '', 'FECHA REPORTE:', new Date().toLocaleDateString()]);
+    sheet.addRow(['TRAMITE:', tramiteInfo.nombre_tipo_tramite || '-', '', 'TIPO:', tipo]);
+    sheet.addRow(['COSTO ESTIMADO:', 'BS. ' + parseFloat(tramiteInfo.costo || 0).toFixed(2), '', 'SALDO DISP.:', 'BS. ' + parseFloat(tramiteInfo.saldoDisponible || 0).toFixed(2)]);
+    sheet.addRow(['DETALLE:', tramiteInfo.detalle || '-']);
 
-    // Usamos addRow de forma secuencial sin saltos manuales innecesarios
-    sheet.addRow(['CÓDIGO:', tramiteInfo.codigo, '', 'FECHA REPORTE:', new Date().toLocaleDateString()]);
-    sheet.addRow(['CLIENTE:', tramiteInfo.cliente_nombre, '', 'TIPO:', tramiteInfo.nombre_tipo_tramite]);
-    sheet.addRow(['COSTO ESTIMADO:', parseInt(localStorage.getItem('numRol')) === 4 ? '0.0' : 'BS. ' + parseFloat(tramiteInfo.costo).toFixed(2), '', 'SALDO DISP.:', 'BS. ' + parseFloat(tramiteInfo.saldoDisponible).toFixed(2)]);
-    sheet.addRow(['DETALLE:', tramiteInfo.detalle]);
-    sheet.addRow(['FECHA INGRESO:', tramiteInfo.fecha_ingreso?.split('T')[0], '', 'FECHA DE CIERRE ESTIMADO:', tramiteInfo.fecha_finalizacion?.split('T')[0] || '-',]);
+    // Estilo negritas para etiquetas
+    ['A3', 'A4', 'A5', 'A6', 'D3', 'D4', 'D5'].forEach(c => sheet.getCell(c).font = { bold: true });
+    sheet.mergeCells(6, 2, 6, totalColumnas); // Ajuste dinámico del merge de detalle
 
-    // Estilo para etiquetas (Las filas ahora son 3, 4, 5 y 6 por el título en fila 2)
-    ['A3', 'A4', 'A5', 'A6', 'A7', 'D3', 'D4', 'D5', 'D7'].forEach(cell => {
-        sheet.getCell(cell).font = { bold: true };
-    });
-    sheet.mergeCells('B4:C4');
-    sheet.mergeCells('B6:E6');
+    // 3. ENCABEZADOS
+    const headerLabels = ['FECHA', 'N° COMP.', 'DESCRIPCIÓN / DETALLE'];
+    if (mostrarColumnaCliente) headerLabels.push('CLIENTE');
+    headerLabels.push('MONTO (Bs.)', 'RESPONSABLE');
 
-    // UN SOLO ESPACIO ANTES DE LA TABLA
-    // sheet.addRow([]); 
-
-    // 3. ENCABEZADOS DE LA TABLA
-    const headerRow = sheet.addRow([
-        'FECHA',
-        'N° COMPROBANTE',
-        'DESCRIPCIÓN / DETALLE',
-        'MONTO (Bs.)',
-        'RESPONSABLE'
-    ]);
-
-    headerRow.eachCell((cell) => {
+    const headerRow = sheet.addRow(headerLabels);
+    headerRow.eachCell(cell => {
         cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'D5D8DC' } };
         cell.font = { bold: true };
         cell.alignment = { horizontal: 'center' };
-        cell.border = {
-            top: { style: 'thin' }, left: { style: 'thin' },
-            bottom: { style: 'thin' }, right: { style: 'thin' }
-        };
+        cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
     });
 
-    // Configuración de ancho de columnas
-    sheet.getColumn(1).width = 15;
-    sheet.getColumn(2).width = 18;
-    sheet.getColumn(3).width = 55; // Un poco más ancho para el detalle
-    sheet.getColumn(4).width = 15;
-    sheet.getColumn(5).width = 25;
-
-    // 4. CARGA DE DATOS
+    // 4. DATOS
     let totalMonto = 0;
-
     data.forEach(item => {
         const montoActual = parseFloat(item.monto) || 0;
-        const row = sheet.addRow([
-            item.fecha_solicitud?.split('T')[0] || item.fecha_ingreso?.split('T')[0] || item.fecha?.split('T')[0] || '-',
+        const fecha = item.fecha?.split('T')[0] || item.fecha_ingreso?.split('T')[0] || item.fecha_solicitud?.split('T')[0] || '-';
+
+        // Construcción de fila
+        const rowValues = [
+            fecha,
             item.numero || item.id || '-',
-            tipoReporte === 'GENERAL' ? `[${item.tipo_mov}] ${item.detalle}` : item.detalle,
-            montoActual,
-            item.usuario_nombre || 'S/N'
-        ]);
+            tipo === 'GENERAL' ? `[${item.tipo_mov}] ${item.detalle}` : item.detalle
+        ];
 
-        row.getCell(4).numFmt = '#,##0.00';
+        if (mostrarColumnaCliente) {
+            rowValues.push(item.cliente || item.cliente_nombre || '-');
+        }
 
-        if (tipoReporte === 'GENERAL') {
+        rowValues.push(montoActual);
+        rowValues.push(item.usuario_nombre || 'S/N');
+
+        const row = sheet.addRow(rowValues);
+
+        // Formato de moneda (La columna cambia según si hay cliente o no)
+        const colMontoPos = mostrarColumnaCliente ? 5 : 4;
+        row.getCell(colMontoPos).numFmt = '#,##0.00';
+
+        // Colores para General
+        if (tipo === 'GENERAL') {
             const color = item.tipo_mov === 'INGRESO' ? 'C8E6C9' : 'FFCDD2';
-            row.eachCell(c => {
-                c.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: color } };
-            });
+            row.eachCell(c => c.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: color } });
             totalMonto += (item.tipo_mov === 'INGRESO' ? montoActual : -montoActual);
         } else {
             totalMonto += montoActual;
         }
     });
 
-    // 5. PIE DE PÁGINA (TOTALES)
+    // 5. TOTALES
     sheet.addRow([]);
-    const totalRow = sheet.addRow(['', '', 'RESULTADO TOTAL DE ESTA LISTA', totalMonto, '']);
+    const footer = new Array(totalColumnas).fill('');
+    footer[2] = 'TOTAL:';
+    footer[mostrarColumnaCliente ? 4 : 3] = totalMonto;
+
+    const totalRow = sheet.addRow(footer);
+    const montoIdx = mostrarColumnaCliente ? 5 : 4;
+
     totalRow.getCell(3).font = { bold: true };
     totalRow.getCell(3).alignment = { horizontal: 'right' };
-    totalRow.getCell(4).font = { bold: true, color: { argb: 'C0392B' } };
-    totalRow.getCell(4).numFmt = '#,##0.00 "Bs."';
+    totalRow.getCell(montoIdx).font = { bold: true, color: { argb: 'C0392B' } };
+    totalRow.getCell(montoIdx).numFmt = '#,##0.00 "Bs."';
 
-    // 6. DESCARGA
+    // 6. ANCHOS DE COLUMNA
+    sheet.getColumn(1).width = 12;
+    sheet.getColumn(2).width = 12;
+    sheet.getColumn(3).width = 45;
+    if (mostrarColumnaCliente) {
+        sheet.getColumn(4).width = 25; // Cliente
+        sheet.getColumn(5).width = 15; // Monto
+        sheet.getColumn(6).width = 20; // Responsable
+    } else {
+        sheet.getColumn(4).width = 15; // Monto
+        sheet.getColumn(5).width = 20; // Responsable
+    }
+
+    // DESCARGA
     const buffer = await workbook.xlsx.writeBuffer();
     const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
     const url = window.URL.createObjectURL(blob);
-    const anchor = document.createElement('a');
-    anchor.href = url;
-    anchor.download = `Reporte_${tipoReporte}_${tramiteInfo.codigo}_${new Date().getTime()}.xlsx`;
-    anchor.click();
-    window.URL.revokeObjectURL(url);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `Reporte_${tipo}_${tramiteInfo.codigo || 'S-C'}.xlsx`;
+    a.click();
 };

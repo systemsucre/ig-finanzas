@@ -1,5 +1,5 @@
 // const URL = 'https://etvs.alwaysdata.net/server_chagas/'
-const URL = 'https://finanzas-kohl-eta.vercel.app/'
+const URL = 'https://ig-finanzas-bc.vercel.app/'
 // const URL = 'http://localhost:3005/'
 const LOCAL_URL = '/ig'
 

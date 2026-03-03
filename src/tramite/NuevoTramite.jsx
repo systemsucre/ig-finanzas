@@ -32,7 +32,7 @@ const FormularioTramite = () => {
                 <div className="row justify-content-center">
                     <div className="col-12 col-md-10 col-lg-8 col-xl-7 animate-fade-in">
                         <div className="login-card shadow-clinical p-4 p-md-5 bg-white" style={{ borderRadius: '15px' }}>
-
+  
                             {/* Encabezado Dinámico */}
                             <div className="text-center mb-5">
                                 <div className="icon-pulse mb-3">
@@ -71,17 +71,7 @@ const FormularioTramite = () => {
                                         ExpresionRegular={INPUT.ID}
                                     />  
                                 </div>
-                                <div className="col-md-12">
-                                    <Select1
-                                        estado={estados.idCliente}
-                                        cambiarEstado={setters.setIdCliente}
-                                        Name="id_cliente"
-                                        lista={auxiliares.listaClientes}
-                                        etiqueta="Cliente / Empleador *"
-                                        msg="Busque y seleccione al cliente"
-                                        ExpresionRegular={INPUT.ID}
-                                    />
-                                </div>
+     
 
                                 <div className="col-md-4">
                                     <InputUsuarioStandard

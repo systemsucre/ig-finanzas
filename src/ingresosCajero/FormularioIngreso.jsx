@@ -20,18 +20,21 @@ const FormularioIngreso = () => {
         setters,
         handleGuardar, // Nuestra función unificada del Hook
         cargarIngresoPorId,
+        cargarAuxiliares,
+        listaClientes,
         cargando,
     } = UseCustomIngresos();
 
-        const {
-            cargarTramitePorId,
-        } = useTramites();
+    const {
+        cargarTramitePorId,
+    } = useTramites();
 
     // 1. Efecto para EDICIÓN
 
     useEffect(() => {
         if (isEdit && id && UUID_REGEX.test(id)) {
             cargarIngresoPorId(id);
+            cargarAuxiliares()
             if (id_tramite && cargarTramitePorId) cargarTramitePorId(id_tramite);
         }
     }, [id, isEdit]);
@@ -43,8 +46,7 @@ const FormularioIngreso = () => {
                 campo: id_tramite,
                 valido: 'true'
             });
-
-
+            cargarAuxiliares()
         }
     }, [id_tramite, isEdit]);
 
@@ -68,12 +70,12 @@ const FormularioIngreso = () => {
                             </div>
 
                             {/* Info del Trámite Contextual */}
-                            <CabeceraTramite id = {id_tramite}/>
+                            <CabeceraTramite id={id_tramite} />
 
 
                             <form className="row g-3" onSubmit={(e) => handleGuardar(e, isEdit)}>
                                 {/* MONTO (Si lo incluiste en tu tabla) */}
-                                <div className="col-md-3">
+                                <div className="col-md-6">
                                     <InputUsuarioStandard
                                         estado={estados.monto}
                                         cambiarEstado={setters.setMonto}
@@ -82,6 +84,17 @@ const FormularioIngreso = () => {
                                         etiqueta={'Monto Recibido (Bs) *'}
                                         placeholder="0.00"
                                         ExpresionRegular={INPUT.NUMEROS_MONEY}
+                                    />
+                                </div>
+                                <div className="col-md-6">
+                                    <Select1
+                                        estado={estados.idCliente}
+                                        cambiarEstado={setters.setIdCliente}
+                                        Name="id_cliente"
+                                        lista={listaClientes}
+                                        etiqueta="Cliente / Empleador *"
+                                        msg="Busque y seleccione al cliente"
+                                        ExpresionRegular={INPUT.ID}
                                     />
                                 </div>
 
