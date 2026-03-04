@@ -1,6 +1,6 @@
 // const URL = 'https://etvs.alwaysdata.net/server_chagas/'
-// const URL = 'https://ig-finanzas-bc.vercel.app/'
-const URL = 'http://localhost:3005/'
+const URL = 'https://ig-finanzas-bc.vercel.app/'
+// const URL = 'http://localhost:3005/'
 const LOCAL_URL = '/ig'
 
 const TIEMPO_INACTIVO = 60 // MINUTOS DE TOLERANCIA ANTESDE QUE EL USUARIO VUELVA A INTERACTUAR CON EL SISTEMA YA SEA MEDIANTE MUOSE O TECLADO
