@@ -28,8 +28,8 @@ export const generarReporteFinanciero = async (tipoReporte, data, tramiteInfo, f
 
     // 2. INFO DE CAJA
     sheet.addRow(['CÓDIGO:', tramiteInfo.codigo || '-', '', 'FECHA REPORTE:', new Date().toLocaleDateString()]);
-    sheet.addRow(['TRAMITE:', tramiteInfo.nombre_tipo_tramite || '-', '', 'TIPO:', tipo]);
-    sheet.addRow(['COSTO ESTIMADO:', 'BS. ' + parseFloat(tramiteInfo.costo || 0).toFixed(2), '', 'SALDO DISP.:', 'BS. ' + parseFloat(tramiteInfo.saldoDisponible || 0).toFixed(2)]);
+    sheet.addRow(['CAJA:', tramiteInfo.nombre_tipo_tramite || '-', '', 'TIPO:', tipo]);
+    sheet.addRow(['COSTO ESTIMADO:', 'CLP. ' + parseFloat(tramiteInfo.costo || 0).toFixed(2), '', 'SALDO DISP.:', 'CLP. ' + parseFloat(tramiteInfo.saldoDisponible || 0).toFixed(2)]);
     sheet.addRow(['DETALLE:', tramiteInfo.detalle || '-']);
 
     // Estilo negritas para etiquetas
@@ -39,7 +39,7 @@ export const generarReporteFinanciero = async (tipoReporte, data, tramiteInfo, f
     // 3. ENCABEZADOS
     const headerLabels = ['FECHA', 'N° COMP.', 'DESCRIPCIÓN / DETALLE'];
     if (mostrarColumnaCliente) headerLabels.push('CLIENTE');
-    headerLabels.push('MONTO (Bs.)', 'RESPONSABLE');
+    headerLabels.push('MONTO (CLP.)', 'RESPONSABLE');
 
     const headerRow = sheet.addRow(headerLabels);
     headerRow.eachCell(cell => {
@@ -97,7 +97,7 @@ export const generarReporteFinanciero = async (tipoReporte, data, tramiteInfo, f
     totalRow.getCell(3).font = { bold: true };
     totalRow.getCell(3).alignment = { horizontal: 'right' };
     totalRow.getCell(montoIdx).font = { bold: true, color: { argb: 'C0392B' } };
-    totalRow.getCell(montoIdx).numFmt = '#,##0.00 "Bs."';
+    totalRow.getCell(montoIdx).numFmt = '#,##0.00 "CLP."';
 
     // 6. ANCHOS DE COLUMNA
     sheet.getColumn(1).width = 12;

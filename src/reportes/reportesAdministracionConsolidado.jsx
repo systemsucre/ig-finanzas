@@ -80,7 +80,7 @@ export function ReportesAdministracionConsolidado() {
                                     cambiarEstado={setters.setEstado}
                                     Name="estado"
                                     lista={[{ value: 4, label: 'Todos' }, { value: 1, label: 'En curso' }, { value: 2, label: 'Paralizado' }, { value: 3, label: 'Finalizado' },]}
-                                    etiqueta="Estado Tramite *"
+                                    etiqueta="Estado Caja *"
                                     msg="Cambiar Estado"
                                     ExpresionRegular={INPUT.ID}
                                 />

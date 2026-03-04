@@ -73,7 +73,7 @@ export const generarReporteResumen = async (data, filtros, ) => {
 
         // Formato numérico para las columnas de dinero (F, G, H, I)
         [6, 7, 8, 9].forEach(col => {
-            row.getCell(col).numFmt = '#,##0.00 "Bs."';
+            row.getCell(col).numFmt = '#,##0.00 "CLP."';
         });
 
         // Color condicional para el saldo
@@ -99,7 +99,7 @@ export const generarReporteResumen = async (data, filtros, ) => {
     totalRow.eachCell((cell, colNumber) => {
         if (colNumber >= 4) {
             cell.font = { bold: true, size: 12 };
-            if (colNumber >= 6 && colNumber <= 9) cell.numFmt = '#,##0.00 "Bs."';
+            if (colNumber >= 6 && colNumber <= 9) cell.numFmt = '#,##0.00 "CLP."';
         }
     });
 

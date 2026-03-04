@@ -96,8 +96,8 @@ const NavbarAdmin = () => {
             <ul className="submenu-list">
               <li><NavLink to={LOCAL_URL + "/admin/nuevo-usuario"} className="submenu-link">Nuevo Usuario</NavLink></li>
               <li><NavLink to={LOCAL_URL + "/admin/lista-usuarios"} className="submenu-link">Lista Usuarios</NavLink></li>
-              <li><NavLink to={LOCAL_URL + "/admin/nuevo-tipo-caja"} className="submenu-link">Nuevo Tipo Caja</NavLink></li>
-              <li><NavLink to={LOCAL_URL + "/admin/lista-tipo-caja"} className="submenu-link">Lista Tipo Caja</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/admin/nuevo-tipo-caja"} className="submenu-link">Nuevo categoria Caja</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/admin/lista-tipo-caja"} className="submenu-link">Lista categoria Caja</NavLink></li>
             </ul>
           </div>
 
@@ -171,8 +171,8 @@ const NavbarAdmin = () => {
               <ul className="submenu-list">
                 <li><NavLink to={LOCAL_URL + "/admin/nuevo-usuario"} className="submenu-link">Nuevo Usuario</NavLink></li>
                 <li><NavLink to={LOCAL_URL + "/admin/lista-usuarios"} className="submenu-link">Lista Usuarios</NavLink></li>
-                <li><NavLink to={LOCAL_URL + "/admin/nuevo-tipo-caja"} className="submenu-link">Nuevo Tipo Caja</NavLink></li>
-                <li><NavLink to={LOCAL_URL + "/admin/lista-tipo-caja"} className="submenu-link">Lista Tipo Caja</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/admin/nuevo-tipo-caja"} className="submenu-link">Nuevo categoria Caja</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/admin/lista-tipo-caja"} className="submenu-link">Lista categoria Caja</NavLink></li>
               </ul>
             </div>
 

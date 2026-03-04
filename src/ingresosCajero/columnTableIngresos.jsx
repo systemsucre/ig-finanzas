@@ -64,7 +64,7 @@ export const ColumnsTableIngresos = [
         render: (row) => (
             <div className="text-end pe-3">
                 <span className="fw-bold text-success" style={{ fontSize: '1.1rem' }}>
-                    Bs. {Number(row.monto || 0).toLocaleString('es-BO', {
+                CLP. {Number(row.monto || 0).toLocaleString('es-BO', {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2
                     })}

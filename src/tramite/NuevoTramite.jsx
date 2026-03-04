@@ -54,7 +54,7 @@ const FormularioTramite = () => {
                                         cambiarEstado={setters.setIdTipoTramite}
                                         Name="id_tipo_tramite"
                                         lista={auxiliares.listaTipos}
-                                        etiqueta="Seleccione Tipo de caja *"
+                                        etiqueta="Seleccione Categoria de caja *"
                                         msg="Seleccione el tipo de servicio"
                                         ExpresionRegular={INPUT.ID}
                                     />
@@ -99,7 +99,7 @@ const FormularioTramite = () => {
                                         cambiarEstado={setters.setCosto}
                                         tipo='number'
                                         name='Ingreso Estimado'
-                                        etiqueta={'Ingreso Estimado (Bs) *'}
+                                        etiqueta={'Ingreso Estimado (CLP) *'}
                                         ExpresionRegular={INPUT.NUMEROS_P}
                                     />
                                 </div>

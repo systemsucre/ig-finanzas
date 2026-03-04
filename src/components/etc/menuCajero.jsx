@@ -133,7 +133,7 @@ const NavbarCajero = () => {
             </div>
             <div className="nav-item-container has-submenu">
               <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
-                Tramites <span className="arrow">▼</span>
+                Cajas <span className="arrow">▼</span>
               </NavLink>
               <ul className="submenu-list">
                 <li><NavLink to={LOCAL_URL + "/cajero/nuevo-caja"} className="submenu-link">Aperturar Caja</NavLink></li>
@@ -151,7 +151,6 @@ const NavbarCajero = () => {
               </ul>
             </div>
 
-            <NavLink to={LOCAL_URL + "/cajero/reportes"} className="mobile-link">Reportes</NavLink>
             <div className="nav-item-container has-submenu mt-4" >
               <NavLink to={'#'} className="mobile-link profile" onClick={(e) => e.preventDefault()} >Mi Perfil</NavLink>
               <ul className="submenu-list mt-4">

@@ -65,11 +65,11 @@ const reporteConsolidoTramiteAuxiliar = async (output, { tramite, ingresos = [],
                         s.numero,
                         new Date(s.fecha_solicitud).toLocaleDateString(),
                         s.detalle,
-                        { text: `Bs. ${parseFloat(s.monto).toFixed(2)}`, alignment: 'right' }
+                        { text: `CLP. ${parseFloat(s.monto).toFixed(2)}`, alignment: 'right' }
                     ]),
                     [
                         { text: 'TOTAL EGRESOS', colSpan: 3, bold: true, alignment: 'right' }, {}, {},
-                        { text: `Bs. ${totalSalidas.toFixed(2)}`, bold: true, alignment: 'right', fillColor: '#f1f1f1' }
+                        { text: `CLP. ${totalSalidas.toFixed(2)}`, bold: true, alignment: 'right', fillColor: '#f1f1f1' }
                     ]
                 ]
             },
@@ -86,7 +86,7 @@ const reporteConsolidoTramiteAuxiliar = async (output, { tramite, ingresos = [],
                     [
                         { text: 'SALDO NETO (DISPONIBLE)', alignment: 'right', bold: true, fontSize: 12 },
                         {
-                            text: `Bs. ${saldo.toFixed(2)}`,
+                            text: `CLP. ${saldo.toFixed(2)}`,
                             style: 'hc',
                             fillColor: saldo >= 0 ? '#d4edda' : '#f8d7da',
                             color: saldo >= 0 ? '#155724' : '#721c24'

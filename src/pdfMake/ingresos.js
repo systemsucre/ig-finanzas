@@ -85,7 +85,7 @@ const ticketIngresoIndividual = async (output, { ingreso }) => {
                             bold: true
                         },
                         {
-                            text: `Bs. ${montoFormateado}`,
+                            text: `CLP. ${montoFormateado}`,
                             style: 'hc',
                             margin: [10, 5, 10, 5],
                             fillColor: '#f8f9fa'

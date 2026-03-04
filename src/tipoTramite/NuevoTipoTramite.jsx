@@ -56,7 +56,7 @@ const NuevoTipoTramite = () => {
                                         cambiarEstado={setters.setTipoTramite}
                                         tipo='text'
                                         name='tipo_tramite'
-                                        etiqueta='Nombre del Tipo de caja *'
+                                        etiqueta='Nombre del Categoria de caja *'
                                         placeholder="Ej. Admin IG mes Junio"
                                         ExpresionRegular={INPUT.DIRECCION} // Usamos dirección por permitir espacios y caracteres mixtos
                                     />
@@ -68,7 +68,7 @@ const NuevoTipoTramite = () => {
                                         cambiarEstado={setters.setCodigo}
                                         tipo='text'
                                         name='codigo'
-                                        etiqueta='Codigo del Tipo de caja *'
+                                        etiqueta='Codigo del Categoria de caja *'
                                         placeholder="Ej. ADM (de 1 a 5 letras)"
                                         ExpresionRegular={INPUT.CODIGO_ENTIDAD} // Usamos dirección por permitir espacios y caracteres mixtos
                                     />
@@ -81,7 +81,7 @@ const NuevoTipoTramite = () => {
                                         type="submit"
                                         className={`btn ${id ? ` btn-info text-white` : ` btn-success`} px-5 py-2 fw-bold shadow-sm`}
                                     >
-                                        {id ? 'ACTUALIZAR DATOS' : 'CREAR TIPO CAJA'}
+                                        {id ? 'ACTUALIZAR DATOS' : 'CREAR CATEGORIA CAJA'}
                                     </button>
                                 </div>
                             </form>

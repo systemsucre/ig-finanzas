@@ -131,7 +131,7 @@ export function ListaIngresosTramite() {
                                 <div className="bg-light p-2 rounded border">
                                     <FontAwesomeIcon icon={faHandHoldingUsd} className="text-success me-2" />
                                     <span className="fw-bold">Total en Caja: </span>
-                                    <span className="text-success fw-bold">Bs. {totalRecaudado.toLocaleString('es-BO')}</span>
+                                    <span className="text-success fw-bold">CLP. {totalRecaudado.toLocaleString('es-BO')}</span>
                                 </div>
                                 <span className="text-muted small">({ingresosFiltrados.length} registros)</span>
                             </div>

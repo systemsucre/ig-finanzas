@@ -126,7 +126,7 @@ const HomeLogin = () => {
                                         name='contraseña'
                                         msg={"Longitud permitida: 4 a 12 caracteres."}
                                         mayusculas={false}
-                                        ExpresionRegular={INPUT.INPUT_USUARIO}
+                                        ExpresionRegular={INPUT.PASSWORD}
                                         etiqueta={'contraseña'}
                                         placeholder={"*******"}
                                         logo={false}

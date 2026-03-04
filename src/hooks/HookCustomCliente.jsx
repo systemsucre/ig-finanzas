@@ -26,7 +26,7 @@ export const useClientes = () => {
         setCargando(true);
         const endpoint = `${URL}clientes/listar`;
         // Pasamos el ID del usuario actual si tu backend lo usa para filtrar logs
-        const res = await start(endpoint, { usuario: 1 }, );
+        const res = await start(endpoint, { usuario: 1 },);
 
         if (res) {
             setClientes(res);
@@ -66,7 +66,16 @@ export const useClientes = () => {
                 listarClientes(); // Refresca la lista en el estado global
 
                 setTimeout(() => {
-                    navigate(LOCAL_URL + '/admin/lista-clientes');
+
+                    const rol = parseInt(localStorage.getItem('numRol'));
+                    let base = '';
+                    if (rol === 1) base = '/admin';
+                    else if (rol === 2) base = '/gerente';
+                    else if (rol === 3) base = '/cajero';
+
+
+                     navigate(`${LOCAL_URL}${base}/lista-clientes`)
+
                 }, 1000);
             },
             setCargando // Asegúrate de tener este useState en tu Hook

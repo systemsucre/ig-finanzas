@@ -116,7 +116,7 @@ const ticketSalidaIndividual = async (output, { salida }) => {
                 body: [
                     [
                         { text: estado === 1 ? 'TOTAL SOLICITADO' : estado === 2 ? ' TOTAL APROBADO' : estado === 3 ? 'TOTAL DESPACHADO' : estado === 4 ? 'TOTAL RECHAZADO' : 'MONTO SIN IDENTIFICACION', alignment: 'right', margin: [0, 5, 0, 5], bold: true },
-                        { text: `Bs. ${montoFormateado}`, style: 'hc', margin: [10, 5, 10, 5], fillColor: '#f8f9fa' }
+                        { text: `CLP. ${montoFormateado}`, style: 'hc', margin: [10, 5, 10, 5], fillColor: '#f8f9fa' }
                     ]
                 ]
             },

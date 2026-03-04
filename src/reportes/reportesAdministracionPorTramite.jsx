@@ -78,7 +78,7 @@ export function ReportesAdministracionPorTramite() {
                             <div className="col-lg-12">
                                 <label className="custom-label">Seleccionar caja <span className="text-danger">*</span></label>
                                 <Select
-                                    placeholder='Busque por tramite...'
+                                    placeholder='Busque por caja...'
                                     onChange={(e) => setters.setTramite({ campo: e ? e.value : '', valido: e ? 'true' : 'false' })}
                                     options={listaTramite}
                                     value={listaTramite.find(opt => opt.value === estados.tramite.campo) || null}

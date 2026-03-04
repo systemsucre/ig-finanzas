@@ -18,7 +18,7 @@ export const ColumnsTableTramites = [
         </>
     },
     {
-        label: 'Tipo de Caja',
+        label: 'Categoria  Caja',
         field: 'nombre_tipo_tramite',
         render: (row) => (
             <span className="badge bg-light text-dark border">
