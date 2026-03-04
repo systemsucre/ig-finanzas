@@ -31,7 +31,8 @@ export const ColumnsTableIngresos = [
                     <div className="fw-bold text-dark">{row.detalle}</div> :
                     <div className="d-flex align-items-center mt-1">
                         <small className="text-muted" style={{ fontSize: '0.75rem' }}>
-                            {row.detalle}
+                            {row.detalle?.substring(0, 40)}...
+
                         </small>
                     </div>
                 }
@@ -64,7 +65,7 @@ export const ColumnsTableIngresos = [
         render: (row) => (
             <div className="text-end pe-3">
                 <span className="fw-bold text-success" style={{ fontSize: '1.1rem' }}>
-                CLP. {Number(row.monto || 0).toLocaleString('es-BO', {
+                    CLP. {Number(row.monto || 0).toLocaleString('es-BO', {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2
                     })}

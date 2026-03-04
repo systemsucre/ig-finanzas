@@ -20,7 +20,7 @@ export const ColumnsTableSalidas = [
                 {row.detalle?.length < 20 ?
                     <div className="fw-bold text-dark">{row.detalle}</div> :
                     <small className="text-muted" style={{ fontSize: '0.7rem' }}>
-                        {row.detalle?.substring(0, 60)}...
+                        {row.detalle?.substring(0, 40)}...
                     </small>
                 }
             </div>
