@@ -13,7 +13,7 @@ export const ColumnsTableSalidas = [
         sortable: true,
     },
     {
-        label: 'Detalle del Gasto',
+        label: 'Detalle',
         field: 'detalle',
         render: (row) => (
             <div style={{ minWidth: '200px' }}>

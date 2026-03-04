@@ -23,7 +23,7 @@ export const ColumnsTableIngresos = [
         )
     },
     {
-        label: 'Concepto de Ingreso',
+        label: 'Detalle',
         field: 'detalle',
         render: (row) => (
             <div style={{ minWidth: '220px' }}>
