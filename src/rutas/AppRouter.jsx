@@ -49,6 +49,7 @@ import { ListaIngresosTramite } from "../ingresosCajero/ListaIngresos";
 import FormularioIngreso from "../ingresosCajero/FormularioIngreso";
 import { ReportesAdministracionPorTramite } from "../reportes/reportesAdministracionPorTramite";
 import { ReportesAdministracionConsolidado } from "../reportes/reportesAdministracionConsolidado";
+import DashboardFinanciero from "../reportes/DashboardFinanciero";
 
 
 export default function AppRouter() {
@@ -350,6 +351,11 @@ export default function AppRouter() {
       </>, // El Layout siempre se muestra
       errorElement: <E500 />,
       children: [
+
+        {
+          path: 'dash-1',
+          element: <Check component={DashboardFinanciero} roleRequired="cajero" />,
+        },
 
         {
           path: 'lista-empleadores',

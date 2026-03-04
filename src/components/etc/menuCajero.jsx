@@ -63,6 +63,7 @@ const NavbarCajero = () => {
         {/* Desktop Menu */}
         <ul className="nav-menu-desktop">
           {/* <li><NavLink to="/" end className="nav-link-item">Dashboard</NavLink></li> */}
+          <li><NavLink to={LOCAL_URL + "/cajero/dash-1"} end className="nav-link-item">Dashboard</NavLink></li>
           <li><NavLink to={LOCAL_URL + "/cajero/movimientos"} end className="nav-link-item">Movimientos</NavLink></li>
           <div className="nav-item-container has-submenu">
             <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
@@ -120,6 +121,7 @@ const NavbarCajero = () => {
           <div className={`nav-menu-mobile ${isMobileMenuOpen ? 'open' : ''}`}>
 
             {/* <NavLink to="#" end className="mobile-link">Dashboard</NavLink> */}
+            <NavLink to={LOCAL_URL + "/cajero/dash-1"} end className="mobile-link">Dashboard</NavLink>
             <NavLink to={LOCAL_URL + "/cajero/movimientos"} end className="mobile-link">Movimientos</NavLink>
 
             <div className="nav-item-container has-submenu">

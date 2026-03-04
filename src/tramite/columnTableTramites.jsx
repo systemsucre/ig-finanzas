@@ -13,7 +13,7 @@ export const ColumnsTableTramites = [
         field: 'detalle',
         render: (row) => <>
             <small className="text-muted italic" style={{ fontSize: '0.7rem' }}>
-                {row.detalle?.substring(0, 60)}...
+                {row.detalle?.substring(0, 40)}...
             </small>
         </>
     },
