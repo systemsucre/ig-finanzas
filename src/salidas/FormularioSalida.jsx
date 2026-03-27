@@ -64,7 +64,7 @@ const FormularioSalida = () => {
                                     <span style={{ fontSize: '3rem' }}>{isEdit ? '📝' : '💰'}</span>
                                 </div>
                                 <h2 className="h3 fw-bold text-primary text-uppercase">
-                                    {isEdit ? 'Editar Registro de Gasto' : 'Nuevo Gasto de Caja'}
+                                    {isEdit ? 'Editar Registro de Gasto' : 'Nuevo Gasto de Trámite'}
                                 </h2>
                             </div>
 
@@ -95,7 +95,7 @@ const FormularioSalida = () => {
                                         cambiarEstado={setters.setFechaSolicitud}
                                         tipo='date'
                                         name='fecha_solicitud'
-                                        etiqueta={'Fecha de gasto *'}
+                                        etiqueta={'Fecha de Solicitud *'}
                                     />
                                 </div>
 
@@ -117,9 +117,7 @@ const FormularioSalida = () => {
                                         type="button"
                                         className="btn btn-dark px-4"
                                         style={{ marginRight: '4px' }}
-                                        onClick={() => {
-                                            navigate(-1)
-                                        }} // Retorno más seguro
+                                        onClick={() => navigate(`${LOCAL_URL}/auxiliar/listar-salidas/${id_tramite}`)} // Retorno más seguro
                                     >
                                         CANCELAR
                                     </button>

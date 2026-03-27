@@ -37,11 +37,11 @@ const NuevoCliente = () => {
     }, [id, clientesFiltrados, setNombre, setAp1, setAp2, setCi, setCelular, setDireccion, setEstado]);
 
     return (
-        <main className="container-xl mt-5" style={{ minHeight: '100vh' }}>
+        <main className="login-wrapper d-flex align-items-center justify-content-center py-5" style={{ minHeight: '100vh', background: '#f8f9fa' }}>
             <section className="container">
                 <div className="row justify-content-center">
                     <div className="col-12 col-md-11 col-lg-9 col-xl-8 animate-fade-in">
-                        <div className="login-card shadow-clinical p-4 p-md-5 bg-white" style={{ borderRadius: '15px' }}>
+                        <div className="login-card shadow-clinical p-4 p-md-5 bg-white" style={{   borderTop: `10px solid  #0d6efd` }} >
 
                             {/* Encabezado Dinámico */}
                             <div className="text-center mb-5">
@@ -51,7 +51,6 @@ const NuevoCliente = () => {
                                 <h2 className="h3 fw-black text-primary text-uppercase m-0">
                                     {id ? 'Actualizar Cliente' : 'Registro de Cliente'}
                                 </h2>
-                                <p className="text-muted small">KR Estudios - Base de Datos de empleadores</p>
                             </div>
 
                             <form className="row g-3" onSubmit={(e) => guardarCliente(e, id ? id : null)}>
@@ -107,7 +106,7 @@ const NuevoCliente = () => {
                                 <div className="col-12 p-3 text-end mt-4">
                                     <hr />
                                     <button type="submit" className={`btn ${id ? ` btn-info` : ` btn-success`} px-5 py-2 fw-bold shadow-sm`}>
-                                        {id ? 'GUARDAR CAMBIOS' : 'REGISTRAR EMPLEADOR'}
+                                        {id ? 'GUARDAR CAMBIOS' : 'REGISTRAR CLIENTE'}
                                     </button>
                                 </div>
                             </form>

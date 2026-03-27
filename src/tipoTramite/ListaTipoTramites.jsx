@@ -21,9 +21,9 @@ export function ListaTipoTramite() {
             <main className="container-xl mt-5">
                 <div className="d-flex justify-content-between align-items-center p-2">
                     <div>
-                        <h3 className="text-dark fw-bold mb-0">Categoria de Caja</h3>
+                        <h3 className="text-dark fw-bold mb-0">Tipos de Trámite</h3>
                         <p className="text-muted mb-0 small text-uppercase" style={{ letterSpacing: '1px', fontSize: '0.7rem' }}>
-                            Configuración de categorías y servicios - {localStorage.getItem('entidad')}
+                            Configuración de categorías y servicios KR Estudios
                         </p>
                     </div>
                     
@@ -41,7 +41,7 @@ export function ListaTipoTramite() {
                             <div style={{ width: '280px' }}>
                                 <InputUsuarioSearch
                                     name="search-tramite"
-                                    placeholder='Buscar por nombre de caja...'
+                                    placeholder='Buscar por tipo tramite ...'
                                     onChange={handleSearch}
                                 />
                             </div>
@@ -57,7 +57,7 @@ export function ListaTipoTramite() {
                                 boton: null,
                                 className: 'btn btn-info py-1 px-3 x-small',
                                 icono: faEdit,
-                                enlace: LOCAL_URL + '/admin/editar-tipo-caja',
+                                enlace: LOCAL_URL + '/admin/editar-tipo-tramite',
                                 label: 'Editar'
                             },
                             {

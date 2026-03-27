@@ -30,7 +30,7 @@ export const useUsuarios = (usuarioEdit = null) => {
 
     const listarRoles = useCallback(async () => {
         const endpoint = `${URL}usuarios/listar-roles`; // Ajusta a tu ruta de backend
-        const res = await start(endpoint, null, );
+        const res = await start(endpoint, null,);
         if (res) {
             setRoles(res);
         }
@@ -46,7 +46,7 @@ export const useUsuarios = (usuarioEdit = null) => {
         if (res) {
             setUsuarios(res);
             setUsuariosFiltrados(res);
-        }   
+        }
         setCargando(false);
     }, []);
 
@@ -64,7 +64,8 @@ export const useUsuarios = (usuarioEdit = null) => {
             celular: celular.campo,
             direccion: direccion.campo,
             username: username.campo,
-            estado: estado.campo || 1
+            estado: estado.campo || 1,
+            datosAuditoriaExtra
         };
 
         // Lógica de Contraseña: Solo la incluimos si tiene contenido
@@ -96,7 +97,7 @@ export const useUsuarios = (usuarioEdit = null) => {
     // 3. ELIMINAR
     const eliminarUsuario = async (id, estado) => {
         if (window.confirm("¿Estás seguro de eliminar este usuario?")) {
-            const res = await start(`${URL}usuarios/cambiar-estado`, { id, estado }, "Eliminando...");
+            const res = await start(`${URL}usuarios/cambiar-estado`, { id, estado, datosAuditoriaExtra}, "Eliminando...");
             if (res) {
                 // setUsuarios(prev => prev.filter(u => u.id !== id));
                 // setUsuariosFiltrados(prev => prev.filter(u => u.id !== id));
@@ -108,7 +109,7 @@ export const useUsuarios = (usuarioEdit = null) => {
 
     // 4. BUSQUEDA FILTRADA
     const handleSearch = (e) => {
-        const busqueda = e.target.value.toLowerCase();
+        const busqueda = e.target.value.toLowerCase(); 
         if (!busqueda) {
             setUsuariosFiltrados(usuarios);
             return;

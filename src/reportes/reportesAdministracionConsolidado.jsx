@@ -13,13 +13,13 @@ export function ReportesAdministracionConsolidado() {
     return (
         <>
             <style>{`
-                .report-container { background: #f8f9fa; min-height: 100vh; padding: 20px; }
+                .report-container { background: #f8f9fa; min-height: 100vh; padding: 5px; }
                 .report-card { 
                     background: white; 
                     border-radius: 15px; 
                     box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
                     border: none;
-                    padding: 30px;
+                    padding: 5px;
                 }
                 .section-title {
                     border-left: 5px solid #1B4F72;
@@ -57,20 +57,11 @@ export function ReportesAdministracionConsolidado() {
                     {/* Header */}
                     <div className="d-flex justify-content-between align-items-center mb-4">
                         <div className="section-title">
-                            <h3 className="text-dark fw-bold mb-0">Reportes de Caja Consolidados</h3>
-                            <p className="text-muted mb-0 small text-uppercase">Gestión Económica de CAJA</p>
+                            <h3 className="text-dark fw-bold mb-0">Reportes de Tramites Consolidados</h3>
+                            {/* <p className="text-muted mb-0 small text-uppercase">Gestión Económica de Trámites</p> */}
                         </div>
                     </div>
 
-                    <div className=" d-flex justify-content-end gap-2 " style={{ marginBottom: '10px' }}>
-                        <button className=" btn btn-dark" style={{ marginLeft: '4px' }} onClick={() => {
-                            const path = parseInt(localStorage.getItem('numRol')) === 2 ? 'gerente/movimientos' : parseInt(localStorage.getItem('numRol')) === 3 ? 'cajero/movimientos' : parseInt(localStorage.getItem('numRol')) === 1 ? 'admin/lista-caja' : 'auxiliar/lista-caja'
-                            navigate(LOCAL_URL + "/" + path )
-                        }
-                        }>
-                            <FontAwesomeIcon icon={faArrowLeft} className="me-2" /> VOLVER
-                        </button>
-                    </div>
 
                     <div className="report-card">
                         <div className="row g-4">
@@ -80,7 +71,7 @@ export function ReportesAdministracionConsolidado() {
                                     cambiarEstado={setters.setEstado}
                                     Name="estado"
                                     lista={[{ value: 4, label: 'Todos' }, { value: 1, label: 'En curso' }, { value: 2, label: 'Paralizado' }, { value: 3, label: 'Finalizado' },]}
-                                    etiqueta="Estado Caja *"
+                                    etiqueta="Estado Tramite *"
                                     msg="Cambiar Estado"
                                     ExpresionRegular={INPUT.ID}
                                 />

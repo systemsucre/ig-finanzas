@@ -26,19 +26,19 @@ export const UseCustomIngresos = () => {
 
 
     // 2. LISTAR INGRESOS DE UN TRÁMITE
-    const listarIngresos = async (id_tramite) => {
+    const listarIngresos = async (id_tramite) => { 
         if (!id_tramite) return;
-        const res = await start(`${URL}ingresos-cajero/listar-por-tramites`, { id_tramite });
+        const res = await start(`${URL}ingresos/listar-por-tramites`, { id_tramite });
         if (res) {
             setIngresos(res);
-            setIngresosFiltrados(res);
+            setIngresosFiltrados(res);  
         }
     };
 
     // 3. CARGAR PARA EDICIÓN (Aquí sí seteamos el idIngreso para el WHERE del Update)
     const cargarIngresoPorId = async (id) => {
         setCargando(true);
-        const res = await start(`${URL}ingresos-cajero/obtener`, { id });
+        const res = await start(`${URL}ingresos/obtener`, { id });
         if (res) {
             const data = res[0];
 
@@ -58,7 +58,7 @@ export const UseCustomIngresos = () => {
 
     // 2. CARGAR AUXILIARES (Para los combobox del formulario)
     const cargarAuxiliares = async ()=>  {
-        const resClientes = await start(`${URL}ingresos-cajero/listar-clientes`);
+        const resClientes = await start(`${URL}ingresos/listar-clientes`);
         if (resClientes) setListaClientes(resClientes);
     };
 
@@ -86,17 +86,12 @@ export const UseCustomIngresos = () => {
         };
 
         return await saveDB(
-            `${URL}ingresos-cajero/${urlFinal}`,
+            `${URL}ingresos/${urlFinal}`,
             payload,
             () => {
                 // listarIngresos(idTramite.campo); 
 
-                const rol = parseInt(localStorage.getItem('numRol'));
-                let base = '';
-                if (rol === 1) base = '/admin';
-                else if (rol === 2) base = '/gerente';
-                else if (rol === 3) base = '/cajero';
-                const rutaDestino = LOCAL_URL + '/' + base + '/listar-ingresos/' + idTramite.campo;
+                const rutaDestino = LOCAL_URL +'/listar-ingresos/' + idTramite.campo;
 
                 // console.log(rutaDestino, '   ruta destino')
                 setTimeout(() => {
@@ -116,13 +111,13 @@ export const UseCustomIngresos = () => {
             setCargando(true); // Iniciamos la carga desde el principio
 
             // 1. Obtenemos los datos necesarios para la lógica de eliminación/auditoría
-            const res = await start(`${URL}ingresos-cajero/obtener`, { id });
+            const res = await start(`${URL}ingresos/obtener`, { id });
 
             if (res && res.length > 0) {
                 const data = res[0];
 
                 // 2. Ejecutamos la eliminación enviando el contexto
-                const res1 = await start(`${URL}ingresos-cajero/eliminar`, {
+                const res1 = await start(`${URL}ingresos/eliminar`, {
                     id,
                     monto: data.monto,
                     detalle: data.detalle,

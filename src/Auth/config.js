@@ -1,7 +1,9 @@
 // const URL = 'https://etvs.alwaysdata.net/server_chagas/'
 const URL = 'https://ig-finanzas-bc.vercel.app/'
+
 // const URL = 'http://localhost:3005/'
 const LOCAL_URL = '/ig'
+
 
 const TIEMPO_INACTIVO = 60 // MINUTOS DE TOLERANCIA ANTESDE QUE EL USUARIO VUELVA A INTERACTUAR CON EL SISTEMA YA SEA MEDIANTE MUOSE O TECLADO
 const INPUT = {
@@ -24,7 +26,7 @@ const INPUT = {
     SEXO: /^[FMfm]{1}$/,
     SEXO3: /^[FMfmTt]{1}$/,
     NHC: /^\d{1,10}$/,
-    CODIGO_ENTIDAD: /^[A-Z Ññ0-9_-]{3,5}$/,
+    CODIGO_ENTIDAD: /^[A-Z Ññ0-9_-]{1,5}$/,
     EDAD: /^\d{1,3}$/, // id de redes, 1 a 4 digitos  
     TEXT: /^.{1,500}$/,  
     NUMSIMSIGNO: /^\d{1,15}((\s|[.])\d{1,2})?$/,  

@@ -8,16 +8,16 @@ export const generarReporteResumen = async (data, filtros, ) => {
 
 
     // 1. TÍTULO Y FECHAS DEL FILTRO
-    sheet.mergeCells('A1:J1');
+    sheet.mergeCells('A1:I1');
     const titleCell = sheet.getCell('A1');
-    titleCell.value = 'REPORTE CONSOLIDADO DE TRÁMITES - '+localStorage.getItem('entidad');
+    titleCell.value = 'REPORTE CONSOLIDADO DE CAJAS - IG FINANZAS';
     titleCell.font = { size: 16, bold: true, color: { argb: 'FFFFFF' } };
     titleCell.alignment = { horizontal: 'center' };
     titleCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '1B4F72' } };
 
     sheet.addRow([
         `RANGO DE CONSULTA: ${filtros.desde || 'Inicio'} hasta ${filtros.hasta || 'Hoy'}`,
-        '', '', '', '', '', '', '',
+        '', '', '', '', '', '',
         `FECHA GEN: ${new Date().toLocaleDateString()}`
     ]);
     sheet.addRow([]); // Espacio
@@ -25,15 +25,15 @@ export const generarReporteResumen = async (data, filtros, ) => {
     // 2. ENCABEZADOS DE LA TABLA MAESTRA
     const headers = [
         'CÓDIGO',
-        'EMPLEADOR',
-        'TIPO DE CAJA',
+        'NUMERO',
+        'TIPO CAJA',
         'DETALLE',
         'FECHA ING.',
-        'COSTO ESTIMADO',
+        // 'COSTO PACTADO',
         'INGRESOS (PERIODO)',
         'GASTOS (PERIODO)',
         'SALDO (PERIODO)',
-        'ESTADO'
+        'ESTADO CAJA'
     ];
     const headerRow = sheet.addRow(headers);
     sheet.mergeCells('A2:C2');
@@ -60,11 +60,11 @@ export const generarReporteResumen = async (data, filtros, ) => {
 
         const row = sheet.addRow([
             item.codigo,
-            item.cliente_nombre,
+            item.numero,
             item.nombre_tipo_tramite,
             item.detalle,
             item.fecha_ingreso?.split('T')[0] || '-',
-            parseInt(localStorage.getItem('numRol')) === 4 ? 0.0 : costo,
+            // parseInt(localStorage.getItem('numRol')) === 4 ? 0.0 : costo,
             ingresos,
             gastos,
             saldo,
@@ -73,7 +73,7 @@ export const generarReporteResumen = async (data, filtros, ) => {
 
         // Formato numérico para las columnas de dinero (F, G, H, I)
         [6, 7, 8, 9].forEach(col => {
-            row.getCell(col).numFmt = '#,##0.00 "CLP."';
+            row.getCell(col).numFmt = '#,##0.00 "Bs."';
         });
 
         // Color condicional para el saldo
@@ -89,7 +89,7 @@ export const generarReporteResumen = async (data, filtros, ) => {
     sheet.addRow([]);
     const totalRow = sheet.addRow([
         '', '', '', 'TOTALES GENERALES', '',
-        totalCosto,
+        // totalCosto,
         totalIngresos,
         totalGastos,
         (totalIngresos - totalGastos),
@@ -99,13 +99,13 @@ export const generarReporteResumen = async (data, filtros, ) => {
     totalRow.eachCell((cell, colNumber) => {
         if (colNumber >= 4) {
             cell.font = { bold: true, size: 12 };
-            if (colNumber >= 6 && colNumber <= 9) cell.numFmt = '#,##0.00 "CLP."';
+            if (colNumber >= 6 && colNumber <= 9) cell.numFmt = '#,##0.00 "Bs."';
         }
     });
 
     // Configuración de anchos
     sheet.columns = [
-        { width: 15 }, { width: 30 }, { width: 20 }, { width: 40 },
+        { width: 15 }, { width: 10 }, { width: 20 }, { width: 40 },
         { width: 15 }, { width: 18 }, { width: 18 }, { width: 18 },
         { width: 18 }, { width: 15 }
     ];

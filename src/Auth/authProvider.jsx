@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
-import {  LOCAL_URL, URL } from "./config";
+import { LOCAL_URL, URL } from "./config";
 import { Navigate } from "react-router-dom";
 
 export const AuthContext = createContext();
@@ -9,7 +9,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     async function check() {
       try {
-        localStorage.setItem("user", JSON.stringify(user)); 
+        localStorage.setItem("user", JSON.stringify(user));
       } catch (error) {
         const token = localStorage.getItem("token");
         setUser(null);
@@ -17,7 +17,7 @@ const AuthProvider = ({ children }) => {
         localStorage.removeItem("user");
         localStorage.removeItem("tiempo");
         axios.post(URL + "/logout", { token: token });
-        return <Navigate to = '/login' />
+        return <Navigate to='/login' />
       }
     }
     check();
@@ -35,20 +35,23 @@ const AuthProvider = ({ children }) => {
   if (altura > 1250) cantidad = 23;
   const contextValue = {
     user,
-    logout() {
-      console.log("se aplico logout");
-      const token = localStorage.getItem("token");
-      setUser(null);
-      localStorage.removeItem("token"); 
-      localStorage.removeItem("user");
-      localStorage.removeItem("tiempo");
-      localStorage.removeItem("numRol");
-      localStorage.removeItem("id-municipio");
-      localStorage.removeItem("id-comunidad");
-      axios.post(URL + "/logout", { token: token });
-      return <Navigate to = {LOCAL_URL+'/login'} />
+    logout: async () => {
+      const token = localStorage.getItem("token"); // 1. Recuperar token primero
+      console.log("Token a eliminar:", token);
 
-      // window.location.href = LOCAL_URL+"/";
+      try {
+        if (token) {
+          // 2. Intentar el borrado en BD (Asegúrate que URL no termine en /)
+          await axios.post(`${URL}logout`, { token: token });
+        }
+      } catch (error) {
+        console.error("No se pudo borrar en BD, procediendo a limpiar local", error);
+      }
+
+      // 3. LIMPIAR DESPUÉS de la petición
+      setUser(null);
+      localStorage.clear();
+      window.location.href = LOCAL_URL + "/login";
     },
 
     login(ok) {

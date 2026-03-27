@@ -49,7 +49,7 @@ async function start(url, payload = null, msg = null) {
         if (data.hasOwnProperty("sesion")) {
             console.log(data, ' sesion desde el servidor')
             handleSessionError();
-            return [];
+            return [];  
         }
 
         // console.log(data, ' res bc service')
@@ -59,6 +59,7 @@ async function start(url, payload = null, msg = null) {
             return data.data || [];
         } else {
             toast.error(data.msg || "Error desconocido");
+            
             return [];
         }
 

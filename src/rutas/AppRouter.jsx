@@ -15,7 +15,6 @@ import PublicRoute from "./publicRoute";
 import E500 from "./e500";
 
 import HomeLogin from "../Login";
-import NavbarAdmin from "../components/etc/menuAdmin";
 import { Footer } from "../components/Footer";
 
 import NuevoTramite from "../tramite/NuevoTramite";
@@ -31,25 +30,30 @@ import ListaTipoTramite from "../tipoTramite/ListaTipoTramites";
 import NuevoTipoTramite from "../tipoTramite/NuevoTipoTramite";
 
 
+import NavbarAdmin from "../components/etc/menuAdmin";
 import NavbarAuxiliar from "../components/etc/menuAuxiliar";
-import { ListaTramitesS } from "../salidas/ListaTramites";
-import { ListaSalidas } from "../salidas/ListaSalidas";
-import FormularioSalida from "../salidas/FormularioSalida";
-
-
 import NavbarGerente from "../components/etc/menuGerente";
-import { ListaTramitesGerente } from "../salidasGerente/ListaTramites";
-import { ListaSalidasGerente } from "../salidasGerente/ListaSalidas";
-
 import NavbarCajero from "../components/etc/menuCajero";
-import { ListaTramitesCajero } from "../salidasCajero/ListaTramites";
-import { ListaSalidasCajero } from "../salidasCajero/ListaSalidas";
 
-import { ListaIngresosTramite } from "../ingresosCajero/ListaIngresos";
-import FormularioIngreso from "../ingresosCajero/FormularioIngreso";
+
+
+
+// ALL USERS
+import { Movimientos } from "../tramite/Movimientos";
+import { ListaSalidas } from "../salidas/ListaSalidas";
+import { ListaIngresosTramite } from "../ingresos/ListaIngresos";
+import FormularioIngreso from "../ingresos/FormularioIngreso";
 import { ReportesAdministracionPorTramite } from "../reportes/reportesAdministracionPorTramite";
 import { ReportesAdministracionConsolidado } from "../reportes/reportesAdministracionConsolidado";
-import DashboardFinanciero from "../reportes/DashboardFinanciero";
+
+import { ListaBoleta } from "../boleta/Lista";
+import { FormularioBoleta } from "../boleta/Formulario";
+import { DetallesBoleta } from "../boleta/detalles";
+import { LayoutPorRol } from "./layout";
+import { ListaHonorariosTramite } from "../honorarios/Lista";
+import FormularioHonorario from "../honorarios/FormularioHonorarios";
+import { ReportesHonorarios } from "../reportes/reportesHonorarios";
+
 
 
 export default function AppRouter() {
@@ -113,6 +117,7 @@ export default function AppRouter() {
         { path: "", element: <PublicRoute component={HomeLogin} /> },
       ]
     },
+
     {
       path: LOCAL_URL + '/admin',
       element: <>
@@ -128,15 +133,15 @@ export default function AppRouter() {
       children: [
 
         {
-          path: 'lista-empleadores',
+          path: 'lista-clientes',
           element: <Check component={ListaClientes} roleRequired="admin" />,
         },
         {
-          path: 'nuevo-empleador',
+          path: 'nuevo-cliente',
           element: <Check component={NuevoCliente} roleRequired="admin" />,
         },
         {
-          path: 'editar-empleador/:id',
+          path: 'editar-cliente/:id',
           element: <Check component={NuevoCliente} roleRequired="admin" />,
         },
 
@@ -156,43 +161,37 @@ export default function AppRouter() {
 
 
         {
-          path: 'lista-caja',
+          path: 'lista-tramites',
           element: <Check component={ListaTramites} roleRequired="admin" />,
         },
         {
-          path: 'nuevo-caja',
+          path: 'nuevo-tramite',
           element: <Check component={NuevoTramite} roleRequired="admin" />,
         },
         {
-          path: 'editar-caja/:id',
+          path: 'editar-tramite/:id',
           element: <Check component={NuevoTramite} roleRequired="admin" />,
         },
 
-
         {
-          path: 'lista-tipo-caja',
+          path: 'lista-tipo-tramites',
           element: <Check component={ListaTipoTramite} roleRequired="admin" />,
         },
         {
-          path: 'nuevo-tipo-caja',
+          path: 'nuevo-tipo-tramite',
           element: <Check component={NuevoTipoTramite} roleRequired="admin" />,
         },
         {
-          path: 'editar-tipo-caja/:id',
+          path: 'editar-tipo-tramite/:id',
           element: <Check component={NuevoTipoTramite} roleRequired="admin" />,
+        },
+        {
+          path: 'reporte-honorarios',
+          element: <Check component={ReportesHonorarios} roleRequired="admin" />,
         },
 
-        {
-          path: 'reportes-por-caja',
-          element: <Check component={ReportesAdministracionPorTramite} roleRequired="admin" />,
-        },
-        {
-          path: 'reportes-consolidado',
-          element: <Check component={ReportesAdministracionConsolidado} roleRequired="admin" />,
-        },
       ],
     },
-
 
     // RUTAS AUXILIAR
     {
@@ -207,35 +206,7 @@ export default function AppRouter() {
       errorElement: <E500 />,
       children: [
 
-        {
-          path: 'lista-caja',
-          element: <Check component={ListaTramitesS} roleRequired="auxiliar" />,
-        },
 
-        {
-          path: 'listar-salidas/:id',
-          element: <Check component={ListaSalidas} roleRequired="auxiliar" />,
-        },
-
-        {
-          path: 'salidas/crear/:id_tramite',
-          element: <Check component={FormularioSalida} roleRequired="auxiliar" />,
-        },
-
-        {
-          path: 'salidas/editar/:id_tramite/:id',
-          element: <Check component={FormularioSalida} roleRequired="auxiliar" />,
-        },
-
-
-        {
-          path: 'reportes-por-caja',
-          element: <Check component={ReportesAdministracionPorTramite} roleRequired="auxiliar" />,
-        },
-        {
-          path: 'reportes-consolidado',
-          element: <Check component={ReportesAdministracionConsolidado} roleRequired="auxiliar" />,
-        },
       ],
     },
 
@@ -254,88 +225,55 @@ export default function AppRouter() {
       children: [
 
         {
-          path: 'movimientos',
-          element: <Check component={ListaTramitesCajero} roleRequired="gerente" />,// ListaTramitesGerente>paa fuciones avanzadas
-        },
-
-        // {
-        //   path: 'listar-salidas/:id',
-        //   element: <Check component={ListaSalidasGerente} roleRequired="gerente" />, 
-        // },
-        {
-          path: 'listar-salidas/:id',
-          element: <Check component={ListaSalidas} roleRequired="gerente" />,  // ListaSalidasCajero-> para la funcion de avanzado, despachar salidas
-        },
-
-        {
-          path: 'salidas/crear/:id_tramite',
-          element: <Check component={FormularioSalida} roleRequired="gerente" />,
-        },
-
-        {
-          path: 'salidas/editar/:id_tramite/:id',
-          element: <Check component={FormularioSalida} roleRequired="gerente" />,
-        },
-
-
-        // {
-        //   path: 'listar-ingresos/:id',
-        //   element: <Check component={ListaIngresosTramite} roleRequired="gerente" />,
-        // },
-        {
-          path: 'listar-ingresos/:id',
-          element: <Check component={ListaIngresosTramite} roleRequired="gerente" />,
-        },
-
-        {
-          path: 'crear-ingreso/:id_tramite',
-          element: <Check component={FormularioIngreso} roleRequired="gerente" />,
-        },
-        {
-          path: 'editar-ingreso/:id_tramite/:id',
-          element: <Check component={FormularioIngreso} roleRequired="gerente" />,
-        },
-
-        {
-          path: 'lista-caja',
+          path: 'lista-tramites',
           element: <Check component={ListaTramites} roleRequired="gerente" />,
         },
         {
-          path: 'nuevo-caja',
+          path: 'nuevo-tramite',
           element: <Check component={NuevoTramite} roleRequired="gerente" />,
         },
         {
-          path: 'editar-caja/:id',
+          path: 'editar-tramite/:id',
           element: <Check component={NuevoTramite} roleRequired="gerente" />,
         },
 
 
         {
-          path: 'lista-empleadores',
+          path: 'lista-clientes',
           element: <Check component={ListaClientes} roleRequired="gerente" />,
         },
         {
-          path: 'nuevo-empleador',
+          path: 'nuevo-cliente',
           element: <Check component={NuevoCliente} roleRequired="gerente" />,
         },
 
         {
-          path: 'editar-empleador/:id',
+          path: 'editar-cliente/:id',
           element: <Check component={NuevoCliente} roleRequired="gerente" />,
         },
 
         {
-          path: 'reportes-por-caja',
-          element: <Check component={ReportesAdministracionPorTramite} roleRequired="gerente" />,
+          path: 'listar-honorarios',
+          element: <Check component={ListaHonorariosTramite} roleRequired="gerente" />,
         },
         {
-          path: 'reportes-consolidado',
-          element: <Check component={ReportesAdministracionConsolidado} roleRequired="gerente" />,
+          path: 'guardar-honorario',
+          element: <Check component={FormularioHonorario} roleRequired="gerente" />,
+        },
+        {
+          path: 'editar-honorario/:id',
+          element: <Check component={FormularioHonorario} roleRequired="gerente" />,
+        },
+
+        {
+          path: 'reporte-honorarios',
+          element: <Check component={ReportesHonorarios} roleRequired="gerente" />,
         },
 
 
       ],
     },
+
 
 
 
@@ -353,87 +291,126 @@ export default function AppRouter() {
       children: [
 
         {
-          path: 'dash-1',
-          element: <Check component={DashboardFinanciero} roleRequired="cajero" />,
-        },
-
-        {
-          path: 'lista-empleadores',
+          path: 'lista-clientes',
           element: <Check component={ListaClientes} roleRequired="cajero" />,
         },
         {
-          path: 'nuevo-empleador',
+          path: 'nuevo-cliente',
           element: <Check component={NuevoCliente} roleRequired="cajero" />,
         },
         {
-          path: 'editar-empleador/:id',
+          path: 'editar-cliente/:id',
           element: <Check component={NuevoCliente} roleRequired="cajero" />,
         },
 
         {
-          path: 'movimientos',
-          element: <Check component={ListaTramitesCajero} roleRequired="cajero" />,
+          path: 'listar-honorarios',
+          element: <Check component={ListaHonorariosTramite} roleRequired="cajero" />,
         },
         {
-          path: 'lista-caja',
+          path: 'guardar-honorario',
+          element: <Check component={FormularioHonorario} roleRequired="cajero" />,
+        },
+        {
+          path: 'editar-honorario/:id',
+          element: <Check component={FormularioHonorario} roleRequired="cajero" />,
+        },
+
+        {
+          path: 'reporte-honorarios',
+          element: <Check component={ReportesHonorarios} roleRequired="cajero" />,
+        },
+
+
+
+        {
+          path: 'lista-tramites',
           element: <Check component={ListaTramites} roleRequired="cajero" />,
         },
         {
-          path: 'nuevo-caja',
+          path: 'nuevo-tramite',
           element: <Check component={NuevoTramite} roleRequired="cajero" />,
         },
         {
-          path: 'editar-caja/:id',
+          path: 'editar-tramite/:id',
           element: <Check component={NuevoTramite} roleRequired="cajero" />,
         },
 
 
-
-        {
-          path: 'listar-salidas/:id',
-          element: <Check component={ListaSalidas} roleRequired="cajero" />,  // ListaSalidasCajero-> para la funcion de avanzado, despachar salidas
-        },
-
-        {
-          path: 'salidas/crear/:id_tramite',
-          element: <Check component={FormularioSalida} roleRequired="cajero" />,
-        },
-
-        {
-          path: 'salidas/editar/:id_tramite/:id',
-          element: <Check component={FormularioSalida} roleRequired="cajero" />,
-        },
-
-
-
-        // OTRAS RUTAS
-
-        {
-          path: 'listar-ingresos/:id',
-          element: <Check component={ListaIngresosTramite} roleRequired="cajero" />,
-        },
-
-        {
-          path: 'crear-ingreso/:id_tramite',
-          element: <Check component={FormularioIngreso} roleRequired="cajero" />,
-        },
-        {
-          path: 'editar-ingreso/:id_tramite/:id',
-          element: <Check component={FormularioIngreso} roleRequired="cajero" />,
-        },
-
-        {
-          path: 'reportes-por-caja',
-          element: <Check component={ReportesAdministracionPorTramite} roleRequired="cajero" />,
-        },
-        {
-          path: 'reportes-consolidado',
-          element: <Check component={ReportesAdministracionConsolidado} roleRequired="cajero" />,
-        },
 
       ],
     },
 
+    // ROUTES TO ALL USERS
+    {
+      path: LOCAL_URL + '/',
+      element: <LayoutPorRol />,
+      //  <>
+      //   <NavbarCajero />
+      //   <main className="main-content">
+      //     {/* Outlet es donde se renderizarán las páginas (Pacientes, Login, etc.) */}
+      //     <Outlet />
+      //   </main>
+      // </>, // El Layout siempre se muestra
+      errorElement: <E500 />,
+      children: [
+
+        {
+          path: 'boletas',
+          element: <Check component={ListaBoleta} roleRequired="all" />,
+        },
+        {
+          path: 'detalle-boleta/:codigo',
+          element: <Check component={DetallesBoleta} roleRequired="all" />,
+        },
+
+        {
+          path: 'nueva-boleta',
+          element: <Check component={FormularioBoleta} roleRequired="all" />,
+        },
+
+        {
+          path: 'modificar-boleta/:codigo',
+          element: <Check component={FormularioBoleta} roleRequired="all" />,
+        },
+
+        {
+          path: 'movimientos',
+          element: <Check component={Movimientos} roleRequired="all" />,
+        },
+
+        {
+          path: 'listar-salidas/:id',
+          element: <Check component={ListaSalidas} roleRequired="all" />,
+        },
+
+        {
+          path: 'listar-ingresos/:id',
+          element: <Check component={ListaIngresosTramite} roleRequired="all" />,
+        },
+
+        {
+          path: 'crear-ingreso/:id_tramite',
+          element: <Check component={FormularioIngreso} roleRequired="all" />,
+        },
+
+        {
+          path: 'editar-ingreso/:id_tramite/:id',
+          element: <Check component={FormularioIngreso} roleRequired="all" />,
+        },
+
+        {
+          path: 'reportes-por-tramite',
+          element: <Check component={ReportesAdministracionPorTramite} roleRequired="all" />,
+        },
+
+        {
+          path: 'reportes-consolidado',
+          element: <Check component={ReportesAdministracionConsolidado} roleRequired="all" />,
+        },
+
+      ],
+    },
 
 
   ]);

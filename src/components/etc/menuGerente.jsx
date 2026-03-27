@@ -23,29 +23,18 @@ const NavbarGerente = () => {
   // Cerrar menú al cambiar de ruta
   useEffect(() => setIsMobileMenuOpen(false), [location]);
 
-    // 1. Obtenemos el valor (ej: "KRESTUDIOS" o "ABOGADOS")
-  const entidadCompleta = localStorage.getItem('entidad') || 'IGFinanzas';
-
-  // 2. Extraemos las partes
-  const iniciales = entidadCompleta.substring(0, 2); // Las primeras 2 letras
-  const restoNombre = entidadCompleta.substring(2); // Todo lo demás desde la posición 2
-
   return (
     <nav className={` nav-main ${isScrolled ? 'nav-scrolled' : ''}`}>
       <div className="nav-container">
 
-        <NavLink to={LOCAL_URL + "/"} className="nav-brand d-flex align-items-center">
+        <NavLink to={LOCAL_URL + "/mivimientos"} className="nav-brand d-flex align-items-center">
           {/* Logo Principal */}
           {/* <span style={{ fontSize: '24px', marginRight: '8px' }}>👔</span> */}
 
           {/* Contenedor de Texto */}
           <div className="d-flex flex-column justify-content-start" style={{ lineHeight: '1' }}>
-             <span className="brand-text fw-bold text-uppercase">
-              {iniciales}
-              <span className="text-primary">
-                {restoNombre}
-                {`.   `}
-              </span>
+            <span className="brand-text fw-bold">
+              KR<span className="text-primary">ESTUDIOS{`.   `}</span>
             </span>
             <div className="user-info-brand" style={{ marginTop: '-2px' }}>
               <span className="text-muted text-uppercase" style={{ fontSize: '9px', fontWeight: '700' }}>
@@ -60,25 +49,43 @@ const NavbarGerente = () => {
         </NavLink>
         {/* Desktop Menu */}
         <ul className="nav-menu-desktop">
-          {/* <li><NavLink to="/" end className="nav-link-item">Dashboard</NavLink></li> */}
-          <li><NavLink to={LOCAL_URL + "/gerente/movimientos"} className="nav-link-item">Movimientos</NavLink></li>
+          <li><NavLink to={LOCAL_URL + "/movimientos"} end className="nav-link-item">Movimientos</NavLink></li>
+
           <div className="nav-item-container has-submenu">
             <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
-              Empleadores <span className="arrow">▼</span>
+              Boletas <span className="arrow">▼</span>
             </NavLink>
-
             <ul className="submenu-list">
-              <li><NavLink to={LOCAL_URL + "/gerente/nuevo-empleador"} className="submenu-link">Nuevo Empleador</NavLink></li>
-              <li><NavLink to={LOCAL_URL + "/gerente/lista-empleadores"} className="submenu-link">Lista Empleadores</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/nueva-boleta"} className="submenu-link">Crear Boleta</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/boletas"} className="submenu-link">Listar Boletas</NavLink></li>
             </ul>
           </div>
           <div className="nav-item-container has-submenu">
             <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
-              Cajas <span className="arrow">▼</span>
+              Honorarios <span className="arrow">▼</span>
             </NavLink>
             <ul className="submenu-list">
-              <li><NavLink to={LOCAL_URL + "/gerente/nuevo-caja"} className="submenu-link">Apertura de caja</NavLink></li>
-              <li><NavLink to={LOCAL_URL + "/gerente/lista-caja"} className="submenu-link">Lista de cajas</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/gerente/guardar-honorario"} className="submenu-link">Registrar Honorario</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/gerente/listar-honorarios"} className="submenu-link">Listar Honorarios</NavLink></li>
+            </ul>
+          </div>
+          <div className="nav-item-container has-submenu">
+            <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
+              Clientes <span className="arrow">▼</span>
+            </NavLink>
+
+            <ul className="submenu-list">
+              <li><NavLink to={LOCAL_URL + "/gerente/nuevo-cliente"} className="submenu-link">Nuevo Cliente</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/gerente/lista-clientes"} className="submenu-link">Listar Cliente</NavLink></li>
+            </ul>
+          </div>
+          <div className="nav-item-container has-submenu">
+            <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
+              Tramites <span className="arrow">▼</span>
+            </NavLink>
+            <ul className="submenu-list">
+              <li><NavLink to={LOCAL_URL + "/gerente/nuevo-tramite"} className="submenu-link">Nuevo Trámite</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/gerente/lista-tramites"} className="submenu-link">Listar Tramites</NavLink></li>
             </ul>
           </div>
 
@@ -87,10 +94,13 @@ const NavbarGerente = () => {
               Reportes <span className="arrow">▼</span>
             </NavLink>
             <ul className="submenu-list">
-              <li><NavLink to={LOCAL_URL + "/gerente/reportes-por-caja"} className="submenu-link">Por caja</NavLink></li>
-              <li><NavLink to={LOCAL_URL + "/gerente/reportes-consolidado"} className="submenu-link">Consolidado</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/reportes-por-tramite"} className="submenu-link">Por Trámite</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/reportes-consolidado"} className="submenu-link">Consolidado</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/gerente/reportes-honorarios"} className="submenu-link">Honorarios</NavLink></li>
+
             </ul>
           </div>
+
 
           <li className="nav-action">
             <div className="nav-item-container has-submenu">
@@ -122,25 +132,44 @@ const NavbarGerente = () => {
           {/* Mobile Overlay Menu */}
           <div className={`nav-menu-mobile ${isMobileMenuOpen ? 'open' : ''}`}>
 
-            {/* <NavLink to="#" end className="mobile-link">Dashboard</NavLink> */}
-            <NavLink to={LOCAL_URL + "/gerente/movimientos"} className="mobile-link">Movimientos</NavLink>
+            <NavLink to={LOCAL_URL + "/movimientos"} className="mobile-link">Movimientos</NavLink>
 
             <div className="nav-item-container has-submenu">
               <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
-                Empleador <span className="arrow">▼</span>
+                Boletas <span className="arrow">▼</span>
               </NavLink>
               <ul className="submenu-list">
-                <li><NavLink to={LOCAL_URL + "/gerente/nuevo-empleador"} className="submenu-link">Nuevo Empleador</NavLink></li>
-                <li><NavLink to={LOCAL_URL + "/gerente/lista-empleadores"} className="submenu-link">Lista Empleadores</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/nueva-boleta"} className="submenu-link">Nueva Boleta</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/boletas"} className="submenu-link">Lista Boletas</NavLink></li>
+              </ul>
+            </div>
+
+            <div className="nav-item-container has-submenu">
+              <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
+                Honorarios <span className="arrow">▼</span>
+              </NavLink>
+              <ul className="submenu-list">
+                <li><NavLink to={LOCAL_URL + "/gerente/guardar-honorario"} className="submenu-link">Registrar Honorario</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/gerente/listar-honorarios"} className="submenu-link">Listar Honorarios</NavLink></li>
+              </ul>
+            </div>
+
+            <div className="nav-item-container has-submenu">
+              <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
+                Clientes <span className="arrow">▼</span>
+              </NavLink>
+              <ul className="submenu-list">
+                <li><NavLink to={LOCAL_URL + "/gerente/nuevo-cliente"} className="submenu-link">Nuevo Cliente</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/gerente/clientes"} className="submenu-link">Lista Clientes</NavLink></li>
               </ul>
             </div>
             <div className="nav-item-container has-submenu">
               <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
-                Cajas <span className="arrow">▼</span>
+                Tramites <span className="arrow">▼</span>
               </NavLink>
               <ul className="submenu-list">
-                <li><NavLink to={LOCAL_URL + "/gerente/nuevo-caja"} className="submenu-link">Apertura de caja</NavLink></li>
-                <li><NavLink to={LOCAL_URL + "/gerente/lista-caja"} className="submenu-link">Lista de Cajas</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/gerente/nuevo-tramite"} className="submenu-link">Nuevo Trámite</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/gerente/lista-tramites"} className="submenu-link">Lista Tramites</NavLink></li>
               </ul>
             </div>
 
@@ -149,8 +178,10 @@ const NavbarGerente = () => {
                 Reportes <span className="arrow">▼</span>
               </NavLink>
               <ul className="submenu-list">
-                <li><NavLink to={LOCAL_URL + "/gerente/reportes-por-caja"} className="submenu-link">Por Caja</NavLink></li>
-                <li><NavLink to={LOCAL_URL + "/gerente/reportes-consolidado"} className="submenu-link">Consolidado</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/reportes-por-tramite"} className="submenu-link">Por Trámite</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/reportes-consolidado"} className="submenu-link">Consolidado</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/gerente/reporte-honorarios"} className="submenu-link">honorarios</NavLink></li>
+
               </ul>
             </div>
             <div className="nav-item-container has-submenu mt-4" >

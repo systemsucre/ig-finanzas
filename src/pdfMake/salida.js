@@ -1,15 +1,12 @@
 import createPdf from './base.js';
 
 const ticketSalidaIndividual = async (output, { salida }) => {
-    console.log(salida.fecha_solicitud, ' fecha solicitud')
+    // console.log(salida, ' fecha solicitud')
 
     const montoFormateado = salida?.monto ? parseFloat(salida.monto).toFixed(2) : "0.00";
     const numeroSalida = salida?.numero || "S/N";
-    const fechaSalida = salida?.fecha_solicitud
-        ? new Date(salida.fecha_solicitud?.split('T')[0]).toLocaleDateString()
-        : "---";
 
-    const estados = { 1: 'SOLICITADO', 2: 'APROBADO', 3: 'DESPACHADO', 4: 'RECHAZADO' };
+    const estados = { 1: 'SOLICITADO', 2: 'APROBADO', 3: 'REGISTRADO', 4: 'RECHAZADO' };
     const estado = salida.estado
     const content = [
         // Encabezado con Estilo
@@ -32,13 +29,19 @@ const ticketSalidaIndividual = async (output, { salida }) => {
         { text: ' ', margin: [0, 10] },
 
         // Datos del Trámite y Fecha
+
+        { text: `N° BOLETA: ${salida?.numero_boleta}`, style: 'tHeaderLabel' },
+        { text: `CODIGO BOLETA: ${salida?.codigo_boleta}`, style: 'tHeaderLabel' },
+      
+        { text: '_______________________________________________________________________________________________', color: '#eeeeee', margin: [0, 5, 0, 10] },
+
         {
             columns: [
                 { text: `N° Salida: ${numeroSalida}`, style: 'nhcheader' },
-                { text: `Fecha: ${fechaSalida}`, style: 'tHeaderLabel' }
+                // { text: `Fecha: ${fechaSalida}`, style: 'tHeaderLabel' }
             ]
         },
-        { text: `Trámite Ref: ${salida.codigo_tramite}`, style: 'text', alignment: 'left' },
+        { text: `Caja Ref: ${salida.codigo_tramite}`, style: 'text', alignment: 'left' },
 
         { text: '_______________________________________________________________________________________________', color: '#eeeeee', margin: [0, 5, 0, 10] },
 
@@ -52,7 +55,7 @@ const ticketSalidaIndividual = async (output, { salida }) => {
         },
         {
             text: [
-                { text: 'Solicitante: ', style: 'tProductsHeader' },
+                { text: 'Regiistrado por: ', style: 'tProductsHeader' },
                 { text: salida.usuario_nombre, style: 'text' }
             ],
             margin: [0, 5, 0, 5]
@@ -88,26 +91,12 @@ const ticketSalidaIndividual = async (output, { salida }) => {
 
         {
             text: [
-                { text: 'Fecha solicitado: ', style: 'tProductsHeader' },
-                { text: salida.fecha_solicitud.split('T')[0] || '---', style: 'text', bold: true }
+                { text: 'Fecha registro: ', style: 'tProductsHeader' },
+                { text: salida.fecha_solicitud?.split('T')[0] || '---', style: 'text', bold: true }
             ],
             margin: [0, 5, 0, 5]
         },
-        {
-            text: [
-                { text: 'Fecha aprobación: ', style: 'tProductsHeader' },
-                { text: estado === 2 || estado === 3 ? salida.fecha_aprobacion.split('T')[0] || '---' : '-', style: 'text', bold: true }
-            ],
-            margin: [0, 5, 0, 5]
-        },
-
-        {
-            text: [
-                { text: 'Fecha despacho: ', style: 'tProductsHeader' },
-                { text: estado === 3 ? salida.fecha_despacho?.split('T')[0] || '---' : '-', style: 'text', bold: true }
-            ],
-            margin: [0, 5, 0, 15]
-        },
+       
 
         // Cuadro de Monto
         {
@@ -115,8 +104,8 @@ const ticketSalidaIndividual = async (output, { salida }) => {
                 widths: ['*', 'auto'],
                 body: [
                     [
-                        { text: estado === 1 ? 'TOTAL SOLICITADO' : estado === 2 ? ' TOTAL APROBADO' : estado === 3 ? 'TOTAL DESPACHADO' : estado === 4 ? 'TOTAL RECHAZADO' : 'MONTO SIN IDENTIFICACION', alignment: 'right', margin: [0, 5, 0, 5], bold: true },
-                        { text: `CLP. ${montoFormateado}`, style: 'hc', margin: [10, 5, 10, 5], fillColor: '#f8f9fa' }
+                        { text: estado === 1 ? 'TOTAL REGISTRADO' : estado === 2 ? ' TOTAL APROBADO' : estado === 3 ? 'TOTAL DESPACHADO' : estado === 4 ? 'TOTAL RECHAZADO' : 'MONTO SIN IDENTIFICACION', alignment: 'right', margin: [0, 5, 0, 5], bold: true },
+                        { text: `Bs. ${montoFormateado}`, style: 'hc', margin: [10, 5, 10, 5], fillColor: '#f8f9fa' }
                     ]
                 ]
             },

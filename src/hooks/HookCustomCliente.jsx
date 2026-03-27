@@ -65,6 +65,7 @@ export const useClientes = () => {
                 // Este bloque se ejecuta solo si res.ok === true
                 listarClientes(); // Refresca la lista en el estado global
 
+
                 setTimeout(() => {
 
                     const rol = parseInt(localStorage.getItem('numRol'));
@@ -74,7 +75,7 @@ export const useClientes = () => {
                     else if (rol === 3) base = '/cajero';
 
 
-                     navigate(`${LOCAL_URL}${base}/lista-clientes`)
+                    navigate(`${LOCAL_URL}${base}/lista-clientes`)
 
                 }, 1000);
             },

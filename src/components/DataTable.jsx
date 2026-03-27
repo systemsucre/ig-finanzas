@@ -1,4 +1,3 @@
-import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom'
 
@@ -13,7 +12,7 @@ const DataTable = ({ columns, data, funciones }) => {
                             {columns.map((col) => (
                                 <th key={col.field}>{col.label}</th>
                             ))}
-                            <th className="text-center">Acciones</th>
+                            {funciones.length>0 ? <th className="text-center">Acciones</th> : null}
                         </tr>
                     </thead>
                     <tbody>
@@ -26,18 +25,7 @@ const DataTable = ({ columns, data, funciones }) => {
                                 ))}
                                 <td>
                                     <div className="contenedor-botones">
-                                        {/* {funciones.map((f, index) => (
-                                            !f.enlace ?
-                                                <button
-                                                    key={index}
-                                                    onClick={() => f.boton(item.id)}
-                                                    className={f.className}
-                                                >
-                                                   <FontAwesomeIcon icon={f.icono} />{f.label} 
-                                                </button>
-                                                : <Link key={index} className={f.className} to={`${f.enlace}/${item.id}`} > <FontAwesomeIcon icon={f.icono} /> {f.label} </Link>
-
-                                        ))} */}
+                                      
                                         {funciones.map((f, index) => {
                                             // Resolvemos los valores dinámicos ejecutando la función si es necesario
                                             const className = typeof f.className === 'function' ? f.className(item.id, item) : f.className;
@@ -49,7 +37,7 @@ const DataTable = ({ columns, data, funciones }) => {
                                                     key={index}
                                                     // Importante: pasar item.id y el estado (o el item completo) al hacer click
                                                     onClick={() => f.boton(item.id, item)}
-                                                    className={className}  
+                                                    className={className}
                                                 >
                                                     <FontAwesomeIcon icon={icono} /> {label}
                                                 </button>

@@ -14,7 +14,7 @@ export const columns = [
         width: '80px'
     },
     {
-        label: 'Descripción de Categoria Caja',
+        label: 'Descripción del Trámite',
         field: 'tipo_tramite',
         render: row => <span className="fw-bold text-dark">{row.tipo_tramite}</span>,
         sortable: true,

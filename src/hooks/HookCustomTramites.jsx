@@ -14,12 +14,12 @@ export const useTramites = () => {
     // --- ESTADOS PARA FORMULARIO (Tabla tramites) ---
     const [idCliente, setIdCliente] = useState({ campo: '', valido: null });
     const [idTipoTramite, setIdTipoTramite] = useState({ campo: '', valido: null });
-    const [codigo, setCodigo] = useState({ campo: '', valido: null });
     const [fechaIngreso, setFechaIngreso] = useState({ campo: '', valido: null });
     const [fechaFinalizacion, setFechaFinalizacion] = useState({ campo: '', valido: null });
     const [plazo, setPlazo] = useState({ campo: 0, valido: 'true' });
     const [detalle, setDetalle] = useState({ campo: '', valido: null });
-    const [costo, setCosto] = useState({ campo: '', valido: null });
+    const [costo, setCosto] = useState({ campo: 0.00, valido: 'true' });
+    const [codigo, setCodigo] = useState({ campo: '', valido: null });
     const [otros, setOtros] = useState({ campo: '', valido: 'true' });
     const [estado, setEstado] = useState({ campo: 1, valido: 'true' }); // 1: En curso, 0: Paralizado
 
@@ -29,6 +29,7 @@ export const useTramites = () => {
     const [cargando, setCargando] = useState(false);
 
     // Listas para los Selects del formulario
+    const [listaClientes, setListaClientes] = useState([]);
     const [listaTipos, setListaTipos] = useState([]);
 
     // 1. LISTAR TRÁMITES (Principal)
@@ -45,9 +46,25 @@ export const useTramites = () => {
         setCargando(false);
     }, []);
 
+    // 1.1 LISTAR TRÁMITES (Activos)
+    const listarTramitesActivos = async () => {
+        setCargando(true);
+        const res = await start(`${URL}comuun/listar-tramites`,);
+        // alert()
+        if (res) {
+            setTramites(res);
+            const activos = res.filter(t => t.eliminado > 0 && t.estado === 1);
+            // setTramites(activos);
+            setTramitesFiltrados(activos);
+        }
+        setCargando(false);
+    };
+
     // 2. CARGAR AUXILIARES (Para los combobox del formulario)
     const cargarAuxiliares = useCallback(async () => {
+        const resClientes = await start(`${URL}tramites/listar-clientes`);
         const resTipos = await start(`${URL}tramites/listar-tipo-tramites`);
+        if (resClientes) setListaClientes(resClientes);
         if (resTipos) setListaTipos(resTipos);
     }, []);
 
@@ -70,8 +87,9 @@ export const useTramites = () => {
         if (res) {
             // console.log(res,' codigo', id)
             setTramites(res)
+            setIdCliente({ campo: res.id_cliente, valido: 'true' });
             setCodigo({ campo: res.codigo, valido: 'true' });
-            setIdTipoTramite({ campo: res.id_tipo_tramite, valido: 'true' });  
+            setIdTipoTramite({ campo: res.id_tipo_tramite, valido: 'true' });
             setFechaIngreso({ campo: res.fecha_ingreso.split('T')[0], valido: 'true' });
             setFechaFinalizacion({ campo: res.fecha_finalizacion.split('T')[0], valido: 'true' });
             setEstado({ campo: res.estado, valido: 'true' });
@@ -85,8 +103,8 @@ export const useTramites = () => {
     const guardarTramite = async (e, idParaEditar = null) => {
         if (e) e.preventDefault();
 
-
-        const data = { 
+        const data = {
+            id_cliente: idCliente.campo,
             fecha_ingreso: fechaIngreso.campo,
             fecha_finalizacion: fechaFinalizacion.campo,
             plazo: plazo.campo,
@@ -115,7 +133,7 @@ export const useTramites = () => {
                 else if (rol === 3) base = '/cajero';
 
 
-                setTimeout(() => navigate(`${LOCAL_URL}${base}/lista-caja`), 1000);
+                setTimeout(() => navigate(`${LOCAL_URL}${base}/lista-tramites`), 1000);
             },
             setCargando
         );
@@ -144,7 +162,6 @@ export const useTramites = () => {
     };
 
     // EXPORTAR PDF
-
     const exportPDfTramites = async (output, row) => {
         // Definimos la lógica dentro de una función interna para pasarla al toast
         const generarProceso = async () => {
@@ -222,9 +239,10 @@ export const useTramites = () => {
         }
 
         const filtrados = tramites.filter((t) => (
-            t.codigo.toLowerCase().includes(busqueda) ||
-            t.cliente_nombre.toLowerCase().includes(busqueda) ||
-            t.nombre_tipo_tramite.toLowerCase().includes(busqueda)
+            (t.codigo && t.codigo.toLowerCase().includes(busqueda)) ||
+            (t.cliente_nombre && t.cliente_nombre.toLowerCase().includes(busqueda)) ||
+            // Convertimos a String y usamos optional chaining
+            (t.numero && String(t.numero).includes(busqueda))
         ));
         setTramitesFiltrados(filtrados);
     };
@@ -242,18 +260,19 @@ export const useTramites = () => {
 
     return {
         tramitesFiltrados, tramites,
-        auxiliares: {  listaTipos },
+        auxiliares: { listaClientes, listaTipos },
         handleSearch,
         cargando,
         estados: {
-            idCliente, idTipoTramite,  fechaIngreso,
-            fechaFinalizacion, plazo, detalle, costo, otros, estado, codigo
+            idCliente, idTipoTramite, fechaIngreso, codigo,
+            fechaFinalizacion, plazo, detalle, costo, otros, estado
         },
         setters: {
             setIdCliente, setIdTipoTramite, setFechaIngreso,
             setFechaFinalizacion, setPlazo, setDetalle, setCosto, setOtros, setEstado
         },
         guardarTramite,
+        listarTramitesActivos,
         filterByEstado,
         allList,
         cargarTramitePorId,

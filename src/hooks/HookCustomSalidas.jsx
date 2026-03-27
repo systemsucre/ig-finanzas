@@ -1,10 +1,8 @@
 import { useState, } from "react";
 import { useNavigate } from "react-router-dom";
 import ticketSalidaIndividual from "../pdfMake/salida";
-import fileDownload from "js-file-download";
-import { LOCAL_URL, URL } from '../Auth/config';
-import { saveDB, start } from '../service/service';
-import { datosAuditoriaExtra } from "./datosAuditoriaExtra";
+import {  URL } from '../Auth/config';
+import {  start } from '../service/service';
 
 export const UseCustomSalidas = () => {
     const navigate = useNavigate();
@@ -27,6 +25,7 @@ export const UseCustomSalidas = () => {
         if (!id) return;
         const res = await start(`${URL}salidas/listar`, { id });
         if (res) {
+            // console.log(res)
             setSalidas(res);
             setSalidasFiltradas(res);
         }
@@ -50,73 +49,15 @@ export const UseCustomSalidas = () => {
     };
 
 
-    // 4. GUARDAR (CREAR / EDITAR)
-    const guardarSalida = async (e, idParaEditar = null) => {
-        if (e) e.preventDefault();
-
-        const data = {
-            id_tramite: idTramite.campo,
-            monto: monto.campo,
-            detalle: detalle.campo,
-            fecha_solicitud: fechaSolicitud.campo,
-            datosAuditoriaExtra
-        };
-
-        const endpoint = `${URL}salidas/${idParaEditar ? 'editar' : 'crear'}`;
-        const payload = idParaEditar ? { ...data, id: id.campo } : data;
-
-        return await saveDB(
-            endpoint,
-            payload,
-            () => {
-                // Si estamos editando, refrescamos la lista de ese trámite antes de irnos
-                listarSalidas(idTramite.campo);
-                const rol = localStorage.getItem('numRol')
-                let path = null
-                rol == 3 ? path = 'cajero' : rol == 4 ? path = 'auxiliar' :path = 'gerente'
-                const rutaDestino = LOCAL_URL + '/'+path+'/listar-salidas/' + idTramite.campo;
-
-                console.log(rutaDestino, '   ruta destino')
-                setTimeout(() => {
-                    navigate(rutaDestino);
-                }, 1000);
-            },
-            setCargando
-        );
-    };
-
-    // 5. ACCIONES DE ESTADO (Centralizadas para refrescar la lista correctamente)
-    const ejecutarAccion = async (id, id_tramite, endpoint, msgConfirm, msgCarga) => {
-        if (!window.confirm(msgConfirm)) return;
-
-        const res = await start(`${URL}salidas/${endpoint}`, {
-            id,
-            datosAuditoriaExtra
-        }, msgCarga);
-
-        if (res) listarSalidas(id_tramite); // Refrescamos usando el ID del trámite padre
-    };
-
-    const aprobarSalida = (id, id_tramite) =>
-        ejecutarAccion(id, id_tramite, 'aprobar', "¿Aprobar solicitud?", "Aprobando...");
-
-    const rechazarSalida = (id, id_tramite) =>
-        ejecutarAccion(id, id_tramite, 'rechazar', "¿Rechazar solicitud?", "Rechazando...");
-
-    const despacharSalida = (id, id_tramite) =>
-        ejecutarAccion(id, id_tramite, 'despachar', "¿Despachar salida?", "Despachando...");
-
-    const eliminarSalida = (id, id_tramite) =>
-        ejecutarAccion(id, id_tramite, 'eliminar', "¿Eliminar solicitud de gasto?", "Eliminando...");
 
 
     // EXPORTAR PDF
     const exportPDf = async (output, row) => {
         // Generamos el PDF con el objeto 'row'}
-        console.log("Iniciando exportación...", { output, row });
+        // console.log("Iniciando exportación...", { output, row });
 
         const response = await ticketSalidaIndividual(output, { salida: row });
-        console.log(response, ' reponse')
+        // console.log(response, ' reponse')
         if (!response?.success) {
             alert(response?.message);
             return;
@@ -152,8 +93,8 @@ export const UseCustomSalidas = () => {
     const handleSearch = (e) => {
         const busqueda = e.target.value.toLowerCase();
         const filtrados = salidas.filter(s =>
-            s.codigo_tramite?.toLowerCase().includes(busqueda) ||
-            s.detalle?.toLowerCase().includes(busqueda)
+            s.codigo_boleta?.toLowerCase().includes(busqueda) ||
+            s.detalle?.toLowerCase().includes(busqueda) 
         );
         setSalidasFiltradas(filtrados);
     };
@@ -164,11 +105,7 @@ export const UseCustomSalidas = () => {
         estados: { idTramite, monto, detalle, fechaSolicitud },
         setters: { setIdTramite, setMonto, setDetalle, setFechaSolicitud },
         listarSalidas,
-        guardarSalida,
-        aprobarSalida,
-        rechazarSalida,
-        despacharSalida,
-        eliminarSalida,
+    
         exportPDf,
         handleSearch,
         cargarSalidaPorId,

@@ -3,6 +3,7 @@ import { toast } from "react-hot-toast";
 import { LOCAL_URL, URL } from '../Auth/config';
 import { saveDB, start } from '../service/service';
 import { useNavigate } from "react-router-dom";
+import { datosAuditoriaExtra } from "./datosAuditoriaExtra";
 
 export const useTipoTramite = () => {
     const navigate = useNavigate();
@@ -10,6 +11,7 @@ export const useTipoTramite = () => {
     // --- ESTADOS PARA FORMULARIO (Tabla tipo_tramites) ---
     const [tipo_tramite, setTipoTramite] = useState({ campo: '', valido: null });
     const [codigo, setCodigo] = useState({ campo: '', valido: false });
+
     const [estado, setEstado] = useState({ campo: 1, valido: 'true' });
 
     // --- ESTADOS PARA LISTADO ---
@@ -21,9 +23,9 @@ export const useTipoTramite = () => {
     const listarTramites = useCallback(async () => {
         setCargando(true);
         const endpoint = `${URL}tipo-tramites/listar`;
-        
+
         // Usamos start para obtener el array de datos directamente
-        const res = await start(endpoint, { usuario: 1 }, );
+        const res = await start(endpoint, { usuario: 1 });
 
         if (res) {
             setTramites(res);
@@ -35,15 +37,12 @@ export const useTipoTramite = () => {
     // 2. GUARDAR O ACTUALIZAR
     const guardarTramite = async (e, idParaEditar = null) => {
         if (e) e.preventDefault();
-
         // Estructura según tu tabla tipo_tramites
         const data = {
             tipo_tramite: tipo_tramite.campo,
             codigo: codigo.campo,
             estado: estado.campo || 1,
-            usuario: 1, // ID del usuario de sesión
-            updated_at: idParaEditar ? new Date().toISOString() : null,
-            created_at: !idParaEditar ? new Date().toISOString() : undefined
+          datosAuditoriaExtra
         };
 
         const endpoint = `${URL}tipo-tramites/${idParaEditar ? 'editar' : 'crear'}`;
@@ -56,9 +55,9 @@ export const useTipoTramite = () => {
                 listarTramites(); // Refresca la tabla
                 // Limpiar campo tras guardar si es nuevo
                 if (!idParaEditar) setTipoTramite({ campo: '', valido: null });
-                
+
                 setTimeout(() => {
-                    navigate(LOCAL_URL + '/admin/lista-tipo-caja');
+                    navigate(LOCAL_URL + '/admin/lista-tipo-tramites');
                 }, 1000);
             },
             setCargando
@@ -72,17 +71,16 @@ export const useTipoTramite = () => {
         const nuevoEstado = estadoActual === 1 ? 0 : 1;
         const accion = nuevoEstado === 1 ? 'activar' : 'desactivar';
 
-        if (window.confirm(`¿Estás seguro de ${accion} este tipo de caja?`)) {
+        if (window.confirm(`¿Estás seguro de ${accion} este tipo de trámite?`)) {
             const res = await start(`${URL}tipo-tramites/cambiar-estado`, {
                 id,
                 estado: nuevoEstado,
-                usuario: 1,
-                fecha_: new Date().toISOString()
+                datosAuditoriaExtra
             }, "Actualizando estado...");
 
             if (res) {
-                toast.success(res.msg || `Tipo Caja ${accion}ado`);
-                listarTramites(); 
+                toast.success(res.msg || `Trámite ${accion}ado`);
+                listarTramites();
             }
         }
     };
@@ -117,12 +115,12 @@ export const useTipoTramite = () => {
         tramitesFiltrados,
         handleSearch,
         cargando,
-        estados: { tipo_tramite, estado, codigo },
-        setters: { setTipoTramite, setEstado, setCodigo },
+        estados: { tipo_tramite, codigo, estado },
+        setters: { setTipoTramite, setCodigo, setEstado },
         guardarTramite,
         toggleEstadoTramite,
-        listarTramites, 
-        listActivos, 
+        listarTramites,
+        listActivos,
         allList
     };
 };

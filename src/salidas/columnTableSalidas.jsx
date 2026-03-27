@@ -1,19 +1,32 @@
 export const ColumnsTableSalidas = [
     {
-        label: 'SOLICITUD',
+        label: 'ÍTEM',
         field: 'numero',
         render: (row) => (
             <div style={{ minWidth: '10px' }}>
                 <div className="fw-bold text-dark text-center">{row.numero}</div>
-                <small className="text-muted" style={{ fontSize: '0.7rem' }}>
+                {/* <small className="text-muted" style={{ fontSize: '0.7rem' }}>
                     Registrado por: {row.usuario_nombre}
-                </small>
+                </small> */}
             </div>
         ),
         sortable: true,
     },
     {
-        label: 'Detalle',
+        label: 'BOLETA',
+        field: 'codigo_boleta',
+        render: (row) => (
+            <div style={{ minWidth: '10px' }}>
+                <div className="fw-bold text-dark ">{row.codigo_boleta}</div>
+                {/* <small className="text-muted" style={{ fontSize: '0.7rem' }}>
+                    Registrado por: {row.usuario_nombre}
+                </small> */}
+            </div>
+        ),
+        sortable: true,
+    },
+    {
+        label: 'Detalle ítem',
         field: 'detalle',
         render: (row) => (
             <div style={{ minWidth: '200px' }}>
@@ -28,7 +41,7 @@ export const ColumnsTableSalidas = [
     },
     {
         label: 'Fecha Registro',
-        field: 'created_at',
+        field: 'fecha_solicitud',
         render: (row) => {
             const fecha = new Date(row.fecha_solicitud?.split(" ")[0])
             return (
@@ -64,7 +77,7 @@ export const ColumnsTableSalidas = [
             const estados = {
                 1: { badge: 'bgss-secondary text-dark', texto: 'SOLICITADO', icon: 'bi-hourglass-split' },
                 2: { badge: 'bg-info text-white', texto: 'APROBADO', icon: 'bi-check-circle' },
-                3: { badge: 'bg-success text-white', texto: 'EN CAJA', icon: 'bi-cash-stack' },
+                3: { badge: ' text-success', texto: 'REGISTRADO', icon: 'bi-cash-stack' },
                 4: { badge: 'bg-danger text-white', texto: 'RECHAZADO', icon: 'bi-x-circle' }
             };
 

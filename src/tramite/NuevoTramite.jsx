@@ -25,36 +25,35 @@ const FormularioTramite = () => {
     }, [id, isEdit]);
 
 
-
     return (
         <main className="login-wrapper d-flex align-items-center justify-content-center py-5" style={{ minHeight: '100vh' }}>
             <section className="container">
                 <div className="row justify-content-center">
                     <div className="col-12 col-md-10 col-lg-8 col-xl-7 animate-fade-in">
-                        <div className="login-card shadow-clinical p-4 p-md-5 bg-white" style={{ borderRadius: '15px' }}>
-  
+                        <div className="login-card shadow-clinical p-4 p-md-5 bg-white"style={{  borderTop: `10px solid ${isEdit ? '#0dcaf0' : '#0d6efd'}` }} >
+
                             {/* Encabezado Dinámico */}
                             <div className="text-center mb-5">
                                 <div className="icon-pulse mb-3">
                                     <span className="fs-1">{isEdit ? '📝' : '📑'}</span>
                                 </div>
                                 <h2 className="h3 fw-black text-primary text-uppercase m-0">
-                                    {isEdit ? 'Editar caja' : 'Apertura de Caja'}
+                                    {isEdit ? 'Editar Trámite' : 'Apertura de Trámite'}
                                 </h2>
                                 <p className="text-muted small">
-                                    {isEdit ? `Modificando caja: ${estados.codigo.campo}` : 'Gestión de cajas - '+localStorage.getItem('entidad')}
+                                    {isEdit ? `Modificando expediente: ${estados?.codigo.campo}` : ''}
                                 </p>
                             </div>
 
                             <form className="row g-3" onSubmit={(e) => guardarTramite(e, id)}>
 
-                                <div className="col-md-4">
+                                <div className="col-md-6">
                                     <Select1
                                         estado={estados.idTipoTramite}
                                         cambiarEstado={setters.setIdTipoTramite}
                                         Name="id_tipo_tramite"
                                         lista={auxiliares.listaTipos}
-                                        etiqueta="Seleccione Categoria de caja *"
+                                        etiqueta="Tipo de Trámite *"
                                         msg="Seleccione el tipo de servicio"
                                         ExpresionRegular={INPUT.ID}
                                     />
@@ -71,7 +70,17 @@ const FormularioTramite = () => {
                                         ExpresionRegular={INPUT.ID}
                                     />  
                                 </div>
-     
+                                <div className="col-md-12">
+                                    <Select1
+                                        estado={estados.idCliente}
+                                        cambiarEstado={setters.setIdCliente}
+                                        Name="id_cliente"
+                                        lista={auxiliares.listaClientes}
+                                        etiqueta="Cliente / Empleador *"
+                                        msg="Busque y seleccione al cliente"
+                                        ExpresionRegular={INPUT.ID}
+                                    />
+                                </div>
 
                                 <div className="col-md-4">
                                     <InputUsuarioStandard
@@ -89,20 +98,20 @@ const FormularioTramite = () => {
                                         cambiarEstado={setters.setFechaFinalizacion}
                                         tipo='date'
                                         name='fecha_finalizacion'
-                                        etiqueta={'Fecha de cierre estimado *'}
+                                        etiqueta={'Fecha Entrega *'}
                                     />
                                 </div>
 
-                                <div className="col-md-4">
+                                {/* <div className="col-md-4">
                                     <InputUsuarioStandard
                                         estado={estados.costo}
                                         cambiarEstado={setters.setCosto}
                                         tipo='number'
                                         name='Ingreso Estimado'
-                                        etiqueta={'Ingreso Estimado (CLP) *'}
+                                        etiqueta={'Costo Total (Bs) *'}
                                         ExpresionRegular={INPUT.NUMEROS_P}
                                     />
-                                </div>
+                                </div> */}
 
                                 <div className="col-12 mb-2">
                                     <InputUsuarioStandard
@@ -110,7 +119,7 @@ const FormularioTramite = () => {
                                         cambiarEstado={setters.setDetalle}
                                         tipo='textarea'
                                         name='detalle'
-                                        etiqueta={'Detalle del caja'}
+                                        etiqueta={'Detalle del Trámite'}
                                         placeholder={"Descripción del caso..."}
                                     />
                                 </div>

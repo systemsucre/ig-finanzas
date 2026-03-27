@@ -13,13 +13,13 @@ export function ReportesAdministracionPorTramite() {
     return (
         <>
             <style>{`
-                .report-container { background: #f8f9fa; min-height: 100vh; padding: 20px; }
+                .report-container { background: #f8f9fa; min-height: 100vh; padding: 5px; }
                 .report-card { 
                     background: white; 
                     border-radius: 15px; 
                     box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
                     border: none;
-                    padding: 30px;
+                    padding: 8px;
                 }
                 .section-title {
                     border-left: 5px solid #1B4F72;
@@ -57,28 +57,20 @@ export function ReportesAdministracionPorTramite() {
                     {/* Header */}
                     <div className="d-flex justify-content-between align-items-center mb-4">
                         <div className="section-title">
-                            <h3 className="text-dark fw-bold mb-0">Reportes Individual por Caja</h3>
-                            <p className="text-muted mb-0 small text-uppercase">Constrol Económica de Caja</p>
+                            <h3 className="text-dark fw-bold mb-0">Reportes Individual de Tramite</h3>
+                            {/* <p className="text-muted mb-0 small text-uppercase">Gestión Económica de Trámites</p> */}
                         </div>
                     </div>
 
-                    <div className=" d-flex justify-content-end gap-2 " style={{ marginBottom: '10px' }}>
-                        <button className=" btn btn-dark" style={{ marginLeft: '4px' }} onClick={() => {
-                            const path = parseInt(localStorage.getItem('numRol')) === 2 ? 'gerente/movimientos' : parseInt(localStorage.getItem('numRol')) === 3 ? 'cajero/movimientos' : parseInt(localStorage.getItem('numRol')) === 1 ? 'admin/lista-caja' : 'auxiliar/lista-caja'
-                            navigate(LOCAL_URL + "/" + path )
-                        }
-                        }>
-                            <FontAwesomeIcon icon={faArrowLeft} className="me-2" /> VOLVER
-                        </button>
-                    </div>
+      
 
                     <div className="report-card">
                         <div className="row g-4">
                             {/* Selector de Trámite */}
                             <div className="col-lg-12">
-                                <label className="custom-label">Seleccionar caja <span className="text-danger">*</span></label>
+                                <label className="custom-label">Seleccionar Expediente / Trámite <span className="text-danger">*</span></label>
                                 <Select
-                                    placeholder='Busque por caja...'
+                                    placeholder='Busque por código o nombre del cliente...'
                                     onChange={(e) => setters.setTramite({ campo: e ? e.value : '', valido: e ? 'true' : 'false' })}
                                     options={listaTramite}
                                     value={listaTramite.find(opt => opt.value === estados.tramite.campo) || null}

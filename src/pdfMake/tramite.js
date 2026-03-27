@@ -7,13 +7,15 @@ const reporteConsolidoTramite = async (output, { tramite, ingresos = [], salidas
     const totalSalidas = salidas.reduce((acc, curr) => acc + parseFloat(curr.monto || 0), 0);
     const saldo = totalIngresos - totalSalidas;
 
+    // console.log(salidas, ' lista de salidas del tramite')
+
     const content = [
         // 1. ENCABEZADO PRINCIPAL
         {
             table: {
                 widths: ['100%'],
                 body: [[{
-                    text: 'ESTADO DE CUENTA - RESUMEN DE CAJA',
+                    text: 'ESTADO DE CUENTA - RESUMEN DE TRÁMITE',
                     style: 'hc',
                     fillColor: '#343a40',
                     color: 'white',
@@ -32,17 +34,17 @@ const reporteConsolidoTramite = async (output, { tramite, ingresos = [], salidas
                 widths: ['auto', '*', 'auto', '*'],
                 body: [
                     [
-                        { text: 'CÓDIGO:', bold: true, fillColor: '#f2f2f2' }, { text: tramite.codigo },
-                        { text: 'FECHA APERTURA:', bold: true, fillColor: '#f2f2f2' }, { text: new Date(tramite.fecha_ingreso).toLocaleDateString() }
+                        { text: 'CÓDIGO TRAMITE:', bold: true, fillColor: '#f2f2f2' }, { text: tramite.codigo },
+                        { text: ' NUMERO TRAMITE:', bold: true, fillColor: '#f2f2f2' }, { text: tramite.numero  }
                     ],
                     [
-                        { text: 'EMPLEADOR:', bold: true, fillColor: '#f2f2f2' }, { text: tramite.cliente_nombre || 'S/D', colSpan: 3 }, {}, {}
+                        { text: 'CLIENTE:', bold: true, fillColor: '#f2f2f2' }, { text: tramite.cliente_nombre || 'S/D', colSpan: 3 }, {}, {}
                     ],
                     [
                         { text: 'DETALLE:', bold: true, fillColor: '#f2f2f2' }, { text: tramite.detalle, colSpan: 3 }, {}, {}
                     ],
                     [
-                        { text: 'COSTO: ', bold: true, fillColor: '#f2f2f2' }, { text: 'CLP: ' + tramite.costo, colSpan: 3 }, {}, {}
+                        { text: 'FECHA INGRESO: ', bold: true, fillColor: '#f2f2f2' }, { text:  new Date(tramite.fecha_ingreso).toLocaleDateString(), colSpan: 3 }, {}, {}
                     ]
                 ]
             },
@@ -68,11 +70,11 @@ const reporteConsolidoTramite = async (output, { tramite, ingresos = [], salidas
                         i.numero,
                         new Date(i.fecha_ingreso).toLocaleDateString(),
                         i.detalle,
-                        { text: `CLP. ${parseFloat(i.monto).toFixed(2)}`, alignment: 'right' }
+                        { text: `Bs. ${parseFloat(i.monto).toFixed(2)}`, alignment: 'right' }
                     ]),
                     [
                         { text: 'TOTAL INGRESOS', colSpan: 3, bold: true, alignment: 'right' }, {}, {},
-                        { text: `CLP. ${totalIngresos.toFixed(2)}`, bold: true, alignment: 'right', fillColor: '#f1f1f1' }
+                        { text: `Bs. ${totalIngresos.toFixed(2)}`, bold: true, alignment: 'right', fillColor: '#f1f1f1' }
                     ]
                 ]
             },
@@ -82,6 +84,7 @@ const reporteConsolidoTramite = async (output, { tramite, ingresos = [], salidas
         { text: 'DETALLE DE EGRESOS / GASTOS', style: 'nhcheader', margin: [0, 10, 0, 5], color: '#dc3545' },
 
         // 4. TABLA DE SALIDAS
+        
         {
             table: {
                 headerRows: 1,
@@ -97,11 +100,11 @@ const reporteConsolidoTramite = async (output, { tramite, ingresos = [], salidas
                         s.numero,
                         new Date(s.fecha_solicitud).toLocaleDateString(),
                         s.detalle,
-                        { text: `CLP. ${parseFloat(s.monto).toFixed(2)}`, alignment: 'right' }
+                        { text: `Bs. ${parseFloat(s.monto).toFixed(2)}`, alignment: 'right' }
                     ]),
                     [
                         { text: 'TOTAL EGRESOS', colSpan: 3, bold: true, alignment: 'right' }, {}, {},
-                        { text: `CLP. ${totalSalidas.toFixed(2)}`, bold: true, alignment: 'right', fillColor: '#f1f1f1' }
+                        { text: `Bs. ${totalSalidas.toFixed(2)}`, bold: true, alignment: 'right', fillColor: '#f1f1f1' }
                     ]
                 ]
             },
@@ -118,7 +121,7 @@ const reporteConsolidoTramite = async (output, { tramite, ingresos = [], salidas
                     [
                         { text: 'SALDO NETO (DISPONIBLE)', alignment: 'right', bold: true, fontSize: 12 },
                         {
-                            text: `CLP. ${saldo.toFixed(2)}`,
+                            text: `Bs. ${saldo.toFixed(2)}`,
                             style: 'hc',
                             fillColor: saldo >= 0 ? '#d4edda' : '#f8d7da',
                             color: saldo >= 0 ? '#155724' : '#721c24'

@@ -2,10 +2,10 @@ import createPdf from './base.js';
 
 const ticketIngresoIndividual = async (output, { ingreso }) => {
     // ingreso: es el objeto que viene de tu consulta SQL 'listarPorTramite'
-
+    
     const montoFormateado = ingreso?.monto ? parseFloat(ingreso.monto).toFixed(2) : "0.00";
     const numeroIngreso = ingreso?.numero || "S/N";
-
+    
     // Usamos fecha_ingreso de la tabla ingresos
     const fechaIngreso = ingreso?.fecha_ingreso
         ? new Date(ingreso.fecha_ingreso).toLocaleDateString()
@@ -38,7 +38,8 @@ const ticketIngresoIndividual = async (output, { ingreso }) => {
                 { text: `Fecha Ingreso: ${fechaIngreso}`, style: 'tHeaderLabel' }
             ]
         },
-        { text: `Trámite Ref: ${ingreso.codigo_tramite}`, style: 'text', alignment: 'left' },
+        { text: `Caja Ref: ${ingreso.codigo_tramite}`, style: 'text', alignment: 'left' },
+        { text: `Cliente/Empleador: ${ingreso.cliente_nombre}`, style: 'text', alignment: 'left' },
 
         { text: '_______________________________________________________________________________________________', color: '#eeeeee', margin: [0, 5, 0, 10] },
 
@@ -47,13 +48,6 @@ const ticketIngresoIndividual = async (output, { ingreso }) => {
             text: [
                 { text: 'Concepto / Detalle: ', style: 'tProductsHeader' },
                 { text: ingreso.detalle, style: 'text' }
-            ],
-            margin: [0, 5, 0, 5]
-        },
-        {
-            text: [
-                { text: 'Empleador: ', style: 'tProductsHeader' },
-                { text: ingreso.cliente_nombre, style: 'text' }
             ],
             margin: [0, 5, 0, 5]
         },
@@ -78,17 +72,17 @@ const ticketIngresoIndividual = async (output, { ingreso }) => {
                 widths: ['*', 'auto'],
                 body: [
                     [
-                        {
-                            text: 'TOTAL RECIBIDO',
-                            alignment: 'right',
-                            margin: [0, 5, 0, 5],
-                            bold: true
+                        { 
+                            text: 'TOTAL RECIBIDO', 
+                            alignment: 'right', 
+                            margin: [0, 5, 0, 5], 
+                            bold: true 
                         },
-                        {
-                            text: `CLP. ${montoFormateado}`,
-                            style: 'hc',
-                            margin: [10, 5, 10, 5],
-                            fillColor: '#f8f9fa'
+                        { 
+                            text: `Bs. ${montoFormateado}`, 
+                            style: 'hc', 
+                            margin: [10, 5, 10, 5], 
+                            fillColor: '#f8f9fa' 
                         }
                     ]
                 ]

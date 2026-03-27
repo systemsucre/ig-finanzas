@@ -1,154 +1,110 @@
 import {
-    faEdit,
-    faTrashAlt,
     faFilePdf,
-    faPlus,
-    faArrowLeft
+    faCheck,
+    faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import DataTable from "../components/DataTable";
 import { InputUsuarioSearch } from "../components/input/elementos";
 import { UseCustomSalidas } from "../hooks/HookCustomSalidas";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ColumnsTableSalidas } from "./columnTableSalidas";
 import { LOCAL_URL } from "../Auth/config";
 import CabeceraTramite from "../components/cabeceraTramite";
-import { useTramites } from "../hooks/HookCustomTramites"; // Hook adaptado previamente
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
-// Expresión regular para validar UUID (v1 a v5)
 const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 export function ListaSalidas() {
     const navigate = useNavigate();
-    const { id } = useParams(); // ID del Trámite (ahora UUID)  
+    const { id } = useParams();
+    const [filtroEstado, setFiltroEstado] = useState('TODOS'); // Estado local para el filtro gerencial
 
     const {
         salidasFiltradas,
         cargando,
         handleSearch,
         listarSalidas,
-        eliminarSalida,
-        exportPDf,
+        exportPDf
+
     } = UseCustomSalidas();
 
-    const {
-        tramites,
-        cargarTramiteInfo
-
-    } = useTramites();
-
-
     useEffect(() => {
-        // Validación de seguridad: Si el ID no es un UUID válido, redirigimos
         if (id) {
             if (!UUID_REGEX.test(id)) {
-                console.error("ID de trámite no válido (UUID esperado)");
-                navigate(LOCAL_URL + "/auxiliar/lista-tramites"); // Redirigir a la lista general
+                navigate(LOCAL_URL + "/auxiliar/lista-tramites");
                 return;
             }
             listarSalidas(id);
-            cargarTramiteInfo(id)
-
         }
-    }, [id, navigate]);
+    }, [id]);
+
+    // Lógica de filtrado para el nivel gerencial
+    // Asumiendo: estado 1 = Pendiente, 1 = Aprobado, 2 = Rechazado, 3 = Despachados
+    const dataFiltrada = salidasFiltradas.filter(s => {
+        if (filtroEstado === 'TODOS') return true;
+        return s.estado === filtroEstado;
+    });
+
+    // Contadores para los botones
+    const countPendientes = salidasFiltradas.filter(s => s.estado === 1).length;
+    const countAprobados = salidasFiltradas.filter(s => s.estado === 2).length;
+    const countDespachados = salidasFiltradas.filter(s => s.estado === 3).length;
+    const countRechazados = salidasFiltradas.filter(s => s.estado === 4).length;
+
 
     return (
         <>
             <main className="container-xl mt-2" style={{ maxWidth: "100%", padding: '3px' }}>
-                <div className=" align-items-center mb-4 m-2">
-                    <div className="d-flex justify-content-between align-items-center p-2">
-                        <div>
-                            <h3 className="text-dark fw-bold mb-0">Gestión de Gastos</h3>
-                            <p className="text-muted mb-0 small text-uppercase" style={{ letterSpacing: '1px', fontSize: '0.7rem' }}>
-                                Control de salidas económicas
-                            </p>
-                        </div>
-
-                    </div>
-                    <div className=" d-flex justify-content-end gap-2 " style={{ marginRight: '10px' }}>
-                        {/* El botón nuevo gasto hereda el UUID correctamente */}
-                        {tramites.length > 0 ?
-
-                            tramites[0].estado === 1 ?
-                                < button
-                                    className="btn btn-success  fw-bold"
-                                    onClick={() => {
-                                        const rol = localStorage.getItem('numRol')
-                                        let path = null
-                                        rol == 3 ? path = 'cajero' : rol == 4 ? path = 'auxiliar' : rol ==2 ? path ='gerente':null
-                                        navigate(LOCAL_URL + `/${path}/salidas/crear/${id}`)
-                                    }
-                                    }
-                                    disabled={!id || !UUID_REGEX.test(id)}
-                                >
-                                    <FontAwesomeIcon icon={faPlus} className="me-2" /> NUEVO GASTO
-                                </button> : < button
-                                    className="btn btn-success  fw-bold"
-                                    disabled
-                                >
-                                    <FontAwesomeIcon icon={faPlus} className="me-2" /> NO DISPONIBLE{tramites[0].estado}
-                                </button> : null
-                        }
-                        <button className=" btn btn-dark" style={{ marginLeft: '4px' }} onClick={() => {
-                            const rol = localStorage.getItem('numRol')
-                            let path = null
-                            rol == 3 ? path = 'cajero' : rol == 4 ? path = 'auxiliar' : path = 'gerente'
-                            navigate(LOCAL_URL + "/" + path + "/movimientos")
-                        }
-                        }>
-                            <FontAwesomeIcon icon={faArrowLeft} className="me-2" /> VOLVER
-                        </button>
+                <div className="d-flex justify-content-between align-items-center mb-4 m-2">
+                    <div>
+                        <h3 className="text-dark fw-bold mb-0 text-titulos">Panel de Gatos</h3>
                     </div>
                 </div>
 
-                {/* Renderizado de la Cabecera del Trámite */}
+                <div className=" d-flex justify-content-end gap-2 " style={{ marginRight: '10px' }}>
+                    <button className=" btn btn-dark" style={{ marginLeft: '4px' }} onClick={() => {
+                       
+                        navigate(LOCAL_URL + "/movimientos")
+                    }
+                    }>
+                        <FontAwesomeIcon icon={faArrowLeft} className="me-2" /> VOLVER
+                    </button>
+                </div>
+
+                {/* Cabecera de información del Trámite */}
                 <CabeceraTramite id={id} />
 
-                <div className="panel-custom bg-white rounded shadow-sm p-2">
-                    <div style={{ width: '100%', maxWidth: '300px', paddingLeft: '5px' }}>
-                        <InputUsuarioSearch
-                            name="input-search-salida"
-                            placeholder="Filtrar por detalle..."
-                            onChange={handleSearch}
-                        />
+                {/* --- SECCIÓN DE FILTROS GERENCIALES --- */}
+                <div className="panel-custom bg-white rounded shadow-sm p-2 mx-2">
+                    <div className="row align-items-center mb-3 g-3">
+                        <div className="col-md-6">
+                            <div className="d-flex1 gap-2">
+                                <button className="btn  btn-sm border text-success fw-bold" onClick={() => setFiltroEstado('TODOS')}>ITEMS <span className="fw-bold mb-0 text-success">({salidasFiltradas.length})</span></button>
+                                {/* <button className="btn  btn-sm border text-warning fw-bold" onClick={() => setFiltroEstado(1)}>SOLICITADOS <span className="fw-bold mb-0 text-warning">{countPendientes}</span></button>
+                                <button className="btn  btn-sm border text-primary fw-bold" onClick={() => setFiltroEstado(2)}>APROBADOS <span className="fw-bold mb-0 text-primary">{countAprobados}</span></button>
+                                <button className="btn  btn-sm border text-success fw-bold" onClick={() => setFiltroEstado(3)}>DESPACHADOS <span className="fw-bold mb-0 text-success">{countDespachados}</span></button>
+                                <button className="btn  btn-sm border text-danger fw-bold" onClick={() => setFiltroEstado(4)}>RECHAZADOS <span className="fw-bold mb-0 text-danger">{countRechazados}</span></button>  */}
+                            </div>
+                        </div>
+                        <div className="col-md-6 d-flex justify-content-end ">
+                            <div style={{ width: '100%', maxWidth: '300px', paddingRight: '10px' }}>
+                                <InputUsuarioSearch
+                                    name="input-search-salida"
+                                    placeholder="codigo boleta, detalle"
+                                    onChange={handleSearch}
+                                />
+                            </div>
+                        </div>
                     </div>
-
                     <div className="table-responsive">
                         <DataTable
                             columns={ColumnsTableSalidas}
-                            data={salidasFiltradas}
+                            data={dataFiltrada}
                             cargando={cargando}
                             funciones={[
-                                {
-                                    // 1. Bloqueo de funcionalidad: Si no es estado 1, la función es null
-                                    boton: (tramites?.length > 0 && tramites[0].estado === 1)
-                                        ? (id_salida, row) => {
-                                            const rol = localStorage.getItem('numRol')
-                                            let path = null
-                                            rol == 3 ? path = 'cajero' : rol == 4 ? path = 'auxiliar' : 'gerente'
-                                            navigate(`${LOCAL_URL}/${path}/salidas/editar/${row.id_tramite}/${id_salida}`)
-
-                                        }
-                                        : () => alert(),
-
-                                    // 2. Bloqueo Visual: 'disabled' desactiva el click, el icono y el label
-                                    // 'opacity-50' hace que todo el conjunto (icono + texto) se vea gris
-                                    className: `btn btn-info py-1 px-3 x-small me-1 ${(tramites?.length > 0 && tramites[0].estado === 1) ? '' : 'disabled opacity-50'
-                                        }`,
-
-                                    icono: faEdit,
-                                    label: 'Editar'
-                                },
-                                {
-                                    boton: (tramites?.length > 0 && tramites[0].estado === 1) ? (id_salida, row) => {
-                                        eliminarSalida(id_salida, id);
-                                    } : null,
-                                    className: `btn btn-danger py-1 px-3 x-small me-1 ${(tramites?.length > 0 && tramites[0].estado === 1) ? '' : 'disabled opacity-50'}`,
-                                    icono: faTrashAlt,
-                                    label: 'Eliminar'
-                                },
+                             
                                 {
                                     boton: (id_salida, row) => { exportPDf(window.innerWidth < 1100 ? 'b64' : "print", row) },
                                     className: 'btn btn-secondary py-1 px-3 x-small',
@@ -159,7 +115,7 @@ export function ListaSalidas() {
                         />
                     </div>
                 </div>
-            </main >
+            </main>
         </>
     );
 }

@@ -6,23 +6,24 @@ import useAuth from "../Auth/useAuth"
 
 export default function PublicRoute({ component: Component, ...rest }) {
     const auth = useAuth();
-    let url = null
+    // let url = null
 
-    if (parseInt(localStorage.getItem('numRol')) === 4) {
-        url = "/auxiliar/lista-caja"
-    }
-    if (parseInt(localStorage.getItem('numRol')) === 3) {
-        url = "/cajero/movimientos"
-    }
-    if (parseInt(localStorage.getItem('numRol')) === 2) {
-        url = "/gerente/movimientos"
-    }
-    if (parseInt(localStorage.getItem('numRol')) === 1) {
-        url = "/admin/lista-caja"
-    }
+    // if (parseInt(localStorage.getItem('numRol')) === 4) {
+    //     url = "/movimientos"
+    // }
+    // if (parseInt(localStorage.getItem('numRol')) === 3) {
+    //     url = "/cajero/lista-tramites"
+    // }
+    // if (parseInt(localStorage.getItem('numRol')) === 2) {
+    //     url = "/gerente/movimientos"
+    // }
+    // if (parseInt(localStorage.getItem('numRol')) === 1) {
+    //     url = "/admin/lista-tramites"
+    // }
     return (
         auth.isLogged() ? (
-            <Navigate to={url ? LOCAL_URL + url : LOCAL_URL + '/login'} replace />
+            // <Navigate to={url ? LOCAL_URL+'/movimientos' : LOCAL_URL + '/login'} replace />
+            <Navigate to={LOCAL_URL + '/movimientos'} replace />
         ) : (
             <Component /> // RUTA PUBLICA
         )

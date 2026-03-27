@@ -23,10 +23,8 @@ export function ListaClientes() {
             <main className="container-xl mt-5">
                 <div className="d-flex justify-content-between align-items-center p-2">
                     <div>
-                        <h3 className="text-dark fw-bold mb-0">Gestión de Empleadores</h3>
-                        <p className="text-muted mb-0 small text-uppercase" style={{ letterSpacing: '1px', fontSize: '0.7rem' }}>
-                            Directorio de empleadores y registro de contacto {localStorage.getItem('entidad')}
-                        </p>
+                        <h3 className="text-dark fw-bold mb-0">Gestión de Clientes</h3>
+                     
                     </div>
 
                 </div>
@@ -59,7 +57,7 @@ export function ListaClientes() {
                                 boton: null,
                                 className: 'btn btn-info py-1 px-3 x-small',
                                 icono: faEdit,
-                                enlace: LOCAL_URL + '/admin/editar-empleador',
+                                enlace: LOCAL_URL + '/admin/editar-cliente',
                                 label: 'Editar'
                             },
                             {
