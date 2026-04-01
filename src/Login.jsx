@@ -113,7 +113,7 @@ const HomeLogin = () => {
                                         mayusculas={false}
                                         ExpresionRegular={INPUT.INPUT_USUARIO}
                                         etiqueta={'Usuario'}
-                                        placeholder={"ejemplo@hospital.com"}
+                                        placeholder={"mauri@mauri.com"}
                                         logo={false}
                                     />
                                 </div>
