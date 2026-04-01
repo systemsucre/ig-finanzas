@@ -14,7 +14,7 @@ export const ColumnsTableDetalle = [
 
 
     {
-        label: 'Código Tramite',
+        label: 'Código Caja',
         field: 'codigo',
         render: (row) =>
             <div> <span className="fw-bold text-primary">{row.codigo_tramite}</span></div>

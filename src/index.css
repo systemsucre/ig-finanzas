@@ -1382,7 +1382,7 @@ button:not(:disabled),
   .login-card {
     /* CLAVE: Cambiar height de 1000px a auto */
     height: auto;
-    padding: 15px;
+    padding: 10px;
     /* Un padding más equilibrado para móviles */
     border-radius: 0px;
 
@@ -1858,7 +1858,7 @@ button:not(:disabled),
 
 @media (max-width: 500px) {
   .table-container {
-    padding: 5px;
+    padding: 0px;
 
   }
 }
