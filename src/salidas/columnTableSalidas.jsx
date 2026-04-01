@@ -62,10 +62,7 @@ export const ColumnsTableSalidas = [
         render: (row) => (
             <div className="text-center">
                 <span className="fw-bold text-dark" style={{ fontSize: '1.05rem' }}>
-                    Bs. {Number(row.monto || 0).toLocaleString('es-BO', {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2
-                    })}
+                     {localStorage.getItem('moneda')} {row.monto}
                 </span>
             </div>
         )

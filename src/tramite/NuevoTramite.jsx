@@ -38,67 +38,56 @@ const FormularioTramite = () => {
                                     <span className="fs-1">{isEdit ? '📝' : '📑'}</span>
                                 </div>
                                 <h2 className="h3 fw-black text-primary text-uppercase m-0">
-                                    {isEdit ? 'Editar Trámite' : 'Apertura de Trámite'}
+                                    {isEdit ? 'Editar Caja' : 'Apertura de Caja'}
                                 </h2>
                                 <p className="text-muted small">
-                                    {isEdit ? `Modificando expediente: ${estados?.codigo.campo}` : ''}
+                                    {isEdit ? `Modificando Caja: ${estados?.codigo.campo}` : ''}
                                 </p>
                             </div>
 
                             <form className="row g-3" onSubmit={(e) => guardarTramite(e, id)}>
 
-                                <div className="col-md-6">
+                                <div className="col-md-3">
                                     <Select1
                                         estado={estados.idTipoTramite}
                                         cambiarEstado={setters.setIdTipoTramite}
                                         Name="id_tipo_tramite"
                                         lista={auxiliares.listaTipos}
-                                        etiqueta="Tipo de Trámite *"
+                                        etiqueta="Tipo de Caja"
                                         msg="Seleccione el tipo de servicio"
                                         ExpresionRegular={INPUT.ID}
                                     />
                                 </div>
 
-                                <div className="col-md-4">
+                                <div className="col-md-3">
                                     <Select1
                                         estado={estados.estado}
                                         cambiarEstado={setters.setEstado}
                                         Name="estado"
                                         lista={[ {value:1, label: 'En curso'}, {value:2, label: 'Paralizado'}, {value:3, label: 'Finalizado'}, ]}
-                                        etiqueta="Estado Tramite *"
+                                        etiqueta="Estado Caja"
                                         msg="Cambiar Estado"
                                         ExpresionRegular={INPUT.ID}
                                     />  
                                 </div>
-                                <div className="col-md-12">
-                                    <Select1
-                                        estado={estados.idCliente}
-                                        cambiarEstado={setters.setIdCliente}
-                                        Name="id_cliente"
-                                        lista={auxiliares.listaClientes}
-                                        etiqueta="Cliente / Empleador *"
-                                        msg="Busque y seleccione al cliente"
-                                        ExpresionRegular={INPUT.ID}
-                                    />
-                                </div>
 
-                                <div className="col-md-4">
+                                <div className="col-md-3">
                                     <InputUsuarioStandard
                                         estado={estados.fechaIngreso}
                                         cambiarEstado={setters.setFechaIngreso}
                                         tipo='date'
                                         name='fecha_ingreso'
-                                        etiqueta={'Fecha Ingreso *'}
+                                        etiqueta={'Fecha Ingreso'}
                                     />
                                 </div>
 
-                                <div className="col-md-4">
+                                <div className="col-md-3">
                                     <InputUsuarioStandard
                                         estado={estados.fechaFinalizacion}
                                         cambiarEstado={setters.setFechaFinalizacion}
                                         tipo='date'
                                         name='fecha_finalizacion'
-                                        etiqueta={'Fecha Entrega *'}
+                                        etiqueta={'Fecha Entrega'}
                                     />
                                 </div>
 
@@ -111,7 +100,7 @@ const FormularioTramite = () => {
                                         etiqueta={'Costo Total (Bs) *'}
                                         ExpresionRegular={INPUT.NUMEROS_P}
                                     />
-                                </div> */}
+                                </div>  */}
 
                                 <div className="col-12 mb-2">
                                     <InputUsuarioStandard
@@ -119,7 +108,7 @@ const FormularioTramite = () => {
                                         cambiarEstado={setters.setDetalle}
                                         tipo='textarea'
                                         name='detalle'
-                                        etiqueta={'Detalle del Trámite'}
+                                        etiqueta={'Detalle del caja'}
                                         placeholder={"Descripción del caso..."}
                                     />
                                 </div>

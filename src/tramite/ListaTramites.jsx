@@ -51,7 +51,7 @@ export function ListaTramites() {
                             <div style={{ width: '100%', maxWidth: '300px', paddingTop: '10px' }}>
                                 <InputUsuarioSearch
                                     name="input-search-tramite"
-                                    placeholder='Buscar por código, cliente o numero...'
+                                    placeholder='Buscar por código o número...' 
                                     onChange={handleSearch}
                                 />
                             </div>
@@ -76,7 +76,7 @@ export function ListaTramites() {
                                         else if (rol === 2) base = '/gerente';
                                         else if (rol === 3) base = '/cajero';
 
-                                        return `${LOCAL_URL}${base}/editar-tramite`;
+                                        return `${LOCAL_URL}${base}/editar-caja`;
                                     })(),
                                     label: 'Editar'
                                 },

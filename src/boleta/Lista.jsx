@@ -31,7 +31,7 @@ export function ListaBoleta() {
     }, []);
 
 
-    const idUsuarioActual = parseInt(localStorage.getItem('id'));
+    const idUsuarioActual = parseInt(localStorage.getItem('id_'));
     const dataFiltrada = boletasFiltradas.filter(b => {
         // Si el filtro es 'MIOS', filtramos por el ID del usuario
         if (filtroEstado === 'MIOS') {
@@ -49,7 +49,7 @@ export function ListaBoleta() {
     // const countAprobados = boletasFiltradas.filter(b => b.estado === 2).length;
     // const countDespachados = boletasFiltradas.filter(b => b.estado === 3).length;
     // const countRechazados = boletasFiltradas.filter(b => b.estado === 4).length;
-    const mios = boletasFiltradas.filter(b => b.usuario_solicita_id === parseInt(localStorage.getItem('id'))).length;
+    const mios = boletasFiltradas.filter(b => b.usuario_solicita_id === parseInt(localStorage.getItem('id_'))).length;
 
     return (
         <>
@@ -59,14 +59,6 @@ export function ListaBoleta() {
                         <h3 className="text-dark fw-bold mb-0 text-titulos">Gestión de Boletas de Gasto</h3>
                     </div>
 
-                </div>
-                <div className=" d-flex justify-content-end gap-2 " style={{ marginBottom: '10px' }}>
-                    < button
-                        className="btn btn-success  fw-bold"
-                        onClick={() => navigate(LOCAL_URL + `/nueva-boleta`)}
-                    >
-                        <FontAwesomeIcon icon={faPlus} className="me-2" /> REGISTRAR BOLETA
-                    </button>
                 </div>
 
                 <div className="panel-custom bg-white rounded shadow-sm p-2 mx-2">

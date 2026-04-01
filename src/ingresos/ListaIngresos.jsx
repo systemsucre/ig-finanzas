@@ -90,7 +90,7 @@ export function ListaIngresosTramite() {
                     <div>
                         <h3 className="text-dark fw-bold mb-0 text-titulos">Historial de Ingresos y Abonos</h3>
                         <p className="text-muted mb-0 small text-uppercase" style={{ letterSpacing: '1px', fontSize: '0.7rem' }}>
-                            Gestión Financiera - Control de Pagos por Trámite
+                            Gestión Financiera - Control de Pagos por Caja
                         </p>
                     </div>
                 </div>
@@ -99,7 +99,8 @@ export function ListaIngresosTramite() {
                     {/* El botón nuevo gasto hereda el UUID correctamente */}
                     {tramites.length > 0 && parseInt(localStorage.getItem('numRol')) === 3 ?
 
-                        tramites[0].estado === 1 ?
+                        // tramites[0].estado === 1 ?
+                        tramites.find(t => String(t.id) === String(id)).estado === 1 ?
                             < button
                                 className="btn btn-success  fw-bold"
                                 onClick={() => navigate(LOCAL_URL + `/crear-ingreso/${id}`)}
@@ -114,7 +115,7 @@ export function ListaIngresosTramite() {
                             </button> : null
                     }
                     <button className=" btn btn-dark" style={{ marginLeft: '4px' }} onClick={() => {
-                       
+
                         navigate(LOCAL_URL + "/movimientos")
                     }
                     }>

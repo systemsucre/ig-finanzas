@@ -42,7 +42,7 @@ const AuthProvider = ({ children }) => {
       try {
         if (token) {
           // 2. Intentar el borrado en BD (Asegúrate que URL no termine en /)
-          await axios.post(`${URL}logout`, { token: token });
+          axios.post(`${URL}logout`, { token: token });
         }
       } catch (error) {
         console.error("No se pudo borrar en BD, procediendo a limpiar local", error);

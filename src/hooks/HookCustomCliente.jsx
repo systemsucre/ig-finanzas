@@ -3,7 +3,7 @@ import { toast } from "react-hot-toast";
 import { LOCAL_URL, URL } from '../Auth/config';
 import { saveDB, start } from '../service/service';
 import { useNavigate } from "react-router-dom";
-
+import { datosAuditoriaExtra } from "./datosAuditoriaExtra";
 export const useClientes = () => {
     const navigate = useNavigate();
 
@@ -49,7 +49,8 @@ export const useClientes = () => {
             direccion: direccion.campo,
             estado: estado.campo || 1,
             usuario: 1, // ID del usuario (sesión)
-            fecha_: new Date().toISOString()
+            fecha_: new Date().toISOString(),
+            datosAuditoriaExtra
         };
 
         // 2. Definimos endpoint y payload (incluimos ID si es edición)
@@ -95,7 +96,8 @@ export const useClientes = () => {
                 id,
                 estado: nuevoEstado,
                 usuario: 1,
-                fecha_: new Date().toISOString()
+                fecha_: new Date().toISOString(),
+                datosAuditoriaExtra
             }, "Cambiando estado...");
 
             if (res) {

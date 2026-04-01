@@ -57,7 +57,7 @@ export function ListaTipoTramite() {
                                 boton: null,
                                 className: 'btn btn-info py-1 px-3 x-small',
                                 icono: faEdit,
-                                enlace: LOCAL_URL + '/admin/editar-tipo-tramite',
+                                enlace: LOCAL_URL + '/admin/editar-tipo-caja',
                                 label: 'Editar'
                             },
                             {

@@ -57,7 +57,7 @@ export function ReportesAdministracionPorTramite() {
                     {/* Header */}
                     <div className="d-flex justify-content-between align-items-center mb-4">
                         <div className="section-title">
-                            <h3 className="text-dark fw-bold mb-0">Reportes Individual de Tramite</h3>
+                            <h3 className="text-dark fw-bold mb-0">Reportes Individual de Caja</h3>
                             {/* <p className="text-muted mb-0 small text-uppercase">Gestión Económica de Trámites</p> */}
                         </div>
                     </div>
@@ -68,9 +68,9 @@ export function ReportesAdministracionPorTramite() {
                         <div className="row g-4">
                             {/* Selector de Trámite */}
                             <div className="col-lg-12">
-                                <label className="custom-label">Seleccionar Expediente / Trámite <span className="text-danger">*</span></label>
+                                <label className="custom-label">Seleccionar Caja <span className="text-danger">*</span></label>
                                 <Select
-                                    placeholder='Busque por código o nombre del cliente...'
+                                    placeholder='Busque por código caja...'
                                     onChange={(e) => setters.setTramite({ campo: e ? e.value : '', valido: e ? 'true' : 'false' })}
                                     options={listaTramite}
                                     value={listaTramite.find(opt => opt.value === estados.tramite.campo) || null}

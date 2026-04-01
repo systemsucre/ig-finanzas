@@ -59,6 +59,7 @@ export const DetallesBoleta = () => {
         tableHeader: { backgroundColor: '#2c3e50', color: '#fff', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px' },
         badgeStatus: { padding: '8px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 'bold' }
     };
+    // console.log(itemsBoleta)
     return (
         !cargando ?
             <main className="py-5" style={{ minHeight: '100vh', background: '#f0f2f5' }}>
@@ -109,12 +110,18 @@ export const DetallesBoleta = () => {
                                 <button className="btn btn-pdf btn-lg px-4 shadow-sm" onClick={() => exportarBoletaPDF('print', infoCabecera)}>
                                     <FontAwesomeIcon icon={faFilePdf} className="me-2" />
                                 </button>
-                                <button className="btn btn-info btn-lg px-4 shadow-sm" onClick={() => navigate(`${LOCAL_URL}/modificar-boleta/${codigo}`)}>
-                                    <FontAwesomeIcon icon={faEdit} className="me-2" />
-                                </button>
-                                <button className="btn btn-danger btn-lg px-4 shadow-sm" onClick={() => eliminarBoleta(codigo)}>
-                                    <FontAwesomeIcon icon={faTrash} className="me-2" />
-                                </button>
+                                {
+                                    itemsBoleta && itemsBoleta.length > 0 &&
+                                        itemsBoleta[0].usuario_solicita_id === parseInt(localStorage.getItem('id_')) ? <>
+                                        <button className="btn btn-info btn-lg px-4 shadow-sm" onClick={() => navigate(`${LOCAL_URL}/modificar-boleta/${codigo}`)}>
+                                            <FontAwesomeIcon icon={faEdit} className="me-2" />
+                                        </button>
+                                        <button className="btn btn-danger btn-lg px-4 shadow-sm" onClick={() => eliminarBoleta(codigo)}>
+                                            <FontAwesomeIcon icon={faTrash} className="me-2" />
+                                        </button>
+                                    </>
+                                        : null
+                                }
                                 {/* {infoCabecera?.estado === 1 && parseInt(localStorage.getItem('id')) === infoCabecera?.usuario ?
                                     <>
                                         <button className="btn btn-info btn-lg px-4 shadow-sm" onClick={() => navigate(`${LOCAL_URL}/modificar-boleta/${codigo}`)}>

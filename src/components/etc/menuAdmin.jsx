@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation, Link } from 'react-router-dom';
 import { LOCAL_URL } from '../../Auth/config';
 import useAuth from "../../Auth/useAuth";
-import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faPowerOff, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
@@ -23,6 +23,13 @@ const NavbarAdmin = () => {
   // Cerrar menú al cambiar de ruta
   useEffect(() => setIsMobileMenuOpen(false), [location]);
 
+  // 1. Obtenemos el valor (ej: "KRESTUDIOS" o "ABOGADOS")
+  const entidadCompleta = localStorage.getItem('entidad') || 'IGFinanzas';
+
+  // 2. Extraemos las partes
+  const iniciales = entidadCompleta.substring(0, 2); // Las primeras 2 letras
+  const restoNombre = entidadCompleta.substring(2); // Todo lo demás desde la posición 2 
+
   return (
     <nav className={` nav-main ${isScrolled ? 'nav-scrolled' : ''}`}>
       <div className="nav-container">
@@ -32,8 +39,12 @@ const NavbarAdmin = () => {
 
           {/* Contenedor de Texto */}
           <div className="d-flex flex-column justify-content-start" style={{ lineHeight: '1' }}>
-            <span className="brand-text fw-bold">
-              KR<span className="text-primary">ESTUDIOS{`.   `}</span>
+            <span className="brand-text fw-bold text-uppercase">
+              {iniciales}
+              <span className="text-primary">
+                {restoNombre}
+                {`.   `}
+              </span>
             </span>
             <div className="user-info-brand" style={{ marginTop: '-2px' }}>
               <span className="text-muted text-uppercase" style={{ fontSize: '9px', fontWeight: '700' }}>
@@ -48,49 +59,48 @@ const NavbarAdmin = () => {
         </NavLink>
         {/* Desktop Menu */}
         <ul className="nav-menu-desktop">
-          <li><NavLink to={LOCAL_URL+"/movimientos"} end className="nav-link-item">Movimientos</NavLink></li>
+          <li><NavLink to={LOCAL_URL + "/movimientos"} end className="nav-link-item">Movimientos</NavLink></li>
           <div className="nav-item-container has-submenu">
             <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
-              Clientes <span className="arrow">▼</span>
+              Empleadores <FontAwesomeIcon icon={faChevronDown} />
             </NavLink>
-
             <ul className="submenu-list">
-              <li><NavLink to={LOCAL_URL + "/admin/nuevo-cliente"} className="submenu-link">Nuevo Cliente</NavLink></li>
-              <li><NavLink to={LOCAL_URL + "/admin/lista-clientes"} className="submenu-link">Lista Cliente</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/admin/nuevo-empleador"} className="submenu-link">Nuevo Empleador</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/admin/lista-empleadores"} className="submenu-link">Lista Empleadores</NavLink></li>
             </ul>
           </div>
           <div className="nav-item-container has-submenu">
             <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
-              Tramites <span className="arrow">▼</span>
+              Cajas <FontAwesomeIcon icon={faChevronDown} />
             </NavLink>
 
             <ul className="submenu-list">
-              <li><NavLink to={LOCAL_URL + "/admin/nuevo-tramite"} className="submenu-link">Nuevo Trámite</NavLink></li>
-              <li><NavLink to={LOCAL_URL + "/admin/lista-tramites"} className="submenu-link">Lista Tramites</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/admin/nuevo-caja"} className="submenu-link">Aperturar Caja</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/admin/lista-tramites"} className="submenu-link">Lista Cajas</NavLink></li>
             </ul>
           </div>
 
           <div className="nav-item-container has-submenu">
             <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
-              Reportes <span className="arrow">▼</span>
+              Reportes  <FontAwesomeIcon icon={faChevronDown} />
             </NavLink>
             <ul className="submenu-list">
-              <li><NavLink to={LOCAL_URL + "/reportes-por-tramite"} className="submenu-link">Por Trámite</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/reportes-por-caja"} className="submenu-link">Por Caja</NavLink></li>
               <li><NavLink to={LOCAL_URL + "/reportes-consolidado"} className="submenu-link">Consolidado</NavLink></li>
-              <li><NavLink to={LOCAL_URL + "/admin/reporte-honorarios"} className="submenu-link">Honorarios</NavLink></li>
+              {/* <li><NavLink to={LOCAL_URL + "/admin/reporte-honorarios"} className="submenu-link">Honorarios</NavLink></li> */}
             </ul>
           </div>
 
           <div className="nav-item-container has-submenu">
             <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
-              CONF <span className="arrow">▼</span>
+              CONFIGURACION  <FontAwesomeIcon icon={faChevronDown} />
             </NavLink>
 
             <ul className="submenu-list">
               <li><NavLink to={LOCAL_URL + "/admin/nuevo-usuario"} className="submenu-link">Nuevo Usuario</NavLink></li>
               <li><NavLink to={LOCAL_URL + "/admin/lista-usuarios"} className="submenu-link">Lista Usuarios</NavLink></li>
-              <li><NavLink to={LOCAL_URL + "/admin/nuevo-tipo-tramite"} className="submenu-link">Nuevo Tipo Trámite</NavLink></li>
-              <li><NavLink to={LOCAL_URL + "/admin/lista-tipo-tramites"} className="submenu-link">Lista Tipo Tramites</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/admin/nuevo-tipo-tramite"} className="submenu-link">Nuevo Tipo Caja</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/admin/lista-tipo-tramites"} className="submenu-link">Lista Tipo Cajas</NavLink></li>
             </ul>
           </div>
 
@@ -101,8 +111,8 @@ const NavbarAdmin = () => {
                 Mi Perfil
               </NavLink>
               <ul className="submenu-list mt-4">
-                <li><NavLink to={"#"} className="submenu-link" onClick={() => auth.logout()}>Cerrar sesion <FontAwesomeIcon icon={faPowerOff} /></NavLink></li>
-                <li><NavLink to={LOCAL_URL + "/perfil"} className="submenu-link">Perfil</NavLink></li>
+                <li><NavLink to={"#"} className="submenu-link" onClick={() => auth.logout()}><FontAwesomeIcon icon={faPowerOff} /> Cerrar sesion </NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/perfil"} className="submenu-link"><FontAwesomeIcon icon={faUser} /> Perfil</NavLink></li>
               </ul>
             </div>
 
@@ -124,49 +134,49 @@ const NavbarAdmin = () => {
 
           {/* Mobile Overlay Menu */}
           <div className={`nav-menu-mobile ${isMobileMenuOpen ? 'open' : ''}`}>
-            <NavLink to={LOCAL_URL+"/movimientos"} end className="mobile-link">Movimientos</NavLink>
+            <NavLink to={LOCAL_URL + "/movimientos"} end className="mobile-link">Movimientos</NavLink>
 
             <div className="nav-item-container has-submenu">
               <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
-                Clientes <span className="arrow">▼</span>
+                Empleador <FontAwesomeIcon icon={faChevronDown} />
               </NavLink>
               <ul className="submenu-list">
-                <li><NavLink to={LOCAL_URL + "/admin/nuevo-cliente"} className="submenu-link">Nuevo Cliente</NavLink></li>
-                <li><NavLink to={LOCAL_URL + "/admin/clientes"} className="submenu-link">Lista Clientes</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/admin/nuevo-empleador"} className="submenu-link">Nuevo Empleador</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/admin/empleadores"} className="submenu-link">Lista Empleadores</NavLink></li>
               </ul>
             </div>
             <div className="nav-item-container has-submenu">
 
               <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
-                Tramites <span className="arrow">▼</span>
+                Caja<FontAwesomeIcon icon={faChevronDown} />
               </NavLink>
               <ul className="submenu-list">
-                <li><NavLink to={LOCAL_URL + "/admin/nuevo-tramite"} className="submenu-link">Nuevo Trámite</NavLink></li>
-                <li><NavLink to={LOCAL_URL + "/admin/lista-tramites"} className="submenu-link">Lista Tramites</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/admin/nuevo-caja"} className="submenu-link">Aperturar Caja</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/admin/lista-cajas"} className="submenu-link">Lista Cajas</NavLink></li>
               </ul>
             </div>
 
             <div className="nav-item-container has-submenu">
               <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
-                Reportes <span className="arrow">▼</span>
+                Reportes <FontAwesomeIcon icon={faChevronDown} />
               </NavLink>
               <ul className="submenu-list">
-                <li><NavLink to={LOCAL_URL + "/reportes-por-tramite"} className="submenu-link">Por Trámite</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/reportes-por-caja"} className="submenu-link">Por Caja</NavLink></li>
                 <li><NavLink to={LOCAL_URL + "/reporte-consolidado"} className="submenu-link">Consolidado</NavLink></li>
-                <li><NavLink to={LOCAL_URL + "/admin/reporte-honorarios"} className="submenu-link">Honorarios</NavLink></li>
+                {/* <li><NavLink to={LOCAL_URL + "/admin/reporte-honorarios"} className="submenu-link">Honorarios</NavLink></li> */}
               </ul>
             </div>
 
 
             <div className="nav-item-container has-submenu">
               <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
-                CONFIGURACIONES <span className="arrow">▼</span>
+                CONFIGURACIONES<FontAwesomeIcon icon={faChevronDown} />
               </NavLink>
               <ul className="submenu-list">
                 <li><NavLink to={LOCAL_URL + "/admin/nuevo-usuario"} className="submenu-link">Nuevo Usuario</NavLink></li>
                 <li><NavLink to={LOCAL_URL + "/admin/lista-usuarios"} className="submenu-link">Lista Usuarios</NavLink></li>
-                <li><NavLink to={LOCAL_URL + "/admin/nuevo-tipo-tramite"} className="submenu-link">Nuevo Tipo Trámite</NavLink></li>
-                <li><NavLink to={LOCAL_URL + "/admin/lista-tipo-tramites"} className="submenu-link">Lista Tipo Tramites</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/admin/nuevo-tipo-tramite"} className="submenu-link">Nuevo tipo Caja</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/admin/lista-tipo-tramites"} className="submenu-link">Lista tipo Caja</NavLink></li>
               </ul>
             </div>
 
@@ -174,8 +184,8 @@ const NavbarAdmin = () => {
             <div className="nav-item-container has-submenu mt-4" >
               <NavLink to={'#'} className="mobile-link profile" onClick={(e) => e.preventDefault()} >Mi Perfil</NavLink>
               <ul className="submenu-list mt-4">
-                <li><NavLink to={"#"} className="submenu-link" onClick={() => auth.logout()}>Cerrar sesion <FontAwesomeIcon icon={faPowerOff} /> </NavLink> </li>
-                <li><NavLink to={LOCAL_URL + "/perfil"} className="submenu-link">Perfil</NavLink></li>
+                <li><NavLink to={"#"} className="submenu-link" onClick={() => auth.logout()}> <FontAwesomeIcon icon={faPowerOff} /> Cerrar sesion </NavLink> </li>
+                <li><NavLink to={LOCAL_URL + "/perfil"} className="submenu-link"> <FontAwesomeIcon icon={faUser} />  Perfil</NavLink></li>
               </ul>
             </div>
           </div>

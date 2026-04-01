@@ -133,15 +133,15 @@ export default function AppRouter() {
       children: [
 
         {
-          path: 'lista-clientes',
+          path: 'lista-empleadores',
           element: <Check component={ListaClientes} roleRequired="admin" />,
         },
         {
-          path: 'nuevo-cliente',
+          path: 'nuevo-empleador',
           element: <Check component={NuevoCliente} roleRequired="admin" />,
         },
         {
-          path: 'editar-cliente/:id',
+          path: 'editar-empleador/:id',
           element: <Check component={NuevoCliente} roleRequired="admin" />,
         },
 
@@ -161,15 +161,15 @@ export default function AppRouter() {
 
 
         {
-          path: 'lista-tramites',
+          path: 'lista-cajas',
           element: <Check component={ListaTramites} roleRequired="admin" />,
         },
         {
-          path: 'nuevo-tramite',
+          path: 'nuevo-caja',
           element: <Check component={NuevoTramite} roleRequired="admin" />,
         },
         {
-          path: 'editar-tramite/:id',
+          path: 'editar-caja/:id',
           element: <Check component={NuevoTramite} roleRequired="admin" />,
         },
 
@@ -178,11 +178,11 @@ export default function AppRouter() {
           element: <Check component={ListaTipoTramite} roleRequired="admin" />,
         },
         {
-          path: 'nuevo-tipo-tramite',
+          path: 'nuevo-tipo-caja',
           element: <Check component={NuevoTipoTramite} roleRequired="admin" />,
         },
         {
-          path: 'editar-tipo-tramite/:id',
+          path: 'editar-tipo-caja/:id',
           element: <Check component={NuevoTipoTramite} roleRequired="admin" />,
         },
         {
@@ -225,30 +225,30 @@ export default function AppRouter() {
       children: [
 
         {
-          path: 'lista-tramites',
+          path: 'lista-cajas',
           element: <Check component={ListaTramites} roleRequired="gerente" />,
         },
         {
-          path: 'nuevo-tramite',
+          path: 'nuevo-caja',
           element: <Check component={NuevoTramite} roleRequired="gerente" />,
         },
         {
-          path: 'editar-tramite/:id',
+          path: 'editar-caja/:id',
           element: <Check component={NuevoTramite} roleRequired="gerente" />,
         },
 
 
         {
-          path: 'lista-clientes',
+          path: 'lista-empleadores',
           element: <Check component={ListaClientes} roleRequired="gerente" />,
         },
         {
-          path: 'nuevo-cliente',
+          path: 'nuevo-empleador',
           element: <Check component={NuevoCliente} roleRequired="gerente" />,
         },
 
         {
-          path: 'editar-cliente/:id',
+          path: 'editar-empleador/:id',
           element: <Check component={NuevoCliente} roleRequired="gerente" />,
         },
 
@@ -291,15 +291,15 @@ export default function AppRouter() {
       children: [
 
         {
-          path: 'lista-clientes',
+          path: 'lista-empleadores',
           element: <Check component={ListaClientes} roleRequired="cajero" />,
         },
         {
-          path: 'nuevo-cliente',
+          path: 'nuevo-empleador',
           element: <Check component={NuevoCliente} roleRequired="cajero" />,
         },
         {
-          path: 'editar-cliente/:id',
+          path: 'editar-empleador/:id',
           element: <Check component={NuevoCliente} roleRequired="cajero" />,
         },
 
@@ -324,15 +324,15 @@ export default function AppRouter() {
 
 
         {
-          path: 'lista-tramites',
+          path: 'lista-cajas',
           element: <Check component={ListaTramites} roleRequired="cajero" />,
         },
         {
-          path: 'nuevo-tramite',
+          path: 'nuevo-caja',
           element: <Check component={NuevoTramite} roleRequired="cajero" />,
         },
         {
-          path: 'editar-tramite/:id',
+          path: 'editar-caja/:id',
           element: <Check component={NuevoTramite} roleRequired="cajero" />,
         },
 
@@ -345,13 +345,6 @@ export default function AppRouter() {
     {
       path: LOCAL_URL + '/',
       element: <LayoutPorRol />,
-      //  <>
-      //   <NavbarCajero />
-      //   <main className="main-content">
-      //     {/* Outlet es donde se renderizarán las páginas (Pacientes, Login, etc.) */}
-      //     <Outlet />
-      //   </main>
-      // </>, // El Layout siempre se muestra
       errorElement: <E500 />,
       children: [
 
@@ -400,7 +393,7 @@ export default function AppRouter() {
         },
 
         {
-          path: 'reportes-por-tramite',
+          path: 'reportes-por-caja',
           element: <Check component={ReportesAdministracionPorTramite} roleRequired="all" />,
         },
 

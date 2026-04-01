@@ -83,7 +83,7 @@ export const ticketHonorarioIndividual = async (output, honorario) => {
                             fontSize: 10
                         },
                         {
-                            text: `Bs. ${montoFormateado}`,
+                            text: `${localStorage.getItem('moneda')} ${montoFormateado}`,
                             style: 'hc',
                             fontSize: 12,
                             margin: [15, 8, 15, 8],

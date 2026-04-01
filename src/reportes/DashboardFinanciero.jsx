@@ -15,7 +15,7 @@ const CardKPI = ({ titulo, monto, icono, color }) => (
                 </div>
                 <div>
                     <p className="text-muted small mb-0 fw-bold">{titulo}</p>
-                    <h5 className="fw-bold mb-0">Bs. {Number(monto || 0).toLocaleString()}</h5>
+                    <h5 className="fw-bold mb-0">{localStorage.getItem('moneda')} {Number(monto || 0).toLocaleString()}</h5>
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@ const DashboardFinanciero = () => {
 
                 <div className="col-lg-8 mb-4">
                     <div className="card border-0 shadow-sm p-4" style={{ borderRadius: '15px', minHeight: '450px' }}>
-                        <h6 className="fw-bold mb-4">Flujo de Caja Mensual (Bs.)</h6>
+                        <h6 className="fw-bold mb-4">Flujo de Caja Mensual ({localStorage.getItem('moneda')})</h6>
 
                         {/* ESTE CONTENEDOR ES LA CLAVE */}
                         <div style={{
@@ -79,7 +79,7 @@ const DashboardFinanciero = () => {
                                             tickFormatter={(val) => val >= 1000000 ? `${(val / 1000000).toFixed(1)}M` : val.toLocaleString()}
                                         />
                                         <Tooltip
-                                            formatter={(value) => [`Bs. ${Number(value).toLocaleString()}`, '']}
+                                            formatter={(value) => [`${localStorage.getItem('moneda')} ${Number(value).toLocaleString()}`, '']}
                                             contentStyle={{ borderRadius: '10px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
                                         />
                                         <Legend verticalAlign="top" align="right" height={36} />

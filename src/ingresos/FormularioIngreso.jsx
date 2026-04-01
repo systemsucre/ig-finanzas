@@ -81,7 +81,7 @@ const FormularioIngreso = () => {
                                         cambiarEstado={setters.setMonto}
                                         tipo='number'
                                         name='monto'
-                                        etiqueta={'Monto Recibido (CLP)'}
+                                        etiqueta={'Monto Recibido '+localStorage.getItem('moneda')} 
                                         placeholder="0.00"
                                         ExpresionRegular={INPUT.NUMEROS_MONEY}
                                     />

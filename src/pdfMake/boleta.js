@@ -76,7 +76,7 @@ const ticketBoleta = async (output, { itemsBoleta }) => {
         {
             table: {
                 headerRows: 1,
-                widths: [55,100, '*',  50],
+                widths: [55, 100, '*', 50],
                 body: [
                     // Header de la Tabla
                     [
@@ -90,7 +90,7 @@ const ticketBoleta = async (output, { itemsBoleta }) => {
                         { text: item.codigo_tramite, fontSize: 8, color: '#4e73df' },
                         { text: item.numero, alignment: 'center', fontSize: 9 },
                         { text: item.detalle, bold: true, fontSize: 10 },
-                        { text: `${parseFloat(item.monto).toFixed(2)} Bs.`, alignment: 'right', bold: true, fontSize: 10 }
+                        { text: `${parseFloat(item.monto).toFixed(2)} ${localStorage.getItem('moneda')}`, alignment: 'right', bold: true, fontSize: 10 }
                     ])
                 ]
             },
@@ -113,7 +113,7 @@ const ticketBoleta = async (output, { itemsBoleta }) => {
                     [
                         { text: 'TOTAL BOLETA:', alignment: 'right', bold: true, margin: [0, 10, 0, 0] },
                         {
-                            text: `${itemsBoleta.reduce((acc, item) => acc + parseFloat(item.monto), 0).toFixed(2)} Bs.`,
+                            text: `${itemsBoleta.reduce((acc, item) => acc + parseFloat(item.monto), 0).toFixed(2)} ${localStorage.getItem('moneda')}`,
                             style: 'hc',
                             fillColor: '#f8f9fa',
                             margin: [10, 10, 10, 10],

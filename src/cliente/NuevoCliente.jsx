@@ -49,7 +49,7 @@ const NuevoCliente = () => {
                                     <span className="fs-1">{id ? '📝' : '🤝'}</span>
                                 </div>
                                 <h2 className="h3 fw-black text-primary text-uppercase m-0">
-                                    {id ? 'Actualizar Cliente' : 'Registro de Cliente'}
+                                    {id ? 'Actualizar Empleador' : 'Registro de Empleador'}
                                 </h2>
                             </div>
 

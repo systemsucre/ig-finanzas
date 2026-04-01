@@ -56,14 +56,14 @@ const CabeceraTramite = ({ id }) => {
                 <div className="col-md-6 col-12 text-md-end">
                     {localStorage.getItem('numRol') < 4 && (
                         <div className="text-muted" style={{ fontSize: '0.75rem' }}>
-                            ABONO TOTAL RECIBIDO: <span className="fw-bold">Bs. {ingresos.toFixed(2)}</span>
+                            ABONO TOTAL RECIBIDO: <span className="fw-bold">{localStorage.getItem('moneda')} {ingresos.toFixed(2)}</span>
                         </div>
                     )}
                     <div className="text-muted" style={{ fontSize: '0.75rem' }}>
-                        TOTAL GASTADO: <span className="text-danger">Bs. {gastos.toFixed(2)}</span>
+                        TOTAL GASTADO: <span className="text-danger">{localStorage.getItem('moneda')} {gastos.toFixed(2)}</span>
                     </div>
                     <div className="fw-bold text-dark">
-                        SALDO DISPONIBLE: <span className="text-success">Bs. {saldo.toFixed(2)}</span>
+                        SALDO DISPONIBLE: <span className="text-success">{localStorage.getItem('moneda')} {saldo.toFixed(2)}</span>
                     </div>
 
                 </div>
@@ -104,7 +104,7 @@ const CabeceraTramite = ({ id }) => {
 
 
                     <div className="d-flex justify-content-between mt-1" style={{ fontSize: '0.65rem', color: '#6c757d' }}>
-                        <span>Total Abonado:    </span> <span>{'Bs. ' + ingresos.toFixed(2)}</span>
+                        <span>Total Abonado:    </span> <span>{localStorage.getItem('moneda') + ingresos.toFixed(2)}</span>
                     </div>
                 </div>
                 : null}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation, Link } from 'react-router-dom';
 import { LOCAL_URL } from '../../Auth/config';
 import useAuth from "../../Auth/useAuth";
-import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faPowerOff, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
@@ -23,17 +23,24 @@ const NavbarAuxiliar = () => {
   // Cerrar menú al cambiar de ruta
   useEffect(() => setIsMobileMenuOpen(false), [location]);
 
+  // 1. Obtenemos el valor (ej: "KRESTUDIOS" o "ABOGADOS")
+  const entidadCompleta = localStorage.getItem('entidad') || 'IGFinanzas';
+
+  // 2. Extraemos las partes
+  const iniciales = entidadCompleta.substring(0, 2); // Las primeras 2 letras
+  const restoNombre = entidadCompleta.substring(2); // Todo lo demás desde la posición 2 
+
   return (
     <nav className={` nav-main ${isScrolled ? 'nav-scrolled' : ''}`}>
       <div className="nav-container">
         <NavLink to={LOCAL_URL + "/mivimientos"} className="nav-brand d-flex align-items-center">
-          {/* Logo Principal */}
-          {/* <span style={{ fontSize: '24px', marginRight: '8px' }}>👔</span> */}
-
-          {/* Contenedor de Texto */}
           <div className="d-flex flex-column justify-content-start" style={{ lineHeight: '1' }}>
-            <span className="brand-text fw-bold">
-              KR<span className="text-primary">ESTUDIOS{`.   `}</span>
+            <span className="brand-text fw-bold text-uppercase">
+              {iniciales}
+              <span className="text-primary">
+                {restoNombre}
+                {`.   `}
+              </span>
             </span>
             <div className="user-info-brand" style={{ marginTop: '-2px' }}>
               <span className="text-muted text-uppercase" style={{ fontSize: '9px', fontWeight: '700' }}>
@@ -53,7 +60,7 @@ const NavbarAuxiliar = () => {
 
           <div className="nav-item-container has-submenu">
             <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
-              Boletas <span className="arrow">▼</span>
+              Boletas <FontAwesomeIcon icon={faChevronDown} />
             </NavLink>
             <ul className="submenu-list">
               <li><NavLink to={LOCAL_URL + "/nueva-boleta"} className="submenu-link">Crear Boleta</NavLink></li>
@@ -64,10 +71,10 @@ const NavbarAuxiliar = () => {
 
           <div className="nav-item-container has-submenu">
             <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
-              Reportes <span className="arrow">▼</span>
+              Reportes <FontAwesomeIcon icon={faChevronDown} />
             </NavLink>
             <ul className="submenu-list">
-              <li><NavLink to={LOCAL_URL + "/reportes-por-tramite"} className="submenu-link">Por Trámite</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/reportes-por-caja"} className="submenu-link">Por Caja</NavLink></li>
               <li><NavLink to={LOCAL_URL + "/reportes-consolidado"} className="submenu-link">Consolidado</NavLink></li>
             </ul>
           </div>
@@ -79,7 +86,7 @@ const NavbarAuxiliar = () => {
               </NavLink>
               <ul className="submenu-list mt-4">
                 <li><NavLink to={"#"} className="submenu-link" onClick={() => auth.logout()}>Cerrar sesion <FontAwesomeIcon icon={faPowerOff} /></NavLink></li>
-                <li><NavLink to={LOCAL_URL + "/perfil"} className="submenu-link">Perfil</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/perfil"} className="submenu-link"><FontAwesomeIcon icon={faUser} />Perfil</NavLink></li>
               </ul>
             </div>
 
@@ -106,7 +113,7 @@ const NavbarAuxiliar = () => {
 
             <div className="nav-item-container has-submenu">
               <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
-                Boletas <span className="arrow">▼</span>
+                Boletas  <FontAwesomeIcon icon={faChevronDown} />
               </NavLink>
               <ul className="submenu-list">
                 <li><NavLink to={LOCAL_URL + "/nueva-boleta"} className="submenu-link">Nueva Boleta</NavLink></li>
@@ -115,10 +122,10 @@ const NavbarAuxiliar = () => {
             </div>
             <div className="nav-item-container has-submenu">
               <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
-                Reportes <span className="arrow">▼</span>
+                Reportes  <FontAwesomeIcon icon={faChevronDown} />
               </NavLink>
               <ul className="submenu-list">
-                <li><NavLink to={LOCAL_URL + "/reportes-por-tramite"} className="submenu-link">Por Trámite</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/reportes-por-caja"} className="submenu-link">Por Caja</NavLink></li>
                 <li><NavLink to={LOCAL_URL + "/reporte-consolidado"} className="submenu-link">Consolidado</NavLink></li>
               </ul>
             </div>
@@ -127,7 +134,7 @@ const NavbarAuxiliar = () => {
               <NavLink to={'#'} className="mobile-link profile" onClick={(e) => e.preventDefault()} >Mi Perfil</NavLink>
               <ul className="submenu-list mt-4">
                 <li><NavLink to={"#"} className="submenu-link" onClick={() => auth.logout()}>Cerrar sesion <FontAwesomeIcon icon={faPowerOff} /> </NavLink> </li>
-                <li><NavLink to={LOCAL_URL + "/perfil"} className="submenu-link">Perfil</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/perfil"} className="submenu-link"><FontAwesomeIcon icon={faUser} />Perfil</NavLink></li>
               </ul>
             </div>
           </div>

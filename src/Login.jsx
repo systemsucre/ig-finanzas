@@ -73,6 +73,7 @@ const HomeLogin = () => {
                     localStorage.setItem('numRol', json.data.numRol)
                     localStorage.setItem('id_', json.data.id_)
                     localStorage.setItem('entidad', json.data.entidad)
+                    localStorage.setItem('moneda', json.data.moneda)
                     auth.login('ok')
                 }
                 else

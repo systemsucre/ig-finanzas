@@ -6,7 +6,7 @@ export const ColumnsTableTramites = [
             <div> <span className="fw-bold text-primary">{row.numero}</span></div>
     },
     {
-        label: 'Código',
+        label: 'Código de Caja',
         field: 'codigo',
         render: (row) =>
             <div> <span className="fw-bold text-primary">{row.codigo}</span></div>
@@ -15,22 +15,13 @@ export const ColumnsTableTramites = [
         label: 'Detalle',
         field: 'detalle',
         render: (row) =>
-            <small className="text-muted italic" style={{ fontSize: '0.7rem' }}>
+            <small className="text-muted italic" >
                 {row.detalle?.substring(0, 30)}...
             </small>
     },
+
     {
-        label: 'Cliente',
-        field: 'cliente_nombre', // Viene del CONCAT en el backend
-        render: (row) => (
-            <div>
-                <div className="fw-bold">{row.cliente_nombre}</div>
-                <small className="text-muted">ID CLIENTE: {row.id_cliente}</small>
-            </div>
-        )
-    },
-    {
-        label: 'Tipo de Trámite',
+        label: 'Tipo Caja',
         field: 'nombre_tipo_tramite',
         render: (row) => (
             <span className="badge bg-light text-dark border">
@@ -67,11 +58,11 @@ export const ColumnsTableTramites = [
                 <div>
                     <div className="small text-muted">
                         <i className="bi bi-calendar-check me-1"></i>
-                        Ingreso: {new Date(row.fecha_ingreso).toLocaleDateString()}
+                        Apertura: {new Date(row.fecha_ingreso).toLocaleDateString()}
                     </div>
                     <div className="small text-info">
                         <i className="bi bi-calendar-x me-1"></i>
-                        Entrega: {vencimiento.toLocaleDateString()}
+                        Cierre estimado: {vencimiento.toLocaleDateString()}
                     </div>
                     <div className={`${color} mt-1`} style={{ fontSize: '0.85rem' }}>
                         <i className="bi bi-clock-history me-1"></i>
@@ -82,14 +73,14 @@ export const ColumnsTableTramites = [
         }
     },
     {
-        label: 'Costo de Gestión',
+        label: 'Movimientos',
         field: 'costo',
         render: (row) => {
             const costo = row.costo || 0;
             return (
                 <div className="text-end">
                     <div className="fw-bold text-dark">
-                        GASTOS : Bs. {row.total_gastos}
+                        GASTOS : {localStorage.getItem('moneda')} {row.total_gastos}
                     </div>
                     {/* {localStorage.getItem('numRol') != 4 ?
                         <div className=" fw-bold text-muted text-success italic" style={{ fontSize: '0.7rem' }}>
@@ -97,10 +88,10 @@ export const ColumnsTableTramites = [
                         </div>
                         : null} */}
                     <div className=" fw-bold text-muted text-success italic" style={{ fontSize: '0.7rem' }}>
-                        MONTO ABONADO  Bs. {row.total_ingresos}
+                        MONTO ABONADO  {localStorage.getItem('moneda')} {row.total_ingresos}
                     </div>
                     <div className={`fw-bold ${row.saldoDisponible > 2000 ? `text-dark` : row.saldoDisponible > 1000 ? `text-warning` : `text-danger`}`} style={{ fontSize: '0.7rem' }}>
-                        SALDO DISP.  BS. {row.saldoDisponible}
+                        SALDO DISP.  {localStorage.getItem('moneda')} {row.saldoDisponible}
                     </div>
                 </div>
             );

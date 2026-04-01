@@ -65,10 +65,7 @@ export const ColumnsTableIngresos = [
         render: (row) => (
             <div className="text-end pe-3">
                 <span className="fw-bold text-success" style={{ fontSize: '1.1rem' }}>
-                    CLP. {Number(row.monto || 0).toLocaleString('es-BO', {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2
-                    })}
+                    {localStorage.getItem('moneda')} {row.monto}
                 </span>
                 <div style={{ fontSize: '0.65rem' }} className="text-muted text-uppercase fw-bold">
                     Efectivo / Transferencia

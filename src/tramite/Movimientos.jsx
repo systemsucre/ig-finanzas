@@ -50,7 +50,7 @@ export function Movimientos() {
                             <div style={{ width: '100%', maxWidth: '300px', paddingLeft: '5px', paddingTop: '10px' }}>
                                 <InputUsuarioSearch
                                     name="input-search-tramite"
-                                    placeholder='Buscar por código, cliente o numero...'
+                                    placeholder='Buscar por Codigo o numero...'
                                     onChange={handleSearch}
                                 />
                             </div>

@@ -57,7 +57,7 @@ export function ReportesAdministracionConsolidado() {
                     {/* Header */}
                     <div className="d-flex justify-content-between align-items-center mb-4">
                         <div className="section-title">
-                            <h3 className="text-dark fw-bold mb-0">Reportes de Tramites Consolidados</h3>
+                            <h3 className="text-dark fw-bold mb-0">Reportes de Cajas Consolidados</h3>
                             {/* <p className="text-muted mb-0 small text-uppercase">Gestión Económica de Trámites</p> */}
                         </div>
                     </div>
@@ -71,7 +71,7 @@ export function ReportesAdministracionConsolidado() {
                                     cambiarEstado={setters.setEstado}
                                     Name="estado"
                                     lista={[{ value: 4, label: 'Todos' }, { value: 1, label: 'En curso' }, { value: 2, label: 'Paralizado' }, { value: 3, label: 'Finalizado' },]}
-                                    etiqueta="Estado Tramite *"
+                                    etiqueta="Estado Caja"
                                     msg="Cambiar Estado"
                                     ExpresionRegular={INPUT.ID}
                                 />

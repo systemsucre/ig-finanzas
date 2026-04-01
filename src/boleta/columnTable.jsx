@@ -12,7 +12,7 @@ export const ColumnsTable = [
     },
 
     {
-        label: 'CODIGO. BOLETA',
+        label: 'CODIGO BOLETA',
         field: 'codigo',
         render: (row) => (
             <div style={{ minWidth: '10px' }}>
@@ -24,7 +24,7 @@ export const ColumnsTable = [
     },
 
     {
-        label: 'Fecha solicitud',
+        label: 'Fecha Registro',
         field: 'created_at',
         render: (row) => {
             const fecha = new Date(row.fecha?.split(" ")[0])
@@ -57,16 +57,13 @@ export const ColumnsTable = [
         render: (row) => (
             <div className="text-center">
                 <span className="fw-bold text-dark" style={{ fontSize: '1.05rem' }}>
-                    Bs. {Number(row.monto_total || 0).toLocaleString('es-BO', {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2
-                    })}
+                    {localStorage.getItem('moneda')} {row.monto_total}
                 </span>
             </div>
         )
     },
     {
-        label: 'Usuario Solicitante',
+        label: 'Usuario Registrador',
         field: 'solicitante',
         render: (row) => (
             <div style={{ minWidth: '10px' }}>
@@ -84,7 +81,7 @@ export const ColumnsTable = [
             const estados = {
                 1: { badge: 'bgss-secondary text-dark', texto: 'SOLICITADO', icon: 'bi-hourglass-split' },
                 2: { badge: 'bg-info text-white', texto: 'APROBADO', icon: 'bi-check-circle' },
-                3: { badge: 'bg-success text-white', texto: 'DESPACHADO', icon: 'bi-cash-stack' },
+                3: { badge: 'bg-success text-white', texto: 'REGISTRADO', icon: 'bi-cash-stack' },
                 4: { badge: 'bg-danger text-white', texto: 'RECHAZADO', icon: 'bi-x-circle' }
             };
 

@@ -52,7 +52,7 @@ export const ColumnsTableDetalle = [
         render: (row) => (
             <div >
                 <span className="fw-bold text-dark" style={{ fontSize: '0.9rem' }}>
-                   {row.fecha_solicitud?.split('T')[0]}
+                    {row.fecha_solicitud?.split('T')[0]}
                 </span>
             </div>
         )
@@ -63,10 +63,7 @@ export const ColumnsTableDetalle = [
         render: (row) => (
             <div >
                 <span className="fw-bold text-dark" style={{ fontSize: '1.05rem' }}>
-                    Bs. {Number(row.monto || 0).toLocaleString('es-BO', {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2
-                    })}
+                    {localStorage.getItem('moneda')} {row.monto}
                 </span>
             </div>
         )

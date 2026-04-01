@@ -37,8 +37,8 @@ export const generarReporteFinanciero = async (tipoReporte, data, tramiteInfo, f
     // 3. LÓGICA DE COLUMNA CLIENTE (Habilitada para INGRESOS y GENERAL)
     const mostrarColumnaCliente = TIPO.includes('INGRESO') || TIPO === 'GENERAL';
 
-    let headers = ['N° ITEM', 'FECHA', 'DESCRIPCIÓN / DETALLE', 'MONTO (Bs.)'];
-    if (mostrarColumnaCliente) headers.push('CLIENTE');
+    let headers = ['N° ITEM', 'FECHA', 'DESCRIPCIÓN / DETALLE', 'MONTO ('+localStorage.getItem('moneda')+')'];
+    if (mostrarColumnaCliente) headers.push('EMPLEADOR');
     headers.push('RESPONSABLE');
 
     const headerRow = sheet.addRow(headers);
@@ -98,7 +98,7 @@ export const generarReporteFinanciero = async (tipoReporte, data, tramiteInfo, f
     totalRow.getCell(3).font = { bold: true };
     totalRow.getCell(3).alignment = { horizontal: 'right' };
     totalRow.getCell(4).font = { bold: true, color: { argb: 'C0392B' } };
-    totalRow.getCell(4).numFmt = '#,##0.00 "Bs."';
+    totalRow.getCell(4).numFmt =  `#,##0.00 "${localStorage.getItem('moneda')}"`;
 
     // 6. DESCARGA
     const buffer = await workbook.xlsx.writeBuffer();
