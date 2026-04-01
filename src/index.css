@@ -1338,7 +1338,7 @@ button:not(:disabled),
   position: relative;
   width: 100%;
   height: auto;
-  margin-top: 2rem;
+  padding-top: 2rem;
   /* Ocupa toda la altura de la ventana */
 }
 
@@ -1382,7 +1382,7 @@ button:not(:disabled),
   .login-card {
     /* CLAVE: Cambiar height de 1000px a auto */
     height: auto;
-    padding: 4px;
+    padding: 15px;
     /* Un padding más equilibrado para móviles */
     border-radius: 0px;
 
@@ -2210,7 +2210,9 @@ thead {
 }
 
 
-
+.container{
+  padding: 5px;
+}
 
 /* formulario boletas  */
 
