@@ -51,7 +51,7 @@ const reporteConsolidoTramite = async (output, { tramite, ingresos = [], salidas
                         { text: 'DETALLE:', bold: true, fillColor: '#f2f2f2' }, { text: tramite.detalle, colSpan: 3 }, {}, {}
                     ],
                     [
-                        { text: 'FECHA INGRESO: ', bold: true, fillColor: '#f2f2f2' }, { text: new Date(tramite.fecha_ingreso).toLocaleDateString(), colSpan: 3 }, {}, {}
+                        { text: 'FECHA APERTURA: ', bold: true, fillColor: '#f2f2f2' }, { text: new Date(tramite.fecha_ingreso).toLocaleDateString(), colSpan: 3 }, {}, {}
                     ]
                 ]
             },

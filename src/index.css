@@ -187,6 +187,25 @@ body {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
+  /* --- FONDO OPTIMIZADO --- */
+  background-image: url("/img/fondo1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  /* Mantiene el fondo quieto mientras el contenido sube */
+
+  /* --- AJUSTES DE SCROLL Y ALTURA --- */
+  /* overflow: hidden;  <-- ELIMINA O COMENTA ESTA LÍNEA */
+  overflow-y: auto;
+  /* Asegura que el scroll vertical aparezca si es necesario */
+
+  width: 100%;
+  min-height: 100vh;
+  /* Usa min-height en lugar de height fijo */
+  display: flex;
+  /* Opcional: ayuda a centrar el contenido del login */
+  flex-direction: column;
 }
 
 
@@ -893,7 +912,7 @@ button:not(:disabled),
   --bs-btn-disabled-color: #FFF;
   --bs-btn-disabled-bg: #262626;
   --bs-btn-disabled-border-color: #262626;
-  /* border-radius: 4px; */
+  border-radius: 5px;
 }
 
 .btn-dark:hover {
@@ -931,6 +950,7 @@ button:not(:disabled),
 /* Agrega estas clases a tu index.css */
 .text-titulos {
   letter-spacing: -0.5px;
+  color: white;
 }
 
 .codigo-boleta {
@@ -1199,7 +1219,7 @@ button:not(:disabled),
 
 .bg-white {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-white-rgb), var(--bs-bg-opacity)) !important;
+  background-color: rgba(var(--bs-white-rgb), .7) !important;
 }
 
 @media (min-width: 768px) {
@@ -1333,7 +1353,7 @@ button:not(:disabled),
 
 /* --- CONTENEDOR PRINCIPAL (EL SECRETO DEL CENTRADO) --- */
 .login-wrapper {
-  background: radial-gradient(circle, #ffffff 0%, #e2e8f0 100%);
+  background: zradial-gradient(circle, #ffffff 0%, #e2e8f0 100%);
   overflow: hidden;
   position: relative;
   width: 100%;
@@ -1511,7 +1531,7 @@ button:not(:disabled),
   /* Debe ser igual o mayor a la altura (height) de tu Navbar */
   padding-top: 5px;
   min-height: calc(100vh - 85px);
-  background-color: var(--bs-light);
+  /* background-color: var(--bs-light); */
 }
 
 .nav-scrolled {
@@ -1848,9 +1868,9 @@ button:not(:disabled),
 
 /* --- ESTILOS DE TABLA RESPONSIVA --- */
 .table-container {
-  background: white;
+  /* background: white; */
   /* border-radius: 15px; */
-  padding: 10px;
+  /* padding: 5px; */
   box-shadow: var(--bs-shadow-md);
   margin-top: 0.5rem;
   overflow: hidden;
@@ -1914,6 +1934,11 @@ thead {
   border-radius: 0;
 }
 
+.table-responsive-custom tr {
+
+  background: #fff;
+}
+
 /* --- MAGIA PARA MÓVILES (Celulares y Tablets pequeñas) --- */
 @media (max-width: 878px) {
   .table-responsive-custom {
@@ -1929,8 +1954,8 @@ thead {
     display: block;
     margin-top: 5px;
     margin-bottom: 1.5rem;
-    border: 1px solid var(--hospital-blue);
-    /* border-radius: 12px; */
+    /* border: 1px solid var(--hospital-blue); */
+    border-radius: 10px;
     padding: 3px;
     background: #fff;
   }
@@ -2018,14 +2043,15 @@ thead {
 
 /* Reemplazo profesional para .card */
 .panel-custom {
-  background: #ffffff;
-  /* border-radius: 0px; */
+  /* background: #ffffff; */
+  border-radius: 10px;
   border: 1px solid #edf2f7;
   /* Un borde muy sutil */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   /* Sombra suave */
   padding: 0;
   height: 100%;
+  margin: 5px;
   transition: all 0.3s ease;
 }
 
@@ -2210,7 +2236,7 @@ thead {
 }
 
 
-.container{
+.container {
   padding: 5px;
 }
 

@@ -76,7 +76,7 @@ const ticketBoleta = async (output, { itemsBoleta }) => {
         {
             table: {
                 headerRows: 1,
-                widths: [55, 100, '*', 50],
+                widths: [55, 100, '*', 70],
                 body: [
                     // Header de la Tabla
                     [

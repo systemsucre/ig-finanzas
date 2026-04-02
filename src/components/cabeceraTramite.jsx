@@ -27,7 +27,7 @@ const CabeceraTramite = ({ id }) => {
     const porcentajeSaldo = 100 - porcentajeGasto;
 
     return (
-        <div className="alert alert-success border-0 shadow-sm mb-4" style={{ backgroundColor: '#f8fdf9', padding: '15px', marginTop: '10px', borderLeft: '5px solid #1bbec0' }}>
+        <div className="alert alert-success border-0 shadow-sm mb-4" style={{ borderRadius:'10px', backgroundColor: 'rgba(255,255,255,.7)', padding: '10px', margin: '5px', }}>
             <div className="row g-2 small">
                 <div className="col-md-6 col-12">
                     {/* <div>

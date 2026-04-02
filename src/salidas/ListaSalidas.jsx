@@ -63,9 +63,8 @@ export function ListaSalidas() {
                     </div>
                 </div>
 
-                <div className=" d-flex justify-content-end gap-2 " style={{ marginRight: '10px' }}>
-                    <button className=" btn btn-dark" style={{ marginLeft: '4px' }} onClick={() => {
-                       
+                <div className=" d-flex justify-content-end gap-2 " style={{ marginRight: '5px' }}>
+                    <button className=" btn btn-dark" style={{ marginLeft: '0px' }} onClick={() => {
                         navigate(LOCAL_URL + "/movimientos")
                     }
                     }>

@@ -126,7 +126,7 @@ export const FormularioBoleta = () => {
 
                                             <div className="row g-3">
                                                 <div className="col-md-6">
-                                                    <label className="form-label-profesional">Trámite / Expediente</label>
+                                                    <label className="form-label-profesional">CAJA</label>
                                                     <Select
                                                         placeholder={'Busque un trámite...'}
                                                         onChange={(e) => actualizarFila(index, 'id_tramite', e ? e.value : '')}
