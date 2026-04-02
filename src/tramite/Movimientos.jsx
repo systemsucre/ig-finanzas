@@ -26,12 +26,12 @@ export function Movimientos() {
             <main className="container-xl mt-5" style={{ maxWidth: "100%" }}>
                 <div className="d-flex justify-content-between align-items-end mb-4">
                     <div>
-                        <h3 className="text-dark fw-bold mb-0 p-2">Ver Movimientos</h3>
+                        <h3 className="text-dark fw-bold mb-0 p-2 text-titulos">Ver Movimientos</h3>
                       
                     </div>
                 </div>
 
-                <div className="panel-custom bg-white rounded shadow-sm p-1">
+               <div className="panel-custom bg-white rounded shadow-sm p-2 mx-2">
                     <div className="row align-items-center mb-3 g-3">
                         <div className="col-md-6">
                             <div className="d-flex1 gap-2">

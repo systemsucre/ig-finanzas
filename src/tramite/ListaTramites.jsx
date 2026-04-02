@@ -35,7 +35,7 @@ export function ListaTramites() {
 
                 </div>
 
-                <div className="panel-custom bg-white rounded shadow-sm p-1">
+                <div className="panel-custom bg-white rounded shadow-sm p-2 mx-2">
                     {/* BARRA DE ACCIONES: Filtros y Buscador */}
                     <div className="row align-items-center mb-3 g-3">
                         <div className="col-md-6">

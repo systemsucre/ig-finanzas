@@ -23,13 +23,13 @@ export function ListaClientes() {
             <main className="container-xl mt-5">
                 <div className="d-flex justify-content-between align-items-center p-2">
                     <div>
-                        <h3 className="text-dark fw-bold mb-0">Gestión de Clientes</h3>
+                        <h3 className="text-dark fw-bold mb-0 text-titulos">Gestión de Clientes</h3>
                      
                     </div>
 
                 </div>
 
-                <div className="panel-custom mt-3">
+                <div className="panel-custom bg-white rounded shadow-sm p-2 mx-2">
                     <div className="d-flex align-items-center mb-3 bg-white p-3 shadow-sm row m-0">
                         <div className="col-sm-6">
                             <div className="d-flex gap-2">

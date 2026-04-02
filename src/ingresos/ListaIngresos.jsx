@@ -89,7 +89,7 @@ export function ListaIngresosTramite() {
                 <div className="d-flex justify-content-between align-items-center mb-4 m-2">
                     <div>
                         <h3 className="text-dark fw-bold mb-0 text-titulos">Historial de Ingresos y Abonos</h3>
-                        <p className="text-muted mb-0 small text-uppercase" style={{ letterSpacing: '1px', fontSize: '0.7rem' }}>
+                        <p className="text-muted mb-0 small text-uppercase" style={{ letterSpacing: '1px', fontSize: '0.7rem', color:'white' }}>
                             Gestión Financiera - Control de Pagos por Caja
                         </p>
                     </div>

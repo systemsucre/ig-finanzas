@@ -97,7 +97,7 @@ export function ListaSalidas() {
                             </div>
                         </div>
                     </div>
-                    <div className="table-responsive">
+                    <div className="table-responsive">  
                         <DataTable
                             columns={ColumnsTableSalidas}
                             data={dataFiltrada}
