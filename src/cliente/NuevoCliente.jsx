@@ -23,7 +23,7 @@ const NuevoCliente = () => {
     // 2. Efecto para cargar datos en modo Edición
     useEffect(() => {
         if (id && clientesFiltrados.length > 0) {
-            const cliente = clientesFiltrados.find(c => c.id === parseInt(id));
+            const cliente = clientesFiltrados.find(c => c.id === parseInt(id));   
             if (cliente) {
                 setNombre({ campo: cliente.nombre, valido: 'true' });
                 setAp1({ campo: cliente.ap1, valido: 'true' });
@@ -41,14 +41,14 @@ const NuevoCliente = () => {
             <section className="container">
                 <div className="row justify-content-center">
                     <div className="col-12 col-md-11 col-lg-9 col-xl-8 animate-fade-in">
-                        <div className="login-card shadow-clinical p-4 p-md-5 bg-white" style={{ borderTop: `10px solid  #0d6efd` }} >
+                        <div className="login-card shadow-clinical p-4 p-md-5 bg-white" style={{ borderTop: `10px solid  #0d6efd`, marginTop:'2rem' }} >
 
                             {/* Encabezado Dinámico */}
                             <div className="text-center mb-5">
                                 <div className="icon-pulse mb-3">
                                     <span className="fs-1">{id ? '📝' : '🤝'}</span>
                                 </div>
-                                <h2 className="h3 fw-black text-primary text-uppercase m-0">
+                                <h2 className="h3 fw-black text-primary text-uppercase m-0" >
                                     {id ? 'Actualizar Empleador' : 'Registro de Empleador'}
                                 </h2>
                             </div>

@@ -34,7 +34,7 @@ const NuevoTipoTramite = () => {
             <section className="container">
                 <div className="row justify-content-center">
                     <div className="col-12 col-md-8 col-lg-6 animate-fade-in">
-                        <div className="login-card shadow-clinical p-4 p-md-5 bg-white" style={{  marginTop:'1rem' }}>
+                        <div className="login-card shadow-clinical p-4 p-md-5 bg-white" style={{  marginTop:'2rem' }}>
 
                             {/* Encabezado Dinámico */}
                             <div className="text-center mb-5">

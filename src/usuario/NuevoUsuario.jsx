@@ -14,7 +14,7 @@ const NuevoUsuario = () => {
         setters,
         roles,
         guardarUsuario,
-        usuariosFiltrados
+        usuariosFiltrados   
     } = useUsuarios();
 
     // 3. DESESTRUCTURACIÓN: Extraemos las funciones individuales del objeto setters
@@ -49,7 +49,7 @@ const NuevoUsuario = () => {
             <section className="container">
                 <div className="row justify-content-center">
                     <div className="col-12 col-md-11 col-lg-9 col-xl-8 animate-fade-in">
-                        <div className="login-card shadow-clinical p-4 p-md-5 bg-white">
+                        <div className="login-card shadow-clinical p-4 p-md-5 bg-white" style={{  border: 'none', marginTop:'2rem' }}>
 
                             {/* Encabezado Dinámico */}
                             <div className="text-center mb-5">

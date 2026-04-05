@@ -1385,7 +1385,7 @@ button:not(:disabled),
 
     padding: 15px;
     /* Un padding más equilibrado para móviles */
-    border-radius: 20px;
+    border-radius: 5px;
     /* Bordes un poco menos pronunciados en móvil */
     margin-bottom: 20px;
     /* Espacio extra abajo para que no pegue al borde del navegador */
@@ -1403,7 +1403,7 @@ button:not(:disabled),
     height: auto;
     padding: 10px;
     /* Un padding más equilibrado para móviles */
-    border-radius: 0px;
+    border-radius: 8px;
 
   }
 }
@@ -2261,7 +2261,7 @@ thead {
 
 /* Contenedor principal del formulario */
 .form-boleta-container {
-  background: rgba(255, 255, 255, 0.7);
+  /* background: rgba(255, 255, 255, 0.7); */
   border-radius: 16px;
   /* Bordes redondeados modernos */
   padding: 30px;
@@ -2269,7 +2269,7 @@ thead {
   /* Sombra muy suave */
   max-width: 1000px;
   margin: 20px auto;
-  border: 1px solid #f0f0f0;
+  /* border: 1px solid #f0f0f0; */
 }
 
 /* El título principal */

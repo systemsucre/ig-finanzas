@@ -32,7 +32,7 @@ const FormularioIngreso = () => {
     // 1. Efecto para EDICIÓN
 
     useEffect(() => {
-        if (isEdit && id && UUID_REGEX.test(id)) {
+        if (isEdit && id && UUID_REGEX.test(id)) {  
             cargarIngresoPorId(id);
             cargarAuxiliares()
             if (id_tramite && cargarTramitePorId) cargarTramitePorId(id_tramite);
@@ -52,18 +52,19 @@ const FormularioIngreso = () => {
 
     const lista = [{ value: 'EFECTIVO', label: 'EFECTIVO' }, { value: 'TRANFERENCIA', label: 'TRANFERENCIA' }, { value: 'CHEQUE', label: 'CHEQUE' },]
     return (
-        <main className="login-wrapper d-flex align-items-center justify-content-center py-5" style={{ minHeight: '100vh', background: '#f0f2f5' }}>
+        <main className="login-wrapper d-flex align-items-center justify-content-center py-5" style={{ minHeight: '100vh' }}>
+
             <section className="container">
                 <div className="row justify-content-center">
                     <div className="col-12 col-md-10 col-lg-8 col-xl-7 animate-fade-in">
-                        <div className="login-card shadow p-4 p-md-5 bg-white" style={{ borderRadius: '20px', border: 'none' }}>
+                        <div className="login-card shadow p-4 p-md-5 bg-white" style={{  border: 'none', marginTop:'2rem' }}>
 
                             {/* Encabezado dinámico */}
                             <div className="text-center mb-4">
                                 <div className="mb-3">
                                     <span style={{ fontSize: '3.5rem' }}>{isEdit ? '📝' : '📥'}</span>
                                 </div>
-                                <h2 className="h3 fw-bold text-success text-uppercase">
+                                <h2 className="h3 fw-bold text-success text-uppercase" style={{marginTop:'0'}}>
                                     {isEdit ? 'Editar Registro de Ingreso' : 'Nuevo Ingreso / Abono'}
                                 </h2>
                                 <p className="text-muted small">Registro de dinero percibido para trámites</p>

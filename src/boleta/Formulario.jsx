@@ -92,123 +92,126 @@ export const FormularioBoleta = () => {
         <main className="login-wrapper d-flex align-items-center justify-content-center py-5" style={{ minHeight: '100vh' }}>
             <section className="container">
                 <div className="row justify-content-center">
-                    <div className="form-boleta-container">
+                    <div className="login-card shadow-clinical p-4 p-md-5 bg-white" style={{ borderTop: `10px solid  #0d6efd`, marginTop: '2rem' }} >
 
-                        <div className="text-center">
-                            <span style={{ fontSize: '3rem' }}>{codigo ? '📝' : '📑'}</span>
+                        <div className="form-boleta-container">
 
-                        </div>
-                        <h2 className="titulo-boleta" style={{ marginTop: "8px" }}>
-                            {codigo ? `Modificar Boleta` : 'Nueva Boleta de Gastos'}
-                        </h2>
-                        {codigo && <p className='text-center'> <span className="badge bg-info text-dark">Editando Código: {codigo}</span></p>}
-                        {tramitesFiltrados.length > 0 ?
-                            <form onSubmit={handleGuardar} style={{ marginTop: '10px' }}>
-                                {itemsForm.map((item, index) => (
-                                    <div className="item-gasto-row" key={index}>
-                                        {/* Indicador visual de fila */}
-                                        <div className="item-number">ITEM #{index + 1}</div>
+                            <div className="text-center">
+                                <span style={{ fontSize: '3rem' }}>{codigo ? '📝' : '📑'}</span>
 
-                                        {/* Botón eliminar arriba a la derecha */}
-                                        {itemsForm.length > 1 && (
-                                            <button
-                                                type="button"
-                                                className="btn-eliminar-fila"
-                                                onClick={() => eliminarFila(index)}
-                                                title="Eliminar este gasto"
-                                            >
-                                                <FontAwesomeIcon icon={faTimesSquare} />
-                                            </button>
-                                        )}
+                            </div>
+                            <h2 className="titulo-boleta" style={{ marginTop: "8px" }}>
+                                {codigo ? `Modificar Boleta` : 'Nueva Boleta de Gastos'}
+                            </h2>
+                            {codigo && <p className='text-center'> <span className="badge bg-info text-dark">Editando Código: {codigo}</span></p>}
+                            {tramitesFiltrados.length > 0 ?
+                                <form onSubmit={handleGuardar} style={{ marginTop: '10px' }}>
+                                    {itemsForm.map((item, index) => (
+                                        <div className="item-gasto-row" key={index}>
+                                            {/* Indicador visual de fila */}
+                                            <div className="item-number">ITEM #{index + 1}</div>
 
-                                        <div className="row g-3">
-                                            <div className="col-md-6">
-                                                <label className="form-label-profesional">CAJA</label>
-                                                <Select
-                                                    placeholder={'Seleccione caja...'}
-                                                    onChange={(e) => actualizarFila(index, 'id_tramite', e ? e.value : '')}
-                                                    options={tramitesFiltrados}
-                                                    value={tramitesFiltrados.find(opt => String(opt.value) === String(item.id_tramite)) || null}
-                                                    // getOptionLabel={(e) => (
-                                                    //     `${e.label} | Saldo: ${localStorage.getItem('moneda')} ${Number(e.saldoDisponible || 0).toLocaleString('es-BO')}`
-                                                    // )}
-                                                    isSearchable={true}
-                                                    className="react-select-container"
-                                                    classNamePrefix="react-select"
-                                                />
-                                            </div>
+                                            {/* Botón eliminar arriba a la derecha */}
+                                            {itemsForm.length > 1 && (
+                                                <button
+                                                    type="button"
+                                                    className="btn-eliminar-fila"
+                                                    onClick={() => eliminarFila(index)}
+                                                    title="Eliminar este gasto"
+                                                >
+                                                    <FontAwesomeIcon icon={faTimesSquare} />
+                                                </button>
+                                            )}
 
-                                            <div className="col-md-3">
-                                                <label className="form-label-profesional">Monto ({localStorage.getItem('moneda')})</label>
-                                                <input
-                                                    type="number"
-                                                    className="form-control form-control-profesional text-end fw-bold"
-                                                    value={item.monto}
-                                                    placeholder="0.00"
-                                                    onChange={(e) => actualizarFila(index, 'monto', e.target.value)}
-                                                />
-                                            </div>
+                                            <div className="row g-3">
+                                                <div className="col-md-6">
+                                                    <label className="form-label-profesional">CAJA</label>
+                                                    <Select
+                                                        placeholder={'Seleccione caja...'}
+                                                        onChange={(e) => actualizarFila(index, 'id_tramite', e ? e.value : '')}
+                                                        options={tramitesFiltrados}
+                                                        value={tramitesFiltrados.find(opt => String(opt.value) === String(item.id_tramite)) || null}
+                                                        // getOptionLabel={(e) => (
+                                                        //     `${e.label} | Saldo: ${localStorage.getItem('moneda')} ${Number(e.saldoDisponible || 0).toLocaleString('es-BO')}`
+                                                        // )}
+                                                        isSearchable={true}
+                                                        className="react-select-container"
+                                                        classNamePrefix="react-select"
+                                                    />
+                                                </div>
 
-                                            <div className="col-md-3">
-                                                <label className="form-label-profesional">Fecha de Gasto</label>
-                                                <input
-                                                    type="date"
-                                                    className="form-control form-control-profesional"
-                                                    value={item.fecha}
-                                                    onChange={(e) => actualizarFila(index, 'fecha', e.target.value)}
-                                                />
-                                            </div>
+                                                <div className="col-md-3">
+                                                    <label className="form-label-profesional">Monto ({localStorage.getItem('moneda')})</label>
+                                                    <input
+                                                        type="number"
+                                                        className="form-control form-control-profesional text-end fw-bold"
+                                                        value={item.monto}
+                                                        placeholder="0.00"
+                                                        onChange={(e) => actualizarFila(index, 'monto', e.target.value)}
+                                                    />
+                                                </div>
 
-                                            <div className="col-md-12">
-                                                <label className="form-label-profesional">Concepto del Gasto</label>
-                                                <textarea
-                                                    className="form-control form-control-profesional"
-                                                    placeholder="Escriba el detalle del gasto realizado..."
-                                                    rows="2"
-                                                    value={item.detalle}
-                                                    onChange={(e) => actualizarFila(index, 'detalle', e.target.value)}
-                                                />
+                                                <div className="col-md-3">
+                                                    <label className="form-label-profesional">Fecha de Gasto</label>
+                                                    <input
+                                                        type="date"
+                                                        className="form-control form-control-profesional"
+                                                        value={item.fecha}
+                                                        onChange={(e) => actualizarFila(index, 'fecha', e.target.value)}
+                                                    />
+                                                </div>
+
+                                                <div className="col-md-12">
+                                                    <label className="form-label-profesional">Concepto del Gasto</label>
+                                                    <textarea
+                                                        className="form-control form-control-profesional"
+                                                        placeholder="Escriba el detalle del gasto realizado..."
+                                                        rows="2"
+                                                        value={item.detalle}
+                                                        onChange={(e) => actualizarFila(index, 'detalle', e.target.value)}
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                ))}
+                                    ))}
 
-                                {/* Botón de Añadir Gasto Mejorado */}
-                                <div className="mt-2 mb-4">
-                                    <button type="button" className="btn btn-add-gasto" onClick={agregarFila}>
-                                        <i className="fas fa-plus-circle me-2"></i>
-                                        Añadir otra línea de gasto
-                                    </button>
-                                </div>
-
-                                <div className="row align-items-center mt-5">
-                                    <div className="col-md-6 text-start">
-                                        <strong className="text-uppercase" style={{ letterSpacing: '1px' }}>Total Acumulado: </strong>
-                                        <span className="text-success fw-bold ms-1 fs-5">{localStorage.getItem('moneda')} {totalBoleta}</span>
-                                    </div>
-
-                                    <div className="col-md-6 text-end btn-action-container d-flex justify-content-end gap-2" style={{ padding: '5px' }}>
-                                        <button type="button" className="btn btn-cancelar-boleta" onClick={() => navigate(-1)}>
-                                            Cancelar
-                                        </button>
-
-                                        <button type="submit" className="btn btn-guardar-boleta" disabled={cargando || itemsForm.length === 0} >
-                                            <i className="fas fa-save me-2"></i> {/* Icono FontAwesome */}
-                                            {cargando ? (
-                                                <><span className="spinner-border spinner-border-sm me-2"></span>PROCESANDO...</>
-                                            ) : (
-                                                codigo ? 'ACTUALIZAR' : 'GUARDAR BOLETA'
-                                            )}
+                                    {/* Botón de Añadir Gasto Mejorado */}
+                                    <div className="mt-2 mb-4">
+                                        <button type="button" className="btn btn-add-gasto" onClick={agregarFila}>
+                                            <i className="fas fa-plus-circle me-2"></i>
+                                            Añadir otra línea de gasto
                                         </button>
                                     </div>
-                                </div>
 
-                            </form>
-                            :
-                            <div className="p-3">
-                                {[1, 2, 3].map(n => <SkeletonRow key={n} />)}
-                            </div>
-                        }
+                                    <div className="row align-items-center mt-5">
+                                        <div className="col-md-6 text-start">
+                                            <strong className="text-uppercase" style={{ letterSpacing: '1px' }}>Total Acumulado: </strong>
+                                            <span className="text-success fw-bold ms-1 fs-5">{localStorage.getItem('moneda')} {totalBoleta}</span>
+                                        </div>
+
+                                        <div className="col-md-6 text-end btn-action-container d-flex justify-content-end gap-2" style={{ padding: '5px' }}>
+                                            <button type="button" className="btn btn-cancelar-boleta" onClick={() => navigate(-1)}>
+                                                Cancelar
+                                            </button>
+
+                                            <button type="submit" className="btn btn-guardar-boleta" disabled={cargando || itemsForm.length === 0} >
+                                                <i className="fas fa-save me-2"></i> {/* Icono FontAwesome */}
+                                                {cargando ? (
+                                                    <><span className="spinner-border spinner-border-sm me-2"></span>PROCESANDO...</>
+                                                ) : (
+                                                    codigo ? 'ACTUALIZAR' : 'GUARDAR BOLETA'
+                                                )}
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                                :
+                                <div className="p-3">
+                                    {[1, 2, 3].map(n => <SkeletonRow key={n} />)}
+                                </div>
+                            }
+                        </div>
                     </div>
                 </div>
             </section>
