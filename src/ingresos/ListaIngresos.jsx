@@ -85,7 +85,7 @@ export function ListaIngresosTramite() {
 
     return (
         <>
-            <main className="container-xl mt-2" style={{ maxWidth: "100%", padding: '3px' }}>
+            <main className="container-xl mt-2" >
                 <div className="d-flex justify-content-between align-items-center mb-4 m-2">
                     <div>
                         <h3 className="text-dark fw-bold mb-0 text-titulos">Historial de Ingresos y Abonos</h3>
@@ -105,7 +105,7 @@ export function ListaIngresosTramite() {
                                 className="btn btn-success  fw-bold"
                                 onClick={() => navigate(LOCAL_URL + `/crear-ingreso/${id}`)}
                                 disabled={!id || !UUID_REGEX.test(id)}
-                            >
+                            >  
                                 <FontAwesomeIcon icon={faPlus} className="me-2" /> REGISTRAR PAGO
                             </button> : < button
                                 className="btn btn-success  fw-bold"
@@ -138,7 +138,7 @@ export function ListaIngresosTramite() {
                             </div>
                         </div>
                         <div className="col-md-6 d-flex justify-content-end">
-                            <div style={{ width: '100%', maxWidth: '300px' }}>
+                               <div style={{ width: '280px' }}>
                                 <InputUsuarioSearch
                                     name="input-search-ingreso"
                                     placeholder="Buscar abono o detalle..."

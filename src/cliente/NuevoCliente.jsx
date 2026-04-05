@@ -37,11 +37,11 @@ const NuevoCliente = () => {
     }, [id, clientesFiltrados, setNombre, setAp1, setAp2, setCi, setCelular, setDireccion, setEstado]);
 
     return (
-        <main className="login-wrapper d-flex align-items-center justify-content-center py-5" style={{ minHeight: '100vh', background: '#f8f9fa' }}>
+        <main className="login-wrapper d-flex align-items-center justify-content-center py-5" style={{ minHeight: '100vh' }}>
             <section className="container">
                 <div className="row justify-content-center">
                     <div className="col-12 col-md-11 col-lg-9 col-xl-8 animate-fade-in">
-                        <div className="login-card shadow-clinical p-4 p-md-5 bg-white" style={{   borderTop: `10px solid  #0d6efd` }} >
+                        <div className="login-card shadow-clinical p-4 p-md-5 bg-white" style={{ borderTop: `10px solid  #0d6efd` }} >
 
                             {/* Encabezado Dinámico */}
                             <div className="text-center mb-5">
@@ -75,7 +75,7 @@ const NuevoCliente = () => {
                                         estado={estados.ap2} cambiarEstado={setters.setAp2}
                                         tipo='text' name='ap2' etiqueta='Segundo Apellido'
                                         placeholder="Ej. Gomez" ExpresionRegular={INPUT.NOMBRE}
-                                        importante = {false}
+                                        importante={false}
                                     />
                                 </div>
 

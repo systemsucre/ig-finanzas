@@ -22,15 +22,15 @@ export function ListaUsuarios() {
             <main className="container-xl mt-3">
                 <div className="d-flex justify-content-between align-items-center p-2">
                     <div>
-                        <h3 className="text-dark fw-bold mb-0">Gestión de Usuarios</h3>
-                        <p className="text-muted mb-0 small text-uppercase" style={{ letterSpacing: '1px', fontSize: '0.7rem' }}>
+                        <h3 className="text-dark fw-bold mb-0 text-titulos">Gestión de Usuarios</h3>
+                        <p className="text-muted mb-0 small text-uppercase" style={{ letterSpacing: '1px', fontSize: '0.7rem', color:'white' }}>
                             Administración de personal y permisos del sistema
                         </p>
                     </div>
                   
                 </div>
 
-                <div className="panel-custom mt-3">
+                <div className="panel-custom bg-white rounded shadow-sm p-2 mx-2">
                     <div className="d-flex align-items-center mb-3 bg-white p-3 shadow-sm row m-0">
                         <div className="col-sm-6">
                             <div className="d-flex gap-2">

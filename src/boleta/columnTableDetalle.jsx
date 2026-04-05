@@ -85,7 +85,7 @@ export const ColumnsTableDetalle = [
             return (
                 <span className={`badge ${est.badge} d-flex align-items-center w-fit-content px-2 py-1`}>
                     <i className={`bi ${est.icon} me-1`}></i>
-                    {est.texto}
+                    {est.texto} 
                 </span>
             );
         }

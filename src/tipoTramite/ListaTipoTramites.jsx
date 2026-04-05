@@ -21,8 +21,8 @@ export function ListaTipoTramite() {
             <main className="container-xl mt-5">
                 <div className="d-flex justify-content-between align-items-center p-2">
                     <div>
-                        <h3 className="text-dark fw-bold mb-0">Tipos de Trámite</h3>
-                        <p className="text-muted mb-0 small text-uppercase" style={{ letterSpacing: '1px', fontSize: '0.7rem' }}>
+                        <h3 className="text-dark fw-bold mb-0 text-titulos">Tipos de Trámite</h3>
+                        <p className="text-muted mb-0 small text-uppercase" style={{ letterSpacing: '1px', fontSize: '0.7rem', color:'white'}}>
                             Configuración de categorías y servicios KR Estudios
                         </p>
                     </div>

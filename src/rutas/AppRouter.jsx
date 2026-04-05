@@ -174,7 +174,7 @@ export default function AppRouter() {
         },
 
         {
-          path: 'lista-tipo-tramites',
+          path: 'lista-tipo-caja',
           element: <Check component={ListaTipoTramite} roleRequired="admin" />,
         },
         {

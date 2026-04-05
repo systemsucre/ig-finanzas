@@ -2,18 +2,16 @@ import { useEffect } from 'react';
 import { useTramites } from '../hooks/HookCustomTramites'
 
 const CabeceraTramite = ({ id }) => {
+
     const {
         tramites,
-        cargarTramiteInfo,
     } = useTramites();
 
-    useEffect(() => {
-        cargarTramiteInfo(id)
-    }, [id])
 
     if (tramites.length === 0) return null;
 
-    const tramite = tramites[0];
+    const tramite = tramites.find(t => String(t.id) === String(id))
+    // console.log(tramite, ' tramites en cabecera')
 
     // --- LÓGICA DE BALANCE BI-COLOR ---
     const ingresos = parseFloat(tramite.total_ingresos) || 0;
@@ -27,7 +25,7 @@ const CabeceraTramite = ({ id }) => {
     const porcentajeSaldo = 100 - porcentajeGasto;
 
     return (
-        <div className="alert alert-success border-0 shadow-sm mb-4" style={{ borderRadius:'10px', backgroundColor: 'rgba(255,255,255,.7)', padding: '10px', margin: '5px', }}>
+        <div className="alert alert-success border-0 shadow-sm mb-4" style={{ borderRadius: '10px', backgroundColor: 'rgba(255,255,255,.7)', padding: '10px', margin: '5px', }}>
             <div className="row g-2 small">
                 <div className="col-md-6 col-12">
                     {/* <div>

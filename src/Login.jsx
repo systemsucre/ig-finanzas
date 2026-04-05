@@ -91,7 +91,7 @@ const HomeLogin = () => {
                 <div className="row justify-content-center">
                     <div className="col-12 col-md-8 col-lg-5 col-xl-4 animate-fade-in">
 
-                        <div className="login-card shadow-clinical p-4 p-md-5">
+                        <div className="login-card shadow-clinical p-4 p-md-5" style={{padding:'1rem'}}>
                             {/* Encabezado con Icono Animado */}
                             <div className="text-center mb-5">
                                 <div className="icon-pulse mb-3">

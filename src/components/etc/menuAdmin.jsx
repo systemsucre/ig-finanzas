@@ -76,7 +76,7 @@ const NavbarAdmin = () => {
 
             <ul className="submenu-list">
               <li><NavLink to={LOCAL_URL + "/admin/nuevo-caja"} className="submenu-link">Aperturar Caja</NavLink></li>
-              <li><NavLink to={LOCAL_URL + "/admin/lista-tramites"} className="submenu-link">Lista Cajas</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/admin/lista-cada"} className="submenu-link">Lista Cajas</NavLink></li>
             </ul>
           </div>
 
@@ -99,8 +99,8 @@ const NavbarAdmin = () => {
             <ul className="submenu-list">
               <li><NavLink to={LOCAL_URL + "/admin/nuevo-usuario"} className="submenu-link">Nuevo Usuario</NavLink></li>
               <li><NavLink to={LOCAL_URL + "/admin/lista-usuarios"} className="submenu-link">Lista Usuarios</NavLink></li>
-              <li><NavLink to={LOCAL_URL + "/admin/nuevo-tipo-tramite"} className="submenu-link">Nuevo Tipo Caja</NavLink></li>
-              <li><NavLink to={LOCAL_URL + "/admin/lista-tipo-tramites"} className="submenu-link">Lista Tipo Cajas</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/admin/nuevo-tipo-caja"} className="submenu-link">Nuevo Tipo Caja</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/admin/lista-tipo-caja"} className="submenu-link">Lista Tipo Cajas</NavLink></li>
             </ul>
           </div>
 
@@ -175,8 +175,8 @@ const NavbarAdmin = () => {
               <ul className="submenu-list">
                 <li><NavLink to={LOCAL_URL + "/admin/nuevo-usuario"} className="submenu-link">Nuevo Usuario</NavLink></li>
                 <li><NavLink to={LOCAL_URL + "/admin/lista-usuarios"} className="submenu-link">Lista Usuarios</NavLink></li>
-                <li><NavLink to={LOCAL_URL + "/admin/nuevo-tipo-tramite"} className="submenu-link">Nuevo tipo Caja</NavLink></li>
-                <li><NavLink to={LOCAL_URL + "/admin/lista-tipo-tramites"} className="submenu-link">Lista tipo Caja</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/admin/nuevo-tipo-caja"} className="submenu-link">Nuevo tipo Caja</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/admin/lista-tipo-caja"} className="submenu-link">Lista tipo Caja</NavLink></li>
               </ul>
             </div>
 

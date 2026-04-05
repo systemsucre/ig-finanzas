@@ -24,9 +24,7 @@ export function ListaClientes() {
                 <div className="d-flex justify-content-between align-items-center p-2">
                     <div>
                         <h3 className="text-dark fw-bold mb-0 text-titulos">Gestión de Clientes</h3>
-                     
-                    </div>
-
+                    </div>   
                 </div>
 
                 <div className="panel-custom bg-white rounded shadow-sm p-2 mx-2">

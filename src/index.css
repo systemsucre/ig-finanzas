@@ -431,8 +431,8 @@ button:not(:disabled),
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
   width: 100%;
-  padding-right: calc(var(--bs-gutter-x) * 0.5);
-  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  /* padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5); */
   margin-right: auto;
   margin-left: auto;
 }
@@ -669,6 +669,7 @@ button:not(:disabled),
   border: var(--bs-btn-border-width) solid var(--bs-btn-border-color);
   border-radius: var(--bs-btn-border-radius);
   background-color: var(--bs-btn-bg);
+  border-radius: 10px;
 
   transition: var(--bs-transition);
 }
@@ -954,12 +955,10 @@ button:not(:disabled),
 }
 
 .codigo-boleta {
-  background: linear-gradient(120deg, #e0e7ff 0%, #f3f4f6 100%);
   padding: 2px 8px;
   border-radius: 4px;
   font-family: 'Courier New', Courier, monospace;
-  /* O cualquier fuente mono */
-  border: 1px solid #c7d2fe;
+ 
 }
 
 .ls-1 {
@@ -1512,20 +1511,33 @@ button:not(:disabled),
 
 
 /* MENU */
-/* --- NAVEGACIÓN BASE --- */
+
+
+/* --- NAVEGACIÓN BASE (CENTRADA Y AJUSTABLE) --- */
 .nav-main {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+  top: 5px; /* Tu margen superior */
+  
+  /* EL SECRETO DEL CENTRADO CON MÁRGENES FIJOS */
+  left: 5px; 
+  right: 5px;
+  width: calc(100% - 10px); /* 100% menos la suma de los márgenes (8px + 8px) */
+  
   height: 85px;
   display: flex;
   align-items: center;
   z-index: 1000;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  background: radial-gradient(circle, #ffffff 0%, #e2e8f0 100%);
+  
+  /* ESTILO VISUAL */
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px); /* Toque Pro: desenfoca el fondo de finanzas al pasar */
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Borde sutil para resaltar */
+  
+  /* Eliminamos margin-left manual para que left/right hagan el trabajo */
+  margin: 0 auto; 
 }
-
 
 .main-content {
   /* Debe ser igual o mayor a la altura (height) de tu Navbar */
@@ -1536,7 +1548,8 @@ button:not(:disabled),
 
 .nav-scrolled {
   height: 70px;
-  background: rgba(255, 255, 255, 0.85);
+  background:transparent;   
+  /* rgba(255, 255, 255, 0.85); */
   backdrop-filter: blur(12px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   border-bottom: 1px solid rgba(0, 123, 255, 0.1);
@@ -2237,6 +2250,7 @@ thead {
 
 
 .container {
+  margin-top: 10px;
   padding: 5px;
 }
 
@@ -2247,7 +2261,7 @@ thead {
 
 /* Contenedor principal del formulario */
 .form-boleta-container {
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.7);
   border-radius: 16px;
   /* Bordes redondeados modernos */
   padding: 30px;
@@ -2414,7 +2428,7 @@ thead {
 /* Bloque de cada ítem en el bucle */
 .item-gasto-row {
   position: relative;
-  background: #fcfcfc;
+  /* background: #fcfcfc; */
   border: 1px solid #eef0f2;
   border-radius: 12px;
   padding: 20px;
