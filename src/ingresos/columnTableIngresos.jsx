@@ -48,7 +48,7 @@ export const ColumnsTableIngresos = [
                 <div className="small text-secondary">
                     <span className="fw-bold text-dark">
                         <i className="bi bi-calendar-check me-1 text-success"></i>
-                        {fecha?.split('T')[0]}
+                        {row.fecha?.split('T')[0]}
                     </span>
                     <br />
                     <span className="text-muted" style={{ fontSize: '0.7rem' }}>
@@ -59,12 +59,12 @@ export const ColumnsTableIngresos = [
         }
     },
     {
-        label: 'Monto Recibido',  
+        label: 'Monto Recibido',
         field: 'monto',
         render: (row) => (
             <div className="text-end pe-3">
                 <span className="fw-bold text-success" style={{ fontSize: '1.1rem' }}>
-                    {row.simbolo} {row.monto}  
+                    {row.simbolo} {row.monto}
                 </span>
                 <div style={{ fontSize: '0.65rem' }} className="text-muted text-uppercase fw-bold">
                     Efectivo / Transferencia

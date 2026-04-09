@@ -27,11 +27,11 @@ export const ColumnsTable = [
         label: 'Fecha Registro',
         field: 'created_at',
         render: (row) => {
-            const fecha = new Date(row.fecha?.split(" ")[0])
+            const fecha = row.fecha?.split(" ")[0]
             return (
                 <div className="small text-secondary">
                     <i className="bi bi-calendar3 me-1"></i>
-                    {fecha?.split('T')[0]}
+                    {fecha}
                     <br />
                     <span className="text-muted" style={{ fontSize: '0.7rem' }}>
                         {fecha.toLocaleTimeString('es-BO', { hour: '2-digit', minute: '2-digit' })}
