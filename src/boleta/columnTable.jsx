@@ -57,7 +57,7 @@ export const ColumnsTable = [
         render: (row) => (
             <div className="text-center">
                 <span className="fw-bold text-dark" style={{ fontSize: '1.05rem' }}>
-                    {localStorage.getItem('moneda')} {row.monto_total}
+                    {row.simbolo} {row.monto_total}
                 </span>
             </div>
         )

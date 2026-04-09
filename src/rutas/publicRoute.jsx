@@ -23,7 +23,7 @@ export default function PublicRoute({ component: Component, ...rest }) {
     return (
         auth.isLogged() ? (
             // <Navigate to={url ? LOCAL_URL+'/movimientos' : LOCAL_URL + '/login'} replace />
-            <Navigate to={LOCAL_URL + '/movimientos'} replace />
+            <Navigate to={LOCAL_URL + '/dash-1'} replace />
         ) : (
             <Component /> // RUTA PUBLICA
         )

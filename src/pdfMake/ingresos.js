@@ -79,7 +79,7 @@ const ticketIngresoIndividual = async (output, { ingreso }) => {
                             bold: true 
                         },
                         { 
-                            text: `${localStorage.getItem('moneda')} ${montoFormateado}`, 
+                            text: `${ingreso.simbolo} ${montoFormateado}`, 
                             style: 'hc', 
                             margin: [10, 5, 10, 5], 
                             fillColor: '#f8f9fa' 

@@ -53,6 +53,9 @@ import { LayoutPorRol } from "./layout";
 import { ListaHonorariosTramite } from "../honorarios/Lista";
 import FormularioHonorario from "../honorarios/FormularioHonorarios";
 import { ReportesHonorarios } from "../reportes/reportesHonorarios";
+import { ReportesMovimientos } from "../reportes/ReportesPorMovimientos";
+
+import DashboardFinanciero from "../reportes/DashboardFinanciero";
 
 
 
@@ -396,10 +399,19 @@ export default function AppRouter() {
           path: 'reportes-por-caja',
           element: <Check component={ReportesAdministracionPorTramite} roleRequired="all" />,
         },
-
+        {
+          path: 'reporte-por-movimientos',
+          element: <Check component={ReportesMovimientos} roleRequired="all" />,
+        },
         {
           path: 'reportes-consolidado',
           element: <Check component={ReportesAdministracionConsolidado} roleRequired="all" />,
+        },
+
+
+        {
+          path: 'dash-1',
+          element: <Check component={DashboardFinanciero} roleRequired="all" />,
         },
 
       ],

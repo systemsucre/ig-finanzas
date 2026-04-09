@@ -57,9 +57,10 @@ const NavbarCajero = () => {
 
         {/* Desktop Menu */}
         <ul className="nav-menu-desktop">
-          <li><NavLink to={LOCAL_URL + "/movimientos"} end className="nav-link-item">Movimientos</NavLink></li>
+          <li><NavLink to={LOCAL_URL + "/dash-1"} end className="nav-link-item">Dashboard</NavLink></li>
+          <li><NavLink to={LOCAL_URL + "/movimientos"}  className="nav-link-item">Movimientos</NavLink></li>
 
-          <div className="nav-item-container has-submenu">
+          <div className="nav-item-container has-submenu nav-link-item">
             <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
               Boletas  <FontAwesomeIcon icon={faChevronDown} />
             </NavLink>
@@ -68,15 +69,6 @@ const NavbarCajero = () => {
               <li><NavLink to={LOCAL_URL + "/boletas"} className="submenu-link">Listar Boletas</NavLink></li>
             </ul>
           </div>
-          {/* <div className="nav-item-container has-submenu">
-            <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
-              Honorarios <FontAwesomeIcon icon={faChevronDown}  />
-            </NavLink>
-            <ul className="submenu-list">
-              <li><NavLink to={LOCAL_URL + "/cajero/guardar-honorario"} className="submenu-link">Registrar Honorario</NavLink></li>
-              <li><NavLink to={LOCAL_URL + "/cajero/listar-honorarios"} className="submenu-link">Listar Honorarios</NavLink></li>
-            </ul>
-          </div> */}
           <div className="nav-item-container has-submenu">
             <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
               Empleador  <FontAwesomeIcon icon={faChevronDown} />
@@ -102,7 +94,8 @@ const NavbarCajero = () => {
             <ul className="submenu-list">
               <li><NavLink to={LOCAL_URL + "/reportes-por-caja"} className="submenu-link">Por Caja</NavLink></li>
               <li><NavLink to={LOCAL_URL + "/reportes-consolidado"} className="submenu-link">Consolidado</NavLink></li>
-              {/* <li><NavLink to={LOCAL_URL + "/cajero/reporte-honorarios"} className="submenu-link">Honorarios</NavLink></li> */}
+              <li><NavLink to={LOCAL_URL + "/reporte-por-movimientos"} className="submenu-link">Movimientos</NavLink></li>
+
 
             </ul>
           </div>
@@ -132,6 +125,8 @@ const NavbarCajero = () => {
 
           {/* Mobile Overlay Menu */}
           <div className={`nav-menu-mobile ${isMobileMenuOpen ? 'open' : ''}`}>
+            <NavLink to={LOCAL_URL + "/dash-1"} end className="mobile-link">Dashboard</NavLink>
+
             <NavLink to={LOCAL_URL + "/movimientos"} className="mobile-link">Movimientos</NavLink>
 
             <div className="nav-item-container has-submenu">
@@ -177,7 +172,9 @@ const NavbarCajero = () => {
               </NavLink>
               <ul className="submenu-list">
                 <li><NavLink to={LOCAL_URL + "/reportes-por-caja"} className="submenu-link">Por Caja</NavLink></li>
-                <li><NavLink to={LOCAL_URL + "/reporte-consolidado"} className="submenu-link">Consolidado</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/reportes-consolidado"} className="submenu-link">Consolidado</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/reporte-por-movimientos"} className="submenu-link">Movimientos</NavLink></li>
+
                 {/* <li><NavLink to={LOCAL_URL + "/cajero/reporte-honorarios"} className="submenu-link">Honorarios</NavLink></li> */}
 
               </ul>

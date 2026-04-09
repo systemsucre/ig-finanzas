@@ -59,6 +59,7 @@ const NavbarAdmin = () => {
         </NavLink>
         {/* Desktop Menu */}
         <ul className="nav-menu-desktop">
+          <li><NavLink to={LOCAL_URL + "/dash-1"} end className="nav-link-item">Dashboard</NavLink></li>
           <li><NavLink to={LOCAL_URL + "/movimientos"} end className="nav-link-item">Movimientos</NavLink></li>
           <div className="nav-item-container has-submenu">
             <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
@@ -76,7 +77,7 @@ const NavbarAdmin = () => {
 
             <ul className="submenu-list">
               <li><NavLink to={LOCAL_URL + "/admin/nuevo-caja"} className="submenu-link">Aperturar Caja</NavLink></li>
-              <li><NavLink to={LOCAL_URL + "/admin/lista-cada"} className="submenu-link">Lista Cajas</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/admin/lista-cajas"} className="submenu-link">Lista Cajas</NavLink></li>
             </ul>
           </div>
 
@@ -87,6 +88,8 @@ const NavbarAdmin = () => {
             <ul className="submenu-list">
               <li><NavLink to={LOCAL_URL + "/reportes-por-caja"} className="submenu-link">Por Caja</NavLink></li>
               <li><NavLink to={LOCAL_URL + "/reportes-consolidado"} className="submenu-link">Consolidado</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/reporte-por-movimientos"} className="submenu-link">Movimientos</NavLink></li>
+
               {/* <li><NavLink to={LOCAL_URL + "/admin/reporte-honorarios"} className="submenu-link">Honorarios</NavLink></li> */}
             </ul>
           </div>
@@ -134,6 +137,7 @@ const NavbarAdmin = () => {
 
           {/* Mobile Overlay Menu */}
           <div className={`nav-menu-mobile ${isMobileMenuOpen ? 'open' : ''}`}>
+            <NavLink to={LOCAL_URL + "/dash-1"} end className="mobile-link">Dashboard</NavLink>
             <NavLink to={LOCAL_URL + "/movimientos"} end className="mobile-link">Movimientos</NavLink>
 
             <div className="nav-item-container has-submenu">
@@ -142,7 +146,7 @@ const NavbarAdmin = () => {
               </NavLink>
               <ul className="submenu-list">
                 <li><NavLink to={LOCAL_URL + "/admin/nuevo-empleador"} className="submenu-link">Nuevo Empleador</NavLink></li>
-                <li><NavLink to={LOCAL_URL + "/admin/empleadores"} className="submenu-link">Lista Empleadores</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/admin/lista-empleadores"} className="submenu-link">Lista Empleadores</NavLink></li>
               </ul>
             </div>
             <div className="nav-item-container has-submenu">
@@ -163,6 +167,8 @@ const NavbarAdmin = () => {
               <ul className="submenu-list">
                 <li><NavLink to={LOCAL_URL + "/reportes-por-caja"} className="submenu-link">Por Caja</NavLink></li>
                 <li><NavLink to={LOCAL_URL + "/reporte-consolidado"} className="submenu-link">Consolidado</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/reporte-por-movimientos"} className="submenu-link">Movimientos</NavLink></li>
+
                 {/* <li><NavLink to={LOCAL_URL + "/admin/reporte-honorarios"} className="submenu-link">Honorarios</NavLink></li> */}
               </ul>
             </div>

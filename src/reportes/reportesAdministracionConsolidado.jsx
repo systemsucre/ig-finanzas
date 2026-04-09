@@ -2,13 +2,11 @@ import { faArrowLeft, faFileDownload, faChartLine, faFileInvoiceDollar, faWallet
 import Select from 'react-select';
 import { InputUsuarioStandard, Select1 } from "../components/input/elementos";
 import { useReportes } from "../hooks/HookCustomReportes";
-import { useNavigate } from "react-router-dom";
 import { INPUT, LOCAL_URL } from "../Auth/config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export function ReportesAdministracionConsolidado() {
-    const navigate = useNavigate();
-    const { estados, setters, reporteConsolidado } = useReportes();
+    const { estados, setters,monedas, reporteConsolidado } = useReportes();
 
     return (
         <>
@@ -65,6 +63,17 @@ export function ReportesAdministracionConsolidado() {
 
                     <div className="report-card">
                         <div className="row g-4">
+                            <div className="col-md-12">
+                                <Select1
+                                    estado={estados.moneda}
+                                    cambiarEstado={setters.setMoneda}
+                                    Name="id_moneda"
+                                    lista={monedas}
+                                    etiqueta="Moneda"
+                                    msg="Seleccione la moneda"
+                                    ExpresionRegular={INPUT.ID}
+                                />
+                            </div>
                             <div className="col-md-4">
                                 <Select1
                                     estado={estados.estado}

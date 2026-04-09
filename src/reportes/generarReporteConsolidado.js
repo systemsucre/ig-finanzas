@@ -65,16 +65,16 @@ export const generarReporteResumen = async (data, filtros, ) => {
             item.detalle,
             item.fecha_ingreso?.split('T')[0] || '-',
             // parseInt(localStorage.getItem('numRol')) === 4 ? 0.0 : costo,
-            ingresos,
+            ingresos ,
             gastos,
             saldo,
             item.estado === 1 ? 'EN CURSO' : item.estado === 2 ? 'PARALIZADO' : 'FINALIZADO'
         ]);
 
         // Formato numérico para las columnas de dinero (F, G, H, I)
-        [6, 7, 8, 9].forEach(col => {
-            row.getCell(col).numFmt = `#,##0.00 "${localStorage.getItem('moneda')}"`;
-        });
+        // [6, 7, 8, 9].forEach(col => {
+        //     row.getCell(col).numFmt = `#,##0.00 "${data[0].simbolo}"`;
+        // });
 
         // Color condicional para el saldo
         row.getCell(9).font = { color: { argb: saldo < 0 ? '943126' : '145A32' }, bold: true };
@@ -99,7 +99,7 @@ export const generarReporteResumen = async (data, filtros, ) => {
     totalRow.eachCell((cell, colNumber) => {
         if (colNumber >= 4) {
             cell.font = { bold: true, size: 12 };
-            if (colNumber >= 6 && colNumber <= 9) cell.numFmt = `#,##0.00 "${localStorage.getItem('moneda')}"`;
+            if (colNumber >= 6 && colNumber <= 9) cell.numFmt = `#,##0.00 "${data[0].simbolo}"`;
         }
     });
 

@@ -29,7 +29,7 @@ export function ListaTramites() {
                 {/* Encabezado */}
                 <div className="d-flex justify-content-between align-items-end mb-4">
                     <div>
-                        <h3 className="text-dark fw-bold mb-0 p-2">Gestión de Trámites</h3>
+                        <h3 className="text-dark fw-bold mb-0 p-2">Gestión de Cajas</h3>
                       
                     </div>
 

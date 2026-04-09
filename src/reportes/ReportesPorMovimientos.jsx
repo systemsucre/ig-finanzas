@@ -1,25 +1,22 @@
-import { faArrowLeft, faFileDownload, faChartLine, faFileInvoiceDollar, faWallet } from "@fortawesome/free-solid-svg-icons";
-import Select from 'react-select';
+import { faFileDownload, faFileInvoiceDollar, faWallet } from "@fortawesome/free-solid-svg-icons";
 import { InputUsuarioStandard, Select1 } from "../components/input/elementos";
 import { useReportes } from "../hooks/HookCustomReportes";
-import { useNavigate } from "react-router-dom";
-import { INPUT, LOCAL_URL } from "../Auth/config";
+import { INPUT } from "../Auth/config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export function ReportesAdministracionConsolidado() {
-    const navigate = useNavigate();
-    const { estados, setters, reporteConsolidado } = useReportes();
+export function ReportesMovimientos() {
+    const { estados, setters, monedas, reportesTodasSalidas, reportesTodosIngresos } = useReportes();
 
     return (
         <>
             <style>{`
-                .report-container { background: #f8f9fa; min-height: 100vh; padding: 20px; }
+                .report-container { background: #f8f9fa; min-height: 100vh; padding: 5px; }
                 .report-card { 
                     background: white; 
                     border-radius: 15px; 
                     box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
                     border: none;
-                    padding: 30px;
+                    padding: 8px;
                 }
                 .section-title {
                     border-left: 5px solid #1B4F72;
@@ -57,37 +54,29 @@ export function ReportesAdministracionConsolidado() {
                     {/* Header */}
                     <div className="d-flex justify-content-between align-items-center mb-4">
                         <div className="section-title">
-                            <h3 className="text-dark fw-bold mb-0">Reportes de Caja Consolidados</h3>
-                            <p className="text-muted mb-0 small text-uppercase">Gestión Económica de CAJA</p>
+                            <h3 className="text-dark fw-bold mb-0">Reportes de Movimientos</h3>
+                            {/* <p className="text-muted mb-0 small text-uppercase">Gestión Económica de Trámites</p> */}
                         </div>
                     </div>
 
-                    <div className=" d-flex justify-content-end gap-2 " style={{ marginBottom: '10px' }}>
-                        <button className=" btn btn-dark" style={{ marginLeft: '4px' }} onClick={() => {
-                            const path = parseInt(localStorage.getItem('numRol')) === 2 ? 'gerente/movimientos' : parseInt(localStorage.getItem('numRol')) === 3 ? 'cajero/movimientos' : parseInt(localStorage.getItem('numRol')) === 1 ? 'admin/lista-caja' : 'auxiliar/lista-caja'
-                            navigate(LOCAL_URL + "/" + path )
-                        }
-                        }>
-                            <FontAwesomeIcon icon={faArrowLeft} className="me-2" /> VOLVER
-                        </button>
-                    </div>
+
 
                     <div className="report-card">
                         <div className="row g-4">
-                            <div className="col-md-4">
+                            <div className="col-md-12">
                                 <Select1
-                                    estado={estados.estado}
-                                    cambiarEstado={setters.setEstado}
-                                    Name="estado"
-                                    lista={[{ value: 4, label: 'Todos' }, { value: 1, label: 'En curso' }, { value: 2, label: 'Paralizado' }, { value: 3, label: 'Finalizado' },]}
-                                    etiqueta="Estado Caja *"
-                                    msg="Cambiar Estado"
+                                    estado={estados.moneda}
+                                    cambiarEstado={setters.setMoneda} 
+                                    Name="id_moneda"
+                                    lista={monedas}
+                                    etiqueta="Moneda"
+                                    msg="Seleccione la moneda"
                                     ExpresionRegular={INPUT.ID}
                                 />
                             </div>
 
-                            {/* Filtros de Fecha */}
-                            <div className="col-md-4">
+                            {/* Filtros de Fecha */} 
+                            <div className="col-md-6">
                                 <InputUsuarioStandard
                                     estado={estados.desde}
                                     cambiarEstado={setters.setDesde}
@@ -97,7 +86,7 @@ export function ReportesAdministracionConsolidado() {
                                     ExpresionRegular={INPUT.FECHA}
                                 />
                             </div>
-                            <div className="col-md-4">
+                            <div className="col-md-6">
                                 <InputUsuarioStandard
                                     estado={estados.hasta}
                                     cambiarEstado={setters.setHasta}
@@ -112,12 +101,22 @@ export function ReportesAdministracionConsolidado() {
                             <div className="col-12 mt-5">
                                 <div className="p-3 bg-light rounded-3">
                                     <h6 className="text-center mb-4 text-muted text-uppercase small fw-bold">Generar Archivos Excel</h6>
+                                    <div className="row g-3">
+                                        <div className="col-md-4">
+                                            <button className="btn-report btn-salidas py-3"
+                                                onClick={() => reportesTodasSalidas(estados.desde.campo, estados.hasta.campo)}>
+                                                <FontAwesomeIcon icon={faWallet} /> Reporte Salidas
+                                            </button>
+                                        </div>
+                                        {parseInt(localStorage.getItem('numRol')) < 4 ?
+                                            <div className="col-md-4">
+                                                <button className="btn-report btn-ingresos py-3"
+                                                    onClick={() => reportesTodosIngresos(estados.desde.campo, estados.hasta.campo)}>
+                                                    <FontAwesomeIcon icon={faFileInvoiceDollar} /> Reporte Ingresos
+                                                </button>
+                                            </div>
 
-                                    <div className="col-md-12 m-auto">
-                                        <button className="btn-report btn-ingresos py-3"
-                                            onClick={() => reporteConsolidado(estados.desde.campo, estados.hasta.campo, estados.estado.campo)}>
-                                            <FontAwesomeIcon icon={faChartLine} /> Generar Reporte
-                                        </button>
+                                            : null}
                                     </div>
                                 </div>
                             </div>

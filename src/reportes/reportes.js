@@ -3,7 +3,7 @@ import ExcelJS from 'exceljs';
 export const generarReporteFinanciero = async (tipoReporte, data, tramiteInfo, filtros) => {
     const TIPO = tipoReporte?.toString().toUpperCase().trim();
     const workbook = new ExcelJS.Workbook();
-    
+
     const sheet = workbook.addWorksheet('REPORTE', {
         pageSetup: { paperSize: 9, orientation: 'landscape' },
         properties: { tabColor: { argb: '1bbec0' } }
@@ -32,12 +32,12 @@ export const generarReporteFinanciero = async (tipoReporte, data, tramiteInfo, f
     ['A3', 'A4', 'A5', 'A6', 'A7', 'D3', 'D4', 'D5', 'D7'].forEach(c => sheet.getCell(c).font = { bold: true });
     sheet.mergeCells('B5:C5');
     sheet.mergeCells('B6:E6');
-    sheet.addRow([]); 
+    sheet.addRow([]);
 
     // 3. LÓGICA DE COLUMNA CLIENTE (Habilitada para INGRESOS y GENERAL)
     const mostrarColumnaCliente = TIPO.includes('INGRESO') || TIPO === 'GENERAL';
 
-    let headers = ['N° ITEM', 'FECHA', 'DESCRIPCIÓN / DETALLE', 'MONTO ('+localStorage.getItem('moneda')+')'];
+    let headers = ['N° ITEM', 'FECHA', 'DESCRIPCIÓN / DETALLE', 'MONTO (' + tramiteInfo.simbolo + ')'];
     if (mostrarColumnaCliente) headers.push('EMPLEADOR');
     headers.push('RESPONSABLE');
 
@@ -69,7 +69,7 @@ export const generarReporteFinanciero = async (tipoReporte, data, tramiteInfo, f
             item.numero || item.id || '-',
             item.fecha?.split('T')[0] || '-',
             TIPO === 'GENERAL' ? `[${item.tipo_mov}] ${item.detalle}` : item.detalle,
-            montoActual
+             montoActual,
         ];
 
         if (mostrarColumnaCliente) {
@@ -92,13 +92,56 @@ export const generarReporteFinanciero = async (tipoReporte, data, tramiteInfo, f
         }
     });
 
-    // 5. TOTAL
-    sheet.addRow([]);
-    const totalRow = sheet.addRow(['', '', 'RESULTADO TOTAL DE ESTA LISTA', totalMonto]);
-    totalRow.getCell(3).font = { bold: true };
-    totalRow.getCell(3).alignment = { horizontal: 'right' };
-    totalRow.getCell(4).font = { bold: true, color: { argb: 'C0392B' } };
-    totalRow.getCell(4).numFmt =  `#,##0.00 "${localStorage.getItem('moneda')}"`;
+
+    sheet.addRow([]); // Fila de separación
+
+    // Creamos la fila. Dejamos vacías las celdas que vamos a combinar
+    // Columna 1: Vacía, Columna 2: Texto, Columna 3: Vacía, Columna 4: Monto, Columna 5: Vacía
+    const totalRow = sheet.addRow(['', 'RESULTADO TOTAL DE ESTA LISTA', '', totalMonto, '']);
+    const rowNum = totalRow.number;
+
+    // --- 1. COMBINAR ETIQUETA (Columnas B y C / 2 y 3) ---
+    sheet.mergeCells(`B${rowNum}:C${rowNum}`);
+    const labelCell = totalRow.getCell(2);
+    labelCell.font = { bold: true, size: 11 };
+    labelCell.alignment = { horizontal: 'right', vertical: 'middle' };
+
+    // --- 2. COMBINAR MONTO (Columnas D y E / 4 y 5) ---
+    // Esto hará que el número ocupe el espacio de dos celdas
+    sheet.mergeCells(`D${rowNum}:E${rowNum}`);
+    const amountCell = totalRow.getCell(4); // La celda principal del grupo es la 4 (D)
+
+    // --- ESTILOS DEL MONTO COMBINADO ---
+    const monedaLocal = tramiteInfo.simbolo || 'Bs.';
+    amountCell.font = {
+        bold: true,
+        color: { argb: 'FFC0392B' },
+        size: 12
+    };
+    amountCell.alignment = { horizontal: 'center', vertical: 'middle' }; // Centrado para que se note la combinación
+    amountCell.numFmt = `#,##0.00 "${monedaLocal}"`;
+
+    // --- BORDES PARA AMBAS SECCIONES COMBINADAS ---
+    const estiloBorde = {
+        top: { style: 'thin' },
+        bottom: { style: 'double' } // Doble línea de cierre contable
+    };
+
+    labelCell.border = estiloBorde;
+    amountCell.border = estiloBorde;
+
+    // Relleno de fondo sutil para que toda la franja del total destaque
+    totalRow.eachCell({ includeEmpty: true }, (cell, colNumber) => {
+        if (colNumber >= 2 && colNumber <= 5) {
+            cell.fill = {
+                type: 'pattern',
+                pattern: 'solid',
+                fgColor: { argb: 'F9F9F9' }
+            };
+        }
+    });
+
+
 
     // 6. DESCARGA
     const buffer = await workbook.xlsx.writeBuffer();

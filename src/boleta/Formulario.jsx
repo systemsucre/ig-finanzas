@@ -5,7 +5,7 @@ import { useTramites } from "../hooks/HookCustomTramites";
 import toast from 'react-hot-toast';
 import Select from 'react-select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimesSquare } from '@fortawesome/free-solid-svg-icons';
+import { faPlusCircle, faTimesSquare } from '@fortawesome/free-solid-svg-icons';
 
 export const FormularioBoleta = () => {
     const { codigo } = useParams();
@@ -32,7 +32,7 @@ export const FormularioBoleta = () => {
 
     }, [codigo]);
 
-    // 2. Sincronización de datos del backend (Modo Edición)
+    // 2. Sincronización de datos del backend (Modo Edición)  
     useEffect(() => {
         if (codigo && itemsBoleta.length > 0) {
             const itemsMapeados = itemsBoleta.map(item => ({
@@ -107,6 +107,7 @@ export const FormularioBoleta = () => {
                             {tramitesFiltrados.length > 0 ?
                                 <form onSubmit={handleGuardar} style={{ marginTop: '10px' }}>
                                     {itemsForm.map((item, index) => (
+
                                         <div className="item-gasto-row" key={index}>
                                             {/* Indicador visual de fila */}
                                             <div className="item-number">ITEM #{index + 1}</div>
@@ -124,34 +125,34 @@ export const FormularioBoleta = () => {
                                             )}
 
                                             <div className="row g-3">
-                                                <div className="col-md-6">
+                                                <div className="col-md-6 mt-3">
                                                     <label className="form-label-profesional">CAJA</label>
                                                     <Select
                                                         placeholder={'Seleccione caja...'}
                                                         onChange={(e) => actualizarFila(index, 'id_tramite', e ? e.value : '')}
                                                         options={tramitesFiltrados}
                                                         value={tramitesFiltrados.find(opt => String(opt.value) === String(item.id_tramite)) || null}
-                                                        // getOptionLabel={(e) => (
-                                                        //     `${e.label} | Saldo: ${localStorage.getItem('moneda')} ${Number(e.saldoDisponible || 0).toLocaleString('es-BO')}`
-                                                        // )}
+                                                        getOptionLabel={(e) => (
+                                                            `${e.label} ,Moneda(${e.simbolo})`
+                                                        )}
                                                         isSearchable={true}
                                                         className="react-select-container"
                                                         classNamePrefix="react-select"
                                                     />
                                                 </div>
 
-                                                <div className="col-md-3">
-                                                    <label className="form-label-profesional">Monto ({localStorage.getItem('moneda')})</label>
+                                                <div className="col-md-3 mt-3">
+                                                    <label className="form-label-profesional">Monto ({tramitesFiltrados.find(opt => String(opt.value) === String(item.id_tramite))?.simbolo||'' })</label>
                                                     <input
                                                         type="number"
                                                         className="form-control form-control-profesional text-end fw-bold"
                                                         value={item.monto}
-                                                        placeholder="0.00"
+                                                        placeholder= {tramitesFiltrados.find(opt => String(opt.value) === String(item.id_tramite))?.simbolo? tramitesFiltrados.find(opt => String(opt.value) === String(item.id_tramite))?.simbolo+" 0.00":'0.00'}
                                                         onChange={(e) => actualizarFila(index, 'monto', e.target.value)}
                                                     />
                                                 </div>
 
-                                                <div className="col-md-3">
+                                                <div className="col-md-3 mt-3">
                                                     <label className="form-label-profesional">Fecha de Gasto</label>
                                                     <input
                                                         type="date"
@@ -178,7 +179,7 @@ export const FormularioBoleta = () => {
                                     {/* Botón de Añadir Gasto Mejorado */}
                                     <div className="mt-2 mb-4">
                                         <button type="button" className="btn btn-add-gasto" onClick={agregarFila}>
-                                            <i className="fas fa-plus-circle me-2"></i>
+                                            <FontAwesomeIcon icon={faPlusCircle} />
                                             Añadir otra línea de gasto
                                         </button>
                                     </div>

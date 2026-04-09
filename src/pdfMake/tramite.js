@@ -80,7 +80,7 @@ const reporteConsolidoTramite = async (output, { tramite, ingresos = [], salidas
                         { text: i?.cliente_nombre || 's/e', fontSize: 8 },
                         { text: new Date(i.fecha_ingreso).toLocaleDateString(), fontSize: 8 },
                         { text: i.detalle || '', fontSize: 8 },
-                        { text: `${localStorage.getItem('moneda')} ${cleanNum(i.monto).toFixed(2)}`, alignment: 'right', fontSize: 8 }
+                        { text: `${tramite.simbolo} ${cleanNum(i.monto).toFixed(2)}`, alignment: 'right', fontSize: 8 }
                     ]),
                     // FILA DE TOTALES
                     [
@@ -92,7 +92,7 @@ const reporteConsolidoTramite = async (output, { tramite, ingresos = [], salidas
                             fontSize: 9
                         }, {}, {}, {},
                         {
-                            text: `${localStorage.getItem('moneda')} ${totalIngresos.toFixed(2)}`,
+                            text: `${tramite.simbolo} ${totalIngresos.toFixed(2)}`,
                             bold: true,
                             alignment: 'right',
                             fillColor: '#f1f1f1',
@@ -126,11 +126,11 @@ const reporteConsolidoTramite = async (output, { tramite, ingresos = [], salidas
 
                         { text: s.fecha_solicitud ? new Date(s.fecha_solicitud).toLocaleDateString() : '-', fontSize: 9 },
                         { text: s.detalle || '', fontSize: 9 },
-                        { text: `${localStorage.getItem('moneda')} ${cleanNum(s.monto).toFixed(2)}`, alignment: 'right', fontSize: 9 }
+                        { text: `${tramite.simbolo} ${cleanNum(s.monto).toFixed(2)}`, alignment: 'right', fontSize: 9 }
                     ]),
                     [
                         { text: 'TOTAL EGRESOS', colSpan: 4, bold: true, alignment: 'right', fontSize: 10 }, {}, {}, {},
-                        { text: `${localStorage.getItem('moneda')} ${totalSalidas.toFixed(2)}`, bold: true, alignment: 'right', fillColor: '#f1f1f1', fontSize: 10 }
+                        { text: `${tramite.simbolo} ${totalSalidas.toFixed(2)}`, bold: true, alignment: 'right', fillColor: '#f1f1f1', fontSize: 10 }
                     ]
                 ]
             },
@@ -147,7 +147,7 @@ const reporteConsolidoTramite = async (output, { tramite, ingresos = [], salidas
                     [
                         { text: 'SALDO NETO (DISPONIBLE)', alignment: 'right', bold: true, fontSize: 12 },
                         {
-                            text: `${localStorage.getItem('moneda')} ${saldo.toFixed(2)}`,
+                            text: `${tramite.simbolo} ${saldo.toFixed(2)}`,
                             style: 'hc',
                             fillColor: saldo >= 0 ? '#d4edda' : '#f8d7da',
                             color: saldo >= 0 ? '#155724' : '#721c24'

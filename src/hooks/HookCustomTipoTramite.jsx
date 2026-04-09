@@ -57,7 +57,7 @@ export const useTipoTramite = () => {
                 if (!idParaEditar) setTipoTramite({ campo: '', valido: null });
 
                 setTimeout(() => {
-                    navigate(LOCAL_URL + '/admin/lista-tipo-tramites');
+                    navigate(LOCAL_URL + '/admin/lista-tipo-caja'); 
                 }, 1000);
             },
             setCargando

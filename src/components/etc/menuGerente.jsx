@@ -57,6 +57,8 @@ const NavbarGerente = () => {
         </NavLink>
         {/* Desktop Menu */}
         <ul className="nav-menu-desktop">
+                    <li><NavLink to={LOCAL_URL + "/dash-1"} end className="nav-link-item">Dashboard</NavLink></li>
+          
           <li><NavLink to={LOCAL_URL + "/movimientos"} end className="nav-link-item">Movimientos</NavLink></li>
 
           <div className="nav-item-container has-submenu">
@@ -104,6 +106,8 @@ const NavbarGerente = () => {
             <ul className="submenu-list">
               <li><NavLink to={LOCAL_URL + "/reportes-por-tramite"} className="submenu-link">Por Cajas</NavLink></li>
               <li><NavLink to={LOCAL_URL + "/reportes-consolidado"} className="submenu-link">Consolidado</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/reporte-por-movimientos"} className="submenu-link">Movimientos</NavLink></li>
+
               {/* <li><NavLink to={LOCAL_URL + "/gerente/reportes-honorarios"} className="submenu-link">Honorarios</NavLink></li> */}
 
             </ul>
@@ -136,6 +140,7 @@ const NavbarGerente = () => {
 
           {/* Mobile Overlay Menu */}
           <div className={`nav-menu-mobile ${isMobileMenuOpen ? 'open' : ''}`}>
+            <NavLink to={LOCAL_URL + "/dash-1"} end className="mobile-link">Dashboard</NavLink>
 
             <NavLink to={LOCAL_URL + "/movimientos"} className="mobile-link">Movimientos</NavLink>
 
@@ -185,6 +190,8 @@ const NavbarGerente = () => {
               <ul className="submenu-list">
                 <li><NavLink to={LOCAL_URL + "/reportes-por-caja"} className="submenu-link">Por Caja</NavLink></li>
                 <li><NavLink to={LOCAL_URL + "/reportes-consolidado"} className="submenu-link">Consolidado</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/reporte-por-movimientos"} className="submenu-link">Movimientos</NavLink></li>
+
                 {/* <li><NavLink to={LOCAL_URL + "/gerente/reporte-honorarios"} className="submenu-link">honorarios</NavLink></li> */}
 
               </ul>

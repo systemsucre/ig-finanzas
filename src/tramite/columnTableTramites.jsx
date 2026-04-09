@@ -12,6 +12,12 @@ export const ColumnsTableTramites = [
             <div> <span className="fw-bold text-primary">{row.codigo}</span></div>
     },
     {
+        label: 'MONEDA',
+        field: 'sinmbolo',
+        render: (row) =>
+            <div> <span className="badge bg-light text-dark border">{row.simbolo}</span></div>
+    },
+    {
         label: 'Detalle',
         field: 'detalle',
         render: (row) =>
@@ -80,7 +86,7 @@ export const ColumnsTableTramites = [
             return (
                 <div className="text-end">
                     <div className="fw-bold text-dark">
-                        GASTOS : {localStorage.getItem('moneda')} {row.total_gastos}
+                        GASTOS : {row.simbolo} {row.total_gastos}
                     </div>
                     {/* {localStorage.getItem('numRol') != 4 ?
                         <div className=" fw-bold text-muted text-success italic" style={{ fontSize: '0.7rem' }}>
@@ -88,10 +94,10 @@ export const ColumnsTableTramites = [
                         </div>
                         : null} */}
                     <div className=" fw-bold text-muted text-success italic" style={{ fontSize: '0.7rem' }}>
-                        MONTO ABONADO  {localStorage.getItem('moneda')} {row.total_ingresos}
+                        MONTO ABONADO  {row.simbolo} {row.total_ingresos} 
                     </div>
                     <div className={`fw-bold ${row.saldoDisponible > 2000 ? `text-dark` : row.saldoDisponible > 1000 ? `text-warning` : `text-danger`}`} style={{ fontSize: '0.7rem' }}>
-                        SALDO DISP.  {localStorage.getItem('moneda')} {row.saldoDisponible}
+                        SALDO DISP.  {row.simbolo} {row.saldoDisponible}
                     </div>
                 </div>
             );

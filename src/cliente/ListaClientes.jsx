@@ -5,9 +5,10 @@ import { InputUsuarioSearch } from "../components/input/elementos";
 import { useClientes } from "../hooks/HookCustomCliente"; // Importamos el hook de clientes
 import { LOCAL_URL } from '../Auth/config';
 import { columns } from "./columnTable"; // Importamos las columnas de clientes
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function ListaClientes() {
+       const navigate = useNavigate();
     // 1. Extraemos la lógica del Custom Hook de Clientes
     const {
         clientesFiltrados,
@@ -24,7 +25,7 @@ export function ListaClientes() {
                 <div className="d-flex justify-content-between align-items-center p-2">
                     <div>
                         <h3 className="text-dark fw-bold mb-0 text-titulos">Gestión de Clientes</h3>
-                    </div>   
+                    </div>
                 </div>
 
                 <div className="panel-custom bg-white rounded shadow-sm p-2 mx-2">
@@ -52,10 +53,17 @@ export function ListaClientes() {
                         progressPending={cargando}
                         funciones={[
                             {
-                                boton: null,
+                                boton: (id) => {
+                                        let path = null;
+                                        const rol = parseInt(localStorage.getItem('numRol'))
+                                        if (rol === 1) path = 'admin'
+                                        if (rol === 2) path = 'gerente'
+                                        if (rol === 3) path = 'cajero'
+                                        navigate(`${LOCAL_URL}/${path}/editar-cliente/${id}`)
+                                    },
                                 className: 'btn btn-info py-1 px-3 x-small',
                                 icono: faEdit,
-                                enlace: LOCAL_URL + '/admin/editar-empleador',
+                                enlace: null,
                                 label: 'Editar'
                             },
                             {

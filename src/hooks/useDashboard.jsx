@@ -3,51 +3,76 @@ import { URL } from "../Auth/config";
 import { start } from '../service/service';
 
 export const useDashboard = () => {
+    const [moneda, setMoneda] = useState({
+        campo: parseInt(localStorage.getItem('moneda')) || 1,
+        valido: 'true'
+    });
+
+    const [cajas, setCajas] = useState([]);
     const [stats, setStats] = useState([]);
+    const [monedas, setMonedas] = useState([]);
     const [kpis, setKpis] = useState({ ingresos: 0, gastos: 0, saldo: 0, activos: 0 });
     const [cargando, setCargando] = useState(true);
 
-    const cargarDashboard = useCallback(async () => {
+    // FUNCIÓN ÚNICA DE CARGA
+    const cargarDatos = useCallback(async (idMonedaManual) => {
+        // alert(idMonedaManual, 'moneda desde select')
+        const idMoneda = idMonedaManual || moneda.campo;
+        if (!idMoneda) return;
+
         setCargando(true);
         try {
-            // 1. Obtener KPIs
-            const dataConsolidada = await start(`${URL}comuun/stats-mensuales`, { 
-                desde: new Date(new Date().getFullYear(), 0, 1),
-                estado: 4 
-            });
+            // 1. Obtener datos (KPIs y Stats en una o dos llamadas según tu API)
+            // Agregamos el parámetro de moneda a AMBAS llamadas para evitar el undefined
+            const data = await start(`${URL}comuun/stats-mensuales`, { moneda: idMoneda });
 
-            if (dataConsolidada) {
-                const totales = dataConsolidada.reduce((acc, curr) => ({
-                    ingresos: acc.ingresos + (parseFloat(curr.total_ingresos) || 0),
-                    gastos: acc.gastos + (parseFloat(curr.total_gastos) || 0),
-                    activos: acc.activos + (curr.estado === 1 ? 1 : 0)
-                }), { ingresos: 0, gastos: 0, activos: 0 });
+            if (data && Array.isArray(data)) {
+                // Calcular KPIs
+                const totales = data.reduce((acc, curr) => ({
+                    ingresos: acc.ingresos + (parseFloat(curr.ingresos) || 0),
+                    gastos: acc.gastos + (parseFloat(curr.gastos) || 0),
+                }), { ingresos: 0, gastos: 0 });
 
-                setKpis({ ...totales, saldo: totales.ingresos - totales.gastos });
-            }
-            
-            // 2. Cargar Stats Mensuales (Los datos que me mostraste)
-            const mensual = await start(`${URL}comuun/stats-mensuales`); 
-            
-            if (mensual) {
+                setKpis({
+                    ...totales,
+                    saldo: totales.ingresos - totales.gastos,
+                    activos: 0 // Ajustar según tu lógica de 'estado' si viene en el array
+                });
+
+                // Formatear Stats para el gráfico
                 const nombresMeses = ["", "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
-                
-                const datosLimpios = mensual.map(item => ({
-                    mes: nombresMeses[item.mes], // Convierte 3 en "Mar"
-                    ingresos: parseFloat(item.ingresos), // Convierte "34219500" en número
-                    gastos: parseFloat(item.gastos)    // Convierte "96444.00" en número
+                const datosLimpios = data.map(item => ({
+                    mes: nombresMeses[item.mes] || 'S/N',
+                    ingresos: parseFloat(item.ingresos) || 0,
+                    gastos: parseFloat(item.gastos) || 0
                 }));
-                
                 setStats(datosLimpios);
             }
         } catch (error) {
-            console.error("Error cargando dashboard:", error);
+            console.error("Error en dashboard:", error);
         } finally {
             setCargando(false);
         }
+    }, [moneda.campo]);
+
+    const listarConfiguracion = async () => {
+        const [resMonedas, resCajas] = await Promise.all([
+            start(`${URL}comuun/listar-monedas`),
+            start(`${URL}comuun/listar-cajas`)
+        ]);
+        if (resMonedas) setMonedas(resMonedas);
+        if (resCajas) setCajas(resCajas);
+    };
+
+    // Solo se ejecuta al montar el componente
+    useEffect(() => {
+        listarConfiguracion();
+        cargarDatos();
     }, []);
 
-    useEffect(() => { cargarDashboard(); }, [cargarDashboard]);
-
-    return { kpis, stats, cargando, refresh: cargarDashboard };
+    return {
+        kpis, stats, moneda, setMoneda,
+        monedas, cajas, cargando,
+        refresh: cargarDatos // Esta función ahora acepta un ID opcional
+    };
 };

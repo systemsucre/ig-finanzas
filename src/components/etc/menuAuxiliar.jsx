@@ -56,6 +56,9 @@ const NavbarAuxiliar = () => {
 
         {/* Desktop Menu */}
         <ul className="nav-menu-desktop">
+
+          <li><NavLink to={LOCAL_URL + "/dash-1"} end className="nav-link-item">Dashboard</NavLink></li>
+
           <li><NavLink to={LOCAL_URL + "/movimientos"} end className="nav-link-item">Movimientos</NavLink></li>
 
           <div className="nav-item-container has-submenu">
@@ -76,6 +79,8 @@ const NavbarAuxiliar = () => {
             <ul className="submenu-list">
               <li><NavLink to={LOCAL_URL + "/reportes-por-caja"} className="submenu-link">Por Caja</NavLink></li>
               <li><NavLink to={LOCAL_URL + "/reportes-consolidado"} className="submenu-link">Consolidado</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/reporte-por-movimientos"} className="submenu-link">Movimientos</NavLink></li>
+
             </ul>
           </div>
 
@@ -108,6 +113,7 @@ const NavbarAuxiliar = () => {
 
           {/* Mobile Overlay Menu */}
           <div className={`nav-menu-mobile ${isMobileMenuOpen ? 'open' : ''}`}>
+            <NavLink to={LOCAL_URL + "/dash-1"} end className="mobile-link">Dashboard</NavLink>
 
             <NavLink to={LOCAL_URL + "/movimientos"} className="mobile-link">Movimientos</NavLink>
 
@@ -127,6 +133,8 @@ const NavbarAuxiliar = () => {
               <ul className="submenu-list">
                 <li><NavLink to={LOCAL_URL + "/reportes-por-caja"} className="submenu-link">Por Caja</NavLink></li>
                 <li><NavLink to={LOCAL_URL + "/reporte-consolidado"} className="submenu-link">Consolidado</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/reporte-por-movimientos"} className="submenu-link">Movimientos</NavLink></li>
+
               </ul>
             </div>
 

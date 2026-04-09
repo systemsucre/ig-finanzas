@@ -20,10 +20,12 @@ export const useTramites = () => {
     const [costo, setCosto] = useState({ campo: 0.00, valido: 'true' });
     const [codigo, setCodigo] = useState({ campo: '', valido: null });
     const [otros, setOtros] = useState({ campo: '', valido: 'true' });
+    const [moneda, setMoneda] = useState({ campo: parseInt(localStorage.getItem('moneda'))||null, valido: parseInt(localStorage.getItem('moneda'))||null });
     const [estado, setEstado] = useState({ campo: 1, valido: 'true' }); // 1: En curso, 0: Paralizado
 
     // --- ESTADOS PARA LISTADO Y AUXILIARES ---
     const [tramites, setTramites] = useState([]);
+    const [monedas, setMonedas] = useState([]);
     const [tramitesFiltrados, setTramitesFiltrados] = useState([]);
     const [cargando, setCargando] = useState(false);
 
@@ -62,6 +64,8 @@ export const useTramites = () => {
     const cargarAuxiliares = useCallback(async () => {
         const resTipos = await start(`${URL}tramites/listar-tipo-tramites`);
         if (resTipos) setListaTipos(resTipos);
+        const resMonedas = await start(`${URL}tramites/listar-monedas`);
+        if (resMonedas) setMonedas(resMonedas);
     }, []);
 
 
@@ -91,6 +95,7 @@ export const useTramites = () => {
             setCosto({ campo: res.costo, valido: 'true' });
             setDetalle({ campo: res.detalle || '', valido: 'true' });
             setOtros({ campo: res.otros || '', valido: 'true' });
+            setMoneda({ campo: res.id_moneda, valido: 'true' });
         }
         setCargando(false);
     };
@@ -107,6 +112,7 @@ export const useTramites = () => {
             costo: costo.campo,
             otros: otros.campo,
             estado: estado.campo,
+            id_moneda: moneda.campo,
             usuario: 1, // ID usuario sesión
             fecha_: new Date().toISOString(), // Para created_at o modified_at,
             datosAuditoriaExtra
@@ -228,7 +234,7 @@ export const useTramites = () => {
     const handleSearch = (e) => {
         const busqueda = e.target.value.toLowerCase();
         if (!busqueda) {
-            setTramitesFiltrados(tramites);  
+            setTramitesFiltrados(tramites);
             return;
         }
 
@@ -253,15 +259,15 @@ export const useTramites = () => {
 
     return {
         tramitesFiltrados, tramites,
-        auxiliares: { listaTipos },
+        auxiliares: { listaTipos,monedas },
         handleSearch,
         cargando,
         estados: {
-            idTipoTramite, fechaIngreso, codigo,
+            idTipoTramite, fechaIngreso, codigo,moneda,
             fechaFinalizacion, plazo, detalle, costo, otros, estado
         },
         setters: {
-            setIdTipoTramite, setFechaIngreso,
+            setIdTipoTramite, setFechaIngreso,setMoneda,
             setFechaFinalizacion, setPlazo, setDetalle, setCosto, setOtros, setEstado
         },
         guardarTramite,

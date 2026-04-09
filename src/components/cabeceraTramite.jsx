@@ -11,7 +11,7 @@ const CabeceraTramite = ({ id }) => {
     if (tramites.length === 0) return null;
 
     const tramite = tramites.find(t => String(t.id) === String(id))
-    // console.log(tramite, ' tramites en cabecera')
+    // console.log(tramite.simbolo, ' tramites en cabecera')
 
     // --- LÓGICA DE BALANCE BI-COLOR ---
     const ingresos = parseFloat(tramite.total_ingresos) || 0;
@@ -54,14 +54,14 @@ const CabeceraTramite = ({ id }) => {
                 <div className="col-md-6 col-12 text-md-end">
                     {localStorage.getItem('numRol') < 4 && (
                         <div className="text-muted" style={{ fontSize: '0.75rem' }}>
-                            ABONO TOTAL RECIBIDO: <span className="fw-bold">{localStorage.getItem('moneda')} {ingresos.toFixed(2)}</span>
+                            ABONO TOTAL RECIBIDO: <span className="fw-bold">{tramite.simbolo} {ingresos.toFixed(2)}</span>
                         </div>
                     )}
                     <div className="text-muted" style={{ fontSize: '0.75rem' }}>
-                        TOTAL GASTADO: <span className="text-danger">{localStorage.getItem('moneda')} {gastos.toFixed(2)}</span>
+                        TOTAL GASTADO: <span className="text-danger">{tramite.simbolo} {gastos.toFixed(2)}</span>
                     </div>
                     <div className="fw-bold text-dark">
-                        SALDO DISPONIBLE: <span className="text-success">{localStorage.getItem('moneda')} {saldo.toFixed(2)}</span>
+                        SALDO DISPONIBLE: <span className="text-success">{tramite.simbolo} {saldo.toFixed(2)}</span>
                     </div>
 
                 </div>
@@ -102,7 +102,7 @@ const CabeceraTramite = ({ id }) => {
 
 
                     <div className="d-flex justify-content-between mt-1" style={{ fontSize: '0.65rem', color: '#6c757d' }}>
-                        <span>Total Abonado:    </span> <span>{localStorage.getItem('moneda') + ingresos.toFixed(2)}</span>
+                        <span>Total Abonado:    </span> <span>{tramite.simbolo + ingresos.toFixed(2)}</span>
                     </div>
                 </div>
                 : null}
