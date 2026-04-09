@@ -59,15 +59,15 @@ export const ColumnsTableIngresos = [
         }
     },
     {
-        label: 'Monto Recibido',  
+        label: 'Monto Recibido',
         field: 'monto',
         render: (row) => (
             <div className="text-end pe-3">
                 <span className="fw-bold text-success" style={{ fontSize: '1.1rem' }}>
-                    {row.simbolo} {row.monto}  
+                    {row.simbolo} {row.monto}
                 </span>
                 <div style={{ fontSize: '0.65rem' }} className="text-muted text-uppercase fw-bold">
-                    Efectivo / Transferencia
+                    {row.tipo}
                 </div>
             </div>
         )

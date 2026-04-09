@@ -24,6 +24,18 @@ export const ColumnsTable = [
     },
 
     {
+        label: 'NUMERO BOLETA',
+        field: 'numero',
+        render: (row) => (
+            <div style={{ minWidth: '10px' }}>
+                <div className="fw-bold text-dark text-center ">{row.numero_boleta}</div>
+
+            </div>
+        ),
+        sortable: true,
+    },
+
+    {
         label: 'Fecha Registro',
         field: 'created_at',
         render: (row) => {

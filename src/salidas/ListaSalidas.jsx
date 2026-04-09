@@ -27,7 +27,6 @@ export function ListaSalidas() {
         handleSearch,
         listarSalidas,
         exportPDf
-
     } = UseCustomSalidas();
 
     useEffect(() => {
@@ -35,7 +34,7 @@ export function ListaSalidas() {
             if (!UUID_REGEX.test(id)) {
                 navigate(LOCAL_URL + "/auxiliar/lista-tramites");
                 return;
-            }
+            }    
             listarSalidas(id);
         }
     }, [id]);
@@ -91,7 +90,7 @@ export function ListaSalidas() {
                             <div style={{ width: '100%', maxWidth: '300px', paddingRight: '10px' }}>
                                 <InputUsuarioSearch
                                     name="input-search-salida"
-                                    placeholder="codigo boleta, detalle"
+                                    placeholder="codigo/numero boleta, detalle"
                                     onChange={handleSearch}
                                 />
                             </div>

@@ -20,7 +20,7 @@ export const useTramites = () => {
     const [costo, setCosto] = useState({ campo: 0.00, valido: 'true' });
     const [codigo, setCodigo] = useState({ campo: '', valido: null });
     const [otros, setOtros] = useState({ campo: '', valido: 'true' });
-    const [moneda, setMoneda] = useState({ campo: parseInt(localStorage.getItem('moneda'))||null, valido: parseInt(localStorage.getItem('moneda'))||null });
+    const [moneda, setMoneda] = useState({ campo: parseInt(localStorage.getItem('moneda')) || null, valido: parseInt(localStorage.getItem('moneda')) || null });
     const [estado, setEstado] = useState({ campo: 1, valido: 'true' }); // 1: En curso, 0: Paralizado
 
     // --- ESTADOS PARA LISTADO Y AUXILIARES ---
@@ -55,6 +55,7 @@ export const useTramites = () => {
             setTramites(res);
             const activos = res.filter(t => t.eliminado > 0 && t.estado === 1);
             // setTramites(activos);
+            // console.log(activos, ' tramites activos')
             setTramitesFiltrados(activos);
         }
         setCargando(false);
@@ -255,19 +256,21 @@ export const useTramites = () => {
         listarTramites();
         if (localStorage.getItem('numRol') != 4)
             cargarAuxiliares();
-    }, [listarTramites, cargarAuxiliares]);
+
+        // listarTramites, cargarAuxiliares
+    }, []);
 
     return {
         tramitesFiltrados, tramites,
-        auxiliares: { listaTipos,monedas },
+        auxiliares: { listaTipos, monedas },
         handleSearch,
         cargando,
         estados: {
-            idTipoTramite, fechaIngreso, codigo,moneda,
+            idTipoTramite, fechaIngreso, codigo, moneda,
             fechaFinalizacion, plazo, detalle, costo, otros, estado
         },
         setters: {
-            setIdTipoTramite, setFechaIngreso,setMoneda,
+            setIdTipoTramite, setFechaIngreso, setMoneda,
             setFechaFinalizacion, setPlazo, setDetalle, setCosto, setOtros, setEstado
         },
         guardarTramite,

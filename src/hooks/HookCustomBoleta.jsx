@@ -38,7 +38,7 @@ export const UseCustomBoletas = () => {
 
     const consultarDetalleBoleta = async (codigo_boleta) => {
         setCargando(true);
-        const res = await start(`${URL}boletas/detalles`, { codigo_boleta });  
+        const res = await start(`${URL}boletas/detalles`, { codigo_boleta });
         if (res) {
             setItemsBoleta(res);
         }
@@ -173,15 +173,27 @@ export const UseCustomBoletas = () => {
         ejecutarAccionBoleta(codigo, 'eliminar', "¿Eliminar permanentemente esta boleta?", "Eliminando...");
 
     // 6. BUSCADOR POR NÚMERO DE BOLETA O DETALLE
+
     const handleSearchBoleta = (e) => {
         const busqueda = e.target.value.toLowerCase();
-        const filtrados = boletas.filter(b =>
-            b.numero_boleta?.includes(busqueda) ||
-            b.codigo_boleta?.toString().toLowerCase().includes(busqueda) ||
-            b.solicitado_por?.toString().toLowerCase().includes(busqueda)
-        );
+
+        const filtrados = boletas.filter(s => {
+            // Convertimos todo a String y usamos el operador || "" para evitar errores con nulos
+            const codigo = String(s.codigo_boleta || "").toLowerCase();
+            const numero = String(s.numero_boleta || "").toLowerCase();
+            const detalle = (s.solicitado_po || "").toLowerCase();
+
+            return (
+                codigo.includes(busqueda) ||
+                numero.includes(busqueda) ||
+                detalle.includes(busqueda)
+            );
+        });
+
         setBoletasFiltradas(filtrados);
     };
+
+
 
     return {
         boletas,

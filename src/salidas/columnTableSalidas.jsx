@@ -25,6 +25,20 @@ export const ColumnsTableSalidas = [
         ),
         sortable: true,
     },
+
+    {
+        label: 'NUMERO BOLETA',
+        field: 'numero_boleta',
+        render: (row) => (
+            <div style={{ minWidth: '10px' }}>
+                <div className="fw-bold text-dark ">{row.numero_boleta}</div>
+                {/* <small className="text-muted" style={{ fontSize: '0.7rem' }}>
+                    Registrado por: {row.usuario_nombre}
+                </small> */}
+            </div>
+        ),
+        sortable: true,
+    },
     {
         label: 'Detalle ítem',
         field: 'detalle',
@@ -62,7 +76,7 @@ export const ColumnsTableSalidas = [
         render: (row) => (
             <div className="text-center">
                 <span className="fw-bold text-dark" style={{ fontSize: '1.05rem' }}>
-                     {localStorage.getItem('moneda')} {row.monto}
+                    {row.simbolo} {row.monto}
                 </span>
             </div>
         )
