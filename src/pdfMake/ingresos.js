@@ -2,14 +2,12 @@ import createPdf from './base.js';
 
 const ticketIngresoIndividual = async (output, { ingreso }) => {
     // ingreso: es el objeto que viene de tu consulta SQL 'listarPorTramite'
-    
+
     const montoFormateado = ingreso?.monto ? parseFloat(ingreso.monto).toFixed(2) : "0.00";
     const numeroIngreso = ingreso?.numero || "S/N";
-    
+
     // Usamos fecha_ingreso de la tabla ingresos
-    const fechaIngreso = ingreso?.fecha_ingreso
-        ? new Date(ingreso.fecha_ingreso).toLocaleDateString()
-        : "---";
+    const fechaIngreso = ingreso?.fecha_ingreso?.split('T')[0] || "---";
 
     const content = [
         // Encabezado
@@ -72,17 +70,17 @@ const ticketIngresoIndividual = async (output, { ingreso }) => {
                 widths: ['*', 'auto'],
                 body: [
                     [
-                        { 
-                            text: 'TOTAL RECIBIDO', 
-                            alignment: 'right', 
-                            margin: [0, 5, 0, 5], 
-                            bold: true 
+                        {
+                            text: 'TOTAL RECIBIDO',
+                            alignment: 'right',
+                            margin: [0, 5, 0, 5],
+                            bold: true
                         },
-                        { 
-                            text: `${ingreso.simbolo} ${montoFormateado}`, 
-                            style: 'hc', 
-                            margin: [10, 5, 10, 5], 
-                            fillColor: '#f8f9fa' 
+                        {
+                            text: `${ingreso.simbolo} ${montoFormateado}`,
+                            style: 'hc',
+                            margin: [10, 5, 10, 5],
+                            fillColor: '#f8f9fa'
                         }
                     ]
                 ]

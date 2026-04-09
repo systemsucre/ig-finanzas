@@ -78,7 +78,7 @@ const reporteConsolidoTramite = async (output, { tramite, ingresos = [], salidas
                     ...ingresos.map(i => [
                         { text: i.numero || '-', fontSize: 8 },
                         { text: i?.cliente_nombre || 's/e', fontSize: 8 },
-                        { text: new Date(i.fecha_ingreso).toLocaleDateString(), fontSize: 8 },
+                        { text: i.fecha_ingreso?.split('T')[0], fontSize: 8 },
                         { text: i.detalle || '', fontSize: 8 },
                         { text: `${tramite.simbolo} ${cleanNum(i.monto).toFixed(2)}`, alignment: 'right', fontSize: 8 }
                     ]),
@@ -124,7 +124,7 @@ const reporteConsolidoTramite = async (output, { tramite, ingresos = [], salidas
                         { text: s.numero || '-', fontSize: 8 },
                         { text: s.codigo_boleta || '-', fontSize: 8 },
 
-                        { text: s.fecha_solicitud ? new Date(s.fecha_solicitud).toLocaleDateString() : '-', fontSize: 9 },
+                        { text: s.fecha_solicitud?.split('T')[0] || '-', fontSize: 9 },
                         { text: s.detalle || '', fontSize: 9 },
                         { text: `${tramite.simbolo} ${cleanNum(s.monto).toFixed(2)}`, alignment: 'right', fontSize: 9 }
                     ]),

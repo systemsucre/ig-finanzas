@@ -31,7 +31,7 @@ export const ColumnsTable = [
             return (
                 <div className="small text-secondary">
                     <i className="bi bi-calendar3 me-1"></i>
-                    {fecha.toLocaleDateString('es-BO')}
+                    {fecha?.split('T')[0]}
                     <br />
                     <span className="text-muted" style={{ fontSize: '0.7rem' }}>
                         {fecha.toLocaleTimeString('es-BO', { hour: '2-digit', minute: '2-digit' })}
