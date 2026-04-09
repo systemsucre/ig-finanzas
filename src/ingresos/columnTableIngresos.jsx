@@ -44,16 +44,15 @@ export const ColumnsTableIngresos = [
         field: 'fecha_ingreso',
         render: (row) => {
             // Manejamos la fecha de ingreso definida en el formulario
-            const fecha = new Date(row.fecha_ingreso);
             return (
                 <div className="small text-secondary">
                     <span className="fw-bold text-dark">
                         <i className="bi bi-calendar-check me-1 text-success"></i>
-                        {fecha.toLocaleDateString('es-BO')}
+                        {fecha?.split('T')[0]}
                     </span>
                     <br />
                     <span className="text-muted" style={{ fontSize: '0.7rem' }}>
-                        Registro: {new Date(row.created_at).toLocaleDateString('es-BO')}
+                        Registro: {row.created_at?.split('T')[0]}
                     </span>
                 </div>
             );
