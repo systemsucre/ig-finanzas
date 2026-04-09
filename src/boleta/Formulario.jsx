@@ -142,12 +142,12 @@ export const FormularioBoleta = () => {
                                                 </div>
 
                                                 <div className="col-md-3 mt-3">
-                                                    <label className="form-label-profesional">Monto ({tramitesFiltrados.find(opt => String(opt.value) === String(item.id_tramite))?.simbolo||'' })</label>
+                                                    <label className="form-label-profesional">Monto ({tramitesFiltrados.find(opt => String(opt.value) === String(item.id_tramite))?.simbolo || ''})</label>
                                                     <input
                                                         type="number"
                                                         className="form-control form-control-profesional text-end fw-bold"
                                                         value={item.monto}
-                                                        placeholder= {tramitesFiltrados.find(opt => String(opt.value) === String(item.id_tramite))?.simbolo? tramitesFiltrados.find(opt => String(opt.value) === String(item.id_tramite))?.simbolo+" 0.00":'0.00'}
+                                                        placeholder={tramitesFiltrados.find(opt => String(opt.value) === String(item.id_tramite))?.simbolo ? tramitesFiltrados.find(opt => String(opt.value) === String(item.id_tramite))?.simbolo + " 0.00" : '0.00'}
                                                         onChange={(e) => actualizarFila(index, 'monto', e.target.value)}
                                                     />
                                                 </div>
@@ -187,7 +187,7 @@ export const FormularioBoleta = () => {
                                     <div className="row align-items-center mt-5">
                                         <div className="col-md-6 text-start">
                                             <strong className="text-uppercase" style={{ letterSpacing: '1px' }}>Total Acumulado: </strong>
-                                            <span className="text-success fw-bold ms-1 fs-5">{tramitesFiltrados.find(opt => String(opt.value) === String(item.id_tramite))?.simbolo} {totalBoleta}</span>
+                                            <span className="text-success fw-bold ms-1 fs-5"> {totalBoleta}</span>
                                         </div>
 
                                         <div className="col-md-6 text-end btn-action-container d-flex justify-content-end gap-2" style={{ padding: '5px' }}>
