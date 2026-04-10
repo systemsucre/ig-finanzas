@@ -304,7 +304,7 @@ const ComponenteInputUserDisabled = ({ estado, etiqueta, placeholder, tabla = fa
         value={estado.campo || ""}
         valido={estado.valido}
         placeholder={placeholder}
-        toUpperCase
+        // toUpperCase
         disabled
       />
     </FormGroup>

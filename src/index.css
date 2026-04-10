@@ -1775,7 +1775,7 @@ button:not(:disabled),
 }
 
 /* --- RESPONSIVE --- */
-@media (max-width: 1200px) {
+@media (max-width: 1250px) {
   .nav-menu-desktop {
     display: none;
   }

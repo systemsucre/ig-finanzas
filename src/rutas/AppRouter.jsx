@@ -56,6 +56,8 @@ import { ReportesHonorarios } from "../reportes/reportesHonorarios";
 import { ReportesMovimientos } from "../reportes/ReportesPorMovimientos";
 
 import DashboardFinanciero from "../reportes/DashboardFinanciero";
+import MiContrasena from "../usuario/miContrasena";
+import MiPerfil from "../usuario/miPerfil";
 
 
 
@@ -412,6 +414,16 @@ export default function AppRouter() {
         {
           path: 'dash-1',
           element: <Check component={DashboardFinanciero} roleRequired="all" />,
+        },
+
+        {
+          path: 'perfil',
+          element: <Check component={MiPerfil} roleRequired="all" />,
+        },
+
+        {
+          path: 'c-pass',
+          element: <Check component={MiContrasena} roleRequired="all" />,
         },
 
       ],

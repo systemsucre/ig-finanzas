@@ -57,8 +57,8 @@ const NavbarGerente = () => {
         </NavLink>
         {/* Desktop Menu */}
         <ul className="nav-menu-desktop">
-                    <li><NavLink to={LOCAL_URL + "/dash-1"} end className="nav-link-item">Dashboard</NavLink></li>
-          
+          <li><NavLink to={LOCAL_URL + "/dash-1"} end className="nav-link-item">Dashboard</NavLink></li>
+
           <li><NavLink to={LOCAL_URL + "/movimientos"} end className="nav-link-item">Movimientos</NavLink></li>
 
           <div className="nav-item-container has-submenu">
@@ -106,7 +106,7 @@ const NavbarGerente = () => {
             <ul className="submenu-list">
               <li><NavLink to={LOCAL_URL + "/reportes-por-tramite"} className="submenu-link">Por Cajas</NavLink></li>
               <li><NavLink to={LOCAL_URL + "/reportes-consolidado"} className="submenu-link">Consolidado</NavLink></li>
-                <li><NavLink to={LOCAL_URL + "/reporte-por-movimientos"} className="submenu-link">Movimientos</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/reporte-por-movimientos"} className="submenu-link">Movimientos</NavLink></li>
 
               {/* <li><NavLink to={LOCAL_URL + "/gerente/reportes-honorarios"} className="submenu-link">Honorarios</NavLink></li> */}
 
@@ -197,7 +197,9 @@ const NavbarGerente = () => {
               </ul>
             </div>
             <div className="nav-item-container has-submenu mt-4" >
-              <NavLink to={'#'} className="mobile-link profile" onClick={(e) => e.preventDefault()} >Mi Perfil</NavLink>
+              <NavLink to={'#'} className="mobile-link profile" onClick={(e) => e.preventDefault()} >
+                <FontAwesomeIcon icon={faUser} />
+              </NavLink>
               <ul className="submenu-list mt-4">
                 <li><NavLink to={"#"} className="submenu-link" onClick={() => auth.logout()}> <FontAwesomeIcon icon={faPowerOff} /> Cerrar sesion </NavLink> </li>
                 <li><NavLink to={LOCAL_URL + "/perfil"} className="submenu-link"> <FontAwesomeIcon icon={faUser} />  Perfil</NavLink></li>

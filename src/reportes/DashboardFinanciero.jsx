@@ -62,7 +62,7 @@ const DashboardFinanciero = () => {
                         <Select
                             placeholder='Busque por código caja...'
                             onChange={(e) => {
-                                if (e) {
+                                if (e) {  
                                     const nuevoId = e.value;
                                     setMoneda({ campo: nuevoId, valido: 'true' });
                                     localStorage.setItem('moneda', nuevoId);

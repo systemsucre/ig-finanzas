@@ -2,11 +2,13 @@
 import md5 from 'md5';
 import { useEffect, useState } from 'react';
 
-import { INPUT, LOCAL_URL, URL } from "./Auth/config";
+import { INPUT, URL } from "./Auth/config";
 import useAuth from "./Auth/useAuth";
 import { ComponenteCheck, InputUsuarioStandard } from './components/input/elementos';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUnlock } from '@fortawesome/free-solid-svg-icons';
 
 const HomeLogin = () => {
 
@@ -91,7 +93,7 @@ const HomeLogin = () => {
                 <div className="row justify-content-center">
                     <div className="col-12 col-md-8 col-lg-5 col-xl-4 animate-fade-in">
 
-                        <div className="login-card shadow-clinical p-4 p-md-5" style={{padding:'1rem'}}>
+                        <div className="login-card shadow-clinical p-4 p-md-5" style={{ padding: '1rem' }}>
                             {/* Encabezado con Icono Animado */}
                             <div className="text-center mb-5">
                                 <div className="icon-pulse mb-3">
@@ -145,7 +147,7 @@ const HomeLogin = () => {
                                 </div>
 
                                 <button type="submit" className="btn btn-dark-clinical w-100 py-3 shadow-sm" >
-                                    Iniciar Sesión
+                                    Iniciar Sesión <FontAwesomeIcon icon={faUnlock} />
                                 </button>
                             </form>
 

@@ -112,7 +112,7 @@ const NavbarCajero = () => {
 
 
 
-        {window.innerWidth < 1200 ? <>
+        {window.innerWidth < 1250 ? <>
           {/* Mobile Toggle */}
           <button
             className={`nav-toggle ${isMobileMenuOpen ? 'active' : ''}`}
@@ -181,7 +181,9 @@ const NavbarCajero = () => {
             </div>
 
             <div className="nav-item-container has-submenu mt-4" >
-              <NavLink to={'#'} className="mobile-link profile" onClick={(e) => e.preventDefault()} >Mi Perfil</NavLink>
+              <NavLink to={'#'} className="mobile-link profile" onClick={(e) => e.preventDefault()} >
+                <FontAwesomeIcon icon={faUser} />  
+              </NavLink>
               <ul className="submenu-list mt-4">
                 <li><NavLink to={"#"} className="submenu-link" onClick={() => auth.logout()}> <FontAwesomeIcon icon={faPowerOff} /> Cerrar sesion </NavLink> </li>
                 <li><NavLink to={LOCAL_URL + "/perfil"} className="submenu-link"> <FontAwesomeIcon icon={faUser} />  Perfil</NavLink></li>
