@@ -362,7 +362,7 @@ const DashboardFinanciero = () => {
                                     />
                                     <YAxis />
                                     <Tooltip
-                                        formatter={(value) => `Bs. ${value.toFixed(2)}`}
+                                        formatter={(value) => `${monedas.find(e => e.value === moneda.campo)?.simbolo} ${value.toFixed(2)}`}
                                         contentStyle={{ backgroundColor: '#fff', borderRadius: '10px' }}
                                     />
                                     <Legend />
@@ -447,7 +447,7 @@ const DashboardFinanciero = () => {
 
                             <div className="py-4" >
                                 <h1 className="text-white display-5 fw-bold" style={{ fontSize: '2rem' }}>
-                                    Bs. {sueldoSeguro?.toFixed(2)}
+                                    {monedas.find(e => e.value === moneda.campo)?.simbolo} {sueldoSeguro?.toFixed(2)}
                                 </h1>
                                 <p className="text-white">Flujo positivo seguro al 80%</p>
                             </div>
@@ -459,7 +459,7 @@ const DashboardFinanciero = () => {
                         <div className="card border-0 shadow-sm p-4 text-center" style={{ borderRadius: '15px', height: '100%' }}>
                             <div className="py-4" >
                                 <h1 className="text-white display-5 fw-bold" style={{ fontSize: '1.4rem' }}>
-                                    {`Margen de error: ± Bs. ${errorEstandar?.toFixed(2)}`}
+                                    {`Margen de error: ± ${monedas.find(e => e.value === moneda.campo)?.simbolo}. ${errorEstandar?.toFixed(2)}`}
                                 </h1>
                                 <p className="text-white">Error Estandar</p>
                             </div>
