@@ -20,7 +20,7 @@ const MiPerfil = () => {
             <section className="container">
                 <div className="row justify-content-center">
                     <div className="col-12 col-md-10 col-lg-8 col-xl-7 animate-fade-in">
-                        <div className="login-card shadow-clinical p-4 p-md-5 bg-white" style={{ borderTop: `10px #0d6efd` }} >
+                        <div className="login-card shadow-clinical p-4 p-md-5 bg-white" style={{ borderTop: `10px #0d6efd`, marginTop:'2rem' }} >
 
                             <div className="text-center mb-5">
                                 <div className="icon-pulse mb-3">
@@ -29,7 +29,7 @@ const MiPerfil = () => {
                                 <h2 className="h3 fw-black text-primary text-uppercase m-0">
                                     {'Actualizar mi Perfil'}
                                 </h2>
-                                <p className="text-muted small">KR Estudios</p>
+                                <p className="text-muted small">{localStorage.getItem('entidad')}</p>
                             </div>
 
                             <div className="row g-3" >
@@ -91,7 +91,7 @@ const MiPerfil = () => {
                                 </div>
                                 <div className="col-12 p-3 text-end">
                                     <button type="submit" className={`btn ${` btn-success`} px-5 py-2 fw-bold shadow-sm`} onClick={(e) => actualizar(e)}>
-                                        {'ACTUALIZAR MIS DATOS'}
+                                        {'ACTUALIZAR '}
                                     </button>
                                      <button type="submit"  className={`btn ${` btn-danger`} px-5 py-2 fw-bold shadow-sm`} style={{ marginLeft: '5px' }} onClick={(e) => navigate(`${LOCAL_URL + '/c-pass'}`)} >
                                         <FontAwesomeIcon icon={faUnlock} />

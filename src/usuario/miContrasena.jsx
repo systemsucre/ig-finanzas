@@ -3,7 +3,7 @@ import { ComponenteInputUserDisabled, InputUsuarioStandard, Select1 } from '../c
 import { useMiPerfil } from "../hooks/HookCustomMiPerfil";
 
 const MiContrasena = () => {
-    
+
 
     // 2. Extraemos el objeto setters del Hook
     const {
@@ -17,16 +17,16 @@ const MiContrasena = () => {
             <section className="container">
                 <div className="row justify-content-center">
                     <div className="col-12 col-md-10 col-lg-8 col-xl-7 animate-fade-in">
-                        <div className="login-card shadow-clinical p-4 p-md-5 bg-white" style={{ borderTop: `10px #0d6efd` }} >
+                        <div className="login-card shadow-clinical p-4 p-md-5 bg-white" style={{ borderTop: `10px #0d6efd`, marginTop: '2rem' }} >
 
                             <div className="text-center mb-5">
                                 <div className="icon-pulse mb-3">
                                     <span className="fs-1">{'👤'}</span>
                                 </div>
                                 <h2 className="h3 fw-black text-primary text-uppercase m-0">
-                                    {'Actualizar mi Perfil'}
+                                    {'Cambiar mi contraseña'}
                                 </h2>
-                                <p className="text-muted small">Mi Perfil - KR Estudios</p>
+                                <p className="text-muted small">{localStorage.getItem('entidad')}</p>
                             </div>
 
                             <div className="row g-3" >
@@ -67,9 +67,9 @@ const MiContrasena = () => {
                                 </div>
                                 <div className="col-12 p-3 text-end">
                                     <button type="submit" className={`btn ${` btn-success`} px-5 py-2 fw-bold shadow-sm`} onClick={(e) => recet_(e)}>
-                                        {'ACTUALIZAR MIS DATOS'}
+                                        {'ACTUALIZAR CONTRASEÑA'}
                                     </button>
-                                   
+
                                 </div>
                             </div>
                         </div>

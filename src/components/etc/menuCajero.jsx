@@ -182,7 +182,7 @@ const NavbarCajero = () => {
 
             <div className="nav-item-container has-submenu mt-4" >
               <NavLink to={'#'} className="mobile-link profile" onClick={(e) => e.preventDefault()} >
-                <FontAwesomeIcon icon={faUser} />  
+                <FontAwesomeIcon icon={faUser} />  Mi Perfil
               </NavLink>
               <ul className="submenu-list mt-4">
                 <li><NavLink to={"#"} className="submenu-link" onClick={() => auth.logout()}> <FontAwesomeIcon icon={faPowerOff} /> Cerrar sesion </NavLink> </li>
