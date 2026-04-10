@@ -1781,7 +1781,7 @@ button:not(:disabled),
   }
 
   .nav-toggle {
-    display: flex;
+    display: flex;  
   }
 
   .nav-menu-mobile {
@@ -2060,6 +2060,9 @@ thead {
     width: 100%;
   }
 }
+.mb-4{
+  margin-bottom: 1.5rem;
+}
 
 /* Reemplazo profesional para .card */
 .panel-custom {
@@ -2072,6 +2075,8 @@ thead {
   padding: 0;
   height: 100%;
   margin: 4px;
+  padding-bottom: 4rem;
+
   transition: all 0.3s ease;
 }
 

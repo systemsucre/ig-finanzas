@@ -33,6 +33,7 @@
     "react-select": "^5.10.2",
     "reactstrap": "^9.2.3",
     "recharts": "^3.7.0",
+    "simple-statistics": "^7.8.9",
     "styled-components": "^6.3.8",
     "topojson-client": "^3.1.0"
   },
