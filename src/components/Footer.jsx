@@ -12,7 +12,7 @@ export function Footer() {
 
                 {/* Línea principal de Copyright */}
                 <p className="text-white fs-5 mb-1 fw-bold">
-                    © 2026 Copyright MAURI
+                    © 2026 Copyright CONTAMAX
                 </p>
 
                 {/* Derechos reservados */}

@@ -99,7 +99,7 @@ const HomeLogin = () => {
                                 <div className="icon-pulse mb-3">
                                     <span className="fs-1">💳</span>
                                 </div>
-                                <h2 className="h3 fw-black text-primary text-uppercase m-0">IGFinanzas</h2>
+                                <h2 className="h3 fw-black text-primary text-uppercase m-0">CONTAMAX</h2>
                                 <p className="text-muted small">Gestión de gastos</p>
                             </div>
 
@@ -143,7 +143,7 @@ const HomeLogin = () => {
                                         onChange={handleCheckboxChange}
                                         etiqueta='Recordarme'
                                     />
-                                    <a href="#" className="text-primary fw-bold">¿Olvidó su clave?</a>
+                                    <a  href="https://wa.me/+59171166513" className="text-primary fw-bold">¿Olvidó su clave?</a>
                                 </div>
 
                                 <button type="submit" className="btn btn-dark-clinical w-100 py-3 shadow-sm" >
@@ -154,7 +154,7 @@ const HomeLogin = () => {
                             <div className="mt-5 text-center border-top pt-4">
                                 <p className="small text-muted mb-0">
                                     ¿Nuevo en el sistema? <br />
-                                    <a href="#" className="text-primary fw-bold text-decoration-none">Solicitar acceso al administrador</a>
+                                    <a href="https://wa.me/+59171166513" className="text-primary fw-bold text-decoration-none" target='_black'>Solicitar acceso al administrador</a>
                                 </p>
                             </div>
                         </div>

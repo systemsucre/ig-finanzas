@@ -42,9 +42,9 @@ const NuevoTipoTramite = () => {
                                     <span className="fs-1">{id ? '📂' : '🆕'}</span>
                                 </div>
                                 <h2 className="h3 fw-black text-primary text-uppercase m-0">
-                                    {id ? 'Actualizar Trámite' : 'Nuevo Tipo de Trámite'}
+                                    {id ? 'Actualizar Tipo de Tramite' : 'Nuevo Tipo de Caja'}
                                 </h2>
-                                <p className="text-muted small">Configuración de Servicios - KR Estudios</p>
+                                <p className="text-muted small">Configuración de cajas - {localStorage.getItem('entidad')} </p>
                             </div>
 
                             <form className="row g-3" onSubmit={(e) => guardarTramite(e, id ? id : null)}>

@@ -11,7 +11,7 @@ export const FormularioBoleta = () => {
     const { codigo } = useParams();
     const navigate = useNavigate();
 
-    const { listarTramitesActivos, tramitesFiltrados } = useTramites();
+    const { listarTramitesActivos, tramitesFiltradosBoleta } = useTramites();
     const {
         guardarBoletaMasiva,
         actualizarBoletaMasiva,
@@ -104,7 +104,7 @@ export const FormularioBoleta = () => {
                                 {codigo ? `Modificar Boleta` : 'Nueva Boleta de Gastos'}
                             </h2>
                             {codigo && <p className='text-center'> <span className="badge bg-info text-dark">Editando Código: {codigo}</span></p>}
-                            {tramitesFiltrados.length > 0 ?
+                            {tramitesFiltradosBoleta.length > 0 ?
                                 <form onSubmit={handleGuardar} style={{ marginTop: '10px' }}>
                                     {itemsForm.map((item, index) => (
 
@@ -130,8 +130,8 @@ export const FormularioBoleta = () => {
                                                     <Select
                                                         placeholder={'Seleccione caja...'}
                                                         onChange={(e) => actualizarFila(index, 'id_tramite', e ? e.value : '')}
-                                                        options={tramitesFiltrados}
-                                                        value={tramitesFiltrados.find(opt => String(opt.value) === String(item.id_tramite)) || null}
+                                                        options={tramitesFiltradosBoleta}
+                                                        value={tramitesFiltradosBoleta.find(opt => String(opt.value) === String(item.id_tramite)) || null}
                                                         getOptionLabel={(e) => (
                                                             `${e.label} ,Moneda(${e.simbolo})`
                                                         )}
@@ -142,12 +142,12 @@ export const FormularioBoleta = () => {
                                                 </div>
 
                                                 <div className="col-md-3 mt-3">
-                                                    <label className="form-label-profesional">Monto ({tramitesFiltrados.find(opt => String(opt.value) === String(item.id_tramite))?.simbolo || ''})</label>
+                                                    <label className="form-label-profesional">Monto ({tramitesFiltradosBoleta.find(opt => String(opt.value) === String(item.id_tramite))?.simbolo || ''})</label>
                                                     <input
                                                         type="number"
                                                         className="form-control form-control-profesional text-end fw-bold"
                                                         value={item.monto}
-                                                        placeholder={tramitesFiltrados.find(opt => String(opt.value) === String(item.id_tramite))?.simbolo ? tramitesFiltrados.find(opt => String(opt.value) === String(item.id_tramite))?.simbolo + " 0.00" : '0.00'}
+                                                        placeholder={tramitesFiltradosBoleta.find(opt => String(opt.value) === String(item.id_tramite))?.simbolo ? tramitesFiltradosBoleta.find(opt => String(opt.value) === String(item.id_tramite))?.simbolo + " 0.00" : '0.00'}
                                                         onChange={(e) => actualizarFila(index, 'monto', e.target.value)}
                                                     />
                                                 </div>

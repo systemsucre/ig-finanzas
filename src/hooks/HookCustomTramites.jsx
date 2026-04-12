@@ -27,6 +27,7 @@ export const useTramites = () => {
     const [tramites, setTramites] = useState([]);
     const [monedas, setMonedas] = useState([]);
     const [tramitesFiltrados, setTramitesFiltrados] = useState([]);
+    const [tramitesFiltradosBoleta, setTramitesFiltradosBoleta] = useState([]);
     const [cargando, setCargando] = useState(false);
 
     // Listas para los Selects del formulario
@@ -56,7 +57,7 @@ export const useTramites = () => {
             const activos = res.filter(t => t.eliminado > 0 && t.estado === 1);
             // setTramites(activos);
             // console.log(activos, ' tramites activos')
-            setTramitesFiltrados(activos);
+            setTramitesFiltradosBoleta(activos);
         }
         setCargando(false);
     };
@@ -234,7 +235,7 @@ export const useTramites = () => {
     // 5. BÚSQUEDA FILTRADA
     const handleSearch = (e) => {
         const busqueda = e.target.value.toLowerCase();
-        if (!busqueda) {
+        if (!busqueda) {    
             setTramitesFiltrados(tramites);
             return;
         }
@@ -261,7 +262,7 @@ export const useTramites = () => {
     }, []);
 
     return {
-        tramitesFiltrados, tramites,
+        tramitesFiltrados, tramites,tramitesFiltradosBoleta,
         auxiliares: { listaTipos, monedas },
         handleSearch,
         cargando,
