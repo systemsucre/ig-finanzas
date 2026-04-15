@@ -132,7 +132,7 @@ const NavbarAuxiliar = () => {
               </NavLink>
               <ul className="submenu-list">
                 <li><NavLink to={LOCAL_URL + "/reportes-por-caja"} className="submenu-link">Por Caja</NavLink></li>
-                <li><NavLink to={LOCAL_URL + "/reporte-consolidado"} className="submenu-link">Consolidado</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/reportes-consolidado"} className="submenu-link">Consolidado</NavLink></li>
                 <li><NavLink to={LOCAL_URL + "/reporte-por-movimientos"} className="submenu-link">Movimientos</NavLink></li>
 
               </ul>

@@ -255,7 +255,7 @@ export const useReportes = () => {
     };
 
     const listarMonedas = async () => {
-        const resMonedas = await start(`${URL}tramites/listar-monedas`);
+        const resMonedas = await start(`${URL}comuun/listar-monedas`);
         if (resMonedas) setMonedas(resMonedas);
     }
     useEffect(() => {
