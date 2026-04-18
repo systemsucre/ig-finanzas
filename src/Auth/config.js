@@ -2,6 +2,7 @@
 const URL = 'https://ig-finanzas-bc.vercel.app/'
 // 
 // const URL = 'http://localhost:3005/'
+// const URL = 'http://localhost:8080/'
 const LOCAL_URL = '/ig'
 
 
@@ -16,7 +17,7 @@ const INPUT = {
     // CI: /^\d{7,10}$/,
     CI: /^\d{5,15}((\s|[-])\d{1}[A-Z]{1})?$/,
     DIRECCION: /^[a-zA-ZÑñ /0-9-@.,+]{1,100}$/,
-    TELEFONO: /^[+0-9 ]{2,18}$/, // /^\d{5,15}$/, // 7 a 10 numeros.
+    TELEFONO: /^[+0-9 ]{2,18}$/, // /^\d{5,15}$/, // 7 a 10 numeros.s
     CUENTA: /^\d{5,30}$/, // 7 a 10 numeros.
     ID: /^\d{1,10}$/, // id de redes, 1 a 4 digitos
     CODIGO_TRAMITE:/^[A-Z]{3}-\d{8}$/,

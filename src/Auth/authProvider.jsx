@@ -37,12 +37,28 @@ const AuthProvider = ({ children }) => {
     user,
     logout: async () => {
       const token = localStorage.getItem("token"); // 1. Recuperar token primero
-      console.log("Token a eliminar:", token);
+      // console.log("Token a eliminar:", token);
 
       try {
         if (token) {
           // 2. Intentar el borrado en BD (Asegúrate que URL no termine en /)
-          axios.post(`${URL}logout`, { token: token });
+
+          axios.interceptors.request.use(
+            (config) => {
+              const token = localStorage.getItem("token");
+
+              if (token) {
+
+                config.headers.Authorization = `Bearer ${token}`;
+              }
+              return config;
+            },
+            (error) => {
+              return Promise.reject(error);
+            }
+          );
+
+          axios.post(`${URL}logout`, { token: token }); 
         }
       } catch (error) {
         console.error("No se pudo borrar en BD, procediendo a limpiar local", error);
@@ -51,7 +67,7 @@ const AuthProvider = ({ children }) => {
       // 3. LIMPIAR DESPUÉS de la petición
       setUser(null);
       localStorage.clear();
-      window.location.href = LOCAL_URL + "/login";
+      // window.location.href = LOCAL_URL + "/login";
     },
 
     login(ok) {

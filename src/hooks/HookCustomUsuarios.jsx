@@ -34,6 +34,8 @@ export const useUsuarios = (usuarioEdit = null) => {
         const endpoint = `${URL}usuarios/listar-roles`; // Ajusta a tu ruta de backend
         const res = await start(endpoint, null,);
         if (res) {
+        // console.log(res, ' lista de ROLES')
+
             setRoles(res);
         }
     }, []);
@@ -44,7 +46,7 @@ export const useUsuarios = (usuarioEdit = null) => {
         const endpoint = `${URL}usuarios/listar`;
         // Enviamos un objeto vacío o un límite si tu backend lo requiere
         const res = await start(endpoint, { usuario: 100 });
-
+        // console.log(res, ' lista de usuarios')
         if (res) {
             setUsuarios(res);
             setUsuariosFiltrados(res);
@@ -99,7 +101,7 @@ export const useUsuarios = (usuarioEdit = null) => {
     // 3. ELIMINAR
     const eliminarUsuario = async (id, estado) => {
         if (window.confirm("¿Estás seguro de eliminar este usuario?")) {
-            const res = await start(`${URL}usuarios/cambiar-estado`, { id, estado, datosAuditoriaExtra}, "Eliminando...");
+            const res = await start(`${URL}usuarios/cambiar-estado`, { id, estado, datosAuditoriaExtra }, "Eliminando...");
             if (res) {
                 // setUsuarios(prev => prev.filter(u => u.id !== id));
                 // setUsuariosFiltrados(prev => prev.filter(u => u.id !== id));
@@ -111,7 +113,7 @@ export const useUsuarios = (usuarioEdit = null) => {
 
     // 4. BUSQUEDA FILTRADA
     const handleSearch = (e) => {
-        const busqueda = e.target.value.toLowerCase(); 
+        const busqueda = e.target.value.toLowerCase();
         if (!busqueda) {
             setUsuariosFiltrados(usuarios);
             return;

@@ -58,11 +58,11 @@ const HomeLogin = () => {
             axios.get(URL, {
                 params: {
                     'intel': usuario.campo,
-                    'power': '8989389892njn89h8982njcnjnskdjcn909u09j3oi2n3i2093j2kn3k23',
+                    // 'power': '8989389892njn89h8982njcnjnskdjcn909u09j3oi2n3i2093j2kn3k23',
                     'viva': md5(password.campo),
-                    'tigo': 'juana',
-                    'start': 'garay',
-                    'pass': '7827huin3jnud3978EEy9uhn88839j8nld32d23d32dcdsvDFDEewrer',
+                    // 'tigo': 'juana',
+                    // 'start': 'garay',
+                    // 'pass': '7827huin3jnud3978EEy9uhn88839j8nld32d23d32dcdsvDFDEewrer',
                 }
             }).then(json => {
 
