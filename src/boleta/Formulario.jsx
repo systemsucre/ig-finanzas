@@ -88,6 +88,42 @@ export const FormularioBoleta = () => {
 
     const totalBoleta = itemsForm.reduce((acc, curr) => acc + (Number(curr.monto) || 0), 0);
 
+    const customStyles = {
+        control: (provided, state) => ({
+            ...provided,
+            backgroundColor: '#ffffff', // Fondo blanco limpio
+            borderColor: state.isFocused ? '#3b82f6' : '#d1d5db', // Azul suave al enfocar
+            boxShadow: state.isFocused ? '0 0 0 1px #3b82f6' : 'none',
+            borderRadius: '8px',
+            padding: '4px',
+            '&:hover': { borderColor: '#3b82f6' }
+        }),
+        menu: (provided) => ({
+            ...provided,
+            borderRadius: '8px',
+            boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+            marginTop: '8px'
+        }),
+        option: (provided, state) => ({
+            ...provided,
+            padding: '12px 16px', // Más espacio para que no se sienta apretado
+            backgroundColor: state.isSelected
+                ? '#eff6ff'
+                : state.isFocused
+                    ? '#f3f4f6'
+                    : 'transparent',
+            color: state.isSelected ? '#1d4ed8' : '#374151',
+            fontWeight: state.isSelected ? '600' : '400',
+            cursor: 'pointer',
+            transition: 'all 0.2s ease',
+            borderBottom: '1px solid #f3f4f6', // Separador sutil entre items
+            '&:active': { backgroundColor: '#dbeafe' }
+        }),
+        placeholder: (provided) => ({
+            ...provided,
+            color: '#9ca3af'
+        })
+    };
     return (
         <main className="login-wrapper d-flex align-items-center justify-content-center py-5" style={{ minHeight: '100vh' }}>
             <section className="container">
@@ -105,7 +141,15 @@ export const FormularioBoleta = () => {
                             </h2>
                             {codigo && <p className='text-center'> <span className="badge bg-info text-dark">Editando Código: {codigo}</span></p>}
                             {tramitesFiltradosBoleta.length > 0 ?
-                                <form onSubmit={handleGuardar} style={{ marginTop: '10px' }}>
+                                <form
+                                    onSubmit={handleGuardar}
+                                    onKeyDown={(e) => {
+                                        // Si la tecla es "Enter", evitamos que el formulario se envíe
+                                        if (e.key === 'Enter') {
+                                            e.preventDefault();
+                                        }
+                                    }}
+                                    style={{ marginTop: '10px' }}>
                                     {itemsForm.map((item, index) => (
 
                                         <div className="item-gasto-row" key={index}>
@@ -127,14 +171,17 @@ export const FormularioBoleta = () => {
                                             <div className="row g-3">
                                                 <div className="col-md-6 mt-3">
                                                     <label className="form-label-profesional">CAJA</label>
+
+
                                                     <Select
+                                                        styles={customStyles}
                                                         placeholder={'Seleccione caja...'}
-                                                        onChange={(e) => actualizarFila(index, 'id_tramite', e ? e.value : '')}
                                                         options={tramitesFiltradosBoleta}
+                                                        components={{ Option: CustomOption }} // <-- Aquí aplicamos la personalización
+                                                        getOptionLabel={(e) => `${e.label} (${e.simbolo})`} // Limpio para el buscador
+                                                        getOptionValue={(e) => e.value}
+                                                        onChange={(e) => actualizarFila(index, 'id_tramite', e ? e.value : '')}
                                                         value={tramitesFiltradosBoleta.find(opt => String(opt.value) === String(item.id_tramite)) || null}
-                                                        getOptionLabel={(e) => (
-                                                            `${e.label} ,Moneda(${e.simbolo})`
-                                                        )}
                                                         isSearchable={true}
                                                         className="react-select-container"
                                                         classNamePrefix="react-select"
@@ -232,3 +279,27 @@ export const SkeletonRow = () => {
         </div>
     );
 };
+
+
+import { components } from 'react-select';
+
+// Este componente personaliza cómo se ve cada fila en la lista desplegable
+const CustomOption = (props) => {
+    return (
+        <components.Option {...props}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div>
+                    <strong>{props.data.label}</strong>
+                    <div style={{ fontSize: '0.8em', color: '#666' }}>
+                        Moneda: {props.data.simbolo} | Saldo: {props.data.saldoDisponible}
+                    </div>
+                    <div style={{ fontSize: '0.55em', color: '#444444', fontWeight: '100' }}>
+                        {props.data.detalle.substring(0, 40)}
+                    </div>
+                </div>
+
+            </div>
+        </components.Option>
+    );
+};
+

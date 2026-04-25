@@ -56,8 +56,8 @@ export const useTramites = () => {
             setTramites(res);
             const activos = res.filter(t => t.eliminado > 0 && t.estado === 1);
             // setTramites(activos);
-            // console.log(activos, ' tramites activos')
-            setTramitesFiltradosBoleta(activos);
+            // console.log(activos, ' tramites activos')  
+            setTramitesFiltradosBoleta(activos);  
         }
         setCargando(false);
     };

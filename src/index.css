@@ -1432,6 +1432,7 @@ button:not(:disabled),
   display: inline-block;
   width: 70px;
   height: 70px;
+  margin-right: 25px;
   line-height: 70px;
   background: rgba(0, 123, 255, 0.1);
   border-radius: 50%;
@@ -2506,4 +2507,18 @@ thead {
   background: #1bbec0 !important;
   color: white !important;
   border-style: solid !important;
+}
+
+.react-tooltip {
+  background-color: #0f172a !important; /* Un color oscuro tipo "KR-Estudios" */
+  color: white !important;
+  border-radius: 8px !important;
+  padding: 10px !important;
+  font-size: 0.9em !important;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+/* Asegura que el tooltip esté por encima de todo */
+#mi-tooltip-caja {
+  z-index: 9999 !important;
+  pointer-events: none;
 }
