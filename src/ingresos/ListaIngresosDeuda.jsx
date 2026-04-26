@@ -5,7 +5,9 @@ import {
   faTrash,
   faHandHoldingUsd,
   faArrowLeft,
-  faRotateLeft,
+  faCoins,
+  faSackDollar,
+  // fa-circle-half-stroke
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DataTable from '../components/DataTable';
@@ -16,16 +18,16 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { ColumnsTableIngresos } from './columnTableIngresos'; // Columnas adaptadas previamente
 import { LOCAL_URL } from '../Auth/config';
+import { ColumnsTableIngresosPendientes } from './columnTableIngresosPendientes';
 
-export function ListaIngresosTramite() {
+export function ListaIngresosDeuda() {
   const navigate = useNavigate();
 
   const {
     ingresosFiltrados,
     cargando,
     handleSearch,
-    listarIngresosDirectos, // Cambiado de listarSalidas
-    handleRevertirPagoPendientes,
+    listarIngresosPendientes, // Cambiado de listarSalidas
     eliminarIngreso,
     exportPDfIngresos,
   } = UseCustomIngresos();
@@ -33,7 +35,7 @@ export function ListaIngresosTramite() {
   const { tramitesFiltradosBoleta } = useTramites();
 
   useEffect(() => {
-    listarIngresosDirectos();
+    listarIngresosPendientes();
   }, []);
 
   // Cálculo de totales para el resumen
@@ -47,31 +49,32 @@ export function ListaIngresosTramite() {
       ? [
           {
             boton: (id_ingreso, row) => {
-              if (row.tipo_ingreso === 1) {
-                // Caso: Editar
-                navigate(
-                  `${LOCAL_URL}/cajero/editar-ingreso-directo/${id_ingreso}`,
-                );
-              } else {
-                // Caso: Revertir
-                const confirmacion = window.confirm(
-                  '¿REVERTIR ESTE PAGO?\nSU PAGO QUEDARÁ NUEVAMENTE PENDIENTE EN LA VENTANA DE PAGOS PENDIENTES',
-                );
+              navigate(
+                `${LOCAL_URL}/cajero/editar-ingreso-pendiente/${id_ingreso}`,
+              );
+            },
+            className: 'btn btn-orange py-1 px-3 x-small me-1 mr-int',
+            icono: faCoins,
+            label: '',
+          },
 
-                if (confirmacion) {
-                  handleRevertirPagoPendientes(id_ingreso, row.id_tramite);
-                }
-              }
+          {
+            boton: (id_ingreso, row) => {
+              navigate(`${LOCAL_URL}/cajero/completar-pago/${id_ingreso}`);
             },
-            className: (id, row) => {
-              return ` btn ${row.tipo_ingreso === 1 ? ' btn-info mr-int' : 'btn-warning mr'} py-1 px-3 x-small me-1 `;
+            className: 'btn btn-success py-1 px-3 x-small me-1 mr',
+            icono: faSackDollar,
+            label: '',
+          },
+          {
+            boton: (id_ingreso, row) => {
+              navigate(
+                `${LOCAL_URL}/cajero/editar-ingreso-pendiente/${id_ingreso}`,
+              );
             },
-            icono: (id, row) => {
-              return row.tipo_ingreso === 1 ? faEdit : faRotateLeft;
-            },
-            label: (id, row) => {
-              return row.tipo_ingreso === 1 ? 'Editar' : '';
-            },
+            className: 'btn btn-info py-1 px-3 x-small me-1',
+            icono: faEdit,
+            label: 'Editar',
           },
           {
             boton: (id_salida, row) => {
@@ -80,13 +83,13 @@ export function ListaIngresosTramite() {
                 row,
               );
             },
-            className: 'btn btn-pdf py-1 px-3 x-small me-1 mr-int',
+            className: 'btn btn-pdf py-1 px-3 x-small me-1',
             icono: faFilePdf,
             label: 'Recibo',
           },
           {
-            boton: (id_ingreso) => eliminarIngreso(id_ingreso, 1),
-            className: 'btn btn-danger py-1 px-3 x-small mr-int',
+            boton: (id_ingreso) => eliminarIngreso(id_ingreso, 2),
+            className: 'btn btn-danger py-1 px-3 x-small',
             icono: faTrash,
             label: 'Eliminar',
           },
@@ -99,7 +102,7 @@ export function ListaIngresosTramite() {
                 row,
               );
             },
-            className: 'btn btn-pdf py-1 px-3 x-small me-1 mr-int',
+            className: 'btn btn-pdf py-1 px-3 x-small me-1',
             icono: faFilePdf,
             label: 'Recibo',
           },
@@ -114,7 +117,7 @@ export function ListaIngresosTramite() {
               className="text-dark fw-bold mb-0 text-titulos"
               style={{ marginLeft: '5px', marginTop: '7rem' }}
             >
-              Ingresos Liquidados
+              PAGOS PENDIENTES
             </h3>
             <p
               className="text-muted mb-0 small text-uppercase"
@@ -125,7 +128,7 @@ export function ListaIngresosTramite() {
                 marginLeft: '5px',
               }}
             >
-              Gestión Financiera - Control de Pagos por Caja
+              Gestión Financiera - Control de Pagos pendientes por Caja
             </p>
           </div>
         </div>
@@ -140,7 +143,7 @@ export function ListaIngresosTramite() {
               <button
                 className="btn btn-success  fw-bold"
                 onClick={() =>
-                  navigate(LOCAL_URL + `/cajero/nuevo-ingreso-directo/`)
+                  navigate(LOCAL_URL + `/cajero/nuevo-ingreso-pendiente/`)
                 }
                 disabled={
                   !tramitesFiltradosBoleta ||
@@ -148,13 +151,12 @@ export function ListaIngresosTramite() {
                 }
               >
                 <FontAwesomeIcon icon={faPlus} className="me-2" /> REGISTRAR
-                PAGO
               </button>
               <button
                 className=" btn btn-dark"
                 style={{ marginLeft: '4px' }}
                 onClick={() => {
-                  navigate(LOCAL_URL + '/cajero/ingresos-directos');
+                  navigate(LOCAL_URL + '/cajero/ingresos-pendientes');
                 }}
               >
                 <FontAwesomeIcon icon={faArrowLeft} className="me-2" /> VOLVER
@@ -178,7 +180,7 @@ export function ListaIngresosTramite() {
 
           <div className="table-responsive">
             <DataTable
-              columns={ColumnsTableIngresos}
+              columns={ColumnsTableIngresosPendientes}
               data={ingresosFiltrados}
               cargando={cargando}
               funciones={funciones}

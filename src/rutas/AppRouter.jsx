@@ -3,73 +3,72 @@ import {
   Outlet,
   BrowserRouter as Router,
   RouterProvider,
-} from "react-router-dom";
+} from 'react-router-dom';
 
-import { Toaster } from "react-hot-toast";
-import { useEffect } from "react";
+import { Toaster } from 'react-hot-toast';
+import { useEffect } from 'react';
 
-import useAuth from "../Auth/useAuth";
-import { LOCAL_URL, TIEMPO_INACTIVO } from "../Auth/config";
-import Check from "./check";
-import PublicRoute from "./publicRoute";
-import E500 from "./e500";
+import useAuth from '../Auth/useAuth';
+import { LOCAL_URL, TIEMPO_INACTIVO } from '../Auth/config';
+import Check from './check';
+import PublicRoute from './publicRoute';
+import E500 from './e500';
 
-import HomeLogin from "../Login";
-import { Footer } from "../components/Footer";
+import HomeLogin from '../Login';
+import { Footer } from '../components/Footer';
 
-import NuevoTramite from "../tramite/NuevoTramite";
-import { ListaTramites } from "../tramite/ListaTramites";
+import NuevoTramite from '../tramite/NuevoTramite';
+import { ListaTramites } from '../tramite/ListaTramites';
 
-import NuevoUsuario from "../usuario/NuevoUsuario";
-import { ListaUsuarios } from "../usuario/ListaUsuario";
+import NuevoUsuario from '../usuario/NuevoUsuario';
+import { ListaUsuarios } from '../usuario/ListaUsuario';
 
-import NuevoCliente from "../cliente/NuevoCliente";
-import { ListaClientes } from "../cliente/ListaClientes";
+import NuevoCliente from '../cliente/NuevoCliente';
+import { ListaClientes } from '../cliente/ListaClientes';
 
-import ListaTipoTramite from "../tipoTramite/ListaTipoTramites";
-import NuevoTipoTramite from "../tipoTramite/NuevoTipoTramite";
+import ListaTipoTramite from '../tipoTramite/ListaTipoTramites';
+import NuevoTipoTramite from '../tipoTramite/NuevoTipoTramite';
 
-
-import NavbarAdmin from "../components/etc/menuAdmin";
-import NavbarAuxiliar from "../components/etc/menuAuxiliar";
-import NavbarGerente from "../components/etc/menuGerente";
-import NavbarCajero from "../components/etc/menuCajero";
-
-
-
+import NavbarAdmin from '../components/etc/menuAdmin';
+import NavbarAuxiliar from '../components/etc/menuAuxiliar';
+import NavbarGerente from '../components/etc/menuGerente';
+import NavbarCajero from '../components/etc/menuCajero';
 
 // ALL USERS
-import { Movimientos } from "../tramite/Movimientos";
-import { ListaSalidas } from "../salidas/ListaSalidas";
-import { ListaIngresosTramite } from "../ingresos/ListaIngresos";
-import FormularioIngreso from "../ingresos/FormularioIngreso";
-import { ReportesAdministracionPorTramite } from "../reportes/reportesAdministracionPorTramite";
-import { ReportesAdministracionConsolidado } from "../reportes/reportesAdministracionConsolidado";
+import { Movimientos } from '../tramite/Movimientos';
+import { ListaSalidas } from '../salidas/ListaSalidas';
 
-import { ListaBoleta } from "../boleta/Lista";
-import { FormularioBoleta } from "../boleta/Formulario";
-import { DetallesBoleta } from "../boleta/detalles";
-import { LayoutPorRol } from "./layout";
-import { ListaHonorariosTramite } from "../honorarios/Lista";
-import FormularioHonorario from "../honorarios/FormularioHonorarios";
-import { ReportesHonorarios } from "../reportes/reportesHonorarios";
-import { ReportesMovimientos } from "../reportes/ReportesPorMovimientos";
+import { ReportesAdministracionPorTramite } from '../reportes/reportesAdministracionPorTramite';
+import { ReportesAdministracionConsolidado } from '../reportes/reportesAdministracionConsolidado';
 
-import DashboardFinanciero from "../reportes/DashboardFinanciero";
-import MiContrasena from "../usuario/miContrasena";
-import MiPerfil from "../usuario/miPerfil";
+import { ListaBoleta } from '../boleta/Lista';
+import { FormularioBoleta } from '../boleta/Formulario';
+import { DetallesBoleta } from '../boleta/detalles';
+import { LayoutPorRol } from './layout';
+import { ListaHonorariosTramite } from '../honorarios/Lista';
+import FormularioHonorario from '../honorarios/FormularioHonorarios';
+import { ReportesHonorarios } from '../reportes/reportesHonorarios';
+import { ReportesMovimientos } from '../reportes/ReportesPorMovimientos';
 
+import DashboardFinanciero from '../reportes/DashboardFinanciero';
+import MiContrasena from '../usuario/miContrasena';
+import MiPerfil from '../usuario/miPerfil';
 
+import { ListaIngresosTramite } from '../ingresos/ListaIngresos';
+import { ListaIngresosDeuda } from '../ingresos/ListaIngresosDeuda';
+import FormularioIngreso from '../ingresos/FormularioIngreso';
+import FormularioIngresoDeuda from '../ingresos/FormularioIngresoDeuda';
+import FormularioCompletarIngreso from '../ingresos/FormularioCompletarIngreso';
 
 export default function AppRouter() {
   const auth = useAuth();
 
   useEffect(() => {
     async function check() {
-      if (localStorage.getItem("token") != null) {
+      if (localStorage.getItem('token') != null) {
         const inter = setInterval(() => {
-          const tiempo1 = localStorage.getItem("tiempo");
-          if (!tiempo1 || localStorage.getItem("token") == null) {
+          const tiempo1 = localStorage.getItem('tiempo');
+          if (!tiempo1 || localStorage.getItem('token') == null) {
             auth.logout();
           } // sino existe el cookie redireccionamos a la ventana login
           const tiempo2 = new Date().getMinutes();
@@ -97,46 +96,43 @@ export default function AppRouter() {
         return inter;
       }
     }
-    check()
+    check();
   }, [auth]);
 
   useEffect(() => {
-    return () => { };
+    return () => {};
   }, []);
 
   const handleKeyPress = () => {
-    localStorage.setItem("tiempo", new Date().getMinutes());
+    localStorage.setItem('tiempo', new Date().getMinutes());
   };
 
   const handleClick = () => {
-    localStorage.setItem("tiempo", new Date().getMinutes());
+    localStorage.setItem('tiempo', new Date().getMinutes());
   };
 
   const ruta1 = createBrowserRouter([
-
     // --- GRUPO 1: RUTAS PÚBLICAS LOGIN (Sin Navbar) ---
     {
-      path: LOCAL_URL + "/login",
+      path: LOCAL_URL + '/login',
       errorElement: <E500 />,
-      children: [
-        { path: "", element: <PublicRoute component={HomeLogin} /> },
-      ]
+      children: [{ path: '', element: <PublicRoute component={HomeLogin} /> }],
     },
 
     {
       path: LOCAL_URL + '/admin',
-      element: <>
-        <NavbarAdmin />
-        <main className="main-content">
-          {/* Outlet es donde se renderizarán las páginas (Pacientes, Login, etc.) */}
+      element: (
+        <>
+          <NavbarAdmin />
+          <main className="main-content">
+            {/* Outlet es donde se renderizarán las páginas (Pacientes, Login, etc.) */}
 
-          <Outlet />
-
-        </main>
-      </>, // El Layout siempre se muestra
+            <Outlet />
+          </main>
+        </>
+      ), // El Layout siempre se muestra
       errorElement: <E500 />,
       children: [
-
         {
           path: 'lista-empleadores',
           element: <Check component={ListaClientes} roleRequired="admin" />,
@@ -150,7 +146,6 @@ export default function AppRouter() {
           element: <Check component={NuevoCliente} roleRequired="admin" />,
         },
 
-
         {
           path: 'lista-usuarios',
           element: <Check component={ListaUsuarios} roleRequired="admin" />,
@@ -163,7 +158,6 @@ export default function AppRouter() {
           path: 'editar-usuario/:id',
           element: <Check component={NuevoUsuario} roleRequired="admin" />,
         },
-
 
         {
           path: 'lista-cajas',
@@ -192,43 +186,43 @@ export default function AppRouter() {
         },
         {
           path: 'reporte-honorarios',
-          element: <Check component={ReportesHonorarios} roleRequired="admin" />,
+          element: (
+            <Check component={ReportesHonorarios} roleRequired="admin" />
+          ),
         },
-
       ],
     },
 
     // RUTAS AUXILIAR
     {
       path: LOCAL_URL + '/auxiliar',
-      element: <>
-        <NavbarAuxiliar />
-        <main className="main-content">
-          {/* Outlet es donde se renderizarán las páginas (Pacientes, Login, etc.) */}
-          <Outlet />
-        </main>
-      </>, // El Layout siempre se muestra
+      element: (
+        <>
+          <NavbarAuxiliar />
+          <main className="main-content">
+            {/* Outlet es donde se renderizarán las páginas (Pacientes, Login, etc.) */}
+            <Outlet />
+          </main>
+        </>
+      ), // El Layout siempre se muestra
       errorElement: <E500 />,
-      children: [
-
-
-      ],
+      children: [],
     },
-
 
     // RUTAS GERENTE
     {
       path: LOCAL_URL + '/gerente',
-      element: <>
-        <NavbarGerente />
-        <main className="main-content">
-          {/* Outlet es donde se renderizarán las páginas (Pacientes, Login, etc.) */}
-          <Outlet />
-        </main>
-      </>, // El Layout siempre se muestra
+      element: (
+        <>
+          <NavbarGerente />
+          <main className="main-content">
+            {/* Outlet es donde se renderizarán las páginas (Pacientes, Login, etc.) */}
+            <Outlet />
+          </main>
+        </>
+      ), // El Layout siempre se muestra
       errorElement: <E500 />,
       children: [
-
         {
           path: 'lista-cajas',
           element: <Check component={ListaTramites} roleRequired="gerente" />,
@@ -241,7 +235,6 @@ export default function AppRouter() {
           path: 'editar-caja/:id',
           element: <Check component={NuevoTramite} roleRequired="gerente" />,
         },
-
 
         {
           path: 'lista-empleadores',
@@ -259,42 +252,46 @@ export default function AppRouter() {
 
         {
           path: 'listar-honorarios',
-          element: <Check component={ListaHonorariosTramite} roleRequired="gerente" />,
+          element: (
+            <Check component={ListaHonorariosTramite} roleRequired="gerente" />
+          ),
         },
         {
           path: 'guardar-honorario',
-          element: <Check component={FormularioHonorario} roleRequired="gerente" />,
+          element: (
+            <Check component={FormularioHonorario} roleRequired="gerente" />
+          ),
         },
         {
           path: 'editar-honorario/:id',
-          element: <Check component={FormularioHonorario} roleRequired="gerente" />,
+          element: (
+            <Check component={FormularioHonorario} roleRequired="gerente" />
+          ),
         },
 
         {
           path: 'reporte-honorarios',
-          element: <Check component={ReportesHonorarios} roleRequired="gerente" />,
+          element: (
+            <Check component={ReportesHonorarios} roleRequired="gerente" />
+          ),
         },
-
-
       ],
     },
-
-
-
 
     // RUTAS CAJERO
     {
       path: LOCAL_URL + '/cajero',
-      element: <>
-        <NavbarCajero />
-        <main className="main-content">
-          {/* Outlet es donde se renderizarán las páginas (Pacientes, Login, etc.) */}
-          <Outlet />
-        </main>
-      </>, // El Layout siempre se muestra
+      element: (
+        <>
+          <NavbarCajero />
+          <main className="main-content">
+            {/* Outlet es donde se renderizarán las páginas (Pacientes, Login, etc.) */}
+            <Outlet />
+          </main>
+        </>
+      ), // El Layout siempre se muestra
       errorElement: <E500 />,
       children: [
-
         {
           path: 'lista-empleadores',
           element: <Check component={ListaClientes} roleRequired="cajero" />,
@@ -310,23 +307,79 @@ export default function AppRouter() {
 
         {
           path: 'listar-honorarios',
-          element: <Check component={ListaHonorariosTramite} roleRequired="cajero" />,
+          element: (
+            <Check component={ListaHonorariosTramite} roleRequired="cajero" />
+          ),
         },
         {
           path: 'guardar-honorario',
-          element: <Check component={FormularioHonorario} roleRequired="cajero" />,
+          element: (
+            <Check component={FormularioHonorario} roleRequired="cajero" />
+          ),
         },
         {
           path: 'editar-honorario/:id',
-          element: <Check component={FormularioHonorario} roleRequired="cajero" />,
+          element: (
+            <Check component={FormularioHonorario} roleRequired="cajero" />
+          ),
         },
 
         {
           path: 'reporte-honorarios',
-          element: <Check component={ReportesHonorarios} roleRequired="cajero" />,
+          element: (
+            <Check component={ReportesHonorarios} roleRequired="cajero" />
+          ),
         },
 
+        {
+          path: 'ingresos-directos',
+          element: (
+            <Check component={ListaIngresosTramite} roleRequired="cajero" />
+          ),
+        },
+        {
+          path: 'ingresos-pendientes',
+          element: (
+            <Check component={ListaIngresosDeuda} roleRequired="cajero" />
+          ),
+        },
 
+        {
+          path: 'nuevo-ingreso-directo',
+          element: (
+            <Check component={FormularioIngreso} roleRequired="cajero" />
+          ),
+        },
+        {
+          path: 'nuevo-ingreso-pendiente',
+          element: (
+            <Check component={FormularioIngresoDeuda} roleRequired="cajero" />
+          ),
+        },
+
+        {
+          path: 'editar-ingreso-directo/:id',
+          element: (
+            <Check component={FormularioIngreso} roleRequired="cajero" />
+          ),
+        },
+
+        {
+          path: 'editar-ingreso-pendiente/:id',
+          element: (
+            <Check component={FormularioIngresoDeuda} roleRequired="cajero" />
+          ),
+        },
+
+        {
+          path: 'completar-pago/:id',
+          element: (
+            <Check
+              component={FormularioCompletarIngreso}
+              roleRequired="cajero"
+            />
+          ),
+        },
 
         {
           path: 'lista-cajas',
@@ -340,9 +393,6 @@ export default function AppRouter() {
           path: 'editar-caja/:id',
           element: <Check component={NuevoTramite} roleRequired="cajero" />,
         },
-
-
-
       ],
     },
 
@@ -352,7 +402,6 @@ export default function AppRouter() {
       element: <LayoutPorRol />,
       errorElement: <E500 />,
       children: [
-
         {
           path: 'boletas',
           element: <Check component={ListaBoleta} roleRequired="all" />,
@@ -383,23 +432,13 @@ export default function AppRouter() {
         },
 
         {
-          path: 'listar-ingresos/:id',
-          element: <Check component={ListaIngresosTramite} roleRequired="all" />,
-        },
-
-        {
-          path: 'crear-ingreso/:id_tramite',
-          element: <Check component={FormularioIngreso} roleRequired="all" />,
-        },
-
-        {
-          path: 'editar-ingreso/:id_tramite/:id',
-          element: <Check component={FormularioIngreso} roleRequired="all" />,
-        },
-
-        {
           path: 'reportes-por-caja',
-          element: <Check component={ReportesAdministracionPorTramite} roleRequired="all" />,
+          element: (
+            <Check
+              component={ReportesAdministracionPorTramite}
+              roleRequired="all"
+            />
+          ),
         },
         {
           path: 'reporte-por-movimientos',
@@ -407,9 +446,13 @@ export default function AppRouter() {
         },
         {
           path: 'reportes-consolidado',
-          element: <Check component={ReportesAdministracionConsolidado} roleRequired="all" />,
+          element: (
+            <Check
+              component={ReportesAdministracionConsolidado}
+              roleRequired="all"
+            />
+          ),
         },
-
 
         {
           path: 'dash-1',
@@ -425,29 +468,27 @@ export default function AppRouter() {
           path: 'c-pass',
           element: <Check component={MiContrasena} roleRequired="all" />,
         },
-
       ],
     },
-
-
   ]);
   return (
-    <div onClick={handleClick} onKeyPress={handleKeyPress} >
+    <div onClick={handleClick} onKeyPress={handleKeyPress}>
       <RouterProvider router={ruta1} />
       <Footer />
       <Toaster
         position="top-right"
         toastOptions={{
-          className: "",
+          className: '',
           duration: 4000,
           style: {
             padding: '20px 30px',
-            background: "#fff",
+            background: '#fff',
             // fontWeight:'bold',
-            color: "#4E5AFE",
-            fontSize: "14px",
+            color: '#4E5AFE',
+            fontSize: '14px',
           },
-        }} />
+        }}
+      />
     </div>
   );
 }
