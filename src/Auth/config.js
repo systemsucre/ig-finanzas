@@ -1,7 +1,7 @@
 // const URL = 'https://etvs.alwaysdata.net/server_chagas/'
 const URL = 'https://ig-finanzas-bc.vercel.app/';
 
-// const URL = 'http://localhost:3005/'
+// const URL = 'http://localhost:3005/';
 // const URL = 'http://localhost:8080/'
 const LOCAL_URL = '/ig';
 

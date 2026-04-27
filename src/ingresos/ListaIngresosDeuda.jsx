@@ -166,15 +166,13 @@ export function ListaIngresosDeuda() {
         </div>
 
         <div className="panel-custom bg-white rounded shadow-sm p-2 mx-2">
-          <div className="row align-items-center mb-3 g-3">
-            <div className="col-md-6 d-flex justify-content-end">
-              <div style={{ width: '280px' }}>
-                <InputUsuarioSearch
-                  name="input-search-ingreso"
-                  placeholder="Buscar abono o detalle..."
-                  onChange={handleSearch}
-                />
-              </div>
+          <div className="col-md-6 d-flex">
+            <div style={{ width: '280px' }}>
+              <InputUsuarioSearch
+                name="input-search-ingreso"
+                placeholder="Buscar abono o detalle..."
+                onChange={handleSearch}
+              />
             </div>
           </div>
 
