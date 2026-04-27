@@ -669,6 +669,8 @@ button:not(:disabled),
   background-color: var(--bs-btn-bg);
   border-radius: 10px;
 
+  font-size: 10px !important;
+  text-transform: uppercase;
   transition: var(--bs-transition);
 }
 
@@ -759,6 +761,9 @@ button:not(:disabled),
   color: #6c757d;
   pointer-events: none;
   text-decoration: none;
+}
+.fw-bold {
+  /* font-size: 0.75rem; */
 }
 
 .btn-danger {
