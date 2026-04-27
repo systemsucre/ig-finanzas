@@ -335,6 +335,7 @@ th {
   border-color: inherit;
   border-style: solid;
   border-width: 0;
+  /* font-size: 14px; */
 }
 
 button {
@@ -1157,7 +1158,7 @@ button:not(:disabled),
 }
 
 .fw-bold {
-  font-weight: 700 !important;
+  font-weight: 600 !important;
 }
 
 .text-end {
@@ -1874,16 +1875,15 @@ button:not(:disabled),
 
 /* 4. Tus estilos de celdas */
 .table-responsive-custom thead th {
-  background-color: var(--clinical-bg, #f8f9fa);
-  padding: 15px;
-  font-weight: 800;
+  background-color: #f8fafc; /* Un gris muy, muy claro (casi blanco pero neutro) */
+  padding: 12px 15px;
+  font-weight: 500; /* Bajamos el peso para que no compita con los datos */
   text-transform: uppercase;
-  font-size: 0.85rem;
-  border-bottom: 2px solid var(--hospital-blue, #0d6efd);
+  font-size: 0.7rem;
+  border-bottom: 1px solid #e2e8f0; /* Línea delgada y discreta */
+  color: #64748b; /* Gris neutro */
   white-space: nowrap;
-  /* Evita que los títulos se rompan en dos líneas */
 }
-
 .table-responsive-custom td {
   padding: 12px 15px;
   border-bottom: 1px solid #eee;
@@ -1929,14 +1929,16 @@ thead {
     padding: 10px 5px;
   }
 
-  /* Usamos el atributo data-label para mostrar el nombre del campo */
   .table-responsive-custom td::before {
     content: attr(data-label);
-    font-weight: 800;
+    font-weight: 500; /* Reducimos de 800 a 500 para que sea menos agresivo */
     text-transform: uppercase;
-    font-size: 0.75rem;
-    color: var(--hospital-blue);
+    font-size: 0.65rem; /* Un poco más pequeño para dar jerarquía */
+    color: #94a3b8; /* Un gris azulado claro, muy sutil */
     text-align: left;
+    display: block;
+    margin-bottom: 2px;
+    letter-spacing: 0.5px; /* Un toque moderno */
   }
 
   .table-responsive-custom td:last-child {
@@ -1945,6 +1947,37 @@ thead {
     background: var(--clinical-bg);
     /* border-radius: 8px; */
     margin-top: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Hacemos que el cuerpo de la tabla sea un grid */
+  .table-responsive-custom tbody {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas (filas) por defecto */
+    gap: 15px;
+    padding: -10px;
+  }
+
+  /* Si quieres 3 filas, cambia el 2 por un 3 */
+  @media (min-width: 500px) {
+    .table-responsive-custom tbody {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .table-responsive-custom tr {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px;
+    background: #fff;
+  }
+
+  /* Ocultamos los encabezados en móvil */
+  .table-responsive-custom thead {
+    display: none;
   }
 }
 
