@@ -133,7 +133,7 @@ export const useDashboard = () => {
     const h = await start(`${URL}comuun/historico-ia`, { moneda: idMoneda });
     setHistoricoAll(h);
     const dh = await predecirFuturoFinanciero(h);
-    console.log(dataPrediccion, ' data prediccion resultado');
+    console.log(dh, ' data prediccion resultado-------------------------');
     setDataConPrediccion(dh);
   };
   // Solo se ejecuta al montar el componente

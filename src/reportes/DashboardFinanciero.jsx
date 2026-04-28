@@ -246,7 +246,7 @@ const DashboardFinanciero = () => {
     errorEstandar = n > 2 ? Math.sqrt(sumaResiduos / (n - 2)) : 0;
   }
 
-  //   console.log(datosFiltrados);
+  // console.log(datosFiltrados);
   return (
     <main
       className="container-xl mt-5"
@@ -423,6 +423,7 @@ const DashboardFinanciero = () => {
                     radius={[4, 4, 0, 0]}
                     barSize={30}
                   />
+
                   <Bar
                     dataKey="gastos"
                     name="Gastos"
@@ -545,6 +546,9 @@ const DashboardFinanciero = () => {
                       strokeDasharray="5 5"
                       strokeWidth={3}
                       connectNulls // Importante para unir el último real con el futuro
+                      barSize={7}
+                      dot={{ fill: '#10b981', r: 5 }} // Punto verde (círculo de radio 6)
+                      activeDot={{ r: 8 }}
                     />
                   </LineChart>
                 </ResponsiveContainer>
