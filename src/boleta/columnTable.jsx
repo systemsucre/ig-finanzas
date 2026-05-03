@@ -1,66 +1,60 @@
+import { faCalendar, faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { formatearFechaYHora } from "../components/FormtaarFecha";
+
 export const ColumnsTable = [
-  {
-    label: 'NUM. BOLETA',
-    field: 'numero',
-    render: (row) => (
-      <div style={{ minWidth: '10px', fontSize: '0.85rem' }}>
-        <div className="fw-bold text-dark ">{row.numero_boleta}</div>
-      </div>
-    ),
-    sortable: true,
-  },
 
   {
-    label: 'CODIGO BOLETA',
-    field: 'codigo',
-    render: (row) => (
-      <div style={{ minWidth: '10px' }}>
-        <div className="fw-bold text-dark " style={{ fontSize: '0.85rem' }}>
-          {row.codigo_boleta}
-        </div>
-      </div>
-    ),
-    sortable: true,
-  },
-
-  // {
-  //     label: 'NUMERO BOLETA',
-  //     field: 'numero',
-  //     render: (row) => (
-  //         <div style={{ minWidth: '10px' }}>
-  //             <div className="fw-bold text-dark text-center ">{row.numero_boleta}</div>
-
-  //         </div>
-  //     ),
-  //     sortable: true,
-  // },
-
-  {
-    label: 'Fecha Registro',
-    field: 'created_at',
+    label: 'Fecha y Hora',
+    field: 'fecha',
     render: (row) => {
-      const fecha = new Date(row.fecha?.split(' ')[0]);
+      const info = formatearFechaYHora(row.fecha);
       return (
-        <div className="small text-secondary" style={{ fontSize: '0.85rem' }}>
-          <i
-            className="bi bi-calendar3 me-1"
-            style={{ fontSize: '0.75rem' }}
-          ></i>
-          {row.fecha?.split('T')[0]}
-          <br />
-          <span className="text-muted" style={{ fontSize: '0.8rem' }}>
-            {fecha.toLocaleTimeString('es-BO', {
-              hour: '2-digit',
-              minute: '2-digit',
-            })}
-          </span>
+        <div className="movimiento-banco-wrapper">
+          {/* Cabecera con icono de calendario */}
+          <div className="fecha-header">
+            {/* <i className="bi bi-calendar3 me-2"></i> */}
+            <FontAwesomeIcon className="me-2" icon={faCalendarAlt } />
+            {info.fechaLarga}
+            {/* Hora (solo se muestra si existe) */}
+            {info.hora && (
+              <div className="hora-detalle">
+
+                {info.hora}
+              </div>
+            )}
+          </div>
+
+
         </div>
       );
-    },
+    }
   },
+
+  window.innerWidth > 877 ? 
+  {
+    label: 'Numero Boleta',
+    field: 'numero_boleta',
+    render: (row) => (
+      <div className="td-numero">
+        <span className="ms-2"> {row.numero_boleta}</span>
+      </div>
+    )
+  }:{},
+
+  {
+    label: 'Caja',
+    field: 'codigo',
+    render: (row) => (
+      <div className="td-descripcion">
+        <span className="ms-2">{row.codigo_boleta}</span>
+      </div>
+    )
+  },
+window.innerWidth > 877 ?
   {
     label: 'Items',
-    field: 'items',
+    field: '_items',
     render: (row) => (
       <div className="text-center">
         <span className="fw-bold text-dark" style={{ fontSize: '0.85rem' }}>
@@ -68,26 +62,27 @@ export const ColumnsTable = [
         </span>
       </div>
     ),
-  },
-  {
-    label: 'Monto',
-    field: 'monto',
-    render: (row) => (
-      <div className="text-center">
-        <span className="fw-bold text-dark" style={{ fontSize: '0.85rem' }}>
-          {row.simbolo} {row.monto_total}
-        </span>
-      </div>
-    ),
-  },
+  }:{},
+
+  window.innerWidth > 877 ?
+    {
+      label: 'Monto',
+      field: 'monto',
+      render: (row) => (
+        <div className="text-center">
+          <span className="fw-bold text-dark" style={{ fontSize: '0.85rem' }}>
+            {row.simbolo} {row.monto_total}
+          </span>
+        </div>
+      ),
+    } : {},
+
   {
     label: 'Usuario Registrador',
     field: 'solicitante',
     render: (row) => (
-      <div style={{ minWidth: '10px' }}>
-        <small className="text-muted" style={{ fontSize: '0.85rem' }}>
-          {row.solicitado_por}
-        </small>
+       <div className="td-numero">
+        <span className="ms-2"> {row.solicitado_por}</span>
       </div>
     ),
     sortable: true,

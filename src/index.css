@@ -2339,11 +2339,126 @@ thead {
 }
 
 
+/* Fila contenedora principal */
+/* Fila contenedora principal */
+.banco-filter-row {
+    display: flex;
+    flex-direction: column; /* Móvil: una columna vertical */
+    gap: 16px;
+    padding: 10px 5px;
+    /* margin-bottom: 20px; */
+    width: 100%;
+}
 
+/* Contenedor de los botones */
+.banco-tabs-container {
+    display: inline-flex;
+    background: #f0f2f5;
+    border-radius: 25px;
+    padding: 4px;
+    align-self: flex-start; /* Se mantiene a la izquierda en móvil */
+}
 
+.banco-tab-item {
+    border: none;
+    background: transparent;
+    padding: 6px 14px;
+    border-radius: 22px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #5f6368;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
 
+.banco-tab-item.active {
+    background: #ffffff;
+    color: #3b4cb8;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
 
+.banco-tab-count {
+    font-weight: 400;
+    opacity: 0.8;
+    font-size: 0.75rem;
+}
 
+/* Estilo para el buscador */
+/* Contenedor del buscador para posicionar el icono si lo deseas */
+.banco-search-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* El input con estilo BancoEstado */
+.banco-input-search {
+    width:100%;
+    background-color: #f2f2f2; /* Gris claro característico */
+    border: 1px solid transparent;
+    border-radius: 25px; /* Forma de píldora */
+    padding: 10px 20px 10px 45px; /* Espacio extra a la izquierda para una lupa */
+    font-size: 0.9rem;
+    color: #333;
+    transition: all 0.3s ease;
+    outline: none;
+    height: 45px;
+}
+
+/* Efecto al hacer clic (Focus) */
+.banco-input-search:focus {
+    background-color: #ffffff;
+    border-color: #3b4cb8; /* Azul institucional */
+    box-shadow: 0 4px 12px rgba(59, 76, 184, 0.1);
+}
+
+/* Estilo para el placeholder */
+.banco-input-search::placeholder {
+    color: #8e8e93;
+    font-weight: 400;
+}
+
+/* --- PANTALLAS GRANDES (2 COLUMNAS) --- */
+@media (min-width: 992px) { /* xl de bootstrap */
+    .banco-filter-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Dos columnas de igual tamaño */
+        align-items: center; /* Alineación vertical perfecta */
+        gap: 0; /* Controlamos el espacio internamente */
+    }
+
+    .banco-tabs-container {
+        justify-self: start; /* Filtros pegados a la izquierda */
+        align-self: center;
+    }
+
+    .banco-search-wrapper {
+        justify-self: end; /* Buscador pegado a la derecha */
+        width: 100%;
+        max-width: 400px; /* Evita que el buscador sea gigante */
+    }
+}
+/* Ajustes para Pantallas Grandes (PC/Tablets) */
+@media (min-width: 768px) {
+    .banco-filter-row {
+        flex-direction: row; /* Se pone en formato horizontal (como row de Bootstrap) */
+        align-items: center;
+        justify-content: space-between; /* Tabs a la izquierda, Buscador a la derecha */
+    }
+
+    .banco-tabs-container {
+        align-self: center; /* Centrado vertical en la fila */
+    }
+
+    .banco-tab-item {
+        padding: 8px 20px; /* Más aire en pantallas grandes */
+        font-size: 0.85rem;
+        flex: none; /* Que cada botón use solo el espacio necesario */
+    }
+
+    .banco-search-wrapper {
+        max-width: 350px; /* El buscador no se estira infinitamente */
+    }
+}
 
 
 

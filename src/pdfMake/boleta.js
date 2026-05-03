@@ -111,6 +111,25 @@ const ticketBoleta = async (output, { itemsBoleta }) => {
                 widths: ['*', 'auto'],
                 body: [
                     [
+                        { text: 'TOTAL ITEMS:', alignment: 'right', bold: true, margin: [0, 10, 0, 0] },
+                        {
+                            text: ` ${itemsBoleta.reduce((acc, item) => acc + 1, 0)}`,
+                            style: 'hc',
+                            fillColor: '#f8f9fa',
+                            margin: [10, 10, 10, 10],
+                            fontSize: 14
+                        }
+                    ]
+                ]
+            },
+            layout: 'noBorders'
+        },
+
+                {
+            table: {
+                widths: ['*', 'auto'],
+                body: [
+                    [
                         { text: 'TOTAL BOLETA:', alignment: 'right', bold: true, margin: [0, 10, 0, 0] },
                         {
                             text: `${itemsBoleta.reduce((acc, item) => acc + parseFloat(item.monto), 0).toFixed(2)} ${itemsBoleta[0].simbolo}`,
@@ -124,7 +143,6 @@ const ticketBoleta = async (output, { itemsBoleta }) => {
             },
             layout: 'noBorders'
         },
-
         { text: ' ', margin: [0, 40] },
 
         // 6. SECCIÓN DE FIRMAS (ESTILO FORMAL)

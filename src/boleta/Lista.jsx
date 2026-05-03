@@ -1,7 +1,8 @@
 import {
 
     faEye,
-    faPlus
+    faPlus,
+    faSearch
 } from "@fortawesome/free-solid-svg-icons";
 
 import DataTable from "../components/DataTable";
@@ -53,7 +54,7 @@ export function ListaBoleta() {
 
     return (
         <>
-            <main className="container-xl mt-2" style={{ maxWidth: "100%", padding: '3px' }}>
+            <main className="container-xl mt-2" >
                 <div className="d-flex justify-content-between align-items-center mb-4 m-2">
                     <div>
                         <h3 className="text-dark fw-bold mb-0 text-titulos">Gestión de Boletas de Gasto</h3>
@@ -61,33 +62,52 @@ export function ListaBoleta() {
 
                 </div>
 
-                <div className="panel-custom bg-white rounded shadow-sm p-2 mx-2">
-                    <div className="row align-items-center mb-3 g-3">
-                        <div className="col-xl-8 ">
-                            <div className="d-flex1  gap-2">
-                                <button className={`btn btn-sm border fw-bold ${filtroEstado === 'MIOS' ? 'btn-dark' : 'text-success'}`}
-                                    onClick={() => setFiltroEstado('MIOS')}>
-                                    MIS BOLETAS <span>({mios})</span>
-                                </button>
-                                <button className="btn  btn-sm border text-primary fw-bold" onClick={() => setFiltroEstado('TODOS')}>TODOS <span className="fw-bold mb-0 text-primary">({boletasFiltradas.length})</span></button>
-                                {/* <button className="btn  btn-sm border text-warning fw-bold" onClick={() => setFiltroEstado(1)}>SOLICITADOS <span className="fw-bold mb-0 text-warning">{countSolicitados}</span></button>
-                                <button className="btn  btn-sm border text-primary fw-bold" onClick={() => setFiltroEstado(2)}>APROBADOS <span className="fw-bold mb-0 text-primary">{countAprobados}</span></button>
-                                <button className="btn  btn-sm border text-success fw-bold" onClick={() => setFiltroEstado(3)}>DESPACHADOS <span className="fw-bold mb-0 text-success">{countDespachados}</span></button> */}
-                                {/* <button className="btn  btn-sm border text-danger fw-bold" onClick={() => setFiltroEstado(4)}>RECHAZADOS <span className="fw-bold mb-0 text-danger">{countRechazados}</span></button> */}
-                            </div>
+                <div className="panel-custom rounded shadow-sm  mx-2">
+
+                    <div className="banco-filter-row">
+                        {/* Contenedor de Filtros (Segmented Control) */}
+                        <div className="banco-tabs-container">
+                            <button
+                                className={`banco-tab-item ${filtroEstado === 'MIOS' ? 'active' : ''}`}
+                                onClick={() => setFiltroEstado('MIOS')}
+                            >
+                                Mis Boletas <span className="banco-tab-count">({mios})</span>
+                            </button>
+                            <button
+                                className={`banco-tab-item ${filtroEstado === 'TODOS' ? 'active' : ''}`}
+                                onClick={() => setFiltroEstado('TODOS')}
+                            >
+                                Todas <span className="banco-tab-count">({boletasFiltradas.length})</span>
+                            </button>
                         </div>
 
-
-                        <div className="col-xl-4 ">
-                            <InputUsuarioSearch
+                        {/* Buscador Estilizado */}
+                        <div className="banco-search-wrapper">
+                            {/* Icono de lupa posicionado absolutamente dentro del wrapper */}
+                            <FontAwesomeIcon
+                                icon={faSearch}
+                                style={{
+                                    position: 'absolute',
+                                    left: '18px',
+                                    top: '50%',
+                                    transform: 'translateY(-50%)',
+                                    color: '#8e8e93',
+                                    zIndex: 1
+                                }}
+                            />
+                            <input
                                 name="search-boleta"
-                                placeholder="Buscar por Nro/código Boleta o solicitante "
+                                placeholder="Buscar por nro o solicitante..."
                                 onChange={handleSearchBoleta}
+                                className="banco-input-search"
                             />
                         </div>
                     </div>
 
+
+
                     <div className="table-responsive">
+
                         <DataTable
                             columns={ColumnsTable}
                             data={dataFiltrada}
