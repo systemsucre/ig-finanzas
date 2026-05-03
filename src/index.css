@@ -1875,7 +1875,7 @@ button:not(:disabled),
 /* Título de la sección en la barra */
 .banco-nav-title {
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 200;
   color: white;
   margin: 0;
 }
