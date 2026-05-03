@@ -10,7 +10,8 @@ import {
 
     faClock, faCircleCheck, faUserTie, faEdit,
     faTrash,
-    faArrowLeft
+    faArrowLeft,
+    faChevronLeft
 } from '@fortawesome/free-solid-svg-icons';
 import { ColumnsTableDetalle } from './columnTableDetalle';
 import DataTable from "../components/DataTable";
@@ -65,48 +66,85 @@ export const DetallesBoleta = () => {
             <main className="container-xl mt-5">
 
                 {/* CUERPO - TABLA DE ITEMS */}
-                <div className="panel-custom bg-white rounded shadow-sm p-2 mx-2" style={{marginTop:'6rem'}} >
-                    <div className="card-header  border-bottom py-4 px-4 mt-3 ">
-                        <div className="align-items-center">
-                            <div className="d-flex align-items-center gap-3 mb-3">
-                                <h4 className="fw-bold mb-0 text-dark" style={{ margin: '0', padding: '0' }}>
-                                    CODIGO  <span className="codigo-boleta text-primary ms-2" >{codigo}</span>
-                                </h4>
-                            </div>
-                            <div className="d-flex align-items-center gap-3 mb-3">
+                <div className="panel-custom bg-whited rounded shadow-sm  mx-2" style={{ marginTop: '6rem' }} >
 
-                                <h4 className="fw-bold mb-0 text-dark " style={{ margin: '0', padding: '0', marginBottom: '1rem' }}>
-                                    NUMERO BOLETA  <span className="codigo-boleta text-primary ms-2">{itemsBoleta && itemsBoleta.length > 0 ? itemsBoleta[0].numero_boleta : 'S/N'}</span>
-                                </h4>
-                            </div>
-                            <span style={{ ...styles.badgeStatus, background: infoCabecera?.estado === 3 ? '#dcfce7' : '#fef9c3', fontSize: '16px', color: infoCabecera?.estado === 3 ? '#166534' : '#854d0e' }}>
-                                <FontAwesomeIcon icon={infoCabecera?.estado === 3 ? faCircleCheck : faClock} className="me-2" />
-                                {infoCabecera?.estado === 3 ? 'TRANSACCIÓN FINALIZADA' : 'PENDIENTE DE DESPACHO'}
-                            </span>
+                    <div className="banco-nav-header">
+                        <button className="banco-btn-back" onClick={() => navigate(-1)}>
+                            <FontAwesomeIcon icon={faChevronLeft} />
+                        </button>
+                        <h1 className="banco-nav-title">Volver a Lista de Boletas</h1>
+                    </div>
+
+                    <div className="banco-card-header">
+                        <div className="banco-info-main">
+                            {/* Etiqueta superior sutil */}
+                            <p className="banco-label-top">
+                                BOLETA <span className="banco-id-secondary">{codigo}</span>
+                            </p>
+
+                            {/* Identificador Principal (como el saldo) */}
+                            <h2 className="banco-monto-principal">
+                                #{itemsBoleta && itemsBoleta.length > 0 ? itemsBoleta[0].numero_boleta : 'S/N'}
+                            </h2>
+
+                            <p className="banco-label-sub">Número de Boleta</p>
                         </div>
-                    </div>
-                    <div className="card-body bg-light border-bottom py-4 px-4 mt-3">
-                        <button className="btn btn-pdf btn-lg px-4 shadow-sm" onClick={() => exportarBoletaPDF(window.innerWidth < 1100 ? 'b64' : "print", infoCabecera)}>
-                            <FontAwesomeIcon icon={faFilePdf} className="me-2" />
+
+                        <hr className="banco-divider" />
+
+                        <div className="banco-info-grid">
+                            <div className="banco-grid-item">
+                                <span className="banco-grid-label">Estado actual</span>
+                                {/* Badge sutil estilo BancoEstado */}
+                                <span style={{
+                                    ...styles.badgeStatus,
+                                    background: 'transparent',
+                                    padding: '0',
+                                    fontSize: '14px',
+                                    fontWeight: '500',
+                                    color: infoCabecera?.estado === 3 ? '#38a169' : '#d69e2e'
+                                }}>
+                                    <FontAwesomeIcon icon={infoCabecera?.estado === 3 ? faCircleCheck : faClock} className="me-2" />
+                                    {infoCabecera?.estado === 3 ? 'Finalizada' : 'Pendiente despacho'}
+                                </span>
+                            </div>
+
+                            <div className="banco-grid-item text-end">
+                                <span className="banco-grid-label">Total Boleta</span>
+                                <span className="banco-grid-value">
+                                    {
+                                        itemsBoleta.reduce((acumulador, item) => {
+                                            // Convertimos el string "10.00" a número flotante
+                                            return acumulador + parseFloat(item.monto);
+                                        }, 0)?.toFixed(2)} {itemsBoleta[0]?.simbolo}
+                                </span>
+                            </div>
+                        </div>
+
+                        <button className="banco-btn-cartolas" onClick={() => exportarBoletaPDF(window.innerWidth < 1100 ? 'b64' : "print", infoCabecera)}>
+                            Ver Detalles <FontAwesomeIcon icon={faFilePdf} className="me-2" />
                         </button>
-                        {
-                            itemsBoleta && itemsBoleta.length > 0 &&
-                                itemsBoleta[0].usuario_solicita_id === parseInt(localStorage.getItem('id_')) ? <>
-                                <button className="btn btn-info btn-lg px-4 shadow-sm" onClick={() => navigate(`${LOCAL_URL}/modificar-boleta/${codigo}`)}>
+                    </div>
+                    {itemsBoleta && itemsBoleta.length > 0 &&
+                        itemsBoleta[0].usuario_solicita_id === parseInt(localStorage.getItem('id_')) && (
+                            <div className="banco-actions-container">
+                                <button
+                                    className="banco-btn-secondary edit"
+                                    onClick={() => navigate(`${LOCAL_URL}/modificar-boleta/${codigo}`)}
+                                >
                                     <FontAwesomeIcon icon={faEdit} className="me-2" />
+                                    Editar Boleta
                                 </button>
-                                <button className="btn btn-danger btn-lg px-4 shadow-sm" onClick={() => eliminarBoleta(codigo)}>
+
+                                <button
+                                    className="banco-btn-secondary delete"
+                                    onClick={() => eliminarBoleta(codigo)}
+                                >
                                     <FontAwesomeIcon icon={faTrash} className="me-2" />
+                                    Eliminar
                                 </button>
-                            </>
-                                : null
-                        }
-
-                        <button className="btn btn-secondary btn-lg px-4 shadow-sm" style={{ marginLeft: '10px' }} onClick={() => navigate(-1)}>
-                            <FontAwesomeIcon icon={faArrowLeft} className="me-2" /> Volver
-                        </button>
-
-                    </div>
+                            </div>
+                        )}
 
                     <div className="table-responsive">
                         <DataTable
