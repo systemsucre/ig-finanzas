@@ -55,13 +55,12 @@ export function ListaBoleta() {
     return (
         <>
             <main className="container-xl mt-2" >
-                <div className="d-flex justify-content-between align-items-center mb-4 m-2">
-                    <div>
-                        <h3 className="text-dark fw-bold mb-0 text-titulos">Gestión de Boletas de Gasto</h3>
+                <div className="banco-header-section mb-4">
+                    <div className="banco-title-container">
+                        <h3 className="banco-title-main">Gestión de Boletas de Gasto</h3>
+                        <p className="banco-subtitle">Administra y revisa tus solicitudes de fondos</p>
                     </div>
-
                 </div>
-
                 <div className="panel-custom rounded shadow-sm  mx-2">
 
                     <div className="banco-filter-row">

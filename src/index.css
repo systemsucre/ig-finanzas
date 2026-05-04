@@ -1846,6 +1846,81 @@ button:not(:disabled),
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Contenedor principal del encabezado */ 
+.banco-header-section {
+    padding: 10px 15px;
+    border-left: 4px solid #fbfbfb; /* Línea de acento azul BancoEstado */
+    margin-left: 5px;
+}
+
+/* Título Principal */
+.banco-title-main {
+    color: #ffffff; /* Casi negro para legibilidad alta */
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 2px;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Subtítulo descriptivo (opcional, pero le da el look de App) */
+.banco-subtitle {
+    color: #f7f7f7;
+    font-size: 0.85rem;
+    font-weight: 400;
+    margin: 0;
+}
+
+/* Ajuste para pantallas grandes */
+@media (min-width: 992px) {
+    .banco-header-section {
+        padding: 15px 25px;
+        margin-left: 0;
+    }
+    
+    .banco-title-main {
+        font-size: 1.7rem;
+    }
+}
+
+
+
+
+
 /* Contenedor principal de la navegación */
 .banco-nav-header {
   /* background: linear-gradient(to right, #ff6b00, #ff8c00); */
@@ -2026,7 +2101,7 @@ thead {
 
   .table-responsive-custom td {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
     text-align: right;
     border-bottom: 1px solid #f1f1f1;
@@ -2157,11 +2232,28 @@ thead {
   /* Ocultar celdas que no sirven en esta vista */
   .table-responsive-custom td {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     padding: 2px 0;
     border: none;
     white-space: normal;
   }
+
+  /* Flecha a la derecha estilo iOS/Android */
+  .table-responsive-custom tr::after {
+    content: '〉';
+    position: absolute;
+    right: 5px;
+    top: 40%;
+    color: #cbd5e0;
+    font-size: 0.8rem;
+  }
+
+  /* Escondemos los labels de "data-label" porque la app de banco no los usa */
+  .table-responsive-custom td::before {
+    display: none !important;
+  }
+}
+
 
   /* Estilo específico para la descripción (Giro, TEF, etc) */
   .td-descripcion {
@@ -2196,22 +2288,6 @@ thead {
     font-size: 0.7rem;
     justify-content: flex-start !important;
   }
-
-  /* Flecha a la derecha estilo iOS/Android */
-  .table-responsive-custom tr::after {
-    content: '〉';
-    position: absolute;
-    right: 5px;
-    top: 40%;
-    color: #cbd5e0;
-    font-size: 0.8rem;
-  }
-
-  /* Escondemos los labels de "data-label" porque la app de banco no los usa */
-  .table-responsive-custom td::before {
-    display: none !important;
-  }
-}
 
 
 
@@ -2352,23 +2428,41 @@ thead {
 
 /* Contenedor de los botones */
 .banco-tabs-container {
-    display: inline-flex;
+    display: flex;
     background: #f0f2f5;
     border-radius: 25px;
     padding: 4px;
-    align-self: flex-start; /* Se mantiene a la izquierda en móvil */
+    
+    /* Habilitar scroll horizontal */
+    overflow-x: auto; 
+    white-space: nowrap; /* Evita que los botones salten a la siguiente línea */
+    gap: 4px;
+    
+    /* Mejorar el scroll en móviles */
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    
+    /* Ocultar la barra de scroll para estética limpia */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+}
+
+/* Ocultar barra de scroll en Chrome, Safari y Opera */
+.banco-tabs-container::-webkit-scrollbar {
+    display: none;
 }
 
 .banco-tab-item {
+    flex: 0 0 auto; /* Importante: impide que los botones se encojan */
+    scroll-snap-align: start;
     border: none;
     background: transparent;
-    padding: 6px 14px;
+    padding: 8px 18px;
     border-radius: 22px;
     font-size: 0.8rem;
     font-weight: 600;
     color: #5f6368;
     transition: all 0.2s ease;
-    white-space: nowrap;
 }
 
 .banco-tab-item.active {

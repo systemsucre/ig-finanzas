@@ -70,7 +70,7 @@ export const DetallesBoleta = () => {
 
                     <div className="banco-nav-header">
                         <button className="banco-btn-back" onClick={() => navigate(-1)}>
-                            <FontAwesomeIcon icon={faChevronLeft} />
+                            <FontAwesomeIcon  icon={faChevronLeft   } />
                         </button>
                         <h1 className="banco-nav-title">Volver a Lista de Boletas</h1>
                     </div>

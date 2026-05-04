@@ -1,19 +1,22 @@
 import {
   faFileInvoiceDollar,
   faFilePdf,
+  faSearch,
 } from '@fortawesome/free-solid-svg-icons'; // Icono más acorde a gastos/salidas
 import DataTable from '../components/DataTable';
 import { InputUsuarioSearch } from '../components/input/elementos';
 import { ColumnsTableTramites } from './columnTableTramites';
 import { useTramites } from '../hooks/HookCustomTramites';
 import { LOCAL_URL } from '../Auth/config';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
 
 export function Movimientos() {
   const {
     handleSearch,
     tramites,
     tramitesFiltrados,
-    allListTramite,
+    allList,
     filterByEstado,
     cargando,
     filterByDelete,
@@ -22,85 +25,97 @@ export function Movimientos() {
   const enCurso = tramites.filter((t) => t.estado === 1).length;
   const paralizados = tramites.filter((t) => t.estado === 2).length;
   const finalizados = tramites.filter((t) => t.estado === 3).length;
-
+  const [tabActivo, setTabActivo] = useState('todos');
   return (
     <>
       <main className="container-xl mt-5" style={{ maxWidth: '100%' }}>
-        <div className="d-flex justify-content-between align-items-end mb-4">
-          <div>
-            <h3 className="text-dark fw-bold mb-0 p-2 text-titulos">
-              Ver Movimientos
-            </h3>
+
+        <div className="banco-header-section mb-4">
+          <div className="banco-title-container">
+            <h3 className="banco-title-main">Ver Movimientos</h3>
+            <p className="banco-subtitle">Revisa los movimientos registrados</p>
           </div>
         </div>
 
-        <div className="panel-custom bg-white rounded shadow-sm p-2 mx-2">
-          <div className="row align-items-center mb-3 g-3">
-            <div className="col-md-6">
-              <div className="d-flex1 gap-2">
-                <button
-                  className="btn btn-light btn-sm border text-success fw-bold"
-                  onClick={allListTramite}
-                >
-                  TODOS{' '}
-                  <span className="fw-bold mb-0 text-success">
-                    {tramites.length}
-                  </span>
-                </button>
-                <button
-                  className="btn btn-primary btn-sm border text-primary fw-bold"
-                  onClick={() => filterByEstado(1)}
-                >
-                  EN CURSO{' '}
-                  <span className="fw-bold mb-0 text-primary">{enCurso}</span>
-                </button>
-                <button
-                  className="btn btn-warningd btn-sm border text-danger fw-bold"
-                  onClick={() => filterByEstado(0)}
-                >
-                  PARALIZADOS{' '}
-                  <span className="fw-bold mb-0 text-danger">
-                    {paralizados}
-                  </span>
-                </button>
-                <button
-                  className="btn btn-warning1 btn-sm border text-warning fw-bold"
-                  onClick={() => filterByEstado(3)}
-                >
-                  FINALIZADOS{' '}
-                  <span className="fw-bold mb-0 text-warning">
-                    {finalizados}
-                  </span>
-                </button>
-                {tramites.filter((t) => t.eliminado == 0).length > 0 && (
-                  <button
-                    className="btn btn-danger btn-sm border text-white fw-bold"
-                    onClick={() => filterByDelete(0)}
-                  >
-                    RECICLAJE (
-                    <span className="fw-bold mb-0 text-white">
-                      {tramites.filter((t) => t.eliminado == 0).length}
-                    </span>
-                    )
-                  </button>
-                )}
-              </div>
-            </div>
-            <div className="col-md-6 d-flex justify-content-md-end">
-              <div
-                style={{
-                  width: '100%',
-                  maxWidth: '300px',
-                  paddingLeft: '5px',
-                  paddingTop: '10px',
+        <div className="panel-custom  rounded shadow-sm mx-2">
+          <div className="banco-filter-row">
+
+            <div className="banco-tabs-container">
+              <button
+                className={`banco-tab-item ${tabActivo === 'todos' ? 'active' : ''}`}
+                onClick={() => {
+                  allList();
+                  setTabActivo('todos');
                 }}
               >
-                <InputUsuarioSearch
-                  name="input-search-tramite"
-                  placeholder="Buscar por Codigo o numero..."
-                  onChange={handleSearch}
-                />
-              </div>
+                Todos<span className="banco-tab-count">({tramites.length})</span>
+              </button>
+              <button
+                className={`banco-tab-item ${tabActivo === 'en-curso' ? 'active' : ''}`}
+                onClick={() => {
+                  filterByEstado(1);
+                  setTabActivo('en-curso');
+                }}
+              >
+                EN CURSO <span className="banco-tab-count">({enCurso})</span>
+              </button>
+              <button
+                className={`banco-tab-item ${tabActivo === 'paralizados' ? 'active' : ''}`}
+                onClick={() => {
+                  filterByEstado(0);
+                  setTabActivo('paralizados');
+                }}
+              >
+                PARALIZADOS <span className="banco-tab-count">({paralizados})</span>
+              </button>
+              <button
+                className={`banco-tab-item ${tabActivo === 'finalizados' ? 'active' : ''}`}
+                onClick={() => {
+                  filterByEstado(3);
+                  setTabActivo('finalizados');
+                }}
+              >
+                FINALIZADOS <span className="banco-tab-count">({finalizados})</span>
+              </button>
+
+              {tramites.filter((t) => t.eliminado == 0).length > 0 && (
+                <button
+                  className={`banco-tab-item ${tabActivo === 'eliminados' ? 'active' : ''}`}
+                  onClick={() => {
+                    filterByDelete(0)
+                    setTabActivo('eliminados');
+
+                  }}
+                >
+                  RECICLAJE (
+                  <span className="banco-tab-count">
+                    {tramites.filter((t) => t.eliminado == 0).length}
+                  </span>
+                  )
+                </button>
+              )}
+            </div>
+
+            <div className="banco-search-wrapper">
+              {/* Icono de lupa posicionado absolutamente dentro del wrapper */}
+              <FontAwesomeIcon
+                icon={faSearch}
+                style={{
+                  position: 'absolute',
+                  left: '18px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  color: '#8e8e93',
+                  zIndex: 1
+                }}
+              />
+              <input
+                name="search-boleta"
+                               placeholder="Buscar por codigo o numero"
+
+                onChange={handleSearch}
+                className="banco-input-search"
+              />
             </div>
           </div>
 
@@ -125,7 +140,7 @@ export function Movimientos() {
                   className: 'btn btn-info py-1 px-3 x-small me-1 ml-2 mr-int',
                   icono: faFileInvoiceDollar, // Nuevo icono de factura/dinero
                   // Cambiamos la ruta a la lista de salidas
-                  enlace: LOCAL_URL + '/listar-ingresos',
+                  enlace: LOCAL_URL + '/listar-ingresos-por-movimiento',
                   label: 'Ver ingresos',
                 },
                 {

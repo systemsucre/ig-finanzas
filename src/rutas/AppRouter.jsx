@@ -59,6 +59,7 @@ import { ListaIngresosDeuda } from '../ingresos/ListaIngresosDeuda';
 import FormularioIngreso from '../ingresos/FormularioIngreso';
 import FormularioIngresoDeuda from '../ingresos/FormularioIngresoDeuda';
 import FormularioCompletarIngreso from '../ingresos/FormularioCompletarIngreso';
+import { ListaIngresosVista } from '../ingresos/ListaIngresosVista';
 
 export default function AppRouter() {
   const auth = useAuth();
@@ -429,6 +430,10 @@ export default function AppRouter() {
         {
           path: 'listar-salidas/:id',
           element: <Check component={ListaSalidas} roleRequired="all" />,
+        },
+               {
+          path: 'listar-ingresos-por-movimiento/:id',
+          element: <Check component={ListaIngresosVista} roleRequired="all" />,
         },
 
         {

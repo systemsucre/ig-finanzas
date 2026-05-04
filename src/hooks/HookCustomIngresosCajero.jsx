@@ -30,13 +30,15 @@ export const UseCustomIngresos = () => {
   const [cargando, setCargando] = useState(false);
 
   // 2. LISTAR INGRESOS DE UN TRÁMITE
-  const listarIngresosDirectos = async () => {
-    const res = await start(`${URL}ingresos/listar-ingresos-directos`);
+  const listarIngresosDirectos = async (id_tramite = null) => {
+    const res = await start(`${URL}ingresos/listar-ingresos-directos`, { id_tramite });
     if (res) {
       setIngresos(res);
       setIngresosFiltrados(res);
     }
   };
+
+
   const listarIngresosPendientes = async () => {
     const res = await start(`${URL}ingresos/listar-ingresos-pendientes`);
     if (res) {

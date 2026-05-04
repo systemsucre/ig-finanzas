@@ -1,73 +1,69 @@
+import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 export const ColumnsTableTramites = [
+  window.innerWidth > 877 ?
+    {
+      label: 'Numero',
+      field: 'numero',
+      render: (row) => (
+        <div className="td-numero">
+          <span className="ms-2"> {row.numero}</span>
+        </div>
+      )
+    } : {},
+
   {
-    label: 'Numero',
-    field: 'numero,',
-    render: (row) => (
-      <div>
-        {' '}
-        <span className="fw-bold text-primary" style={{ fontSize: '0.85rem' }}>
-          {row.numero}
-        </span>
-      </div>
-    ),
-  },
-  {
-    label: 'Código de Caja',
+    label: 'Caja',
     field: 'codigo',
     render: (row) => (
-      <div>
-        {' '}
-        <span className="fw-bold text-primary" style={{ fontSize: '0.85rem' }}>
-          {row.codigo}
-        </span>
+      <div className="td-descripcion">
+        <span className="ms-2">{row.codigo}</span>
       </div>
-    ),
+    )
   },
-  {
-    label: 'MONEDA',
-    field: 'sinmbolo',
-    render: (row) => (
-      <div>
-        {' '}
-        <span
-          className="badge bg-light text-dark border"
-          style={{ fontSize: '0.85rem' }}
-        >
-          {row.simbolo}
-        </span>
-      </div>
-    ),
-  },
+  window.innerWidth > 877 ?
+    {
+      label: 'MONEDA',
+      field: 'sinmbolo',
+      render: (row) => (
+        <div className="td-descripcion">
+          <span className="ms-2">{row.simbolo}</span>
+        </div>
+      ),
+    } : {},
   {
     label: 'Detalle',
     field: 'detalle',
     render: (row) => (
-      <small className="text-muted italic">
-        {row.detalle?.substring(0, 30)}...
-      </small>
-    ),
-  },
 
-  {
-    label: 'Tipo Caja',
-    field: 'nombre_tipo_tramite',
-    render: (row) => (
-      <span
-        className="badge bg-light text-dark border"
-        style={{ fontSize: '0.85rem' }}
-      >
-        {row.nombre_tipo_tramite?.toUpperCase()}
-      </span>
+      <div className="td-detalle">
+        {row.detalle?.substring(0, 60)}...
+      </div>
     ),
   },
+  window.innerWidth > 877 ?
+    {
+      label: 'Tipo Caja',
+      field: 'nombre_tipo_tramite',
+      render: (row) => (
+
+
+        <div className="td-numero">
+          <span className="ms-2">{row.nombre_tipo_tramite}</span>
+        </div>
+      ),
+    } : {},
+
+
   {
     label: 'Estado',
     field: 'estado',
     render: (row) => (
       <>
         <span
-          className={`badge ${row.estado === 1 ? 'text-success' : 'bg-warnsing text-warning'}`}
-          style={{ fontSize: '0.85rem' }}
+          className={`td-numero badge ${row.estado === 1 ? 'text-success' : 'bg-warnsing text-warning'}`}
+
         >
           {row.estado === 1
             ? 'EN CURSO'
@@ -77,8 +73,8 @@ export const ColumnsTableTramites = [
         </span>{' '}
         <br />
         <span
-          className={`badge ${row.eliminado === 0 ? 'text-danger' : 'bg-warnsing text-warning'}`}
-          style={{ fontSize: '0.85rem' }}
+          className={`td-numero badge ${row.eliminado === 0 ? 'text-danger' : 'bg-warnsing text-warning'}`}
+
         >
           {row.eliminado === 0 ? 'Eliminado' : ''}
         </span>
@@ -100,22 +96,20 @@ export const ColumnsTableTramites = [
       if (diasRestantes <= 3) color = 'text-danger fw-bold animate-pulse';
 
       return (
-        <div>
-          <div className="small text-muted" style={{ fontSize: '0.85rem' }}>
-            <i className="bi bi-calendar-check me-1"></i>
+        <>
+          <div className="td-numero" >
+            <FontAwesomeIcon className="me-2" icon={faCalendar} />
             Apertura: {new Date(row.fecha_ingreso).toLocaleDateString()}
-          </div>
-          <div className="small text-info" style={{ fontSize: '0.85rem' }}>
-            <i className="bi bi-calendar-x me-1"></i>
+            <br />
+            <FontAwesomeIcon className="me-2" icon={faCalendar} />
+
             Cierre estimado: {vencimiento.toLocaleDateString()}
-          </div>
-          <div className={`${color} mt-1`} style={{ fontSize: '0.85rem' }}>
-            <i className="bi bi-clock-history me-1"></i>
+            <br />
             {diasRestantes > 0
               ? `${diasRestantes} días restantes`
               : 'Plazo vencido'}
           </div>
-        </div>
+        </>
       );
     },
   },
