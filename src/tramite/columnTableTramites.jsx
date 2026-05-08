@@ -1,3 +1,4 @@
+
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -38,7 +39,7 @@ export const ColumnsTableTramites = [
     render: (row) => (
 
       <div className="td-detalle">
-        {row.detalle?.substring(0, 60)}...
+        {row.detalle?.substring(0, 100)}
       </div>
     ),
   },

@@ -135,7 +135,7 @@ const NavbarCajero = () => {
                   to={LOCAL_URL + '/cajero/ingresos-directos'}
                   className="submenu-link"
                 >
-                  Pagos Directos
+                  Pagos Directos  
                 </NavLink>
               </li>
             </ul>

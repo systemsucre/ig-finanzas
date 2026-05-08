@@ -55,7 +55,7 @@ export const DetallesBoleta = () => {
 
     const styles = {
         card: { borderRadius: '16px', border: 'none', overflow: 'hidden' },
-        headerIcon: { width: '45px', height: '45px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '12px' },
+        headerIcon: { width: '45px', height: '45px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '12px' }, 
         financeBox: { backgroundColor: '#f8f9fa', borderRadius: '10px', padding: '12px', borderLeft: '4px solid #4e73df' },
         tableHeader: { backgroundColor: '#2c3e50', color: '#fff', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px' },
         badgeStatus: { padding: '8px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 'bold' }
@@ -66,7 +66,7 @@ export const DetallesBoleta = () => {
             <main className="container-xl mt-5">
 
                 {/* CUERPO - TABLA DE ITEMS */}
-                <div className="panel-custom bg-whited rounded shadow-sm  mx-2" style={{ marginTop: '6rem' }} >
+                <div className="panel-custom  rounded shadow-sm  mx-2" style={{ marginTop: '6rem' }} >
 
                     <div className="banco-nav-header">
                         <button className="banco-btn-back" onClick={() => navigate(-1)}>

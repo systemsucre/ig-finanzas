@@ -274,7 +274,7 @@ const FormularioIngreso = () => {
                 </div> */}
                 <div className="col-md-12">
                   <label className="hospital-label w-100 mb-2">CAJA</label>
-
+ 
                   <Select
                     styles={customStyles}
                     placeholder={'Seleccione caja...'}

@@ -67,17 +67,16 @@ export function ListaHonorariosTramite() {
 
     return (
         <>
-            <main className="container-xl mt-3" style={{ maxWidth: "100%", padding: '5px' }}>
-                <div className="d-flex justify-content-between align-items-center mb-4 m-2">
-                    <div>
-                        <h3 className="text-dark fw-bold mb-0 text-titulos">Honorarios Profesionales</h3>
-                      
+            <main className="container-xl mt-3" style={{ maxWidth: "100%",  }}>
+
+                <div className="panel-custom rounded shadow-sm mx-2">
+                    <div className="banco-header-section">
+                        <div className="banco-title-container">
+                            <h3 className="banco-title-main">Honorarios Profesionales </h3>
+                            <p className="banco-subtitle">Ingreso de todos los trámites</p>
+                        </div>
                     </div>
-                </div>
-
-
-
-                <div className="panel-custom bg-white rounded shadow-sm p-2 mx-2">
+                    
                     <div className="row align-items-center mb-3 g-3">
                         <div className="col-md-6">
                             <div className="d-flex align-items-center gap-3">

@@ -43,7 +43,7 @@ export const ColumnsTable = [
   }:{},
 
   {
-    label: 'Caja',
+    label: 'Boleta',
     field: 'codigo',
     render: (row) => (
       <div className="td-descripcion">

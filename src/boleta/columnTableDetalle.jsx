@@ -71,7 +71,7 @@ export const ColumnsTableDetalle = [
 
             return (
                 <div className="td-monto" style={{ color: colorMonto }}>
-                    {prefijo}{row.simbolo} {Math.abs(row.monto).toLocaleString('es-CL')}
+                    {prefijo}{row.simbolo} {Math.abs(row.monto)}
                 </div>
             );
         }

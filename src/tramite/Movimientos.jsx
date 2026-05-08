@@ -24,7 +24,7 @@ export function Movimientos() {
   } = useTramites();
   const enCurso = tramites.filter((t) => t.estado === 1).length;
   const paralizados = tramites.filter((t) => t.estado === 2).length;
-  const finalizados = tramites.filter((t) => t.estado === 3).length;
+  const finalizados = tramites.filter((t) => t.estado === 3).length; 
   const [tabActivo, setTabActivo] = useState('todos');
   return (
     <>
@@ -133,7 +133,7 @@ export function Movimientos() {
                   // Cambiamos la ruta a la lista de salidas
                   enlace: LOCAL_URL + '/listar-salidas',
                   label: 'Ver Gastos',
-                },
+                },  
                 {
                   boton: null,
                   // Cambiamos a btn-success o btn-dark para diferenciarlo de "Editar"
