@@ -135,7 +135,7 @@ const NavbarCajero = () => {
                   to={LOCAL_URL + '/cajero/ingresos-directos'}
                   className="submenu-link"
                 >
-                  Pagos Directos  
+                  Pagos Directos
                 </NavLink>
               </li>
             </ul>
@@ -235,7 +235,7 @@ const NavbarCajero = () => {
               className="nav-link-item btn-nav-profile"
               onClick={(e) => e.preventDefault()}
             >
-              Mi Perfil
+               <FontAwesomeIcon icon={faUser} /> 
             </NavLink>
             <ul className="submenu-list mt-4">
               <li>
@@ -433,7 +433,7 @@ const NavbarCajero = () => {
                   className="mobile-link profile"
                   onClick={(e) => e.preventDefault()}
                 >
-                  <FontAwesomeIcon icon={faUser} /> 
+                  <FontAwesomeIcon icon={faUser} /> Mi Perfil
                 </NavLink>
                 <ul className="submenu-list mt-4">
                   <li>
