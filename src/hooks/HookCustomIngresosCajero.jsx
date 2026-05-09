@@ -323,6 +323,8 @@ export const UseCustomIngresos = () => {
       (i) =>
         i.codigo_tramite?.toLowerCase().includes(busqueda) ||
         i.detalle?.toLowerCase().includes(busqueda),
+      i.codigo_tramite?.toLowerCase().includes(busqueda) ||
+      String(i.numero).toLowerCase().includes(busqueda)
     );
     setIngresosFiltrados(filtrados);
   };
