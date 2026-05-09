@@ -1630,23 +1630,27 @@ button:not(:disabled),
   display: inline-block;
 }
 
-/* --- SUBMENÚS --- */
+/* --- EL SUBMENÚ (FLOTANTE) --- */
 .submenu-list {
   position: absolute;
   top: 100%;
+  /* Justo debajo del padding del padre */
   left: 0;
   background: #ffffff;
   min-width: 180px;
   list-style: none;
   padding: 10px 0;
-  margin-top: 2px;
+  margin: 10px 0 0 0;
   border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0, 51, 102, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   border: 1px solid #e2eefb;
+
+  /* Animación de entrada */
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.65, 0.05, 0.36, 1);
+  z-index: 1000;
 }
 /* --- ESTADO HOVER --- */
 .has-submenu:hover .submenu-list {
@@ -1763,7 +1767,7 @@ button:not(:disabled),
     transition: all 0.3s ease;
     padding: 10px 0;
     border-bottom: 1px solid rgba(0, 123, 255, 0.1);
-  }
+  } 
 
   .mobile-link {
     color: var(--bs-primary);
