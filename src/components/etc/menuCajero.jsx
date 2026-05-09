@@ -433,7 +433,7 @@ const NavbarCajero = () => {
                   className="mobile-link profile"
                   onClick={(e) => e.preventDefault()}
                 >
-                  <FontAwesomeIcon icon={faUser} /> Mi Perfil
+                  <FontAwesomeIcon icon={faUser} /> 
                 </NavLink>
                 <ul className="submenu-list mt-4">
                   <li>
