@@ -1507,77 +1507,73 @@ button:not(:disabled),
 /* --- NAVEGACIÓN BASE (CENTRADA Y AJUSTABLE) --- */
 .nav-main {
   position: fixed;
-  /* top: 5px; */
-  /* Tu margen superior */
-
-  /* EL SECRETO DEL CENTRADO CON MÁRGENES FIJOS */
-  /* left: 5px; */
-  /* right: 5px; */
-  width: calc(100% - 10px);
-  width: 100%;
-  /* 100% menos la suma de los márgenes (8px + 8px) */
-
-  height: 85px;
+  width: 100%; /* Ocupa todo el ancho de la ventana */
+  left: 0;
+  right: 0;
+  height: 80px;
   display: flex;
   align-items: center;
   z-index: 1000;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-
-  /* ESTILO VISUAL */
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-  /* Toque Pro: desenfoca el fondo de finanzas al pasar */
-  /* border-radius: 8px; */
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  /* Borde sutil para resaltar */
-
-  /* Eliminamos margin-left manual para que left/right hagan el trabajo */
-  margin: 0 auto;
+  transition: all 0.4s ease-in-out;
+  background: #ffffff;
+  border-bottom: 2px solid #f1f5f9;
 }
 
 .main-content {
-  /* Debe ser igual o mayor a la altura (height) de tu Navbar */
   padding-top: 5px;
-  min-height: calc(100vh - 85px);
-  /* background-color: var(--bs-light); */
+  min-height: calc(100vh - 80px);
 }
-
+/* Efecto al hacer scroll */
 .nav-scrolled {
   height: 70px;
-  background: transparent;
-  /* rgba(255, 255, 255, 0.85); */
-  backdrop-filter: blur(12px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  border-bottom: 1px solid rgba(0, 123, 255, 0.1);
+  background: #003366; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-bottom: none;
 }
 
+.nav-scrolled .brand-text,
+.nav-scrolled 
+.nav-scrolled .arrow {
+  color: #ffffff !important;
+}
+
+
+/* --- CONTENEDOR AJUSTADO A LOS BORDES --- */
 .nav-container {
-  width: 90%;
-  max-width: 1300px;
-  margin: 0 auto;
+  width: 100%; 
+  max-width: 100%; /* Eliminamos el límite de 1300px para que llegue a los cantos */
+  margin: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 15px; /* Pequeño respiro para que no pegue físicamente al monitor */
 }
 
-/* --- LOGO --- */
+/* --- LOGO (FIJO) --- */
 .nav-brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   text-decoration: none;
-  font-weight: 800;
-  font-size: 1.4rem;
-  color: #1e293b;
+  color: #003366;
+  flex-shrink: 0; /* Evita que el logo se comprima al haber muchos menús */
 }
 
-/* --- DESKTOP LINKS & ANIMACIONES --- */
+.brand-text {
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+/* --- OPTIMIZACIÓN DE LINKS PARA MUCHOS MENÚS --- */
 .nav-menu-desktop {
   display: flex;
   list-style: none;
-  gap: 35px;
+  gap: 8px; /* Espacio reducido entre menús para ganar espacio horizontal */
   align-items: center;
+  flex-grow: 1; /* Permite que el menú use el espacio disponible */
+  justify-content: flex-end; /* Empuja los menús hacia la derecha */
 }
+
 
 .nav-link-item {
   text-decoration: none;
@@ -1589,6 +1585,12 @@ button:not(:disabled),
   transition: color 0.3s ease;
 }
 
+
+.nav-link-item:hover {
+  background-color: #f0f7ff;
+  color: #0056b3;
+}
+ 
 /* Animación de la línea inferior */
 .nav-link-item::after {
   /* content: ''; */
@@ -1628,29 +1630,24 @@ button:not(:disabled),
   display: inline-block;
 }
 
-/* --- EL SUBMENÚ (FLOTANTE) --- */
+/* --- SUBMENÚS --- */
 .submenu-list {
   position: absolute;
   top: 100%;
-  /* Justo debajo del padding del padre */
   left: 0;
   background: #ffffff;
   min-width: 180px;
   list-style: none;
   padding: 10px 0;
-  margin: 10px 0 0 0;
+  margin-top: 2px;
   border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 25px rgba(0, 51, 102, 0.15);
   border: 1px solid #e2eefb;
-
-  /* Animación de entrada */
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
-  transition: all 0.3s cubic-bezier(0.65, 0.05, 0.36, 1);
-  z-index: 1000;
+  transition: all 0.2s ease;
 }
-
 /* --- ESTADO HOVER --- */
 .has-submenu:hover .submenu-list {
   opacity: 1;
@@ -1665,38 +1662,32 @@ button:not(:disabled),
 /* --- LINKS DEL SUBMENÚ --- */
 .submenu-link {
   display: block;
-  padding: 10px 20px;
+  padding: 8px 15px;
   text-decoration: none;
-  color: #64748b;
-  font-size: 0.9rem;
+  color: #334155;
+  font-size: 0.8rem;
   font-weight: 500;
-  transition: all 0.2s ease;
 }
 
 .submenu-link:hover {
-  background-color: #f0f7ff;
-  color: #007bff;
-  padding-left: 25px;
-  /* Efecto de desplazamiento */
+  background-color: #003366;
+  color: #ffffff !important;
 }
 
-/* --- BOTÓN PERFIL --- */
+/* --- PERFIL --- */
 .btn-nav-profile {
-  padding: 10px 22px;
-  border-radius: 50px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-
-  margin-top: 20px;
-  color: #198754;
-  border-bottom: none;
-  background: rgba(25, 135, 84, 0.05);
-  padding: 15px;
-  border-radius: 12px;
-  text-align: center;
-  font-weight: 700;
+  background: #f1f5f9;
+  width: 35px;
+  height: 35px;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50% !important;
+  color: #003366 !important;
+  margin-left: 5px;
+  flex-shrink: 0;
 }
+
 
 .btn-nav-profile:hover {
   border: 1px solid #007bff;
@@ -1823,146 +1814,15 @@ button:not(:disabled),
 
 
 
-/* MENU - Banking Style (Full Width Edition) */
 
-/* --- NAVEGACIÓN BASE (ANCHO COMPLETO) --- */
-.nav-main {
-  position: fixed;
-  width: 100%; /* Ocupa todo el ancho de la ventana */
-  left: 0;
-  right: 0;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  z-index: 1000;
-  transition: all 0.4s ease-in-out;
-  background: #ffffff;
-  border-bottom: 2px solid #f1f5f9;
-}
 
-.main-content {
-  padding-top: 5px;
-  min-height: calc(100vh - 80px);
-}
 
-/* Efecto al hacer scroll */
-.nav-scrolled {
-  height: 70px;
-  background: #003366; 
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-bottom: none;
-}
 
-.nav-scrolled .brand-text,
-.nav-scrolled .nav-link-item,
-.nav-scrolled .arrow {
-  color: #ffffff !important;
-}
 
-/* --- CONTENEDOR AJUSTADO A LOS BORDES --- */
-.nav-container {
-  width: 100%; 
-  max-width: 100%; /* Eliminamos el límite de 1300px para que llegue a los cantos */
-  margin: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 15px; /* Pequeño respiro para que no pegue físicamente al monitor */
-}
 
-/* --- LOGO (FIJO) --- */
-.nav-brand {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-  color: #003366;
-  flex-shrink: 0; /* Evita que el logo se comprima al haber muchos menús */
-}
 
-.brand-text {
-  font-size: 1.1rem;
-  letter-spacing: 0.5px;
-}
 
-/* --- OPTIMIZACIÓN DE LINKS PARA MUCHOS MENÚS --- */
-.nav-menu-desktop {
-  display: flex;
-  list-style: none;
-  gap: 8px; /* Espacio reducido entre menús para ganar espacio horizontal */
-  align-items: center;
-  flex-grow: 1; /* Permite que el menú use el espacio disponible */
-  justify-content: flex-end; /* Empuja los menús hacia la derecha */
-}
 
-.nav-link-item {
-  text-decoration: none;
-  color: #475569;
-  font-weight: 600;
-  font-size: 0.82rem; /* Fuente ligeramente más pequeña para mejorar la densidad */
-  padding: 6px 8px; /* Padding más compacto */
-  border-radius: 6px;
-  transition: all 0.3s ease;
-  white-space: nowrap; /* Evita que los nombres largos se dividan en dos líneas */
-}
-
-.nav-link-item:hover {
-  background-color: #f0f7ff;
-  color: #0056b3;
-}
-
-/* --- SUBMENÚS --- */
-.submenu-list {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: #ffffff;
-  min-width: 180px;
-  list-style: none;
-  padding: 10px 0;
-  margin-top: 2px;
-  border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0, 51, 102, 0.15);
-  border: 1px solid #e2eefb;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
-  transition: all 0.2s ease;
-}
-
-.has-submenu:hover .submenu-list {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.submenu-link {
-  display: block;
-  padding: 8px 15px;
-  text-decoration: none;
-  color: #334155;
-  font-size: 0.8rem;
-  font-weight: 500;
-}
-
-.submenu-link:hover {
-  background-color: #003366;
-  color: #ffffff !important;
-}
-
-/* --- PERFIL --- */
-.btn-nav-profile {
-  background: #f1f5f9;
-  width: 35px;
-  height: 35px;
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50% !important;
-  color: #003366 !important;
-  margin-left: 5px;
-  flex-shrink: 0;
-}
 
 
 
