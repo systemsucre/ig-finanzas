@@ -87,7 +87,7 @@ const NavbarAuxiliar = () => {
           <li className="nav-action">
             <div className="nav-item-container has-submenu">
               <NavLink to="#" className="nav-link-item btn-nav-profile" onClick={(e) => e.preventDefault()}>
-                Mi Perfil
+                 <FontAwesomeIcon icon={faUser} /> 
               </NavLink>
               <ul className="submenu-list mt-4">
                 <li><NavLink to={"#"} className="submenu-link" onClick={() => auth.logout()}>Cerrar sesion <FontAwesomeIcon icon={faPowerOff} /></NavLink></li>
