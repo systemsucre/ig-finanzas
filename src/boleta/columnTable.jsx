@@ -14,7 +14,7 @@ export const ColumnsTable = [
           {/* Cabecera con icono de calendario */}
           <div className="fecha-header">
             {/* <i className="bi bi-calendar3 me-2"></i> */}
-            <FontAwesomeIcon className="me-2" icon={faCalendarAlt } />
+            <FontAwesomeIcon className="me-2" icon={faCalendarAlt} />
             {info.fechaLarga}
             {/* Hora (solo se muestra si existe) */}
             {info.hora && (
@@ -31,38 +31,47 @@ export const ColumnsTable = [
     }
   },
 
-  window.innerWidth > 877 ? 
-  {
-    label: 'Numero Boleta',
-    field: 'numero_boleta',
-    render: (row) => (
-      <div className="td-numero">
-        <span className="ms-2"> {row.numero_boleta}</span>
-      </div>
-    )
-  }:{},
-
-  {
-    label: 'Boleta',
-    field: 'codigo',
-    render: (row) => (
-      <div className="td-descripcion">
-        <span className="ms-2">{row.codigo_boleta}</span>
-      </div>
-    )
-  },
-window.innerWidth > 877 ?
-  {
-    label: 'Items',
-    field: '_items',
-    render: (row) => (
-      <div className="text-center">
-        <span className="fw-bold text-dark" style={{ fontSize: '0.85rem' }}>
-          {row.total_items}
-        </span>
-      </div>
-    ),
-  }:{},
+  window.innerWidth > 877 ?
+    {
+      label: 'Numero Boleta',
+      field: 'numero_boleta',
+      render: (row) => (
+        <div className="td-numero">
+          <span className="ms-2"> {row.numero_boleta}</span>
+        </div>
+      )
+    } : {},
+  window.innerWidth > 877 ?
+    {
+      label: 'Boleta',
+      field: 'codigo',
+      render: (row) => (
+        <div className="td-descripcion">
+          <span className="ms-2">{row.codigo_boleta}</span>
+        </div>
+      )
+    } : {
+      label: 'Boleta',
+      field: 'codigo',
+      render: (row) => (
+        <div className="">
+          <span className="td-numero">Caja .- </span>
+          <span className="td-descripcion">{row.codigo_boleta}</span>
+        </div>
+      )
+    },
+  window.innerWidth > 877 ?
+    {
+      label: 'Items',
+      field: '_items',
+      render: (row) => (
+        <div className="text-center">
+          <span className="fw-bold text-dark" style={{ fontSize: '0.85rem' }}>
+            {row.total_items}
+          </span>
+        </div>
+      ),
+    } : {},
 
   window.innerWidth > 877 ?
     {
@@ -81,7 +90,7 @@ window.innerWidth > 877 ?
     label: 'Usuario Registrador',
     field: 'solicitante',
     render: (row) => (
-       <div className="td-numero">
+      <div className="td-numero">
         <span className="ms-2"> {row.solicitado_por}</span>
       </div>
     ),

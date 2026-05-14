@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { INPUT } from "../Auth/config";
 import { InputUsuarioStandard, Select1 } from '../components/input/elementos';
 import { useUsuarios } from "../hooks/HookCustomUsuarios";
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const NuevoUsuario = () => {
     // 1. Obtenemos el ID de la URL
@@ -14,7 +16,7 @@ const NuevoUsuario = () => {
         setters,
         roles,
         guardarUsuario,
-        usuariosFiltrados   
+        usuariosFiltrados
     } = useUsuarios();
 
     // 3. DESESTRUCTURACIÓN: Extraemos las funciones individuales del objeto setters
@@ -45,25 +47,25 @@ const NuevoUsuario = () => {
     }, [id, usuariosFiltrados, setNombre, setAp1, setAp2, setCi, setCelular, setDireccion, setUsername, setIdRol, setEstado]);
 
     return (
-        <main className="login-wrapper d-flex align-items-center justify-content-center py-5" style={{ minHeight: '100vh' }}>
+        <main className="login-wrapper d-flex align-items-center justify-content-center py-5" style={{ minHeight: '100vh', background: '#F8FAFC' }}>
             <section className="container">
                 <div className="row justify-content-center">
-                    <div className="col-12 col-md-11 col-lg-9 col-xl-8 animate-fade-in">
-                        <div className="login-card shadow-clinical p-4 p-md-5 bg-white" style={{  border: 'none', marginTop:'2rem' }}>
+                    <div className="col-12 col-md-11 col-lg-8 col-xl-7 animate-fade-in">
+                        <div className="login-card shadow-banking border-0 bg-white" style={{ borderRadius: '24px', overflow: 'hidden' }}>
 
-                            {/* Encabezado Dinámico */}
-                            <div className="text-center mb-5">
-                                <div className="icon-pulse mb-3">
-                                    <span className="fs-1">{id ? '📝' : '👤'}</span>
-                                </div>
-                                <h2 className="h3 fw-black text-primary text-uppercase m-0">
-                                    {id ? 'Actualizar Usuario' : 'Registro de Usuario'}
+                            <div className="p-4 text-center cabecera-formulario">
+                                <h2 className="h4 fw-bold m-0 text-uppercase tracking-wider">
+                                    {id ? 'Actualizar Ficha de Usuario' : 'Registro de Nuevo Usuario'}
                                 </h2>
-                                <p className="text-muted small">Gestión de Personal - KR Estudios</p>
                             </div>
-
+ 
                             <form className="row g-3" onSubmit={(e) => guardarUsuario(e, id ? id : null)}>
-
+                                <div className="col-12 mb-2">
+                                    <span className="badge bg-light text-primary p-2 px-3 rounded-pill">
+                                        <FontAwesomeIcon icon={faInfoCircle} className="me-2" />
+                                        Datos Personales: Completa los campos para registrar el usuario. Asegúrate de ingresar información precisa para un mejor seguimiento.
+                                    </span>
+                                </div>
                                 {/* Datos Personales */}
                                 <div className="col-md-4">
                                     <InputUsuarioStandard
@@ -84,7 +86,7 @@ const NuevoUsuario = () => {
                                         estado={estados.ap2} cambiarEstado={setters.setAp2}
                                         tipo='text' name='ap2' etiqueta='Segundo Apellido'
                                         placeholder="Ej. Gomez" ExpresionRegular={INPUT.NOMBRE}
-                                        importante = {false}
+                                        importante={false}
                                     />
                                 </div>
 
@@ -127,7 +129,7 @@ const NuevoUsuario = () => {
 
                                 <div className="col-md-6">
                                     <InputUsuarioStandard
-                                        estado={estados.username} cambiarEstado={setters.setUsername} mayusculas ={false}
+                                        estado={estados.username} cambiarEstado={setters.setUsername} mayusculas={false}
                                         tipo='text' name='username' etiqueta='Nombre de Usuario *'
                                         placeholder="juan.perez" ExpresionRegular={INPUT.INPUT_USUARIO}
                                     />
@@ -139,13 +141,25 @@ const NuevoUsuario = () => {
                                         etiqueta={id ? 'Nueva Contraseña (Opcional)' : 'Contraseña *'}
                                         placeholder="Dejar en blanco para no cambiar"
                                         ExpresionRegular={id ? null : INPUT.PASSWORD}
-                                        importante = {false}
+                                        importante={false}
                                     />
                                 </div>
 
-                                <div className="col-12 p-3 text-end">
-                                    <button type="submit" className={`btn ${id ? ` btn-info` : ` btn-success`} px-5 py-2 fw-bold shadow-sm`}>
-                                        {id ? 'GUARDAR CAMBIOS' : 'REGISTRAR USUARIO'}
+
+                                <div className="col-12 d-flex flex-column flex-md-row justify-content-end gap-3 mt-5 pt-4 border-top">
+                                    <button
+                                        type="button"
+                                        className="btn btn-banking-cancel order-2 order-md-1"
+                                        onClick={() => window.history.back()}
+                                    >
+                                        CANCELAR
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        className={`btn ${id ? 'btn-banking-blue' : 'btn-banking-gold'} order-1 order-md-2 px-5`}
+                                    >
+                                        {/* <FontAwesomeIcon icon={faCheckCircle} className="me-2" /> */}
+                                        <span>             {id ? 'GUARDAR CAMBIOS' : 'REGISTRAR USUARIO'}</span>
                                     </button>
                                 </div>
                             </form>

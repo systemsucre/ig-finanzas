@@ -10,6 +10,73 @@ import toast from 'react-hot-toast';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUnlock } from '@fortawesome/free-solid-svg-icons';
 
+
+// src/utils/auditoria.js
+
+export const getDatosAuditoria = async () => {
+    const ua = navigator.userAgent;
+    let navegadorReal = "Chromium / Desconocido";
+
+    // 1. Detección de Navegadores (El orden importa)
+    if (navigator.brave && await navigator.brave.isBrave()) {
+        navegadorReal = "Brave";
+    } else if (ua.includes("Opera") || ua.includes("OPR")) {
+        navegadorReal = "Opera";
+    } else if (ua.includes("Edg")) {
+        navegadorReal = "Microsoft Edge";
+    } else if (ua.includes("Firefox")) {
+        navegadorReal = "Firefox";
+    } else if (ua.includes("Chrome") && !ua.includes("Chromium")) {
+        navegadorReal = "Google Chrome";
+    } else if (ua.includes("Safari") && !ua.includes("Chrome")) {
+        navegadorReal = "Safari (Apple)";
+    }
+
+    // 2. Detección de Sistema Operativo (Incluyendo iMac/iPhone)
+    let so = "Otro";
+    if (ua.includes("Win")) so = "Windows";
+    if (ua.includes("Mac")) {
+        // Diferenciamos si es iPad/iPhone o Computadora Mac (iMac/MacBook)
+        so = (navigator.maxTouchPoints > 0) ? "iOS (iPad/iPhone)" : "macOS (iMac/MacBook)";
+    }
+    if (ua.includes("Linux")) so = "Linux";
+    if (ua.includes("Android")) so = "Android";
+
+    // 3. IP Pública (Servicio externo)
+    let ipPublica = "No disponible";
+    try {
+        const res = await fetch('https://api.ipify.org?format=json');
+        const data = await res.json();
+        ipPublica = data.ip;
+    } catch (e) {
+        console.warn("Fallo al obtener IP");
+    }
+
+    return {
+        // Identificación de Software
+        navegador: navegadorReal,
+        sistema_operativo: so,
+        dispositivo: navigator.platform,
+        idioma: navigator.language,
+
+        // Hardware del Usuario
+        pantalla: `${window.screen.width}x${window.screen.height}`,
+        nucleos: navigator.hardwareConcurrency || 'N/D',
+        ram_estimada: navigator.deviceMemory ? `${navigator.deviceMemory} GB` : 'N/D',
+
+        // Datos de Red y Entorno
+        ip_publica: ipPublica,
+        zona_horaria: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        agente_completo: ua,
+        
+        // Metadata de sesión
+        fecha_ingreso: new Date().toLocaleString('es-BO', { timeZone: 'America/La_Paz' }),
+        cookies_habilitadas: navigator.cookieEnabled
+    };
+};
+const datosAuditoriaExtra = await getDatosAuditoria();
+
+
 const HomeLogin = () => {
 
     const [usuario, setUsuario] = useState({ campo: null, valido: null })
@@ -50,42 +117,53 @@ const HomeLogin = () => {
             localStorage.removeItem('nombreUsuario'); // Limpiar también el usuario si existe
         }
     };
+
     const iniciarSesion = async (e) => {
         e.preventDefault();
+
         if (usuario.campo && password.campo) {
-            // auth.login('ok')
-            // localStorage.setItem('numRol', 1)
-            axios.get(URL, {
-                params: {
-                    'intel': usuario.campo,
-                    // 'power': '8989389892njn89h8982njcnjnskdjcn909u09j3oi2n3i2093j2kn3k23',
-                    'viva': md5(password.campo),
-                    // 'tigo': 'juana',
-                    // 'start': 'garay',
-                    // 'pass': '7827huin3jnud3978EEy9uhn88839j8nld32d23d32dcdsvDFDEewrer',
-                }
-            }).then(json => {
+            // Definimos el objeto con los datos a enviar
+            const body = {
+                datosAuditoriaExtra,
+                intel: usuario.campo,
+                viva: md5(password.campo), // Sigue usando el hash md5 para la password
+            };
 
-                if (json.data.ok) {
-                    localStorage.setItem('tiempo', new Date().getMinutes())
-                    localStorage.setItem("token", json.data.token)
-                    localStorage.setItem('username', json.data.username)
-                    localStorage.setItem('nombre', json.data.nombre)
-                    localStorage.setItem('rol', json.data.rol_des)
-                    localStorage.setItem('numRol', json.data.numRol)
-                    localStorage.setItem('id_', json.data.id_)
-                    localStorage.setItem('entidad', json.data.entidad)
-                    localStorage.setItem('moneda', json.data.moneda)
-                    auth.login('ok')
-                }
-                else
-                    toast.error(json.data.msg)
-            }).catch(function (error) {
-                toast.error(error.toJSON().message);
-            });
-        } else toast.error('Introduzca sus credenciales de acceso')
-    }
+            try {
+                // Cambiamos axios.get por axios.post
+                // Nota: En POST, el segundo argumento es el 'body', no se usa 'params'
+                const response = await axios.post(URL, body);
 
+                const json = response.data;
+
+                if (json.ok) {
+                    // Guardamos la sesión
+                    localStorage.setItem('tiempo', new Date().getMinutes());
+                    localStorage.setItem("token", json.token);
+                    localStorage.setItem('username', json.username);
+                    localStorage.setItem('nombre', json.nombre);
+                    localStorage.setItem('rol', json.rol_des);
+                    localStorage.setItem('numRol', json.numRol);
+                    localStorage.setItem('id_', json.id_);
+                    localStorage.setItem('entidad', json.entidad);
+                    localStorage.setItem('moneda', json.moneda);
+                    localStorage.setItem('idSesion', json.idSesion); // Guardamos el ID de sesión
+
+                    // Si el usuario marcó "Recordarme", guardamos su nombre en localStorage
+
+                    auth.login('ok');
+                } else {
+                    toast.error(json.msg);
+                }
+            } catch (error) {
+                // Manejo de errores de conexión o servidor
+                const errorMsg = error.response?.data?.msg || error.message;
+                toast.error(errorMsg);
+            }
+        } else {
+            toast.error('Introduzca sus credenciales de acceso');
+        }
+    };
 
     return (
         <main className="login-wrapper d-flex align-items-center justify-content-center vh-100">
@@ -143,7 +221,7 @@ const HomeLogin = () => {
                                         onChange={handleCheckboxChange}
                                         etiqueta='Recordarme'
                                     />
-                                    <a  href="https://wa.me/+59171166513" className="text-primary fw-bold">¿Olvidó su clave?</a>
+                                    <a href="https://wa.me/+59171166513" className="text-primary fw-bold">¿Olvidó su clave?</a>
                                 </div>
 
                                 <button type="submit" className="btn btn-dark-clinical w-100 py-3 shadow-sm" >

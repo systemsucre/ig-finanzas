@@ -55,7 +55,7 @@ export const DetallesBoleta = () => {
 
     const styles = {
         card: { borderRadius: '16px', border: 'none', overflow: 'hidden' },
-        headerIcon: { width: '45px', height: '45px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '12px' }, 
+        headerIcon: { width: '45px', height: '45px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '12px' },
         financeBox: { backgroundColor: '#f8f9fa', borderRadius: '10px', padding: '12px', borderLeft: '4px solid #4e73df' },
         tableHeader: { backgroundColor: '#2c3e50', color: '#fff', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px' },
         badgeStatus: { padding: '8px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 'bold' }
@@ -63,14 +63,14 @@ export const DetallesBoleta = () => {
     // console.log(itemsBoleta)
     return (
         !cargando ?
-            <main className="container-xl mt-5">
+            <main className="container-xls" style={{ maxWidth: "100%", marginTop: '0' }}>
 
                 {/* CUERPO - TABLA DE ITEMS */}
                 <div className="panel-custom  rounded shadow-sm  mx-2" style={{ marginTop: '6rem' }} >
 
                     <div className="banco-nav-header">
                         <button className="banco-btn-back" onClick={() => navigate(-1)}>
-                            <FontAwesomeIcon  icon={faChevronLeft   } />
+                            <FontAwesomeIcon icon={faChevronLeft} />
                         </button>
                         <h1 className="banco-nav-title">Volver a Lista de Boletas</h1>
                     </div>
@@ -117,6 +117,13 @@ export const DetallesBoleta = () => {
                                             // Convertimos el string "10.00" a número flotante
                                             return acumulador + parseFloat(item.monto);
                                         }, 0)?.toFixed(2)} {itemsBoleta[0]?.simbolo}
+                                </span>
+                            </div>
+
+                            <div className="banco-grid-item text-end">
+                                <span className="banco-grid-label">Usuario</span>
+                                <span className="banco-grid-value" style={{fontSize:'0.75rem'}}>
+                                    {itemsBoleta[0]?.solicitado_por}
                                 </span>
                             </div>
                         </div>

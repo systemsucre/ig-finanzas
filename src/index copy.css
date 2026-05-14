@@ -12,15 +12,12 @@
   opacity: 0.5 !important;
 }
 
-
-
 .carrito {
   background-color: transparent;
   border: none;
   max-width: 2rem;
   position: relative;
   z-index: 100;
-
 }
 
 .carrito #carrito {
@@ -80,7 +77,7 @@
   --bs-teal: #20c997;
   --bs-cyan: #0dcaf0;
   --bs-black: #000;
-  --bs-white: #FFF;
+  --bs-white: #fff;
   --bs-gray: #6c757d;
   --bs-gray-dark: #343a40;
   --bs-gray-100: #f8f9fa;
@@ -112,15 +109,22 @@
   --bs-black-rgb: 0, 0, 0;
   --bs-body-color-rgb: 33, 37, 41;
   --bs-body-bg-rgb: 255, 255, 255;
-  --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-  --bs-body-font-family: Outfit, sans-serif;
+  --bs-font-sans-serif:
+    system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans',
+    'Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+  --bs-font-monospace:
+    SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+    monospace;
+  --bs-gradient: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.15),
+      rgba(255, 255, 255, 0));
+  --bs-body-font-family: 'Inter', sans-serif;
   --bs-body-font-size: 1rem;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
   --bs-body-color: #212529;
-  --bs-body-bg: #FFF;
+  --bs-body-bg: #fff;
   --bs-border-width: 1px;
   --bs-border-style: solid;
   --bs-border-color: #dee2e6;
@@ -131,19 +135,16 @@
   --bs-border-radius-xl: 1rem;
   --bs-border-radius-2xl: 2rem;
   --bs-border-radius-pill: 50rem;
-  --bs-link-color: #FFF;
-  --bs-link-hover-color: #FFF;
+  --bs-link-color: #fff;
+  --bs-link-hover-color: #fff;
   --bs-code-color: #d63384;
   --bs-highlight-bg: #fff3cd;
-
-
 
   --hospital-blue: #007bff;
   --hospital-blue-rgb: 0, 123, 255;
   --clinical-bg: #f0f4f8;
   --text-main: #2c3e50;
   --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-
 
   /* Tipografía y Cuerpo */
   --bs-body-font-family: 'Outfit', sans-serif;
@@ -188,7 +189,7 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   /* --- FONDO OPTIMIZADO --- */
-  background-image: url("/img/fondo1.png");
+  background-image: url('/img/fondo1.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -208,8 +209,6 @@ body {
   flex-direction: column;
 }
 
-
-
 /* @media (max-width: 800px) {
   body {
     transform: scale(0.95);
@@ -217,7 +216,7 @@ body {
 } */
 
 .border-status-ok {
-  border: 1px solid var(--bs-info)
+  border: 1px solid var(--bs-info);
 }
 
 h3,
@@ -337,20 +336,16 @@ th {
   border-color: inherit;
   border-style: solid;
   border-width: 0;
+  /* font-size: 14px; */
 }
 
 button {
   border-radius: 0;
 }
 
-.mb-4 {
-  margin-bottom: 1.5rem;
-}
-
 button:focus:not(:focus-visible) {
   outline: 0;
 }
-
 
 button {
   margin: 0;
@@ -364,12 +359,12 @@ button {
 }
 
 button,
-[type=button] {
+[type='button'] {
   -webkit-appearance: button;
 }
 
 button:not(:disabled),
-[type=button]:not(:disabled) {
+[type='button']:not(:disabled) {
   cursor: pointer;
 }
 
@@ -430,7 +425,6 @@ button:not(:disabled),
   height: auto;
 }
 
-
 .container-xl {
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
@@ -439,15 +433,12 @@ button:not(:disabled),
   padding-left: calc(var(--bs-gutter-x) * 0.5); */
   margin-right: auto;
   margin-left: auto;
-  padding-top: 6rem;
 }
 
 @media (max-width: 500px) {
   .container-xl {
-
     padding-right: 0;
     padding-left: 0;
-
   }
 }
 
@@ -491,10 +482,6 @@ button:not(:disabled),
   flex: 0 0 auto;
   width: 100%;
 }
-
-
-
-
 
 .col-4 {
   flex: 0 0 auto;
@@ -608,7 +595,14 @@ button:not(:disabled),
     flex: 0 0 auto;
     width: 66.66666667%;
   }
+}
 
+.mr {
+  margin-right: 20px;
+}
+
+.mr-int {
+  margin-right: 2px;
 }
 
 .table {
@@ -657,9 +651,10 @@ button:not(:disabled),
   --bs-btn-border-color: transparent;
   --bs-btn-border-radius: 0;
   --bs-btn-hover-border-color: transparent;
-  --bs-btn-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
+  --bs-btn-box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
   --bs-btn-disabled-opacity: 0.65;
-  --bs-btn-focus-box-shadow: 0 0 0 0.25rem rgba(var(--bs-btn-focus-shadow-rgb), .5);
+  --bs-btn-focus-box-shadow: 0 0 0 0.25rem rgba(var(--bs-btn-focus-shadow-rgb), 0.5);
   display: inline-block;
   padding: var(--bs-btn-padding-y) var(--bs-btn-padding-x);
   font-family: var(--bs-btn-font-family);
@@ -676,6 +671,8 @@ button:not(:disabled),
   background-color: var(--bs-btn-bg);
   border-radius: 10px;
 
+  font-size: 10px !important;
+  text-transform: uppercase;
   transition: var(--bs-transition);
 }
 
@@ -698,7 +695,6 @@ button:not(:disabled),
     font-size: 8px;
   }
 }
-
 
 @media (max-width: 400px) {
   .d-flex1 .btn {
@@ -769,21 +765,36 @@ button:not(:disabled),
   text-decoration: none;
 }
 
+.fw-bold {
+  /* font-size: 0.75rem; */
+}
+
 .btn-danger {
-  --bs-btn-color: #FFF;
+  --bs-btn-color: #fff;
   --bs-btn-bg: #dc3545;
   --bs-btn-border-color: #dc3545;
-  --bs-btn-hover-color: #FFF;
+  --bs-btn-hover-color: #fff;
   --bs-btn-hover-bg: #bb2d3b;
   --bs-btn-hover-border-color: #b02a37;
   --bs-btn-focus-shadow-rgb: 225, 83, 97;
-  --bs-btn-active-color: #FFF;
+  --bs-btn-active-color: #fff;
   --bs-btn-active-bg: #b02a37;
   --bs-btn-active-border-color: #a52834;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #FFF;
+  --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: #dc3545;
   --bs-btn-disabled-border-color: #dc3545;
+}
+
+.btn-orange {
+  background-color: var(--bs-orange);
+  color: white;
+}
+
+.btn-orange:hover {
+  background-color: white;
+  color: var(--bs-orange);
+  border: 1px solid var(--bs-orange);
 }
 
 .btn-warning {
@@ -807,18 +818,18 @@ button:not(:disabled),
 }
 
 .btn-secondary {
-  --bs-btn-color: #FFF;
+  --bs-btn-color: #fff;
   --bs-btn-bg: #6c757d;
   --bs-btn-border-color: #6c757d;
-  --bs-btn-hover-color: #FFF;
+  --bs-btn-hover-color: #fff;
   --bs-btn-hover-bg: #5c636a;
   --bs-btn-hover-border-color: #565e64;
   --bs-btn-focus-shadow-rgb: 130, 138, 145;
-  --bs-btn-active-color: #FFF;
+  --bs-btn-active-color: #fff;
   --bs-btn-active-bg: #565e64;
   --bs-btn-active-border-color: #51585e;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #FFF;
+  --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: #6c757d;
   --bs-btn-disabled-border-color: #6c757d;
 }
@@ -845,7 +856,6 @@ button:not(:disabled),
   /* Estilo típico de los botones de FB */
 }
 
-
 .btn-info {
   --bs-btn-color: #000;
   --bs-btn-bg: #0dcaf0;
@@ -863,26 +873,24 @@ button:not(:disabled),
   --bs-btn-disabled-border-color: #0dcaf0;
 }
 
-
 .btn-pdf {
-  --bs-btn-color: #FFF;
+  --bs-btn-color: #fff;
   --bs-btn-bg: #dc3545;
   --bs-btn-border-color: #dc3545;
-  --bs-btn-hover-color: #FFF;
+  --bs-btn-hover-color: #fff;
   --bs-btn-hover-bg: #bb2d3b;
   --bs-btn-hover-border-color: #b02a37;
   --bs-btn-focus-shadow-rgb: 225, 83, 97;
-  --bs-btn-active-color: #FFF;
+  --bs-btn-active-color: #fff;
   --bs-btn-active-bg: #b02a37;
   --bs-btn-active-border-color: #a52834;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #FFF;
+  --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: #dc3545;
   --bs-btn-disabled-border-color: #dc3545;
   color: #dc3545;
   background-color: white;
 }
-
 
 .btn-success {
   --bs-btn-color: #fff;
@@ -900,22 +908,21 @@ button:not(:disabled),
   --bs-btn-disabled-bg: #198754;
   --bs-btn-disabled-border-color: #198754;
   /* border-radius: 4px; */
-
 }
 
 .btn-dark {
-  --bs-btn-color: #FFF;
+  --bs-btn-color: #fff;
   --bs-btn-bg: #262626;
   --bs-btn-border-color: #262626;
-  --bs-btn-hover-color: #FFF;
+  --bs-btn-hover-color: #fff;
   --bs-btn-hover-bg: #474747;
   --bs-btn-hover-border-color: #3c3c3c;
   --bs-btn-focus-shadow-rgb: 71, 71, 71;
-  --bs-btn-active-color: #FFF;
+  --bs-btn-active-color: #fff;
   --bs-btn-active-bg: #515151;
   --bs-btn-active-border-color: #3c3c3c;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #FFF;
+  --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: #262626;
   --bs-btn-disabled-border-color: #262626;
   border-radius: 5px;
@@ -963,7 +970,6 @@ button:not(:disabled),
   padding: 2px 8px;
   border-radius: 4px;
   font-family: 'Courier New', Courier, monospace;
-
 }
 
 .ls-1 {
@@ -1085,6 +1091,10 @@ button:not(:disabled),
   margin-top: 1rem !important;
 }
 
+.mb-3 {
+  margin-bottom: 1rem !important;
+}
+
 .ml-2 {
   margin-right: 15px;
 }
@@ -1153,7 +1163,7 @@ button:not(:disabled),
 }
 
 .fw-bold {
-  font-weight: 700 !important;
+  font-weight: 600 !important;
 }
 
 .text-end {
@@ -1223,7 +1233,7 @@ button:not(:disabled),
 
 .bg-white {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-white-rgb), .7) !important;
+  background-color: rgba(var(--bs-white-rgb), 0.7) !important;
 }
 
 @media (min-width: 768px) {
@@ -1275,7 +1285,9 @@ button:not(:disabled),
 }
 
 .header {
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/img/header.jpg");
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url('/img/header.jpg');
 
   background-position: 50%;
   background-size: cover;
@@ -1300,13 +1312,7 @@ button:not(:disabled),
   }
 }
 
-
-
-
-
 /* LOGIN */
-
-
 
 /* --- ANIMACIONES --- */
 @keyframes fadeInSlide {
@@ -1338,9 +1344,6 @@ button:not(:disabled),
   }
 }
 
-
-
-
 .animate-fade-in {
   animation: fadeInSlide 0.8s ease-out;
 }
@@ -1352,7 +1355,9 @@ button:not(:disabled),
 
 /* --- ESTILOS DE COMPONENTES --- */
 .bg-clinical {
-  background: radial-gradient(circle at top left, #ffffff 0%, var(--clinical-bg) 100%);
+  background: radial-gradient(circle at top left,
+      #ffffff 0%,
+      var(--clinical-bg) 100%);
 }
 
 /* --- CONTENEDOR PRINCIPAL (EL SECRETO DEL CENTRADO) --- */
@@ -1365,7 +1370,6 @@ button:not(:disabled),
   padding-top: 2rem;
   /* Ocupa toda la altura de la ventana */
 }
-
 
 .login-card {
   background: #ffffff;
@@ -1383,6 +1387,119 @@ button:not(:disabled),
   box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.15);
 }
 
+
+/* Cabecera con degradado "Oro y Acero" */
+.cabecera-formulario {
+  background: linear-gradient(135deg, #002244 0%, #004488 100%) !important;
+  border-bottom: 4px solid #D4AF37;
+  /* Línea divisoria en oro */
+  padding: 2.5rem 1rem !important;
+  border-radius: 28px 28px 0 0;
+}
+
+.cabecera-formulario h2 {
+  color: rgb(255, 255, 255) !important;
+
+}
+
+/* Efecto de elevación en los Inputs al escribir */
+.form-group-banking input {
+  border: 2px solid #f1f5f9;
+  border-radius: 16px;
+  padding: 12px 18px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: #f8fafc;
+}
+
+.form-group-banking input:focus {
+  background-color: #ffffff;
+  border-color: #D4AF37;
+  /* Dorado al enfocar */
+  box-shadow: 0 10px 20px rgba(212, 175, 55, 0.1);
+  outline: none;
+  transform: translateY(-2px);
+}
+
+/* Botón "Confirmar" con efecto de brillo */
+.btn-banking-gold {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);
+  box-shadow: 0 8px 25px rgba(184, 134, 11, 0.3);
+  border-radius: 18px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.btn-banking-gold::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(45deg);
+  transition: 0.5s;
+}
+
+.btn-banking-gold:hover::after {
+  left: 120%;
+}
+
+/* Botón "Confirmar" con efecto de brillo */
+.btn-banking-blue {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #002464 0%, #004488 100%);
+  box-shadow: 0 8px 25px rgba(0, 36, 100, 0.3);
+  border-radius: 18px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: white;
+}
+
+.btn-banking-blue::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(45deg);
+  transition: 0.5s;
+}
+
+.btn-banking-blue:hover::after {
+  left: 120%;
+  color: white;
+}
+
+
+/* Botón Cancelar - Estilo Clean */
+.btn-banking-cancel {
+  border: 2px solid #e2e8f0;
+  color: #94a3b8;
+  border-radius: 18px;
+  background: transparent;
+  font-weight: 800;
+}
+
+.btn-banking-cancel:hover {
+  background: #fdf2f2;
+  color: #ef4444;
+  border-color: #fee2e2;
+}
+
+.gap-3 {
+  gap: 1rem !important;
+  /* Equivalente a 16px */
+}
+
+
+
+
 @media (max-width: 992px) {
   .login-card {
     /* CLAVE: Cambiar height de 1000px a auto */
@@ -1399,7 +1516,6 @@ button:not(:disabled),
   div .ext-dark {
     font-size: 14px;
   }
-
 }
 
 @media (max-width: 600px) {
@@ -1409,7 +1525,6 @@ button:not(:disabled),
     padding: 10px;
     /* Un padding más equilibrado para móviles */
     border-radius: 8px;
-
   }
 }
 
@@ -1434,11 +1549,11 @@ button:not(:disabled),
   display: inline-block;
   width: 70px;
   height: 70px;
+  margin-right: 25px;
   line-height: 70px;
   background: rgba(0, 123, 255, 0.1);
   border-radius: 50%;
   animation: pulseBlue 3s infinite;
-  margin-right: 30px;
 }
 
 .hospital-label {
@@ -1494,84 +1609,11 @@ button:not(:disabled),
 
 .text-small {
   font-size: 0.65rem;
-
 }
 
 .text-muted-light {
   color: #94a3b8;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
-
-
-
-
-/* CSSPARA POSIBLEMIGRACION */
 
 
 
@@ -1908,6 +1950,40 @@ button:not(:disabled),
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Evita el scroll horizontal en toda la aplicación */
 html,
 body {
@@ -1942,24 +2018,6 @@ main {
 .recharts-responsive-container {
   max-width: 100% !important;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2018,6 +2076,7 @@ main {
 
 /* --- RESPONSIVE --- */
 @media (max-width: 1250px) {
+
   .nav-container {
     width: 100%;
   }
@@ -2111,6 +2170,14 @@ main {
 }
 
 
+
+
+
+
+
+
+
+
 /* ENTRADAS */
 
 .input-group-custom {
@@ -2182,8 +2249,6 @@ main {
 
 
 
-
-
 /* Contenedor principal del encabezado */
 .banco-header-section {
   padding: 10px 15px;
@@ -2196,7 +2261,7 @@ main {
 .banco-title-main {
   color: #ffffff;
   /* Casi negro para legibilidad alta */
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 700;
   letter-spacing: -0.5px;
   margin-bottom: 2px;
@@ -2219,7 +2284,7 @@ main {
   }
 
   .banco-title-main {
-    font-size: 2rem;
+    font-size: 1.7rem;
   }
 }
 
@@ -2313,67 +2378,6 @@ main {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Contenedor para alinear a la derecha con margen de app */
-.be-actions-container {
-  display: flex;
-  justify-content: flex-end;
-  padding: 0 10px;
-  margin-top: -10px;
-  /* Para que parezca que flota sobre la cabecera si es necesario */
-}
-
-/* Botón Principal Estilo BancoEstado */
-.be-main-button {
-  background-color: var(--bs-blue);
-  /* Naranja institucional */
-  color: white;
-  border: none;
-  border-radius: 30px;
-  /* Estilo píldora */
-  padding: 10px 25px;
-  font-weight: 700;
-  font-size: 0.85rem;
-  letter-spacing: 0.3px;
-  box-shadow: 0 4px 12px rgba(255, 90, 0, 0.3);
-  /* Sombra de color */
-  transition: all 0.2s ease;
-  cursor: pointer;
-  outline: none;
-}
-
-.be-main-button:active {
-  transform: scale(0.96);
-  box-shadow: 0 2px 6px rgba(255, 90, 0, 0.2);
-}
-
-/* Estado Deshabilitado (Grisado bancario) */
-.be-main-button.be-disabled {
-  background-color: #e0e0e0;
-  color: #9e9e9e;
-  box-shadow: none;
-  cursor: not-allowed;
-}
-
-.be-button-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Icono dentro de un pequeño círculo para dar detalle */
-.be-icon-circle {
-  background: rgba(255, 255, 255, 0.2);
-  width: 14px;
-  height: 14px;
-  padding: 6px;
-  border-radius: 50%;
-  margin-right: 10px;
-  font-size: 0.75rem;
-}
-
-.be-disabled .be-icon-circle {
-  background: rgba(0, 0, 0, 0.05);
-}
 
 /* TABLE */
 
@@ -2955,174 +2959,6 @@ thead {
   }
 }
 
-/* --- ESTILOS DE FORMULARIO BANCO ESTADO --- */
-
-
-
-/* --- FORMULARIO EVOLUCIÓN BANCA PRIVADA --- */
-
-.login-card {
-  border-radius: 28px !important;
-  border: 1px solid rgba(226, 238, 251, 0.5);
-  background: #ffffff;
-  transition: transform 0.3s ease;
-}
-
-/* Cabecera con degradado "Oro y Acero" */
-.cabecera-formulario {
-  background: linear-gradient(135deg, #002244 0%, #004488 100%) !important;
-  border-bottom: 4px solid #D4AF37;
-  /* Línea divisoria en oro */
-  padding: 2.5rem 1rem !important;
-  border-radius: 28px 28px 0 0;
-}
-
-.cabecera-formulario h2 {
-  color: rgb(255, 255, 255) !important;
-
-}
-
-/* Efecto de elevación en los Inputs al escribir */
-.form-group-banking input {
-  border: 2px solid #f1f5f9;
-  border-radius: 16px;
-  padding: 12px 18px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  background-color: #f8fafc;
-}
-
-.form-group-banking input:focus {
-  background-color: #ffffff;
-  border-color: #D4AF37;
-  /* Dorado al enfocar */
-  box-shadow: 0 10px 20px rgba(212, 175, 55, 0.1);
-  outline: none;
-  transform: translateY(-2px);
-}
-
-/* Botón "Confirmar" con efecto de brillo */
-.btn-banking-gold {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);
-  box-shadow: 0 8px 25px rgba(184, 134, 11, 0.3);
-  border-radius: 18px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-}
-
-.btn-banking-gold::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: rgba(255, 255, 255, 0.1);
-  transform: rotate(45deg);
-  transition: 0.5s;
-}
-
-.btn-banking-gold:hover::after {
-  left: 120%;
-}
-
-/* Botón "Confirmar" con efecto de brillo */
-.btn-banking-blue {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(135deg, #002464 0%, #004488 100%);
-  box-shadow: 0 8px 25px rgba(0, 36, 100, 0.3);
-  border-radius: 18px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: white;
-}
-
-.btn-banking-blue::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: rgba(255, 255, 255, 0.1);
-  transform: rotate(45deg);
-  transition: 0.5s;
-}
-
-.btn-banking-blue:hover::after {
-  left: 120%;
-  color: white;
-}
-
-
-/* Botón Cancelar - Estilo Clean */
-.btn-banking-cancel {
-  border: 2px solid #e2e8f0;
-  color: #94a3b8;
-  border-radius: 18px;
-  background: transparent;
-  font-weight: 800;
-}
-
-.btn-banking-cancel:hover {
-  background: #fdf2f2;
-  color: #ef4444;
-  border-color: #fee2e2;
-}
-
-.gap-3 {
-  gap: 1rem !important;
-  /* Equivalente a 16px */
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* Contenedor Principal */
 .be-card-container {
@@ -3290,27 +3126,6 @@ thead {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* // cabecera */
 
 /* Contenedor del buscador */
@@ -3363,18 +3178,23 @@ thead {
   }
 }
 
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+
 /* Reemplazo profesional para .card */
 .panel-custom {
   /* background: #ffffff; */
   border-radius: 10px;
-  /* border: 1px solid #edf2f7;   */
+  /* border: 1px solid #edf2f7; */
   /* Un borde muy sutil */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   /* Sombra suave */
   padding: 0;
   height: 100%;
+  /* margin: 4px; */
   padding-bottom: 4rem;
-  /* margin: 4px;   */
+
   transition: all 0.3s ease;
 }
 
@@ -3412,7 +3232,6 @@ thead {
 .card-stats h3 {
   /* clamp(mínimo, preferido, máximo) */
   font-size: clamp(0.2rem, 2vw, 1.75rem) !important;
-
 }
 
 .card-stats span {
@@ -3433,7 +3252,6 @@ thead {
   }
 }
 
-
 /* Contenedor principal */
 .contenedor-botones {
   display: flex !important;
@@ -3444,7 +3262,6 @@ thead {
   min-width: max-content;
   /* OBLIGA al contenedor a expandirse según sus hijos */
   align-content: center;
-
 }
 
 /* Opcional: Para que los botones no se deformen */
@@ -3454,13 +3271,6 @@ thead {
   white-space: nowrap !important;
   /* Prohíbe que el texto se parta */
 }
-
-
-
-
-
-
-
 
 /* Contenedor del Skeleton */
 .skeleton-card {
@@ -3558,14 +3368,12 @@ thead {
   }
 }
 
-
 .container {
-  margin-top: 30px;
+  margin-top: 10px;
   padding: 5px;
 }
 
 /* formulario boletas  */
-
 
 /* --- ESTILOS GENERALES Y CONTENEDORES --- */
 
@@ -3601,7 +3409,7 @@ thead {
 .form-label-profesional {
   font-size: 0.85rem;
   font-weight: 700;
-  color: #1B4F72;
+  color: #1b4f72;
   /* Azul marino de tu marca */
   text-transform: uppercase;
   letter-spacing: 1.5px;
@@ -3731,7 +3539,6 @@ thead {
   .btn-cancelar-boleta {
     width: 100%;
     margin-left: 0px;
-
   }
 }
 
@@ -3741,7 +3548,7 @@ thead {
   /* background: #fcfcfc; */
   border: 1px solid #eef0f2;
   border-radius: 12px;
-  padding: 0px;
+  padding: 20px;
   margin-bottom: 20px;
   transition: all 0.3s ease;
   animation: fadeInLoader 0.4s ease-out;
@@ -3758,7 +3565,7 @@ thead {
   position: absolute;
   top: -12px;
   left: 20px;
-  background: #1B4F72;
+  background: #1b4f72;
   color: white;
   padding: 2px 12px;
   border-radius: 20px;
@@ -3806,45 +3613,49 @@ thead {
   border-style: solid !important;
 }
 
-
-
-/* // elimnar desde la tabla */
-
-/* Contenedor del grupo de botones */
-.transition-buttons {
+/* Contenedor del switch */
+.switch-container {
   display: flex;
   align-items: center;
-  transition: all 0.3s ease-in-out;
+  gap: 10px;
+}
+
+/* Ocultamos el radio button original */
+.switch-input {
   display: none;
 }
 
-/* Estilo inicial del botón de eliminar (Invisible y desplazado a la derecha) */
-.btn-delete-file {
-  opacity: 0;
-  transform: translateX(10px);
-  transition: all 0.3s ease;
-  white-space: nowrap;
-  background-color: transparent;
+/* Diseño del interruptor */
+.switch-label {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+  background-color: #ccc;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-/* Solo mostramos el texto 'Eliminar' en pantallas más anchas o si realmente quieres el texto */
-.text-delete {
-  display: none;
+/* El círculo que se mueve */
+.switch-label::after {
+  content: '';
+  position: absolute;
+  width: 21px;
+  height: 21px;
+  background-color: white;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: 0.3s;
 }
 
-/* EFECTO HOVER */
-.parent-hover:hover .btn-delete-file {
-  opacity: 1;
-  transform: translateX(0);
+/* Cuando está seleccionado */
+.switch-input:checked+.switch-label {
+  background-color: #0dcaf0;
+  /* Color del botón (info) */
 }
 
-/* Opcional: Si quieres que el texto aparezca también */
-.parent-hover:hover .text-delete {
-  display: inline;
-}
-
-/* Cambio de color al pasar sobre el de eliminar */
-.btn-delete-file:hover {
-  background-color: #fff1f0 !important;
-  color: #dc3545 !important;
+.switch-input:checked+.switch-label::after {
+  left: 27px;
 }

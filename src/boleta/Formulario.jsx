@@ -5,7 +5,7 @@ import { useTramites } from '../hooks/HookCustomTramites';
 import toast from 'react-hot-toast';
 import Select from 'react-select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle, faTimesSquare } from '@fortawesome/free-solid-svg-icons';
+import { faInfoCircle, faPlusCircle, faTimesSquare } from '@fortawesome/free-solid-svg-icons';
 
 export const FormularioBoleta = () => {
   const { codigo } = useParams();
@@ -136,31 +136,28 @@ export const FormularioBoleta = () => {
     }),
   };
   return (
-    <main
-      className="login-wrapper d-flex align-items-center justify-content-center py-5"
-      style={{ minHeight: '100vh' }}
-    >
+
+    <main className="login-wrapper d-flex align-items-center justify-content-center py-5" style={{ minHeight: '100vh', background: '#F8FAFC' }}>
       <section className="container">
         <div className="row justify-content-center">
-          <div
-            className="login-card shadow-clinical p-4 p-md-5 bg-white"
-            style={{ borderTop: `10px solid  #0d6efd`, marginTop: '2rem' }}
-          >
-            <div className="form-boleta-container">
-              <div className="text-center">
-                <span style={{ fontSize: '3rem' }}>{codigo ? '📝' : '📑'}</span>
+          <div className="col-12 col-md-11 col-lg-8 col-xl-7 animate-fade-in">
+            <div className="login-card shadow-banking border-0 bg-white" style={{ borderRadius: '24px', overflow: 'hidden' }}>
+
+
+              <div className="p-4 text-center cabecera-formulario">
+                <h2 className="h4 fw-bold m-0 text-uppercase tracking-wider">
+                  {codigo ? `Modificar Boleta` : 'Nueva Boleta de Gastos'}
+                </h2>
+                {codigo && (
+                  <p className="text-center">
+                    {' '}
+                    <span className="badge bg-info text-dark">
+                      Editando Caja: {codigo}
+                    </span>
+                  </p>
+                )}
               </div>
-              <h2 className="titulo-boleta" style={{ marginTop: '8px' }}>
-                {codigo ? `Modificar Boleta` : 'Nueva Boleta de Gastos'}
-              </h2>
-              {codigo && (
-                <p className="text-center">
-                  {' '}
-                  <span className="badge bg-info text-dark">
-                    Editando Código: {codigo}
-                  </span>
-                </p>
-              )}
+
               {tramitesFiltradosBoleta.length > 0 ? (
                 <form
                   onSubmit={handleGuardar}
@@ -172,7 +169,12 @@ export const FormularioBoleta = () => {
                   }}
                   style={{ marginTop: '10px' }}
                 >
-                  {itemsForm.map((item, index) => (
+                  <div className="col-12 mb-2">
+                    <span className="badge bg-light text-primary p-2 px-3 rounded-pill">
+                      <FontAwesomeIcon icon={faInfoCircle} className="me-2" />
+                      Datos de la boleta: Completa los campos para cada gasto. Puedes agregar o eliminar filas según sea necesario.
+                    </span>
+                  </div>                  {itemsForm.map((item, index) => (
                     <div className="item-gasto-row" key={index}>
                       {/* Indicador visual de fila */}
                       <div className="item-number">ITEM #{index + 1}</div>
@@ -238,10 +240,10 @@ export const FormularioBoleta = () => {
                                   String(opt.value) === String(item.id_tramite),
                               )?.simbolo
                                 ? tramitesFiltradosBoleta.find(
-                                    (opt) =>
-                                      String(opt.value) ===
-                                      String(item.id_tramite),
-                                  )?.simbolo + ' 0.00'
+                                  (opt) =>
+                                    String(opt.value) ===
+                                    String(item.id_tramite),
+                                )?.simbolo + ' 0.00'
                                 : '0.00'
                             }
                             onChange={(e) =>
@@ -308,13 +310,12 @@ export const FormularioBoleta = () => {
                       </span>
                     </div>
 
-                    <div
-                      className="col-md-6 text-end btn-action-container d-flex justify-content-end gap-2"
-                      style={{ padding: '5px' }}
-                    >
+                    <div className="col-12 d-flex flex-column flex-md-row justify-content-end gap-3 mt-5 pt-4 border-top">
+
                       <button
                         type="button"
-                        className="btn btn-cancelar-boleta"
+                        className="btn btn-banking-cancel order-2 order-md-1"
+
                         onClick={() => navigate(-1)}
                       >
                         Cancelar
@@ -322,7 +323,8 @@ export const FormularioBoleta = () => {
 
                       <button
                         type="submit"
-                        className="btn btn-guardar-boleta"
+                        className={`btn ${codigo ? 'btn-banking-blue' : 'btn-banking-gold'} order-1 order-md-2 px-5`}
+
                         disabled={cargando || itemsForm.length === 0}
                       >
                         <i className="fas fa-save me-2"></i>{' '}
@@ -335,7 +337,7 @@ export const FormularioBoleta = () => {
                         ) : codigo ? (
                           'ACTUALIZAR'
                         ) : (
-                          'GUARDAR BOLETA'
+                          'GUARDAR '
                         )}
                       </button>
                     </div>

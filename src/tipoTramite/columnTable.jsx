@@ -1,34 +1,76 @@
+import { faCheckCircle, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 export const columns = [
     {
         label: 'ID',
         field: 'id',
-        render: row => row.id,
+        render: row => <div >
+            <span className="td-descripcion" >
+                {row.id}
+            </span>
+        </div>,
         sortable: true,
         width: '80px'
     },
     {
         label: 'CODIGO',
         field: 'codigo',
-        render: row => row.codigo,
+        render: row =>
+            <div >
+                <span className="td-descripcion" >
+                    {row.codigo || 'S/N'}
+                </span>
+            </div>,
         sortable: true,
         width: '80px'
     },
     {
         label: 'Descripción del Trámite',
         field: 'tipo_tramite',
-        render: row => <span className="fw-bold text-dark">{row.tipo_tramite}</span>,
+        render: row =>
+            <div >
+                <span className="td-numero" >
+                    {row.tipo_tramite || 'S/N'}
+                </span>
+            </div>,
         sortable: true,
         wrap: true
     },
     {
         label: 'Estado',
-        field: 'estado',
+        field: 'Estado',
         sortable: true,
-        render: (row) => (
-            <span className={`badge ${row.estado === 1 ? 'bg-success' : 'bg-danger'}`} style={{ fontSize: '0.75rem' }}>
-                {row.estado === 1 ? 'ACTIVO' : 'INACTIVO'}
-            </span>
-        )
+        render: (row) => {
+            const estados = {
+                1: {
+                    badge: 'text-success',
+                    texto: 'Activo',
+                    icon: faCheckCircle,
+                },
+                0: {
+                    badge: 'text-secondary',
+                    texto: 'Inactivo',
+                    icon: faXmarkCircle,
+                },
+
+            };
+
+            const est = estados[row.estado] || {
+                badge: 'bg-secondary',
+                texto: 'DESCONOCIDO',
+                icon: 'bi-question',
+            };
+
+            return (
+                <span
+                    className={`text-descripcion ${est.badge} `}
+                >
+                    <FontAwesomeIcon className={`bi me-1`} icon={est.icon} ></FontAwesomeIcon>
+                    {est.texto}
+                </span>
+            );
+        },
     },
     {
         label: 'Fecha Registro',
@@ -38,7 +80,7 @@ export const columns = [
             if (!row.created_at) return '---';
             const fecha = new Date(row.created_at);
             return (
-                <div className="small text-muted">
+                  <div className="td-numero" >
                     {fecha.toLocaleDateString('es-BO', {
                         day: '2-digit',
                         month: '2-digit',

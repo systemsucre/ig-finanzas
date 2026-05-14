@@ -140,6 +140,7 @@ export const useUsuarios = (usuarioEdit = null) => {
     }, [listarUsuarios, listarRoles]);
 
     return {
+        usuarios,
         usuariosFiltrados,
         roles,
         handleSearch,

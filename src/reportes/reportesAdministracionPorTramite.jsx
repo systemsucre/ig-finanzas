@@ -10,81 +10,78 @@ export function ReportesAdministracionPorTramite() {
     const navigate = useNavigate();
     const { estados, setters, listaTramite, reporteSalidas, reporteIngresos, reporteGeneral } = useReportes();
 
+
+    const customStyles = {
+        control: (provided, state) => ({
+            ...provided,
+            backgroundColor: '#ffffff', // Fondo blanco limpio
+            borderColor: state.isFocused ? '#3b82f6' : '#d1d5db', // Azul suave al enfocar
+            boxShadow: state.isFocused ? '0 0 0 1px #3b82f6' : 'none',
+            borderRadius: '8px',
+            padding: '4px',
+            '&:hover': { borderColor: '#3b82f6' },
+        }),
+        menu: (provided) => ({
+            ...provided,
+            borderRadius: '8px',
+            boxShadow:
+                '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+            marginTop: '8px',
+        }),
+        option: (provided, state) => ({
+            ...provided,
+            padding: '12px 16px', // Más espacio para que no se sienta apretado
+            backgroundColor: state.isSelected
+                ? '#eff6ff'
+                : state.isFocused
+                    ? '#f3f4f6'
+                    : 'transparent',
+            color: state.isSelected ? '#1d4ed8' : '#374151',
+            fontWeight: state.isSelected ? '600' : '400',
+            cursor: 'pointer',
+            transition: 'all 0.2s ease',
+            borderBottom: '1px solid #f3f4f6', // Separador sutil entre items
+            '&:active': { backgroundColor: '#dbeafe' },
+        }),
+        placeholder: (provided) => ({
+            ...provided,
+            color: '#9ca3af',
+        }),
+    };
     return (
         <>
-            <style>{`
-                .report-container { background: #f8f9fa; min-height: 100vh; padding: 5px; }
-                .report-card { 
-                    background: white; 
-                    border-radius: 15px; 
-                    box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
-                    border: none;
-                    padding: 8px;
-                }
-                .section-title {
-                    border-left: 5px solid #1B4F72;
-                    padding-left: 15px;
-                    margin-bottom: 10px;
-                    margin-top: 40px;
-                }
-                .btn-report {
-                    transition: all 0.3s ease;
-                    border-radius: 10px;
-                    text-transform: uppercase;
-                    font-size: 0.85rem;
-                    letter-spacing: 1px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 10px;
-                    width: 100%;
-                    height:40px;
-                    margin-bottom:20px;
 
-                }
-                .btn-report:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-                .btn-general { background: #1B4F72; color: white; border: none; }
-                .btn-general:hover { background: #153d5a; color: white; }
-                .btn-salidas { background: #e74c3c; color: white; border: none; }
-                .btn-salidas:hover { background: #c0392b; color: white; }
-                .btn-ingresos { background: #27ae60; color: white; border: none; }
-                .btn-ingresos:hover { background: #1e8449; color: white; }
-                .custom-label { font-weight: 600; color: #444; font-size: 0.9rem; margin-bottom: 8px; display: block; }
-            `}</style>
+            <main className="container-xl mt-2" style={{ maxWidth: "100%", }}>
+                <div className="panel-custom rounded shadow-sm mx-2">
+                    <div className="banco-header-section">
 
-            <main className="report-container">
-                <div className="container">
-                    {/* Header */}
-                    <div className="d-flex justify-content-between align-items-center mb-4">
-                        <div className="section-title">
-                            <h3 className="text-dark fw-bold mb-0">Reportes Individual de Caja</h3>
-                            {/* <p className="text-muted mb-0 small text-uppercase">Gestión Económica de Trámites</p> */}
+                        <div className="banco-title-container">
+                            <h3 className="banco-title-main">Reportes Individual de Caja</h3>
+                            <p className="banco-subtitle">Generar reportes individuales por caja</p>
                         </div>
                     </div>
 
-      
 
-                    <div className="report-card">
+                    <div className="p-4 p-md-5 mt-5" style={{backgroundColor:'white', padding: '2rem', }}>
                         <div className="row g-4">
                             {/* Selector de Trámite */}
                             <div className="col-lg-12">
                                 <label className="custom-label">Seleccionar Caja <span className="text-danger">*</span></label>
                                 <Select
-                                    placeholder='Busque por código caja...'
-                                    onChange={(e) => setters.setTramite({ campo: e ? e.value : '', valido: e ? 'true' : 'false' })}
+                                    styles={customStyles}
+                                    placeholder={'Seleccione caja...'}
                                     options={listaTramite}
-                                    value={listaTramite.find(opt => opt.value === estados.tramite.campo) || null}
+                                    components={{ Option: CustomOption }} // <-- Aquí aplicamos la personalización
+                                    getOptionLabel={(e) => `${e.label} (${e.simbolo})`} // Limpio para el buscador
+                                    getOptionValue={(e) => e.value}
+                                    onChange={(e) => setters.setTramite({ campo: e ? e.value : '', valido: e ? 'true' : 'false' })}
+
+                                    value={
+                                        listaTramite.find(t => t.value === estados.tramite.campo) || null
+                                    }
                                     isSearchable={true}
-                                    isClearable={true}
-                                    styles={{
-                                        control: (base) => ({
-                                            ...base,
-                                            borderRadius: '10px',
-                                            padding: '5px',
-                                            borderColor: '#dee2e6',
-                                            boxShadow: 'none'
-                                        })
-                                    }}
+                                    className="react-select-container"
+                                    classNamePrefix="react-select"
                                 />
                             </div>
 
@@ -110,33 +107,42 @@ export function ReportesAdministracionPorTramite() {
                                 />
                             </div>
 
-                            {/* Botones de Acción */}
-                            <div className="col-12 mt-5">
-                                <div className="p-3 bg-light rounded-3">
-                                    <h6 className="text-center mb-4 text-muted text-uppercase small fw-bold">Generar Archivos Excel</h6>
-                                    <div className="row g-3">
-                                        <div className="col-md-4">
-                                            <button className="btn-report btn-salidas py-3"
-                                                onClick={() => reporteSalidas(estados.tramite.campo, estados.desde.campo, estados.hasta.campo)}>
-                                                <FontAwesomeIcon icon={faWallet} /> Reporte Salidas
-                                            </button>
-                                        </div>
-                                        {parseInt(localStorage.getItem('numRol') )<4 ? <>
-                                            <div className="col-md-4">
-                                                <button className="btn-report btn-ingresos py-3"
-                                                    onClick={() => reporteIngresos(estados.tramite.campo, estados.desde.campo, estados.hasta.campo)}>
-                                                    <FontAwesomeIcon icon={faFileInvoiceDollar} /> Reporte Ingresos
-                                                </button>
-                                            </div>
-                                            <div className="col-md-4">
-                                                <button className="btn-report btn-general py-3"
-                                                    onClick={() => reporteGeneral(estados.tramite.campo, estados.desde.campo, estados.hasta.campo)}>
-                                                    <FontAwesomeIcon icon={faChartLine} /> Balance General
-                                                </button>
-                                            </div>
-                                        </> : null}
-                                    </div>
+                            <div className=" row mt-5">
+                                <div className=" col-md-4 col-12">
+                                    <button
+                                        type="button"
+                                        className="btn btn-banking-blue order-2 order-md-1"
+                                        onClick={() => reporteSalidas(estados.tramite.campo, estados.desde.campo, estados.hasta.campo)}
+                                    >
+                                        <FontAwesomeIcon icon={faWallet} />
+                                        Reporte Salidas
+                                    </button>
                                 </div>
+                                {parseInt(localStorage.getItem('numRol')) < 4 ? <>
+                                    <div className=" col-md-4 col-12">
+
+                                        <button
+                                            type="submit"
+                                            className={`btn btn-banking-gold order-1 order-md-2 px-5`}
+                                            onClick={() => reporteIngresos(estados.tramite.campo, estados.desde.campo, estados.hasta.campo)}
+
+                                        >
+                                            <FontAwesomeIcon icon={faFileInvoiceDollar} />
+                                            <span>              Reporte Ingresos</span>
+                                        </button>
+                                    </div>
+                                    <div className="col-md-4 col-12">
+                                        <button
+                                            type="submit"
+                                            className={`btn btn-banking-blue order-1 order-md-2 px-5`}
+                                            onClick={() => reporteGeneral(estados.tramite.campo, estados.desde.campo, estados.hasta.campo)}
+
+                                        >
+                                            <FontAwesomeIcon icon={faChartLine} />
+                                            <span>  Balance General</span>
+                                        </button>
+                                    </div>
+                                </> : null}
                             </div>
                         </div>
                     </div>
@@ -148,8 +154,37 @@ export function ReportesAdministracionPorTramite() {
                             Los reportes generados se descargarán automáticamente en formato .xlsx (Excel)
                         </p>
                     </div>
-                </div>
+                </div >
             </main>
         </>
     );
 }
+
+import { components } from 'react-select';
+
+// Este componente personaliza cómo se ve cada fila en la lista desplegable
+const CustomOption = (props) => {
+    return (
+        <components.Option {...props}>
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                }}
+            >
+                <div>
+                    <strong>{props.data.label}</strong>
+                    <div style={{ fontSize: '0.8em', color: '#666' }}>
+                        Moneda: {props.data.simbolo} | Saldo: {props.data.saldoDisponible}
+                    </div>
+                    <div
+                        style={{ fontSize: '0.55em', color: '#444444', fontWeight: '100' }}
+                    >
+                        {props.data.detalle.substring(0, 40)}
+                    </div>
+                </div>
+            </div>
+        </components.Option>
+    );
+};

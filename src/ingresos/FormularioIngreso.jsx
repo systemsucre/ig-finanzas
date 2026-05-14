@@ -145,65 +145,55 @@ const FormularioIngreso = () => {
       ? listaEstado.filter((opt) => opt.value !== 2)
       : listaEstado;
   return (
-    <main
-      className="login-wrapper d-flex align-items-center justify-content-center py-5"
-      style={{ minHeight: '100vh' }}
-    >
+
+
+    <main className="login-wrapper d-flex align-items-center justify-content-center py-5" style={{ minHeight: '100vh', background: '#F8FAFC' }}>
       <section className="container">
         <div className="row justify-content-center">
-          <div className="col-12 col-md-10 col-lg-8 col-xl-7 animate-fade-in">
-            <div
-              className="login-card shadow p-4 p-md-5 bg-white"
-              style={{ border: 'none', marginTop: '2rem' }}
-            >
-              {/* Encabezado dinámico */}
-              <div className="text-center mb-4">
-                <div className="mb-3">
-                  <span style={{ fontSize: '3.5rem' }}>
-                    {isEdit ? '📝' : '📥'}
-                  </span>
-                </div>
-                <h2
-                  className="h3 fw-bold text-success text-uppercase"
-                  style={{ marginTop: '0' }}
-                >
-                  {isEdit
-                    ? 'Editar Registro de Ingreso'
-                    : 'Nuevo Ingreso / Abono'}
+          <div className="col-12 col-md-11 col-lg-8 col-xl-7 animate-fade-in">
+            <div className="login-card shadow-banking border-0 bg-white" style={{ borderRadius: '24px', overflow: 'hidden' }}>
+
+              <div className="p-4 text-center cabecera-formulario">
+                <h2 className="h4 fw-bold m-0 text-uppercase tracking-wider">
+                  {isEdit ? 'Actualizar Ingreso' : 'Guardar Ingreso'}
                 </h2>
               </div>
+              <div className="p-4 p-md-5">
 
-              {/* Info del Trámite Contextual */}
+                <form
+                  className="row g-3"
+                  onSubmit={(e) => handleGuardar(e, isEdit)}
+                >
+                  <div className="col-12 mb-2">
+                    <span className="badge bg-light text-primary p-2 px-3 rounded-pill">
+                      <FontAwesomeIcon icon={faInfoCircle} className="me-2" />
+                      Datos de Ingreso
+                    </span>
+                  </div>
+                  <div className="col-md-6">
+                    <InputUsuarioStandard
+                      estado={estados.monto}
+                      cambiarEstado={setters.setMonto}
+                      tipo="number"
+                      name="monto"
+                      etiqueta={'Monto Recibido'}
+                      placeholder="0.00"
+                      ExpresionRegular={INPUT.NUMEROS_MONEY}
+                    />
+                  </div>
+                  <div className="col-md-6">
+                    <Select1
+                      estado={estados.idCliente}
+                      cambiarEstado={setters.setIdCliente}
+                      Name="id_cliente"
+                      lista={listaClientes}
+                      etiqueta="Cliente / Empleador"
+                      msg="Busque y seleccione al cliente"
+                      ExpresionRegular={INPUT.ID}
+                    />
+                  </div>
 
-              <form
-                className="row g-3"
-                onSubmit={(e) => handleGuardar(e, isEdit)}
-              >
-                {/* MONTO (Si lo incluiste en tu tabla) */}
-                <div className="col-md-6">
-                  <InputUsuarioStandard
-                    estado={estados.monto}
-                    cambiarEstado={setters.setMonto}
-                    tipo="number"
-                    name="monto"
-                    etiqueta={'Monto Recibido'}
-                    placeholder="0.00"
-                    ExpresionRegular={INPUT.NUMEROS_MONEY}
-                  />
-                </div>
-                <div className="col-md-6">
-                  <Select1
-                    estado={estados.idCliente}
-                    cambiarEstado={setters.setIdCliente}
-                    Name="id_cliente"
-                    lista={listaClientes}
-                    etiqueta="Cliente / Empleador"
-                    msg="Busque y seleccione al cliente"
-                    ExpresionRegular={INPUT.ID}
-                  />
-                </div>
-
-                {/* <div className="col-md-6 switch-container">
+                  {/* <div className="col-md-6 switch-container">
                   <label className="d-flex align-items-center gap-2">
                     <input
                       name="estado_ingreso"
@@ -272,140 +262,132 @@ const FormularioIngreso = () => {
                     classNamePrefix="react-select"
                   />
                 </div> */}
-                <div className="col-md-12">
-                  <label className="hospital-label w-100 mb-2">CAJA</label>
- 
-                  <Select
-                    styles={customStyles}
-                    placeholder={'Seleccione caja...'}
-                    options={tramitesFiltradosBoleta}
-                    components={{ Option: CustomOption }} // <-- Aquí aplicamos la personalización
-                    getOptionLabel={(e) => `${e.label} (${e.simbolo})`} // Limpio para el buscador
-                    getOptionValue={(e) => e.value}
-                    onChange={(e) => {
-                      setters.setIdTramite({
-                        campo: e.value,
-                        valido: 'true',
-                      });
-                    }}
-                    value={
-                      tramitesFiltradosBoleta.find(
-                        (opt) => opt.value === estados.idTramite.campo,
-                      ) || null
-                    }
-                    isSearchable={true}
-                    className="react-select-container"
-                    classNamePrefix="react-select"
-                  />
-                </div>
+                  <div className="col-md-12">
+                    <label className="hospital-label w-100 mb-2">CAJA</label>
 
-                <div className="col-md-6">
-                  <label className="hospital-label w-100 mb-2">
-                    Tipo Pago<span style={{ color: 'red' }}>*</span>
-                  </label>
-                  <Select
-                    styles={customStyles}
-                    name="tipo"
-                    id="tipo"
-                    placeholder={'Seleccione...'}
-                    onChange={(e) => {
-                      const valor = e.value;
-                      setters.setTipo({ campo: valor, valido: 'true' });
-                    }}
-                    options={lista}
-                    // react-select necesita el objeto completo, lo buscamos en la lista por su ID
-                    value={
-                      lista.find((opt) => opt.value === estados.tipo.campo) ||
-                      null
-                    }
-                    isSearchable={true}
-                    isClearable={true}
-                    styles={{
-                      control: (base) => ({
-                        ...base,
-                        borderRadius: '8px',
-                        minHeight: '45px',
-                        borderColor:
-                          estados.tipo.valido === 'true'
-                            ? '#1ed12d'
-                            : estados.tipo.valido === 'false'
-                              ? '#dc3545'
-                              : '#dee2e6',
-                        boxShadow: 'none',
-                        '&:hover': {
+                    <Select
+                      styles={customStyles}
+                      placeholder={'Seleccione caja...'}
+                      options={tramitesFiltradosBoleta}
+                      components={{ Option: CustomOption }} // <-- Aquí aplicamos la personalización
+                      getOptionLabel={(e) => `${e.label} (${e.simbolo})`} // Limpio para el buscador
+                      getOptionValue={(e) => e.value}
+                      onChange={(e) => {
+                        setters.setIdTramite({
+                          campo: e.value,
+                          valido: 'true',
+                        });
+                      }}
+                      value={
+                        tramitesFiltradosBoleta.find(
+                          (opt) => opt.value === estados.idTramite.campo,
+                        ) || null
+                      }
+                      isSearchable={true}
+                      className="react-select-container"
+                      classNamePrefix="react-select"
+                    />
+                  </div>
+
+                  <div className="col-md-6">
+                    <label className="hospital-label w-100 mb-2">
+                      Tipo Pago<span style={{ color: 'red' }}>*</span>
+                    </label>
+                    <Select
+                      styles={customStyles}
+                      name="tipo"
+                      id="tipo"
+                      placeholder={'Seleccione...'}
+                      onChange={(e) => {
+                        const valor = e.value;
+                        setters.setTipo({ campo: valor, valido: 'true' });
+                      }}
+                      options={lista}
+                      // react-select necesita el objeto completo, lo buscamos en la lista por su ID
+                      value={
+                        lista.find((opt) => opt.value === estados.tipo.campo) ||
+                        null
+                      }
+                      isSearchable={true}
+                      isClearable={true}
+                      styles={{
+                        control: (base) => ({
+                          ...base,
+                          borderRadius: '8px',
+                          minHeight: '45px',
                           borderColor:
                             estados.tipo.valido === 'true'
                               ? '#1ed12d'
                               : estados.tipo.valido === 'false'
                                 ? '#dc3545'
-                                : '#86b7fe',
-                        },
-                      }),
-                    }}
-                  />
-                </div>
+                                : '#dee2e6',
+                          boxShadow: 'none',
+                          '&:hover': {
+                            borderColor:
+                              estados.tipo.valido === 'true'
+                                ? '#1ed12d'
+                                : estados.tipo.valido === 'false'
+                                  ? '#dc3545'
+                                  : '#86b7fe',
+                          },
+                        }),
+                      }}
+                    />
+                  </div>
 
-                {/* FECHA INGRESO */}
-                <div className="col-md-6">
-                  <InputUsuarioStandard
-                    estado={estados.fechaIngreso}
-                    cambiarEstado={setters.setFechaIngreso}
-                    tipo="date"
-                    name="fecha_ingreso"
-                    etiqueta={'Fecha de Cobro'}
-                  />
-                </div>
+                  {/* FECHA INGRESO */}
+                  <div className="col-md-6">
+                    <InputUsuarioStandard
+                      estado={estados.fechaIngreso}
+                      cambiarEstado={setters.setFechaIngreso}
+                      tipo="date"
+                      name="fecha_ingreso"
+                      etiqueta={'Fecha de Cobro'}
+                    />
+                  </div>
 
-                {/* DETALLE */}
-                <div className="col-12">
-                  <InputUsuarioStandard
-                    estado={estados.detalle}
-                    cambiarEstado={setters.setDetalle}
-                    tipo="textarea"
-                    name="detalle"
-                    etiqueta={'Concepto del Pago / Observaciones'}
-                    placeholder="Ej: Pago inicial, Cancelación de trámite, etc."
-                  />
-                </div>
-                <div className="col-12">
-                  <InputUsuarioStandard
-                    estado={estados.numeroReferencia}
-                    cambiarEstado={setters.setNumeroReferencia}
-                    name="Numeroreferencia"
-                    etiqueta={'Numero de referencia'}
-                    placeholder="Ej. num boleta, factura etc."
-                    importante={false}
-                  />
-                </div>
+                  {/* DETALLE */}
+                  <div className="col-12">
+                    <InputUsuarioStandard
+                      estado={estados.detalle}
+                      cambiarEstado={setters.setDetalle}
+                      tipo="textarea"
+                      name="detalle"
+                      etiqueta={'Concepto del Pago / Observaciones'}
+                      placeholder="Ej: Pago inicial, Cancelación de trámite, etc."
+                    />
+                  </div>
+                  <div className="col-12">
+                    <InputUsuarioStandard
+                      estado={estados.numeroReferencia}
+                      cambiarEstado={setters.setNumeroReferencia}
+                      name="Numeroreferencia"
+                      etiqueta={'Numero de referencia'}
+                      placeholder="Ej. num boleta, factura etc."
+                      importante={false}
+                    />
+                  </div>
 
-                {/* ACCIONES */}
-                <div className="col-12 d-flex gap-2 justify-content-end mt-4 pt-3 border-top">
-                  <button
-                    type="button"
-                    className="btn btn-outline-secondary px-4"
-                    onClick={() => navigate(-1)}
-                  >
-                    CANCELAR
-                  </button>
+                  <div className="col-12 d-flex flex-column flex-md-row justify-content-end gap-3 mt-5 pt-4 border-top">
+                    <button
+                      type="button"
+                      className="btn btn-banking-cancel order-2 order-md-1"
+                      onClick={() => window.history.back()}
+                    >
+                      CANCELAR
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={cargando}
 
-                  <button
-                    type="submit"
-                    className={`btn ${isEdit ? 'btn-info' : 'btn-success'} px-5 fw-bold`}
-                    disabled={cargando}
-                  >
-                    {cargando ? (
-                      <>
-                        <span className="spinner-border spinner-border-sm me-2"></span>
-                        PROCESANDO...
-                      </>
-                    ) : isEdit ? (
-                      'GUARDAR CAMBIOS'
-                    ) : (
-                      'REGISTRAR INGRESO'
-                    )}
-                  </button>
-                </div>
-              </form>
+                      className={`btn ${isEdit ? 'btn-banking-blue' : 'btn-banking-gold'} order-1 order-md-2 px-5`}
+                    >
+                      {/* <FontAwesomeIcon icon={faCheckCircle} className="me-2" /> */}
+                      <span>              {isEdit ? 'ACTUALIZAR' : ' REGISTRAR'}</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -415,6 +397,8 @@ const FormularioIngreso = () => {
 };
 import { components } from 'react-select';
 import { listaEstado } from '../data/estadoIngresos';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Este componente personaliza cómo se ve cada fila en la lista desplegable
 const CustomOption = (props) => {

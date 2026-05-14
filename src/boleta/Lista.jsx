@@ -54,16 +54,15 @@ export function ListaBoleta() {
 
     return (
         <>
-            <main className="container-xl mt-2" >
-
-                <div className="panel-custom rounded shadow-sm  mx-2">
-                    <div className="banco-header-section mb-4">
+            <main className="container-xl mt-2" style={{ maxWidth: "100%", }}>
+                <div className="panel-custom rounded shadow-sm mx-2">
+                    <div className="banco-header-section">
                         <div className="banco-title-container">
-                            <h3 className="banco-title-main">Gestión de Boletas de Gasto</h3>
-                            <p className="banco-subtitle">Administra y revisa tus solicitudes de fondos</p>
+                            <h3 className="banco-title-main">Panel de gastos</h3>
+                            <p className="banco-subtitle">Panel de gestión de boletas de gasto</p>
                         </div>
                     </div>
-                    
+
                     <div className="banco-filter-row">
                         {/* Contenedor de Filtros (Segmented Control) */}
                         <div className="banco-tabs-container">
@@ -101,11 +100,11 @@ export function ListaBoleta() {
                                 onChange={handleSearchBoleta}
                                 className="banco-input-search"
                             />
-                        </div>
+                        </div> 
                     </div>
 
 
-
+  
                     <div className="table-responsive">
 
                         <DataTable

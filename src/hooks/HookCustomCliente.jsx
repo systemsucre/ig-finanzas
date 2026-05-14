@@ -137,6 +137,7 @@ export const useClientes = () => {
   }, [listarClientes]);
 
   return {
+    clientes,
     clientesFiltrados,
     handleSearch,
     cargando,

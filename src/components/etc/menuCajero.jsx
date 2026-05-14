@@ -119,27 +119,60 @@ const NavbarCajero = () => {
               className="nav-link-item"
               onClick={(e) => e.preventDefault()}
             >
-              Ingresos <FontAwesomeIcon icon={faChevronDown} />
+              Cobros<FontAwesomeIcon icon={faChevronDown} />
             </NavLink>
             <ul className="submenu-list">
               <li>
                 <NavLink
-                  to={LOCAL_URL + '/cajero/ingresos-pendientes'}
+                  to={LOCAL_URL + '/cajero/nuevo-ingreso-directo/'}
                   className="submenu-link"
                 >
-                  Pagos Pendientes
+                  Registar Pago
                 </NavLink>
+                
               </li>
               <li>
                 <NavLink
                   to={LOCAL_URL + '/cajero/ingresos-directos'}
                   className="submenu-link"
                 >
-                  Pagos Directos
+                  Listar ingresos
                 </NavLink>
               </li>
             </ul>
           </div>
+
+
+          <div className="nav-item-container has-submenu">
+            <NavLink
+              to="#"
+              className="nav-link-item"
+              onClick={(e) => e.preventDefault()}
+            >
+              Deudas <FontAwesomeIcon icon={faChevronDown} />
+            </NavLink>
+            <ul className="submenu-list">
+              <li>
+                <NavLink
+                  to={LOCAL_URL + '/cajero/nuevo-ingreso-pendiente/'}
+                  className="submenu-link"
+                >
+                  Registrar Deuda
+                </NavLink>
+                
+              </li>
+              <li>
+                <NavLink
+                  to={LOCAL_URL + '/cajero/ingresos-pendientes'}
+                  className="submenu-link"
+                >
+                  Ver Deudas
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+
+
           <div className="nav-item-container has-submenu">
             <NavLink
               to="#"
@@ -323,6 +356,7 @@ const NavbarCajero = () => {
                     >
                       Pagos Pedientes
                     </NavLink>
+
                   </li>
                   <li>
                     <NavLink

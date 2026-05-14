@@ -250,10 +250,10 @@ const DashboardFinanciero = () => {
   return (
     <main
       className="container-xl mt-5"
-      style={{ maxWidth: '100%', marginTop: '2rem' }}
+      style={{ maxWidth: '100%', marginTop: '3rem' }}
     >
       <div>
-        <h3 className="text-dark fw-bold mb-0 p-2 text-titulos">
+        <h3 className="text-dark fw-bold mb-0 p-2 text-titulos">   
           Gestión Financiera {new Date().getFullYear()}
         </h3>
       </div>
@@ -262,19 +262,19 @@ const DashboardFinanciero = () => {
         <div className="row g-3 ">
           <CardKPI
             titulo="INGRESOS"
-            monto={kpis.ingresos}
-            icono={faArrowUp}
-            color="#10b981"
-            moneda={moneda}
-            monedas={monedas}
+            monto={kpis.ingresos} 
+            icono={faArrowUp} 
+            color="#10b981" 
+            moneda={moneda} 
+            monedas={monedas} 
           />
-          <CardKPI
-            titulo="GASTOS"
-            monto={kpis.gastos}
-            icono={faArrowDown}
-            color="#f43f5e"
-            moneda={moneda}
-            monedas={monedas}
+          <CardKPI 
+            titulo="GASTOS" 
+            monto={kpis.gastos} 
+            icono={faArrowDown} 
+            color="#f43f5e"  
+            moneda={moneda}  
+            monedas={monedas} 
           />
           <CardKPI
             titulo="SALDO NETO"

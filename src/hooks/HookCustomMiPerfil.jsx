@@ -28,6 +28,8 @@ export const useMiPerfil = (usuarioEdit = null) => {
     // --- ESTADOS PARA LISTADO ---
     const [cargando, setCargando] = useState(false);
 
+    const [sessiones, setsesiones] = useState([]);
+
     // ... dentro del Hook useUsuarios
 
 
@@ -50,6 +52,18 @@ export const useMiPerfil = (usuarioEdit = null) => {
             setCelular({ campo: data[0].celular, valido: 'true' })
         }
     };
+
+    // 1.1 LISTAR USUARIOS
+    const miSesiones = async () => {
+        const data = await start(URL + 'miperfil/sesiones',)
+
+        if (data.length > 0) {
+            setsesiones(data);
+        }
+    };
+
+
+
 
     // 2. GUARDAR O ACTUALIZAR (Adaptado a tu tabla)
     const actualizar = async (e) => {
@@ -85,11 +99,23 @@ export const useMiPerfil = (usuarioEdit = null) => {
     }
 
 
+    const eliminarSesion = async (id) => {
+
+        await saveDB(URL + 'miperfil/eliminarSesion', {
+            id: id
+        })
+        miSesiones();
+
+    }
+
+
+
 
 
     // Cargar al inicio
     useEffect(() => {
         miPerfil();
+        miSesiones();
     }, []);
 
     return {
@@ -97,6 +123,8 @@ export const useMiPerfil = (usuarioEdit = null) => {
         estados: { idRol, nombre, ap1, ap2, ci, celular, direccion, pass, pass1, pass2, estado, user },
         setters: { setIdRol, setNombre, setAp1, setAp2, setCi, setCelular, setDireccion, setPass, setPass1, setPass2, setEstado },
         actualizar,
+        sessiones,
+        eliminarSesion,
         recet_,
     };
-};
+};  

@@ -35,7 +35,7 @@ export function ListaTramites() {
 
   return (
     <>
-      <main className="container-xl mt-5" style={{ maxWidth: '100%' }}>
+      <main className="container-xl mt-2" style={{ maxWidth: '100%' }}>   
         <div className="banco-header-section mb-4">
           <div className="banco-title-container">
             <h3 className="banco-title-main">Gestion de Cajas</h3>

@@ -13,20 +13,17 @@ const MiContrasena = () => {
     } = useMiPerfil();
 
     return (
-        <main className="login-wrapper d-flex align-items-center justify-content-center py-5" style={{ minHeight: '100vh' }}>
+        <main className="login-wrapper d-flex align-items-center justify-content-center py-5" style={{ minHeight: '100vh', background: '#F8FAFC' }}>
             <section className="container">
                 <div className="row justify-content-center">
-                    <div className="col-12 col-md-10 col-lg-8 col-xl-7 animate-fade-in">
-                        <div className="login-card shadow-clinical p-4 p-md-5 bg-white" style={{ borderTop: `10px #0d6efd`, marginTop: '2rem' }} >
+                    <div className="col-12 col-md-11 col-lg-10 animate-fade-in">
 
-                            <div className="text-center mb-5">
-                                <div className="icon-pulse mb-3">
-                                    <span className="fs-1">{'👤'}</span>
-                                </div>
-                                <h2 className="h3 fw-black text-primary text-uppercase m-0">
-                                    {'Cambiar mi contraseña'}
+                        <div className="login-card shadow-banking border-0 bg-white" style={{ borderRadius: '24px', overflow: 'hidden' }}>
+
+                            <div className="p-4 text-center cabecera-formulario">
+                                <h2 className="h4 fw-bold m-0 text-uppercase tracking-wider">
+                                    {'Cambiar contraseña'}
                                 </h2>
-                                <p className="text-muted small">{localStorage.getItem('entidad')}</p>
                             </div>
 
                             <div className="row g-3" >
@@ -65,8 +62,21 @@ const MiContrasena = () => {
                                         etiqueta={'Username'}
                                     />
                                 </div>
-                                <div className="col-12 p-3 text-end">
-                                    <button type="submit" className={`btn ${` btn-success`} px-5 py-2 fw-bold shadow-sm`} onClick={(e) => recet_(e)}>
+                                <div className="col-12 d-flex flex-column flex-md-row justify-content-end gap-3 mt-5 pt-4 border-top">
+
+                                    <button
+                                        type="button"
+                                        className="btn btn-banking-cancel order-2 order-md-1"
+                                        onClick={() => window.history.back()}
+                                    >
+                                        CANCELAR
+                                    </button>
+                                    <button type="submit"
+
+                                        className={`btn  btn-banking-blue order-1 order-md-2 px-5`}
+
+
+                                        onClick={(e) => recet_(e)}>
                                         {'ACTUALIZAR CONTRASEÑA'}
                                     </button>
 

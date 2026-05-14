@@ -7,6 +7,8 @@ import {
   faArrowLeft,
   faCoins,
   faSackDollar,
+  faPlusCircle,
+  faSearch,
   // fa-circle-half-stroke
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -47,131 +49,98 @@ export function ListaIngresosDeuda() {
   const funciones =
     parseInt(localStorage.getItem('numRol')) === 3
       ? [
-          {
-            boton: (id_ingreso, row) => {
-              navigate(
-                `${LOCAL_URL}/cajero/editar-ingreso-pendiente/${id_ingreso}`,
-              );
-            },
-            className: 'btn btn-orange py-1 px-3 x-small me-1 mr-int',
-            icono: faCoins,
-            label: '',
-          },
 
-          {
-            boton: (id_ingreso, row) => {
-              navigate(`${LOCAL_URL}/cajero/completar-pago/${id_ingreso}`);
-            },
-            className: 'btn btn-success py-1 px-3 x-small me-1 mr',
-            icono: faSackDollar,
-            label: '',
+        //INGRESO CANCELADOS POR LOTES
+        // {
+        //   boton: (id_ingreso, row) => {
+        //     navigate(
+        //       `${LOCAL_URL}/cajero/editar-ingreso-pendiente/${id_ingreso}`,
+        //     );
+        //   },
+        //   className: 'btn btn-orange py-1 px-3 x-small me-1 mr-int',
+        //   icono: faCoins,
+        //   label: '',
+        // },
+
+        {
+          boton: (id_ingreso, row) => {
+            navigate(`${LOCAL_URL}/cajero/completar-pago/${id_ingreso}`);
           },
-          {
-            boton: (id_ingreso, row) => {
-              navigate(
-                `${LOCAL_URL}/cajero/editar-ingreso-pendiente/${id_ingreso}`,
-              );
-            },
-            className: 'btn btn-info py-1 px-3 x-small me-1',
-            icono: faEdit,
-            label: 'Editar',
+          className: 'btn btn-success py-1 px-3 x-small me-1 mr',
+          icono: faSackDollar,
+          label: '',
+        },
+        {
+          boton: (id_ingreso, row) => {
+            navigate(
+              `${LOCAL_URL}/cajero/editar-ingreso-pendiente/${id_ingreso}`,
+            );
           },
-          {
-            boton: (id_salida, row) => {
-              exportPDfIngresos(
-                window.innerWidth < 1100 ? 'b64' : 'print',
-                row,
-              );
-            },
-            className: 'btn btn-pdf py-1 px-3 x-small me-1',
-            icono: faFilePdf,
-            label: 'Recibo',
-          },
-          {
-            boton: (id_ingreso) => eliminarIngreso(id_ingreso, 2),
-            className: 'btn btn-danger py-1 px-3 x-small',
-            icono: faTrash,
-            label: 'Eliminar',
-          },
-        ]
+          className: 'btn btn-info py-1 px-3 x-small me-1',
+          icono: faEdit,
+          label: 'Editar',
+        },
+        // {
+        //   boton: (id_salida, row) => {
+        //     exportPDfIngresos(
+        //       window.innerWidth < 1100 ? 'b64' : 'print',
+        //       row,
+        //     );
+        //   },
+        //   className: 'btn btn-pdf py-1 px-3 x-small me-1',
+        //   icono: faFilePdf,
+        //   label: 'Recibo',
+        // },
+        {
+          boton: (id_ingreso) => eliminarIngreso(id_ingreso, 2),
+          className: 'btn btn-danger py-1 px-3 x-small',
+          icono: faTrash,
+          label: 'Eliminar',
+        },
+      ]
       : [
-          {
-            boton: (id_salida, row) => {
-              exportPDfIngresos(
-                window.innerWidth < 1100 ? 'b64' : 'print',
-                row,
-              );
-            },
-            className: 'btn btn-pdf py-1 px-3 x-small me-1',
-            icono: faFilePdf,
-            label: 'Recibo',
+        {
+          boton: (id_salida, row) => {
+            exportPDfIngresos(
+              window.innerWidth < 1100 ? 'b64' : 'print',
+              row,
+            );
           },
-        ];
+          className: 'btn btn-pdf py-1 px-3 x-small me-1',
+          icono: faFilePdf,
+          label: 'Recibo',
+        },
+      ];
 
   return (
     <>
-      <main className="container-xl mt-2" style={{ maxWidth: '100%' }}>
-        <div className="d-flex justify-content-between align-items-center mb-4 m-2">
-          <div>
-            <h3
-              className="text-dark fw-bold mb-0 text-titulos"
-              style={{ marginLeft: '5px', marginTop: '7rem' }}
-            >
-              PAGOS PENDIENTES
-            </h3>
-            <p
-              className="text-muted mb-0 small text-uppercase"
-              style={{
-                letterSpacing: '1px',
-                fontSize: '0.7rem',
-                color: 'white',
-                marginLeft: '5px',
-              }}
-            >
-              Gestión Financiera - Control de Pagos pendientes por Caja
-            </p>
+      <main className="container-xl mt-2" style={{ maxWidth: "100%", }}>
+        <div className="panel-custom rounded shadow-sm mx-2">
+          <div className="banco-header-section">
+            <div className="banco-title-container">
+              <h3 className="banco-title-main">Ingresos Pendientes </h3>
+              <p className="banco-subtitle">Ingreso pendientes de todos los trámites</p>
+            </div>
           </div>
-        </div>
 
-        <div
-          className=" d-flex justify-content-end gap-2 "
-          style={{ marginRight: '10px' }}
-        >
-          {/* El botón nuevo gasto hereda el UUID correctamente */}
-          {parseInt(localStorage.getItem('numRol')) === 3 ? (
-            <>
-              <button
-                className="btn btn-success  fw-bold"
-                onClick={() =>
-                  navigate(LOCAL_URL + `/cajero/nuevo-ingreso-pendiente/`)
-                }
-                disabled={
-                  !tramitesFiltradosBoleta ||
-                  !tramitesFiltradosBoleta.length === 0
-                }
-              >
-                <FontAwesomeIcon icon={faPlus} className="me-2" /> REGISTRAR
-              </button>
-              <button
-                className=" btn btn-dark"
-                style={{ marginLeft: '4px' }}
-                onClick={() => {
-                  navigate(LOCAL_URL + '/cajero/ingresos-pendientes');
+          <div className="banco-search-wrapper p-2">
+            <div className="banco-search-wrapper">
+              <FontAwesomeIcon
+                icon={faSearch}
+                style={{
+                  position: 'absolute',
+                  left: '18px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  color: '#8e8e93',
+                  zIndex: 1
                 }}
-              >
-                <FontAwesomeIcon icon={faArrowLeft} className="me-2" /> VOLVER
-              </button>
-            </>
-          ) : null}
-        </div>
-
-        <div className="panel-custom bg-white rounded shadow-sm p-2 mx-2">
-          <div className="col-md-6 d-flex">
-            <div style={{ width: '280px' }}>
-              <InputUsuarioSearch
-                name="input-search-ingreso"
-                placeholder="Buscar abono o detalle..."
+              />
+              <input
+                name="input-search-salida"
+                placeholder="caja, Cliente..."
                 onChange={handleSearch}
+                className="banco-input-search"
               />
             </div>
           </div>
