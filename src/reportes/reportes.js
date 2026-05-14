@@ -1,4 +1,5 @@
 import ExcelJS from 'exceljs';
+import { name } from '../Auth/config';
 
 export const generarReporteFinanciero = async (tipoReporte, data, tramiteInfo, filtros) => {
     const TIPO = tipoReporte?.toString().toUpperCase().trim();
@@ -149,7 +150,7 @@ export const generarReporteFinanciero = async (tipoReporte, data, tramiteInfo, f
     const url = window.URL.createObjectURL(blob);
     const anchor = document.createElement('a');
     anchor.href = url;
-    anchor.download = `Reporte_${TIPO}_${tramiteInfo.codigo}_${new Date().getTime()}.xlsx`;
+    anchor.download = name + ` - Reporte_${TIPO}_${tramiteInfo.codigo}_${new Date().getTime()}.xlsx`;
     anchor.click();
     window.URL.revokeObjectURL(url);
 };

@@ -4,6 +4,7 @@ import { LOCAL_URL } from '../../Auth/config';
 import useAuth from "../../Auth/useAuth";
 import { faChevronDown, faPowerOff, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { NavMenu } from './nav';
 
 
 const NavbarAdmin = () => {
@@ -34,28 +35,7 @@ const NavbarAdmin = () => {
     <nav className={` nav-main ${isScrolled ? 'nav-scrolled' : ''}`}>
       <div className="nav-container">
         <NavLink to={LOCAL_URL + "/admin/lista-tramites"} className="nav-brand d-flex align-items-center">
-          {/* Logo Principal */}
-          {/* <span style={{ fontSize: '24px', marginRight: '8px' }}>👔</span> */}
-
-          {/* Contenedor de Texto */}
-          <div className="d-flex flex-column justify-content-start" style={{ lineHeight: '1' }}>
-            <span className="brand-text fw-bold text-uppercase">
-              {iniciales}
-              <span className="text-primary">
-                {restoNombre}
-                {`.   `}
-              </span>
-            </span>
-            <div className="user-info-brand" style={{ marginTop: '-2px' }}>
-              <span className="text-muted text-uppercase" style={{ fontSize: '9px', fontWeight: '700' }}>
-                {localStorage.getItem('rol')}
-              </span>
-              <span className="text-muted" style={{ fontSize: '9px', margin: '0 3px' }}>|</span>
-              <span className="text-dark" style={{ fontSize: '9px', fontWeight: '500' }}>
-                {localStorage.getItem('nombre')}
-              </span>
-            </div>
-          </div>
+          <NavMenu />
         </NavLink>
         {/* Desktop Menu */}
         <ul className="nav-menu-desktop">

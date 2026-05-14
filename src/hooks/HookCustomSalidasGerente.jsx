@@ -1,5 +1,5 @@
 import { useState,  } from "react";
-import { URL } from '../Auth/config';
+import { URL, name} from '../Auth/config';
 import {  start } from '../service/service';
 import { datosAuditoriaExtra } from "./datosAuditoriaExtra";
 

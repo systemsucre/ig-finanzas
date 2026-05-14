@@ -10,6 +10,7 @@ import {
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import useAuth from '../../Auth/useAuth';
+import { NavMenu } from './nav';
 
 const NavbarCajero = () => {
   const auth = useAuth();
@@ -42,38 +43,7 @@ const NavbarCajero = () => {
           to={LOCAL_URL + '/mivimientos'}
           className="nav-brand d-flex align-items-center"
         >
-          <div
-            className="d-flex flex-column justify-content-start"
-            style={{ lineHeight: '1' }}
-          >
-            <span className="brand-text fw-bold text-uppercase">
-              {iniciales}
-              <span className="text-primary">
-                {restoNombre}
-                {`.   `}
-              </span>
-            </span>
-            <div className="user-info-brand" style={{ marginTop: '-2px' }}>
-              <span
-                className="text-muted text-uppercase"
-                style={{ fontSize: '9px', fontWeight: '700' }}
-              >
-                {localStorage.getItem('rol')}
-              </span>
-              <span
-                className="text-muted"
-                style={{ fontSize: '9px', margin: '0 3px' }}
-              >
-                |
-              </span>
-              <span
-                className="text-dark"
-                style={{ fontSize: '9px', fontWeight: '500' }}
-              >
-                {localStorage.getItem('nombre')}
-              </span>
-            </div>
-          </div>
+       <NavMenu />
         </NavLink>
 
         {/* Desktop Menu */}

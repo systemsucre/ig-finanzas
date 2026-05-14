@@ -1,3 +1,4 @@
+import { name } from '../Auth/config.js';
 import createPdf from './base.js';
 
 const cleanNum = (val) => {
@@ -8,6 +9,7 @@ const cleanNum = (val) => {
 };
 
 const reporteConsolidoTramite = async (output, { tramite, ingresos = [], salidas = [] }) => {
+    // alert('Generando PDF, por favor espere...');
 
     // Cálculos de totales
     const totalIngresos = ingresos.reduce((acc, curr) => acc + parseFloat(curr.monto || 0), 0);
@@ -18,6 +20,20 @@ const reporteConsolidoTramite = async (output, { tramite, ingresos = [], salidas
 
     const content = [
         // 1. ENCABEZADO PRINCIPAL
+
+        {
+            table: {
+                widths: ['100%'],
+                body: [[{
+                    text:'REPORTE ' + name,
+                    style: 'header',
+                    // fillColor: '#343a40',
+                    color: '#1e5f3b',
+                    margin: [0, 5, 0, 5]
+                }]]
+            },
+            layout: 'noBorders'
+        }, 
         {
             table: {
                 widths: ['100%'],

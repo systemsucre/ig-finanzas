@@ -10,6 +10,19 @@ const ticketIngresoIndividual = async (output, { ingreso }) => {
     const fechaIngreso = ingreso?.fecha_ingreso?.split('T')[0] || "---";
 
     const content = [
+        {
+            table: {
+                widths: ['100%'],
+                body: [[{
+                    text: 'REPORTE ' + name,
+                    style: 'header',
+                    // fillColor: '#343a40',
+                    color: '#1e5f3b',
+                    margin: [0, 5, 0, 5]
+                }]]
+            },
+            layout: 'noBorders'
+        },
         // Encabezado
         {
             table: {

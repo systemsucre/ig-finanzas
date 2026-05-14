@@ -28,7 +28,7 @@ export function Movimientos() {
   const [tabActivo, setTabActivo] = useState('todos');
   return (
     <>
-      <main className="container-xl mt-5" style={{ maxWidth: '100%' }}>
+      <main className="container-xl mt-2" style={{ maxWidth: '100%' }}>
 
         <div className="banco-header-section mb-4">
           <div className="banco-title-container">

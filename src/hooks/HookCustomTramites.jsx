@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import toast from 'react-hot-toast';
 
-import { LOCAL_URL, URL } from '../Auth/config';
+import { LOCAL_URL, name, URL } from '../Auth/config';
 import { saveDB, start } from '../service/service';
 import { useNavigate } from "react-router-dom";
 import { datosAuditoriaExtra } from "./datosAuditoriaExtra";
@@ -210,7 +210,7 @@ export const useTramites = () => {
                 const byteArray = new Uint8Array(byteNumbers);
                 const blob = new Blob([byteArray], { type: "application/pdf" });
 
-                const nombreArchivo = `Reporte_Tramite_${row.codigo || row.id}.pdf`;
+                const nombreArchivo = name +` - Reporte_Tramite_${row.codigo || row.id}.pdf`;
                 const url = window.URL.createObjectURL(blob);
                 const link = document.createElement('a');
                 link.href = url;

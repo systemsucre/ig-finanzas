@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 
 import { useNavigate } from "react-router-dom";
 import ticketBoleta from "../pdfMake/boleta"; // Renombrado también el PDF
-import { LOCAL_URL, URL } from '../Auth/config';
+import { LOCAL_URL, name, URL } from '../Auth/config';
 import { saveDB, start } from '../service/service';
 import { datosAuditoriaExtra } from "./datosAuditoriaExtra";
 
@@ -114,7 +114,7 @@ export const UseCustomBoletas = () => {
                 const url = window.URL.createObjectURL(blob);
                 const link = document.createElement('a');
                 link.href = url;
-                link.download = `Boleta_${row?.codigo_boleta || 'boleta'}.pdf`;
+                link.download = name + ` - Boleta_${row?.codigo_boleta || 'boleta'}.pdf`;
                 link.click();
                 // Pequeña pausa para asegurar la descarga antes de limpiar
                 setTimeout(() => window.URL.revokeObjectURL(url), 100);

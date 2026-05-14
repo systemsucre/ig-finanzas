@@ -13,6 +13,19 @@ export const ticketHonorarioIndividual = async (output, honorario) => {
         : "---";
 
     const content = [
+        {
+            table: {
+                widths: ['100%'],
+                body: [[{
+                    text: 'REPORTE ' + name,
+                    style: 'header',
+                    // fillColor: '#343a40',
+                    color: '#1e5f3b',
+                    margin: [0, 5, 0, 5]
+                }]]
+            },
+            layout: 'noBorders'
+        },
         // Encabezado
         {
             table: {
@@ -40,7 +53,7 @@ export const ticketHonorarioIndividual = async (output, honorario) => {
         { text: '_______________________________________________________________________________________________', color: '#dddddd', margin: [0, 5, 0, 10] },
 
         // Cuerpo del Recibo
-         {
+        {
             text: [
                 { text: 'Fecha de pago: ', style: 'tProductsHeader' },
                 { text: fechaCobro, style: 'text' }

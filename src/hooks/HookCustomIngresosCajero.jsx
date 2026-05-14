@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { LOCAL_URL, URL } from '../Auth/config';
+import { LOCAL_URL, name, URL } from '../Auth/config';
 import { saveDB, start } from '../service/service';
 import { datosAuditoriaExtra } from './datosAuditoriaExtra';
 import { useNavigate } from 'react-router-dom';
@@ -300,7 +300,7 @@ export const UseCustomIngresos = () => {
       const byteArray = new Uint8Array(byteNumbers);
       const blob = new Blob([byteArray], { type: 'application/pdf' });
 
-      const nombreArchivo = `ingreso_${row.numero + ' Tramite ' + row.codigo_tramite || 'sin-numero'}.pdf`;
+      const nombreArchivo = name + ` - Ingreso_${row.numero + ' Tramite ' + row.codigo_tramite || 'sin-numero'}.pdf`;
 
       // MÉTODO DE DESCARGA NATIVO (A prueba de fallos)
       const url = window.URL.createObjectURL(blob);

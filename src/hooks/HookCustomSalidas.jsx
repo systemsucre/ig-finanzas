@@ -1,7 +1,7 @@
 import { useState, } from "react";
 import { useNavigate } from "react-router-dom";
 import ticketSalidaIndividual from "../pdfMake/salida";
-import { URL } from '../Auth/config';
+import { URL, name } from '../Auth/config';
 import { start } from '../service/service';
 
 export const UseCustomSalidas = () => {
@@ -72,7 +72,7 @@ export const UseCustomSalidas = () => {
             const byteArray = new Uint8Array(byteNumbers);
             const blob = new Blob([byteArray], { type: "application/pdf" });
 
-            const nombreArchivo = `Salida_${row.numero + ' Tramite ' + row.codigo_tramite || 'sin-numero'}.pdf`;
+            const nombreArchivo = name + ` - Salida_${row.numero + ' Tramite ' + row.codigo_tramite || 'sin-numero'}.pdf`;
 
             // MÉTODO DE DESCARGA NATIVO (A prueba de fallos)
             const url = window.URL.createObjectURL(blob);

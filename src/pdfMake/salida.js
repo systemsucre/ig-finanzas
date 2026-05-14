@@ -13,6 +13,19 @@ const ticketSalidaIndividual = async (output, { salida }) => {
         {
             table: {
                 widths: ['100%'],
+                body: [[{
+                    text: 'REPORTE ' + name,
+                    style: 'header',
+                    // fillColor: '#343a40',
+                    color: '#1e5f3b',
+                    margin: [0, 5, 0, 5]
+                }]]
+            },
+            layout: 'noBorders'
+        },
+        {
+            table: {
+                widths: ['100%'],
                 body: [
                     [{
                         text: 'COMPROBANTE DE EGRESO',
@@ -32,7 +45,7 @@ const ticketSalidaIndividual = async (output, { salida }) => {
 
         { text: `N° BOLETA: ${salida?.numero_boleta}`, style: 'tHeaderLabel' },
         { text: `CODIGO BOLETA: ${salida?.codigo_boleta}`, style: 'tHeaderLabel' },
-      
+
         { text: '_______________________________________________________________________________________________', color: '#eeeeee', margin: [0, 5, 0, 10] },
 
         {
@@ -96,7 +109,7 @@ const ticketSalidaIndividual = async (output, { salida }) => {
             ],
             margin: [0, 5, 0, 5]
         },
-       
+
 
         // Cuadro de Monto
         {

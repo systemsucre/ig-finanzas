@@ -18,6 +18,19 @@ const ticketBoleta = async (output, { itemsBoleta }) => {
         // 1. ENCABEZADO PRINCIPAL (TIPO BANNER)
         {
             table: {
+                widths: ['100%'],
+                body: [[{
+                    text: 'REPORTE ' + name,
+                    style: 'header',
+                    // fillColor: '#343a40',
+                    color: '#1e5f3b',
+                    margin: [0, 5, 0, 5]
+                }]]
+            },
+            layout: 'noBorders'
+        },
+        {
+            table: {
                 widths: ['*'],
                 body: [
                     [{
@@ -125,7 +138,7 @@ const ticketBoleta = async (output, { itemsBoleta }) => {
             layout: 'noBorders'
         },
 
-                {
+        {
             table: {
                 widths: ['*', 'auto'],
                 body: [

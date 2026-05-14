@@ -142,7 +142,7 @@ export const columns = [
                         })}
                     </div>
                     <div className="td-monto td-numero" style={{ marginTop: '2.5rem' }}>
-                        <span >{row.total_tramites}</span>{row.total_tramites > 1 ? " Tramites" : " Trámite"}
+                        <span >ingreso Cliente</span>
                     </div>
                 </>
 

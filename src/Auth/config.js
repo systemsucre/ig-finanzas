@@ -4,6 +4,7 @@ const URL = 'https://ig-finanzas-bc.vercel.app/';
 // const URL = 'http://localhost:3005/';
 // const URL = 'http://localhost:8080/'
 const LOCAL_URL = '/ig';
+const name  = 'CONTAMAX';
 
 const TIEMPO_INACTIVO = 60; // MINUTOS DE TOLERANCIA ANTESDE QUE EL USUARIO VUELVA A INTERACTUAR CON EL SISTEMA YA SEA MEDIANTE MUOSE O TECLADO
 const INPUT = {
@@ -46,4 +47,5 @@ export {
   INPUT,
   TIEMPO_INACTIVO,
   LOCAL_URL,
+  name
 };
