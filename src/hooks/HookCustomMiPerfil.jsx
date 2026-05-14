@@ -78,7 +78,7 @@ export const useMiPerfil = (usuarioEdit = null) => {
             direccion: direccion.campo,
             datosAuditoriaExtra
         },)
-        navigate(`${LOCAL_URL + '/dash-1'}`)
+        miPerfil()
     }
 
     const recet_ = async () => {
@@ -92,7 +92,8 @@ export const useMiPerfil = (usuarioEdit = null) => {
                         datosAuditoriaExtra
 
                     })
-                    navigate(`${LOCAL_URL + '/dash-1'}`)
+                    miPerfil()
+
                 }
             } else toast.error('las contraseñas no coinciden!, verifique e intente nuevamente')
         } else toast.error('complete todos los campos')
