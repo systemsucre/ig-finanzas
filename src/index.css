@@ -3734,6 +3734,9 @@ thead {
 
   }
 }
+.g-3q{
+  gap: 1rem !important;
+}
 
 /* Bloque de cada ítem en el bucle */
 .item-gasto-row {

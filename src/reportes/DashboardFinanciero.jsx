@@ -22,6 +22,9 @@ import {
   faWallet,
   faClipboardList,
   faRobot,
+  faNoteSticky,
+  faUserCheck,
+  faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -37,7 +40,7 @@ const CardKPI = ({
 }) => (
   <div className="col-md-3 col-sm-6" style={{ marginBottom: '0px' }}>
     <div
-      className="card border-0 shadow-sm p-3 mb-3"
+      className="card border-0 shadow-sm p-3 mb-4"
       style={{ borderRadius: '15px', background: 'rgba(255,255,255 ,.2)' }}
     >
       <div className="d-flex align-items-center ">
@@ -53,7 +56,7 @@ const CardKPI = ({
             {' '}
             {tipo === 'porcentaje'
               ? '%'
-              : monedas.find((e) => e.value === moneda.campo)?.simbolo}{' '}
+              :tipo === 'moneda' ? monedas.find((e) => e.value === moneda.campo)?.simbolo : ''}{' '}
             {Number(monto || 0).toLocaleString()}
           </h5>
         </div>
@@ -75,6 +78,7 @@ const DashboardFinanciero = () => {
     cargando,
     dataConPrediccion,
     historicoAll,
+    cajas, clientes, usuarios, tiposTramites,
   } = useDashboard();
   const [montado, setMontado] = useState(false);
 
@@ -163,7 +167,7 @@ const DashboardFinanciero = () => {
     const ingresos = historicoFiltrado.map((h) => parseFloat(h.total_ingresos));
 
     correlacion = ss.sampleCorrelation(ingresos, gastos);
-    console.log('Correlación Real:', correlacion, historicoAll);
+    // console.log('Correlación Real:', correlacion, historicoAll);
   } else {
     console.log(
       'No hay suficientes datos variables para calcular la correlación.',
@@ -253,7 +257,7 @@ const DashboardFinanciero = () => {
       style={{ maxWidth: '100%', marginTop: '3rem' }}
     >
       <div>
-        <h3 className="text-dark fw-bold mb-0 p-2 text-titulos">   
+        <h3 className="text-dark fw-bold mb-0 p-2 text-titulos">
           Gestión Financiera {new Date().getFullYear()}
         </h3>
       </div>
@@ -262,19 +266,19 @@ const DashboardFinanciero = () => {
         <div className="row g-3 ">
           <CardKPI
             titulo="INGRESOS"
-            monto={kpis.ingresos} 
-            icono={faArrowUp} 
-            color="#10b981" 
-            moneda={moneda} 
-            monedas={monedas} 
+            monto={kpis.ingresos}
+            icono={faArrowUp}
+            color="#10b981"
+            moneda={moneda}
+            monedas={monedas}
           />
-          <CardKPI 
-            titulo="GASTOS" 
-            monto={kpis.gastos} 
-            icono={faArrowDown} 
-            color="#f43f5e"  
-            moneda={moneda}  
-            monedas={monedas} 
+          <CardKPI
+            titulo="GASTOS"
+            monto={kpis.gastos}
+            icono={faArrowDown}
+            color="#f43f5e"
+            moneda={moneda}
+            monedas={monedas}
           />
           <CardKPI
             titulo="SALDO NETO"
@@ -575,7 +579,7 @@ const DashboardFinanciero = () => {
           </div>
         </div>
 
-        <div className="row g-3 mb-4" style={{ marginBottom: '7rem' }}>
+        <div className="row g-3 mb-4" style={{ marginBottom: '7rem', marginTop: '3rem' }}>
           <div className="col-md-4 col-sm-6 mb-4">
             <div
               className="card border-0 shadow-sm p-4 text-center"
@@ -659,6 +663,13 @@ const DashboardFinanciero = () => {
                 <p className="text-white">Error Estandar</p>
               </div>
             </div>
+          </div>
+
+          <div className="row g-3">
+            <CardKPI titulo="CAJAS" monto={cajas.length} icono={faNoteSticky} color="#10b981" tipo={'target'} />
+            <CardKPI titulo="CATEGORIA CAJAS" monto={tiposTramites.length} icono={faClipboardList} color="#8b5cf6" tipo={'target'} />
+            <CardKPI titulo="CLIENTES" monto={clientes.length} icono={faUserCheck} color="#f43f5e" tipo={'target'} />
+            <CardKPI titulo="USUARIOS" monto={usuarios.length} icono={faUser} color="#6366f1" tipo={'target'} />
           </div>
         </div>
       </div>

@@ -10,6 +10,10 @@ export const useDashboard = () => {
     valido: 'true',
   });
 
+  const [clientes, setClientes] = useState([]);
+  const [usuarios, setUsuarios] = useState([]);
+  const [tiposTramites, setTiposTramites] = useState([]);
+
   const [cajas, setCajas] = useState([]);
   const [stats, setStats] = useState([]);
   const [monedas, setMonedas] = useState([]);
@@ -119,12 +123,18 @@ export const useDashboard = () => {
   );
 
   const listarConfiguracion = async () => {
-    const [resMonedas] = await Promise.all([
+    const [resMonedas, resCajas, resClientes, resUsuarios, resTiposTramites] = await Promise.all([
       start(`${URL}comuun/listar-monedas`),
-      // start(`${URL}comuun/listar-cajas`)
+      start(`${URL}comuun/listar-cajas`),
+      start(`${URL}comuun/listar-clientes`),
+      start(`${URL}comuun/listar-usuarios`),
+      start(`${URL}comuun/listar-tipos-tramites`)
     ]);
     if (resMonedas) setMonedas(resMonedas);
-    // if (resCajas) setCajas(resCajas);s
+    if (resCajas) setCajas(resCajas);
+    if (resClientes) setClientes(resClientes);
+    if (resUsuarios) setUsuarios(resUsuarios);
+    if (resTiposTramites) setTiposTramites(resTiposTramites);
   };
 
   const listarHistorico = async (idMonedaManual) => {
@@ -133,7 +143,7 @@ export const useDashboard = () => {
     const h = await start(`${URL}comuun/historico-ia`, { moneda: idMoneda });
     setHistoricoAll(h);
     const dh = await predecirFuturoFinanciero(h);
-    console.log(dh, ' data prediccion resultado-------------------------');
+    // console.log(dh, ' data prediccion resultado-------------------------');
     setDataConPrediccion(dh);
   };
   // Solo se ejecuta al montar el componente
@@ -141,7 +151,7 @@ export const useDashboard = () => {
     listarHistorico();
     listarConfiguracion();
     cargarDatos();
-  }, []);
+  }, []); 
 
   return {
     kpis,
@@ -150,6 +160,9 @@ export const useDashboard = () => {
     setMoneda,
     monedas,
     cajas,
+    clientes,
+    usuarios,
+    tiposTramites,
     cargando,
     dataConPrediccion,
     historicoAll,
