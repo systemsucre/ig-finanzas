@@ -63,17 +63,17 @@ export function ReportesMovimientos() {
                             <div className="col-12 mt-5">
                                 <h6 className="text-center mb-4 text-muted text-uppercase small fw-bold">Generar Archivos Excel</h6>
                                 <div className="row g-3 text-center">
-                                    <div className="col-md-6">
+                                    <div className="col-md-6 col-12 mb-4">
                                         <button
-                                            className={`btn btn-banking-blue order-1 order-md-2 px-5`}
+                                            className={`btn btn-banking-blue order-1 order-md-2 `}
                                             onClick={() => reportesTodasSalidas(estados.desde.campo, estados.hasta.campo)}>
                                             <FontAwesomeIcon icon={faWallet} /> Reporte Salidas
                                         </button>
                                     </div>
                                     {parseInt(localStorage.getItem('numRol')) < 4 ?
-                                        <div className="col-md-6">
+                                        <div className="col-md-6 col-12 mb-4">
                                             <button
-                                                className={`btn btn-banking-gold order-1 order-md-2 px-5`}
+                                                className={`btn btn-banking-gold order-1 order-md-2 `}
                                                 onClick={() => reportesTodosIngresos(estados.desde.campo, estados.hasta.campo)}>
                                                 <FontAwesomeIcon icon={faFileInvoiceDollar} /> Reporte Ingresos
                                             </button>

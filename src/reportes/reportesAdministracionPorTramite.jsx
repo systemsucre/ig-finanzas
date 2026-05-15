@@ -107,8 +107,8 @@ export function ReportesAdministracionPorTramite() {
                                 />
                             </div>
 
-                            <div className=" row mt-5">
-                                <div className=" col-md-4 col-12">
+                            <div className=" row mt-5 text-center">
+                                <div className=" col-md-4 col-12 mb-4">
                                     <button
                                         type="button"
                                         className="btn btn-banking-blue order-2 order-md-1"
@@ -119,11 +119,11 @@ export function ReportesAdministracionPorTramite() {
                                     </button>
                                 </div>
                                 {parseInt(localStorage.getItem('numRol')) < 4 ? <>
-                                    <div className=" col-md-4 col-12">
+                                    <div className=" col-md-4 col-12 mb-4">
 
                                         <button
                                             type="submit"
-                                            className={`btn btn-banking-gold order-1 order-md-2 px-5`}
+                                            className={`btn btn-banking-gold order-1 order-md-2 `}
                                             onClick={() => reporteIngresos(estados.tramite.campo, estados.desde.campo, estados.hasta.campo)}
 
                                         >
@@ -131,10 +131,10 @@ export function ReportesAdministracionPorTramite() {
                                             <span>              Reporte Ingresos</span>
                                         </button>
                                     </div>
-                                    <div className="col-md-4 col-12">
+                                    <div className="col-md-4 col-12 mb-4">
                                         <button
                                             type="submit"
-                                            className={`btn btn-banking-blue order-1 order-md-2 px-5`}
+                                            className={`btn btn-banking-blue order-1 order-md-2`}
                                             onClick={() => reporteGeneral(estados.tramite.campo, estados.desde.campo, estados.hasta.campo)}
 
                                         >
