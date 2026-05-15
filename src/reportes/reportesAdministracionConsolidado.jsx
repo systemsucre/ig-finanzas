@@ -80,7 +80,7 @@ export function ReportesAdministracionConsolidado() {
                                         onClick={() => reporteConsolidado(estados.desde.campo, estados.hasta.campo, estados.estado.campo)}
                                     >
                                         <FontAwesomeIcon icon={faFileInvoiceDollar} />
-                                        <span>              Reporte Ingresos</span>
+                                        <span>              Reporte Consolidado</span>
                                     </button>
                                 </div>
                             </div>

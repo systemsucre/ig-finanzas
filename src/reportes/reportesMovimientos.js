@@ -1,4 +1,5 @@
 import ExcelJS from 'exceljs';
+import { name } from '../Auth/config';
 
 export const reportesMovimientos = async (tipoReporte, data, filtros) => {
     const workbook = new ExcelJS.Workbook();
@@ -100,7 +101,7 @@ export const reportesMovimientos = async (tipoReporte, data, filtros) => {
     const url = window.URL.createObjectURL(blob);
     const anchor = document.createElement('a');
     anchor.href = url;
-    anchor.download = `Reporte_${tipoReporte}_${localStorage.getItem('entidad')}_${new Date().getTime()}.xlsx`;
+    anchor.download = name + ` - Reporte_${tipoReporte}_${localStorage.getItem('entidad')}_${new Date().getTime()}.xlsx`;
     anchor.click();
     window.URL.revokeObjectURL(url);
 };

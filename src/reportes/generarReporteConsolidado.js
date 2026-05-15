@@ -1,4 +1,5 @@
 import ExcelJS from 'exceljs';
+import { name } from '../Auth/config';
 
 export const generarReporteResumen = async (data, filtros, ) => {
     const workbook = new ExcelJS.Workbook();
@@ -116,7 +117,7 @@ export const generarReporteResumen = async (data, filtros, ) => {
     const url = window.URL.createObjectURL(blob);
     const anchor = document.createElement('a');
     anchor.href = url;
-    anchor.download = `Consolidado_General_${new Date().getTime()}.xlsx`;
+    anchor.download = name +   ` - Consolidado_General_${new Date().getTime()}.xlsx`;
     anchor.click();
     window.URL.revokeObjectURL(url);
 };

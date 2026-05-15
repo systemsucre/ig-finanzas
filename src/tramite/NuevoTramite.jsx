@@ -38,7 +38,7 @@ const FormularioTramite = () => {
                             {/* Encabezado Dinámico */}
                             <div className="p-4 text-center cabecera-formulario">
                                 <h2 className="h4 fw-bold m-0 text-uppercase tracking-wider">
-                                    {isEdit ? 'Editar Trámite' : 'Apertura de Trámite'}
+                                    {isEdit ? 'Editar caja' : 'Apertura de caja'}
                                 </h2>
                                 <p className="text-muted small">
                                     {isEdit ? `Modificando expediente: ${estados?.codigo.campo}` : ''}

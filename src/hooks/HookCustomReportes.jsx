@@ -225,6 +225,7 @@ export const useReportes = () => {
 
 
     const reporteConsolidado = async (desde, hasta, estado) => {
+        console.log(desde, hasta, estado, moneda, '  reporte consolidado')
 
         const generarDocumento = async () => {
             const data = (await start(`${URL}comuun/reporte-consolidado`, { desde, hasta, estado, moneda:moneda.campo}));
