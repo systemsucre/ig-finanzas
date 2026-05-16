@@ -44,6 +44,14 @@ import { ReportesAdministracionConsolidado } from '../reportes/reportesAdministr
 import { ListaBoleta } from '../boleta/Lista';
 import { FormularioBoleta } from '../boleta/Formulario';
 import { DetallesBoleta } from '../boleta/detalles';
+
+
+
+import { ListaBoletaIngreso } from '../boletaIngreso/Lista';
+import { FormularioBoletaIngreso } from '../boletaIngreso/Formulario';
+import { DetallesBoletaIngreso } from '../boletaIngreso/detalles';
+
+
 import { LayoutPorRol } from './layout';
 import { ListaHonorariosTramite } from '../honorarios/Lista';
 import FormularioHonorario from '../honorarios/FormularioHonorarios';
@@ -101,7 +109,7 @@ export default function AppRouter() {
   }, [auth]);
 
   useEffect(() => {
-    return () => {};
+    return () => { };
   }, []);
 
   const handleKeyPress = () => {
@@ -332,55 +340,55 @@ export default function AppRouter() {
           ),
         },
 
-        {
-          path: 'ingresos-directos',
-          element: (
-            <Check component={ListaIngresosTramite} roleRequired="cajero" />
-          ),
-        },
-        {
-          path: 'ingresos-pendientes',
-          element: (
-            <Check component={ListaIngresosDeuda} roleRequired="cajero" />
-          ),
-        },
+        // {
+        //   path: 'ingresos-directos',
+        //   element: (
+        //     <Check component={ListaIngresosTramite} roleRequired="cajero" />
+        //   ),
+        // },
+        // {
+        //   path: 'ingresos-pendientes',
+        //   element: (
+        //     <Check component={ListaIngresosDeuda} roleRequired="cajero" />
+        //   ),
+        // },
 
-        {
-          path: 'nuevo-ingreso-directo',
-          element: (
-            <Check component={FormularioIngreso} roleRequired="cajero" />
-          ),
-        },
-        {
-          path: 'nuevo-ingreso-pendiente',
-          element: (
-            <Check component={FormularioIngresoDeuda} roleRequired="cajero" />
-          ),
-        },
+        // {
+        //   path: 'nuevo-ingreso-directo',
+        //   element: (
+        //     <Check component={FormularioIngreso} roleRequired="cajero" />
+        //   ),
+        // },
+        // {
+        //   path: 'nuevo-ingreso-pendiente',
+        //   element: (
+        //     <Check component={FormularioIngresoDeuda} roleRequired="cajero" />
+        //   ),
+        // },
 
-        {
-          path: 'editar-ingreso-directo/:id',
-          element: (
-            <Check component={FormularioIngreso} roleRequired="cajero" />
-          ),
-        },
+        // {
+        //   path: 'editar-ingreso-directo/:id',
+        //   element: (
+        //     <Check component={FormularioIngreso} roleRequired="cajero" />
+        //   ),
+        // },
 
-        {
-          path: 'editar-ingreso-pendiente/:id',
-          element: (
-            <Check component={FormularioIngresoDeuda} roleRequired="cajero" />
-          ),
-        },
+        // {
+        //   path: 'editar-ingreso-pendiente/:id',
+        //   element: (
+        //     <Check component={FormularioIngresoDeuda} roleRequired="cajero" />
+        //   ),
+        // },
 
-        {
-          path: 'completar-pago/:id',
-          element: (
-            <Check
-              component={FormularioCompletarIngreso}
-              roleRequired="cajero"
-            />
-          ),
-        },
+        // {
+        //   path: 'completar-pago/:id',
+        //   element: (
+        //     <Check
+        //       component={FormularioCompletarIngreso}
+        //       roleRequired="cajero"
+        //     />
+        //   ),
+        // },
 
         {
           path: 'lista-cajas',
@@ -419,8 +427,32 @@ export default function AppRouter() {
 
         {
           path: 'modificar-boleta/:codigo',
-          element: <Check component={FormularioBoleta} roleRequired="all" />,
+          element: <Check component={FormularioBoleta} roleRequired="all" />,  
         },
+
+
+
+        {
+          path: 'boletas-ingreso',
+          element: <Check component={ListaBoletaIngreso} roleRequired="all" />,
+        },
+        {
+          path: 'detalle-boleta-ingreso/:codigo',
+          element: <Check component={DetallesBoletaIngreso} roleRequired="all" />,
+        },
+
+        {
+          path: 'nueva-boleta-ingreso',
+          element: <Check component={FormularioBoletaIngreso} roleRequired="all" />,
+        },
+
+        {
+          path: 'modificar-boleta-ingreso/:codigo',
+          element: <Check component={FormularioBoletaIngreso} roleRequired="all" />,
+        },
+
+
+
 
         {
           path: 'movimientos',
@@ -431,7 +463,7 @@ export default function AppRouter() {
           path: 'listar-salidas/:id',
           element: <Check component={ListaSalidas} roleRequired="all" />,
         },
-               {
+        {
           path: 'listar-ingresos-por-movimiento/:id',
           element: <Check component={ListaIngresosVista} roleRequired="all" />,
         },

@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { UseCustomBoletas } from '../hooks/HookCustomBoleta';
+import { UseCustomBoletasIngreso } from '../hooks/HookCustomBoletaIngreso';
 import { useTramites } from '../hooks/HookCustomTramites';
 import toast from 'react-hot-toast';
 import Select from 'react-select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfoCircle, faPlusCircle, faTimesSquare } from '@fortawesome/free-solid-svg-icons';
 
-export const FormularioBoleta = () => {
+export const FormularioBoletaIngreso = () => {
   const { codigo } = useParams();
   const navigate = useNavigate();
 
@@ -18,12 +18,18 @@ export const FormularioBoleta = () => {
     consultarDetalleBoleta,
     itemsBoleta,
     cargando,
-  } = UseCustomBoletas();
+    estados,
+    setters,
+    listaClientes,
+    cargarAuxiliares,
+  } = UseCustomBoletasIngreso();
 
   const [itemsForm, setItemsForm] = useState([]);
   // 1. Carga inicial de datos
   useEffect(() => {
     listarTramitesActivos();
+    cargarAuxiliares()
+
     if (codigo) {
       consultarDetalleBoleta(codigo);
     } else {
@@ -36,12 +42,8 @@ export const FormularioBoleta = () => {
     if (codigo && itemsBoleta.length > 0) {
       const itemsMapeados = itemsBoleta.map((item) => ({
         // Asegúrate de que 'item.id_tramite' sea el UUID que viene del backend
-        id_tramite: item.value || item.id,
         monto: item.monto,
         detalle: item.detalle,
-        fecha:
-          item.fecha_solicitud?.split('T')[0] ||
-          new Date().toISOString().split('T')[0],
       }));
       setItemsForm(itemsMapeados);
     }
@@ -51,10 +53,9 @@ export const FormularioBoleta = () => {
     setItemsForm([
       ...itemsForm,
       {
-        id_tramite: '',
         monto: '',
         detalle: '',
-        fecha: new Date().toISOString().split('T')[0],
+
       },
     ]);
   };
@@ -75,7 +76,7 @@ export const FormularioBoleta = () => {
 
     // Validación: Verificar que no haya campos vacíos
     const incompleto = itemsForm.some(
-      (i) => !i.id_tramite || !i.monto || !i.detalle,
+      (i) => !i.monto || !i.detalle,
     );
     if (incompleto)
       return toast.error('Por favor, completa todos los campos de la tabla');
@@ -146,13 +147,13 @@ export const FormularioBoleta = () => {
 
               <div className="p-4 text-center cabecera-formulario">
                 <h2 className="h4 fw-bold m-0 text-uppercase tracking-wider">
-                  {codigo ? `Modificar Boleta` : 'Nueva Boleta de Gastos'}
+                  {codigo ? `Modificar Boleta` : 'Nueva Boleta de Ingresos'}
                 </h2>
                 {codigo && (
                   <p className="text-center">
                     {' '}
                     <span className="badge bg-info text-dark">
-                      Editando Caja: {codigo}
+                      BOLETA: {codigo}
                     </span>
                   </p>
                 )}
@@ -167,11 +168,61 @@ export const FormularioBoleta = () => {
                       e.preventDefault();
                     }
                   }}
-                  style={{ marginTop: '20px' }}
+                  style={{ marginTop: '10px' }}
                 >
-                  
-                    {itemsForm.map((item, index) => (
-                    <div className="item-gasto-row" key={index}>
+
+
+                  <div className="row item-gasto-row p-2 mt-3">
+                    <div className="col-md-4 mt-3">
+                      <label className="form-label-profesional">CAJA</label>
+                      <Select
+                        styles={customStyles}
+                        placeholder={'Seleccione caja...'}
+                        options={tramitesFiltradosBoleta}
+                        components={{ Option: CustomOption }} // <-- Aquí aplicamos la personalización
+                        getOptionLabel={(e) => `${e.label} (${e.simbolo})`} // Limpio para el buscador
+                        getOptionValue={(e) => e.value}
+                        onChange={(e) => setters.setIdTramite({ campo: e ? e.value : '', valido: e ? 'true' : 'false' })}
+                        value={
+                          tramitesFiltradosBoleta.find(t => t.value === estados.idTramite.campo) || null
+                        }
+                        isSearchable={true}
+                        className="react-select-container"
+                        classNamePrefix="react-select"
+                      />
+                    </div>
+                    <div className="col-md-4 mt-3">
+                      <label className="form-label-profesional">
+                        Fecha de Gasto
+                      </label>
+                      <input
+                        type="date"
+                        className="form-control form-control-profesional"
+                        value={estados.fechaSolicitud.campo}
+                        onChange={(e) =>
+                          setters.setFechaSolicitud({ campo: e.target.value, valido: 'true' })
+                        }
+                      />
+                    </div>
+                    <div className="col-md-4 mt-3">
+                      <label className="form-label-profesional">Cliente</label>
+                      <Select
+                        styles={customStyles}
+                        placeholder={'Seleccione cliente...'}
+                        options={listaClientes}
+                      
+                        onChange={(e) => setters.setIdCliente({ campo: e ? e.value : '', valido: e ? 'true' : 'false' })}
+                        value={
+                          listaClientes.find(t => t.value === estados.idCliente.campo) || null
+                        }
+                        isSearchable={true}
+                        className="react-select-container"
+                        classNamePrefix="react-select"
+                      />
+                    </div>
+                  </div>
+                  {itemsForm.map((item, index) => (
+                    <div className="item-gasto-row p-3 mt-3" key={index}>
                       {/* Indicador visual de fila */}
                       <div className="item-number">ITEM #{index + 1}</div>
 
@@ -187,96 +238,55 @@ export const FormularioBoleta = () => {
                         </button>
                       )}
 
-                      <div className="row g-3">
-                        <div className="col-md-6 mt-3">
-                          <label className="form-label-profesional">CAJA</label>
 
-                          <Select
-                            styles={customStyles}
-                            placeholder={'Seleccione caja...'}
-                            options={tramitesFiltradosBoleta}
-                            components={{ Option: CustomOption }} // <-- Aquí aplicamos la personalización
-                            getOptionLabel={(e) => `${e.label} (${e.simbolo})`} // Limpio para el buscador
-                            getOptionValue={(e) => e.value}
-                            onChange={(e) =>
-                              actualizarFila(
-                                index,
-                                'id_tramite',
-                                e ? e.value : '',
-                              )
-                            }
-                            value={
-                              tramitesFiltradosBoleta.find(
-                                (opt) =>
-                                  String(opt.value) === String(item.id_tramite),
-                              ) || null
-                            }
-                            isSearchable={true}
-                            className="react-select-container"
-                            classNamePrefix="react-select"
-                          />
-                        </div>
+                      <div className="col-md-12">
+                        <label className="form-label-profesional">
+                          Concepto del Gasto
+                        </label>
+                        <textarea
+                          className="form-control form-control-profesional"
+                          placeholder="Escriba el detalle del gasto realizado..."
+                          rows="2"
+                          value={item.detalle}
+                          onChange={(e) =>
+                            actualizarFila(index, 'detalle', e.target.value)
+                          }
+                        />
+                      </div>
 
-                        <div className="col-md-3 mt-3">
-                          <label className="form-label-profesional">
-                            Monto (
-                            {tramitesFiltradosBoleta.find(
+                      <div className="col-md-3 mt-3">
+                        <label className="form-label-profesional">
+                          Monto (
+                          {tramitesFiltradosBoleta.find(
+                            (opt) =>
+                              String(opt.value) === String(estados.idTramite.campo),
+                          )?.simbolo || ''}
+                          )
+                        </label>
+                        <input
+                          type="number"
+                          className="form-control form-control-profesional text-end fw-bold"
+                          value={item.monto}
+                          placeholder={
+                            tramitesFiltradosBoleta.find(
                               (opt) =>
                                 String(opt.value) === String(item.id_tramite),
-                            )?.simbolo || ''}
-                            )
-                          </label>
-                          <input
-                            type="number"
-                            className="form-control form-control-profesional text-end fw-bold"
-                            value={item.monto}
-                            placeholder={
-                              tramitesFiltradosBoleta.find(
+                            )?.simbolo
+                              ? tramitesFiltradosBoleta.find(
                                 (opt) =>
-                                  String(opt.value) === String(item.id_tramite),
-                              )?.simbolo
-                                ? tramitesFiltradosBoleta.find(
-                                  (opt) =>
-                                    String(opt.value) ===
-                                    String(item.id_tramite),
-                                )?.simbolo + ' 0.00'
-                                : '0.00'
-                            }
-                            onChange={(e) =>
-                              actualizarFila(index, 'monto', e.target.value)
-                            }
-                          />
-                        </div>
-
-                        <div className="col-md-3 mt-3">
-                          <label className="form-label-profesional">
-                            Fecha de Gasto
-                          </label>
-                          <input
-                            type="date"
-                            className="form-control form-control-profesional"
-                            value={item.fecha}
-                            onChange={(e) =>
-                              actualizarFila(index, 'fecha', e.target.value)
-                            }
-                          />
-                        </div>
-
-                        <div className="col-md-12">
-                          <label className="form-label-profesional">
-                            Concepto del Gasto
-                          </label>
-                          <textarea
-                            className="form-control form-control-profesional"
-                            placeholder="Escriba el detalle del gasto realizado..."
-                            rows="2"
-                            value={item.detalle}
-                            onChange={(e) =>
-                              actualizarFila(index, 'detalle', e.target.value)
-                            }
-                          />
-                        </div>
+                                  String(opt.value) ===
+                                  String(item.id_tramite),
+                              )?.simbolo + ' 0.00'
+                              : '0.00'
+                          }
+                          onChange={(e) =>
+                            actualizarFila(index, 'monto', e.target.value)
+                          }
+                        />
                       </div>
+
+
+
                     </div>
                   ))}
 
@@ -301,7 +311,10 @@ export const FormularioBoleta = () => {
                         Total Acumulado:{' '}
                       </strong>
                       <span className="text-success fw-bold ms-1 fs-5">
-                        {' '}
+                        {tramitesFiltradosBoleta.find(
+                          (opt) =>
+                            String(opt.value) === String(estados.idTramite.campo),
+                        )?.simbolo || ''}
                         {totalBoleta}
                       </span>
                     </div>

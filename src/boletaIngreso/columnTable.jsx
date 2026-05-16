@@ -17,18 +17,41 @@ export const ColumnsTable = [
             <FontAwesomeIcon className="me-2" icon={faCalendarAlt} />
             {info.fechaLarga}
             {/* Hora (solo se muestra si existe) */}
-            {info.hora && (
-              <div className="hora-detalle">
 
-                {info.hora}
-              </div>
-            )}
           </div>
-
-
         </div>
       );
     }
+  },
+  {
+    label: 'empleador',
+    field: 'cliente_nombre', // Viene del CONCAT en el backend
+    render: (row) => (
+      <div>
+        <div className="fw-bold" style={{ fontSize: '0.75rem' }}>
+          {row.cliente_nombre}
+        </div>
+        <small className="text-muted" style={{ fontSize: '0.7rem' }}>
+          ID EMPLEADOR: {row.id_cliente}
+        </small>
+      </div>
+    ),
+  },
+  {
+    label: 'CAJA',
+    field: 'codigodd',
+    render: (row) => (
+      <div >
+        <div className="td-descripcion">
+          {row.codigo}
+        </div>
+        <div
+          className="td-numero"
+        >
+          {row.detalle_tramite.substring(0, 40)}
+        </div>
+      </div>
+    )
   },
 
   window.innerWidth > 877 ?
@@ -36,7 +59,7 @@ export const ColumnsTable = [
       label: 'Numero Boleta',
       field: 'numero_boleta',
       render: (row) => (
-        <div className="td-numero">
+        <div className="td-numero text-center">
           <span className="ms-2"> {row.numero_boleta}</span>
         </div>
       )
@@ -44,7 +67,7 @@ export const ColumnsTable = [
   window.innerWidth > 877 ?
     {
       label: 'Boleta',
-      field: 'codigoss',
+      field: 'codigo',
       render: (row) => (
         <div className="td-descripcion">
           <span className="ms-2">{row.codigo_boleta}</span>
@@ -52,7 +75,7 @@ export const ColumnsTable = [
       )
     } : {
       label: 'Boleta',
-      field: 'codigoss',
+      field: 'codigo',
       render: (row) => (
         <div className="">
           <span className="td-numero">Caja .- </span>
@@ -79,7 +102,7 @@ export const ColumnsTable = [
       field: 'monto',
       render: (row) => (
         <div className="text-center">
-          <span className="fw-bold text-dark" style={{ fontSize: '0.85rem' }}>
+          <span className="fw-bold text-success" style={{ fontSize: '0.85rem' }}>
             {row.simbolo} {row.monto_total}
           </span>
         </div>
@@ -96,48 +119,48 @@ export const ColumnsTable = [
     ),
     sortable: true,
   },
-  {
-    label: 'Estado',
-    field: 'estado',
-    render: (row) => {
-      const estados = {
-        1: {
-          badge: 'bgss-secsondary text-secondary',
-          texto: 'SOLICITADO',
-          icon: 'bi-hourglass-split',
-        },
-        2: {
-          badge: 'bg-infos text-info',
-          texto: 'APROBADO',
-          icon: 'bi-check-circle',
-        },
-        3: {
-          badge: 'tex-success text-success',
-          texto: 'REGISTRADO',
-          icon: 'bi-cash-stack',
-        },
-        4: {
-          badge: 'bg-danger text-danger',
-          texto: 'RECHAZADO',
-          icon: 'bi-x-circle',
-        },
-      };
+  // {
+  //   label: 'Estado',
+  //   field: 'estado',
+  //   render: (row) => {
+  //     const estados = {
+  //       1: {
+  //         badge: 'bgss-secsondary text-secondary',
+  //         texto: 'SOLICITADO',
+  //         icon: 'bi-hourglass-split',
+  //       },
+  //       2: {
+  //         badge: 'bg-infos text-info',
+  //         texto: 'LIQUIDADO',
+  //         icon: 'bi-check-circle',
+  //       },
+  //       3: {
+  //         badge: 'tex-success text-success',
+  //         texto: 'REGISTRADO',
+  //         icon: 'bi-cash-stack',
+  //       },
+  //       4: {
+  //         badge: 'bg-danger text-danger',
+  //         texto: 'RECHAZADO',
+  //         icon: 'bi-x-circle',
+  //       },
+  //     };
 
-      const est = estados[row.estado] || {
-        badge: 'bg-secondary',
-        texto: 'DESCONOCIDO',
-        icon: 'bi-question',
-      };
+  //     const est = estados[row.estado] || {
+  //       badge: 'bg-secondary',
+  //       texto: 'DESCONOCIDO',
+  //       icon: 'bi-question',
+  //     };
 
-      return (
-        <span
-          className={`badge ${est.badge} d-flex align-items-center w-fit-content px-2 py-1 `}
-          style={{ fontSize: '0.85rem', fontWeight: '600' }}
-        >
-          <i className={`bi ${est.icon} me-1`}></i>
-          {est.texto}
-        </span>
-      );
-    },
-  },
+  //     return (
+  //       <span
+  //         className={`badge ${est.badge} d-flex align-items-center w-fit-content px-2 py-1 `}
+  //         style={{ fontSize: '0.85rem', fontWeight: '600' }}
+  //       >
+  //         <i className={`bi ${est.icon} me-1`}></i>
+  //         {est.texto}
+  //       </span>
+  //     );
+  //   },
+  // },
 ];

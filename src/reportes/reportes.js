@@ -68,9 +68,9 @@ export const generarReporteFinanciero = async (tipoReporte, data, tramiteInfo, f
         const montoActual = parseFloat(item.monto) || 0;
         let filaActual = [
             item.numero || item.id || '-',
-            item.fecha?.split('T')[0] || '-',
+            item?.fecha_despacho ? item?.fecha_despacho?.split('T')[0] : item?.fecha_ingreso?.split('T')[0] || '-',
             TIPO === 'GENERAL' ? `[${item.tipo_mov}] ${item.detalle}` : item.detalle,
-             montoActual,
+            montoActual,
         ];
 
         if (mostrarColumnaCliente) {

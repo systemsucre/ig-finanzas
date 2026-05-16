@@ -35,7 +35,7 @@ const NavbarAuxiliar = () => {
     <nav className={` nav-main ${isScrolled ? 'nav-scrolled' : ''}`}>
       <div className="nav-container">
         <NavLink to={LOCAL_URL + "/mivimientos"} className="nav-brand d-flex align-items-center">
-         <NavMenu />
+          <NavMenu />
         </NavLink>
 
         {/* Desktop Menu */}
@@ -45,13 +45,40 @@ const NavbarAuxiliar = () => {
 
           <li><NavLink to={LOCAL_URL + "/movimientos"} end className="nav-link-item">Movimientos</NavLink></li>
 
-          <div className="nav-item-container has-submenu">
-            <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
-              Boletas <FontAwesomeIcon icon={faChevronDown} />
+
+
+          <div className="nav-item-container has-submenu nav-link-item">
+            <NavLink
+              to="#"
+              className="nav-link-item"
+              onClick={(e) => e.preventDefault()}
+            >
+              Ingresos <FontAwesomeIcon icon={faChevronDown} />
             </NavLink>
             <ul className="submenu-list">
-              <li><NavLink to={LOCAL_URL + "/nueva-boleta"} className="submenu-link">Crear Boleta</NavLink></li>
-              <li><NavLink to={LOCAL_URL + "/boletas"} className="submenu-link">Listar Boletas</NavLink></li>
+              <li>
+                <NavLink
+                  to={LOCAL_URL + '/nueva-boleta-ingreso'}
+                  className="submenu-link"
+                >
+                  Registrar Ingresos
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={LOCAL_URL + '/boletas-ingreso'} className="submenu-link">
+                  Listar Ingresos
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+
+          <div className="nav-item-container has-submenu">
+            <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
+              Gastos <FontAwesomeIcon icon={faChevronDown} />
+            </NavLink>
+            <ul className="submenu-list">
+              <li><NavLink to={LOCAL_URL + "/nueva-boleta"} className="submenu-link">Nuevo Gasto</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/boletas"} className="submenu-link">Listar Gastos</NavLink></li>
             </ul>
           </div>
 
@@ -63,7 +90,7 @@ const NavbarAuxiliar = () => {
             <ul className="submenu-list">
               <li><NavLink to={LOCAL_URL + "/reportes-por-caja"} className="submenu-link">Por Caja</NavLink></li>
               <li><NavLink to={LOCAL_URL + "/reportes-consolidado"} className="submenu-link">Consolidado</NavLink></li>
-                <li><NavLink to={LOCAL_URL + "/reporte-por-movimientos"} className="submenu-link">Movimientos</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/reporte-por-movimientos"} className="submenu-link">Movimientos</NavLink></li>
 
             </ul>
           </div>
@@ -71,7 +98,7 @@ const NavbarAuxiliar = () => {
           <li className="nav-action">
             <div className="nav-item-container has-submenu">
               <NavLink to="#" className="nav-link-item btn-nav-profile" onClick={(e) => e.preventDefault()}>
-                 <FontAwesomeIcon icon={faUser} /> 
+                <FontAwesomeIcon icon={faUser} />
               </NavLink>
               <ul className="submenu-list mt-4">
                 <li><NavLink to={"#"} className="submenu-link" onClick={() => auth.logout()}>Cerrar sesion <FontAwesomeIcon icon={faPowerOff} /></NavLink></li>
@@ -100,14 +127,40 @@ const NavbarAuxiliar = () => {
             <NavLink to={LOCAL_URL + "/dash-1"} end className="mobile-link">Dashboard</NavLink>
 
             <NavLink to={LOCAL_URL + "/movimientos"} className="mobile-link">Movimientos</NavLink>
-
             <div className="nav-item-container has-submenu">
-              <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
-                Boletas  <FontAwesomeIcon icon={faChevronDown} />
+              <NavLink
+                to="#"
+                className="nav-link-item"
+                onClick={(e) => e.preventDefault()}
+              >
+                Ingresos <FontAwesomeIcon icon={faChevronDown} />
               </NavLink>
               <ul className="submenu-list">
-                <li><NavLink to={LOCAL_URL + "/nueva-boleta"} className="submenu-link">Nueva Boleta</NavLink></li>
-                <li><NavLink to={LOCAL_URL + "/boletas"} className="submenu-link">Lista Boletas</NavLink></li>
+                <li>
+                  <NavLink
+                    to={LOCAL_URL + '/nueva-boleta-ingreso'}
+                    className="submenu-link"
+                  >
+                    Nueva boelta de Ingresos
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to={LOCAL_URL + '/boletas-ingreso'}
+                    className="submenu-link"
+                  >
+                    Listar Ingresos
+                  </NavLink>
+                </li>
+              </ul>
+            </div>
+            <div className="nav-item-container has-submenu">
+              <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
+                Gastos  <FontAwesomeIcon icon={faChevronDown} />
+              </NavLink>
+              <ul className="submenu-list">
+                <li><NavLink to={LOCAL_URL + "/nueva-boleta"} className="submenu-link">Nueva gasto</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/boletas"} className="submenu-link">Listar Gastos</NavLink></li>
               </ul>
             </div>
             <div className="nav-item-container has-submenu">

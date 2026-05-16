@@ -1825,7 +1825,7 @@ button:not(:disabled),
 }
 
 .brand-text {
-  font-size: 1.3rem;
+
   letter-spacing: 0.5px;
 }
 
@@ -2261,16 +2261,6 @@ main {
   margin: 0;
 }
 
-/* Ajuste para que la tarjeta no quede pegada al borde superior */
-.banco-card-header {
-  background: #fff;
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  margin: 20px 15px;
-  /* Espaciado externo */
-}
-
 
 
 
@@ -2669,12 +2659,11 @@ thead {
 
 
 .banco-card-header {
+  margin-top: 15px;
   background: #fff;
-  border-radius: 12px;
   padding: 24px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   /* Sombra muy suave */
-  margin: 15px;
   font-family: 'Inter', 'Roboto', sans-serif;
 }
 
@@ -2783,6 +2772,14 @@ thead {
 @media (min-width: 768px) {
   .banco-actions-container {
     justify-content: flex-start;
+  }
+
+  .banco-card-header {
+    background: #fff;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    /* Sombra muy suave */
+    font-family: 'Inter', 'Roboto', sans-serif;
   }
 
   .banco-btn-secondary {
@@ -3734,7 +3731,8 @@ thead {
 
   }
 }
-.g-3q{
+
+.g-3q {
   gap: 1rem !important;
 }
 

@@ -7,7 +7,7 @@ import {
 
 import DataTable from "../components/DataTable";
 import { InputUsuarioSearch } from "../components/input/elementos";
-import { UseCustomBoletas } from "../hooks/HookCustomBoleta"; // Nombre actualizado
+import { UseCustomBoletasIngreso } from "../hooks/HookCustomBoletaIngreso"; // Nombre actualizado
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ColumnsTable } from "./columnTable";
@@ -15,7 +15,7 @@ import { LOCAL_URL } from "../Auth/config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
-export function ListaBoleta() {
+export function ListaBoletaIngreso() {
     const navigate = useNavigate();
     const [filtroEstado, setFiltroEstado] = useState('TODOS');
 
@@ -25,7 +25,7 @@ export function ListaBoleta() {
         cargando,
         handleSearchBoleta, // Actualizado
         listarBoletas, // Actualizado
-    } = UseCustomBoletas();
+    } = UseCustomBoletasIngreso();
 
     useEffect(() => {
         listarBoletas()
@@ -50,7 +50,7 @@ export function ListaBoleta() {
     // const countAprobados = boletasFiltradas.filter(b => b.estado === 2).length;
     // const countDespachados = boletasFiltradas.filter(b => b.estado === 3).length;
     // const countRechazados = boletasFiltradas.filter(b => b.estado === 4).length;
-    const mios = boletasFiltradas.filter(b => b.usuario_solicita_id === parseInt(localStorage.getItem('id_'))).length;
+    const mios = boletasFiltradas.filter(b => b.usuario === parseInt(localStorage.getItem('id_'))).length;
 
     return (
         <>
@@ -58,8 +58,8 @@ export function ListaBoleta() {
                 <div className="panel-custom rounded shadow-sm mx-2">
                     <div className="banco-header-section">
                         <div className="banco-title-container">
-                            <h3 className="banco-title-main">Panel de gastos</h3>
-                            <p className="banco-subtitle">Panel de gestión de boletas de gasto</p>
+                            <h3 className="banco-title-main">Panel de Ingresos</h3>
+                            <p className="banco-subtitle">Panel de gestión de boletas de ingresos</p>
                         </div>
                     </div>
 
@@ -96,7 +96,7 @@ export function ListaBoleta() {
                             />
                             <input
                                 name="search-boleta"
-                                placeholder="Buscar por nro o solicitante..."
+                                placeholder="Buscar por caja, nro o registrador..."
                                 onChange={handleSearchBoleta}
                                 className="banco-input-search"
                             />
@@ -109,13 +109,12 @@ export function ListaBoleta() {
 
                         <DataTable
                             columns={ColumnsTable}
-                            data={dataFiltrada} 
+                            data={dataFiltrada}
                             cargando={cargando}
                             funciones={[
                                 {
                                     boton: (id_ingreso, row) => {
-                                        // alert((`${LOCAL_URL}/detalle-boleta/${row.codigo_boleta}`));
-                                        navigate(`${LOCAL_URL}/detalle-boleta/${row.codigo_boleta}`);
+                                        navigate(`${LOCAL_URL}/detalle-boleta-ingreso/${row.codigo_boleta}`);
                                     },
                                     className: 'btn btn-info py-1 px-3 x-small me-1 text-end',
                                     icono: faEye,

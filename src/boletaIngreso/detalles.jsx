@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { UseCustomBoletas } from "../hooks/HookCustomBoleta";
+import { UseCustomBoletasIngreso } from "../hooks/HookCustomBoletaIngreso";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 
@@ -18,7 +18,7 @@ import DataTable from "../components/DataTable";
 import { LOCAL_URL } from '../Auth/config';
 
 
-export const DetallesBoleta = () => {
+export const DetallesBoletaIngreso = () => {
     const { codigo } = useParams();
     const navigate = useNavigate();
     const [infoCabecera, setInfoCabecera] = useState(null);
@@ -36,14 +36,13 @@ export const DetallesBoleta = () => {
 
         itemsBoleta,
         cargando
-    } = UseCustomBoletas();
+    } = UseCustomBoletasIngreso();
 
     useEffect(() => {
         const cargarDatos = async () => {
             await consultarDetalleBoleta(codigo);
         };
         cargarDatos();
-        // if (itemsBoleta.length < 1) { navigate(`${LOCAL_URL}/boletas`) }
     }, [codigo]);
 
     // Actualizamos la cabecera cuando lleguen los items
@@ -53,9 +52,7 @@ export const DetallesBoleta = () => {
         }
     }, [itemsBoleta]);
 
-    useEffect(() => {
-        // if (itemsBoleta.length < 1) { navigate(`${LOCAL_URL}/boletas`) }
-    }, []);
+
     const styles = {
         card: { borderRadius: '16px', border: 'none', overflow: 'hidden' },
         headerIcon: { width: '45px', height: '45px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '12px' },
@@ -78,7 +75,7 @@ export const DetallesBoleta = () => {
                         <h1 className="banco-nav-title">Volver a Lista de Boletas</h1>
                     </div>
 
-                    <div className="banco-card-header">
+                    <div className="banco-card-header" >
                         <div className="banco-info-main">
                             {/* Etiqueta superior sutil */}
                             <p className="banco-label-top">
@@ -94,12 +91,12 @@ export const DetallesBoleta = () => {
                         </div>
 
                         <hr className="banco-divider"
-
                             style={{
 
-                                borderBottom: '4px solid #b44040', // Línea base muy suave
-                                boxShadow: '0 4px 6px -2px hsla(157, 30%, 92%, 0.15)'}}
-                                    />
+                                borderBottom: '4px solid #48b440', // Línea base muy suave
+                                boxShadow: '0 4px 6px -2px hsla(157, 30%, 92%, 0.15)'
+                            }}
+                        />
 
                         <div className="banco-info-grid">
                             <div className="banco-grid-item">
@@ -111,10 +108,10 @@ export const DetallesBoleta = () => {
                                     padding: '0',
                                     fontSize: '14px',
                                     fontWeight: '500',
-                                    color: infoCabecera?.estado === 3 ? '#38a169' : '#d69e2e'
+                                    color: infoCabecera?.estado === 2 ? '#38a169' : '#d69e2e'
                                 }}>
                                     <FontAwesomeIcon icon={infoCabecera?.estado === 3 ? faCircleCheck : faClock} className="me-2" />
-                                    {infoCabecera?.estado === 3 ? 'Finalizada' : 'Pendiente despacho'}
+                                    {infoCabecera?.estado === 2 ? 'Liquidado' : 'Pendiente despacho'}
                                 </span>
                             </div>
 
@@ -146,7 +143,7 @@ export const DetallesBoleta = () => {
                             <div className="banco-actions-container">
                                 <button
                                     className="banco-btn-secondary edit"
-                                    onClick={() => navigate(`${LOCAL_URL}/modificar-boleta/${codigo}`)}
+                                    onClick={() => navigate(`${LOCAL_URL}/modificar-boleta-ingreso/${codigo}`)}
                                 >
                                     <FontAwesomeIcon icon={faEdit} className="me-2" />
                                     Editar Boleta

@@ -43,7 +43,7 @@ const NavbarCajero = () => {
           to={LOCAL_URL + '/mivimientos'}
           className="nav-brand d-flex align-items-center"
         >
-       <NavMenu />
+          <NavMenu />
         </NavLink>
 
         {/* Desktop Menu */}
@@ -59,13 +59,40 @@ const NavbarCajero = () => {
             </NavLink>
           </li>
 
+
+
           <div className="nav-item-container has-submenu nav-link-item">
             <NavLink
               to="#"
               className="nav-link-item"
               onClick={(e) => e.preventDefault()}
             >
-              Boletas <FontAwesomeIcon icon={faChevronDown} />
+              Ingresos <FontAwesomeIcon icon={faChevronDown} />
+            </NavLink>
+            <ul className="submenu-list">
+              <li>
+                <NavLink
+                  to={LOCAL_URL + '/nueva-boleta-ingreso'}
+                  className="submenu-link"
+                >
+                  Registrar Ingresos
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={LOCAL_URL + '/boletas-ingreso'} className="submenu-link">
+                  Listar Ingresos
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+
+          <div className="nav-item-container has-submenu nav-link-item">
+            <NavLink
+              to="#"
+              className="nav-link-item"
+              onClick={(e) => e.preventDefault()}
+            >
+              Gastos <FontAwesomeIcon icon={faChevronDown} />
             </NavLink>
             <ul className="submenu-list">
               <li>
@@ -73,16 +100,22 @@ const NavbarCajero = () => {
                   to={LOCAL_URL + '/nueva-boleta'}
                   className="submenu-link"
                 >
-                  Crear Boleta
+                  Nuevo Gasto
                 </NavLink>
               </li>
               <li>
                 <NavLink to={LOCAL_URL + '/boletas'} className="submenu-link">
-                  Listar Boletas
+                  Listar gastos
                 </NavLink>
               </li>
             </ul>
           </div>
+
+
+
+
+
+          {/* 
           <div className="nav-item-container has-submenu">
             <NavLink
               to="#"
@@ -140,7 +173,7 @@ const NavbarCajero = () => {
                 </NavLink>
               </li>
             </ul>
-          </div>
+          </div> */}
 
 
           <div className="nav-item-container has-submenu">
@@ -282,30 +315,29 @@ const NavbarCajero = () => {
               <NavLink to={LOCAL_URL + '/movimientos'} className="mobile-link">
                 Movimientos
               </NavLink>
-
               <div className="nav-item-container has-submenu">
                 <NavLink
                   to="#"
                   className="nav-link-item"
                   onClick={(e) => e.preventDefault()}
                 >
-                  Boletas <FontAwesomeIcon icon={faChevronDown} />
+                  Ingresos <FontAwesomeIcon icon={faChevronDown} />
                 </NavLink>
                 <ul className="submenu-list">
                   <li>
                     <NavLink
-                      to={LOCAL_URL + '/nueva-boleta'}
+                      to={LOCAL_URL + '/nueva-boleta-ingreso'}
                       className="submenu-link"
                     >
-                      Nueva Boleta
+                      Nueva boelta de Ingresos
                     </NavLink>
                   </li>
                   <li>
                     <NavLink
-                      to={LOCAL_URL + '/boletas'}
+                      to={LOCAL_URL + '/boletas-ingreso'}
                       className="submenu-link"
                     >
-                      Lista Boletas
+                      Listar Ingresos
                     </NavLink>
                   </li>
                 </ul>
@@ -316,12 +348,39 @@ const NavbarCajero = () => {
                   className="nav-link-item"
                   onClick={(e) => e.preventDefault()}
                 >
+                  Gastos <FontAwesomeIcon icon={faChevronDown} />
+                </NavLink>
+                <ul className="submenu-list">
+                  <li>
+                    <NavLink
+                      to={LOCAL_URL + '/nueva-boleta'}
+                      className="submenu-link"
+                    >
+                      Nuevo Gasto
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to={LOCAL_URL + '/boletas'}
+                      className="submenu-link"
+                    >
+                      Listar gastos
+                    </NavLink>
+                  </li>
+                </ul>
+              </div>
+              {/* <div className="nav-item-container has-submenu">
+                <NavLink
+                  to="#"
+                  className="nav-link-item"
+                  onClick={(e) => e.preventDefault()}
+                >
                   Cobros <FontAwesomeIcon icon={faChevronDown} />
                 </NavLink>
                 <ul className="submenu-list">
                   <li>
                     <NavLink
-                       to={LOCAL_URL + '/cajero/nuevo-ingreso-directo/'}
+                      to={LOCAL_URL + '/cajero/nuevo-ingreso-directo/'}
                       className="submenu-link"
                     >
                       Registar Pago
@@ -350,7 +409,7 @@ const NavbarCajero = () => {
                 <ul className="submenu-list">
                   <li>
                     <NavLink
-                     to={LOCAL_URL + '/cajero/nuevo-ingreso-pendiente/'}
+                      to={LOCAL_URL + '/cajero/nuevo-ingreso-pendiente/'}
                       className="submenu-link"
                     >
                       Registrar Deuda
@@ -359,14 +418,14 @@ const NavbarCajero = () => {
                   </li>
                   <li>
                     <NavLink
-                        to={LOCAL_URL + '/cajero/ingresos-pendientes'}
+                      to={LOCAL_URL + '/cajero/ingresos-pendientes'}
                       className="submenu-link"
                     >
-                       Ver Deudas
+                      Ver Deudas
                     </NavLink>
                   </li>
                 </ul>
-              </div>
+              </div> */}
               <div className="nav-item-container has-submenu">
                 <NavLink
                   to="#"
