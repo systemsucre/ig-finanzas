@@ -54,9 +54,9 @@ const NuevoUsuario = () => {
                         <div className="login-card shadow-banking border-0 bg-white" style={{ borderRadius: '24px', overflow: 'hidden' }}>
 
                             <div className="p-4 text-center cabecera-formulario">
-                                <h2 className="h4 fw-bold m-0 text-uppercase tracking-wider">
+                                <h3 className="h4 fw-bold m-0 text-uppercase tracking-wider">
                                     {id ? 'Actualizar Ficha de Usuario' : 'Registro de Nuevo Usuario'}
-                                </h2>
+                                </h3>
                             </div>
  
                             <form className="row g-3" onSubmit={(e) => guardarUsuario(e, id ? id : null)}>

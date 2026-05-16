@@ -138,17 +138,17 @@ export const FormularioBoletaIngreso = () => {
   };
   return (
 
-    <main className="login-wrapper d-flex align-items-center justify-content-center py-5" style={{ minHeight: '100vh', background: '#F8FAFC' }}>
-      <section className="container">
+    <main className="login-wrapper d-flex align-items-center justify-content-center py-5" style={{ minHeight: '100vh',  background: '#F8FAFC' }}>
+      <section className="container" style={{minWidth:'80%',}}>
         <div className="row justify-content-center">
           <div className="col-12 col-md-11 col-lg-8 col-xl-7 animate-fade-in">
             <div className="login-card shadow-banking border-0 bg-white" style={{ borderRadius: '24px', overflow: 'hidden' }}>
 
 
               <div className="p-4 text-center cabecera-formulario">
-                <h2 className="h4 fw-bold m-0 text-uppercase tracking-wider">
-                  {codigo ? `Modificar Boleta` : 'Nueva Boleta de Ingresos'}
-                </h2>
+                <h3 className="h4 fw-bold m-0 text-uppercase tracking-wider">
+                  {codigo ? `Modificar Ingresos` : 'Nuevos Ingresos'}
+                </h3>
                 {codigo && (
                   <p className="text-center">
                     {' '}

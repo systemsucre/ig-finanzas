@@ -118,7 +118,7 @@ export function ListaBoletaIngreso() {
                                     },
                                     className: 'btn btn-info py-1 px-3 x-small me-1 text-end',
                                     icono: faEye,
-                                    label: 'VER BOLETA'
+                                    label: 'VER DETALLES'
                                 },
                             ]}
                         />

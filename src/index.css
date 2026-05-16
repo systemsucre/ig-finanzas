@@ -2974,10 +2974,27 @@ thead {
   border-radius: 28px 28px 0 0;
 }
 
-.cabecera-formulario h2 {
+.cabecera-formulario h3 {
   color: rgb(255, 255, 255) !important;
 
 }
+
+
+
+/* Cabecera con degradado "Oro y Acero" */
+.cabecera-formulario-gasto {
+  background: linear-gradient(135deg, #d5d5d5 0%, #818181 100%) !important;
+  /* border-bottom: 4px solid #D4AF37; */
+  /* Línea divisoria en oro */
+  padding: 2.5rem 1rem !important;
+  border-radius: 28px 28px 0 0;
+}
+
+.cabecera-formulario-gasto h3{
+  color: rgb(62, 62, 62) !important;
+
+}
+
 
 /* Efecto de elevación en los Inputs al escribir */
 .form-group-banking input {
