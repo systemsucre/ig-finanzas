@@ -27,6 +27,7 @@ import {
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { name } from '../Auth/config';
 
 // 2. Define CardKPI AQUÍ AFUERA (o dentro del componente, pero no lo importes de recharts)
 const CardKPI = ({
@@ -56,7 +57,7 @@ const CardKPI = ({
             {' '}
             {tipo === 'porcentaje'
               ? '%'
-              :tipo === 'moneda' ? monedas.find((e) => e.value === moneda.campo)?.simbolo : ''}{' '}
+              : tipo === 'moneda' ? monedas.find((e) => e.value === moneda.campo)?.simbolo : ''}{' '}
             {Number(monto || 0).toLocaleString()}
           </h5>
         </div>
@@ -127,7 +128,7 @@ const DashboardFinanciero = () => {
       utilidadPredicha: dataConPrediccion.prediccion,
     });
   }
-  //   console.log(dataConPrediccion.prediccion, ' _____mensaje aqui');
+  console.log(datosGrafico, ' _____mensaje aqui');
   const datosFiltrados = datosGrafico;
   // Si tienes 2025 y 2026: Verás una línea larga que va desde Ene/2025... pasando por Dic/2025 y continuando hacia Ene/2026.
 
@@ -138,6 +139,8 @@ const DashboardFinanciero = () => {
   //     Esto te dice qué tan "estables" son tus ingresos.En un estudio jurídico, esto es clave para saber si puedes permitirte gastos fijos grandes.
 
   // Baja desviación: Tus ingresos son constantes(predecible).
+
+
 
   // Alta desviación: Un mes ganas mucho y otro nada(riesgoso).
   const utilidades = historicoAll.map((h) => h.total_ingresos - h.total_gastos);
@@ -150,6 +153,11 @@ const DashboardFinanciero = () => {
 
   // Si la volatilidad es muy alta comparada con el promedio, necesitas un fondo de emergencia.
 
+  const promedioUtilidad = utilidades.reduce((a, b) => a + b, 0) / utilidades.length;
+  const porcentajeRiesgo = (volatilidad / promedioUtilidad) * 100;
+  console.log(promedioUtilidad, porcentajeRiesgo, ' PROMEDIO Y PORCENTAJEDE RIESGO');
+
+
   // 2. Coeficiente de Correlación ($r$)
 
   //     Este es oro puro. Te sirve para saber si X influye en Y.
@@ -160,6 +168,8 @@ const DashboardFinanciero = () => {
   const historicoFiltrado = historicoAll.filter(
     (h) => h.total_ingresos > 0 || h.total_gastos > 0,
   );
+
+
   let correlacion = null;
   // console.log('data mostrado historico filtrado ', historicoFiltrado)
   if (historicoFiltrado.length > 1) {
@@ -178,10 +188,14 @@ const DashboardFinanciero = () => {
        r = -1: Relación inversa (mientras más gastas, menos ganas).
     */
 
+
+
   //     3. Análisis de Outliers(Valores Atípicos)
   // Sirve para detectar meses "raros" que ensucian tu estadística.Por ejemplo, un mes donde entró un pago gigante por un juicio de años, o un mes de pérdida total.
 
   const utilidadesActivas = utilidades.filter((u) => u > 0);
+
+  // console.log(utilidades, ' verifacion outiers' )
   // utilidadesActivas ahora es [647, 3000, 5000]
   let outliersReales = 0;
   if (utilidadesActivas.length >= 3) {
@@ -206,6 +220,8 @@ const DashboardFinanciero = () => {
   }
   // console.log("Percentiles Reales:", historicoAll, utilidades);
 
+
+
   //     4. Percentiles(Metas de Rendimiento)
   // Puedes decirle al sistema: "Dime el monto de utilidad que superamos el 80% de las veces".Esto te ayuda a fijar sueldos base seguros para los socios de KR - Estudios.
 
@@ -222,6 +238,8 @@ const DashboardFinanciero = () => {
 
   //     5. Error Estándar de la Regresión(Margen de Error)
   // Para que tu mensaje de la IA sea honesto, puedes añadir el margen de error a la predicción.
+
+  
   const datosParaRegresion = utilidadesActivas.map((u, index) => [
     index + 1,
     u,
@@ -289,7 +307,7 @@ const DashboardFinanciero = () => {
             monedas={monedas}
           />
           <CardKPI
-            titulo="REI <70"
+            titulo="IEO"
             monto={(kpis.gastos / kpis.ingresos) * 100}
             icono={faClipboardList}
             color="#f59e0b"
@@ -298,7 +316,66 @@ const DashboardFinanciero = () => {
             tipo={'porcentaje'}
           />
         </div>
-
+        <div className="col-md-4">
+          <label className="text-white">Seleccionar Moneda </label>
+          <Select
+            placeholder="Busque por código caja..."
+            onChange={(e) => {
+              if (e) {
+                const nuevoId = e.value;
+                setMoneda({ campo: nuevoId, valido: 'true' });
+                localStorage.setItem('moneda', nuevoId);
+                // Llamamos a la función unificada pasando el nuevo ID directamente
+                refresh(nuevoId);
+                listarHistorico(nuevoId);
+              }
+            }}
+            options={monedas}
+            value={monedas.find((opt) => opt.value === moneda.campo) || null}
+            isSearchable={true}
+            isClearable={true}
+            styles={{
+              control: (base) => ({
+                ...base,
+                backgroundColor: 'transparent', // Fondo transparente
+                borderRadius: '10px',
+                padding: '5px',
+                borderColor: '#dee2e6',
+                boxShadow: 'none',
+                '&:hover': {
+                  borderColor: '#dee2e6',
+                },
+              }),
+              singleValue: (base) => ({
+                ...base,
+                color: '#fff', // Color del texto seleccionado (blanco para que resalte sobre el fondo oscuro)
+              }),
+              placeholder: (base) => ({
+                ...base,
+                color: 'rgba(255, 255, 255, 0.7)', // Color del placeholder semi-transparente
+              }),
+              menu: (base) => ({
+                ...base,
+                backgroundColor: '#ffffff', // Fondo de la lista desplegable blanco
+                borderRadius: '10px',
+                zIndex: 9999, // Asegura que se vea por encima de otros elementos
+              }),
+              option: (base, { isFocused, isSelected }) => ({
+                ...base,
+                backgroundColor: isSelected
+                  ? '#10b981' // Color si está seleccionado (verde esmeralda)
+                  : isFocused
+                    ? '#f1f5f9' // Color al pasar el mouse (gris muy claro)
+                    : '#ffffff', // Color por defecto
+                color: isSelected ? '#fff' : '#333', // Texto oscuro en la lista para legibilidad
+                cursor: 'pointer',
+                '&:active': {
+                  backgroundColor: '#10b981',
+                },
+              }),
+            }}
+          />
+        </div>
         <div
           className="card border-0 shadow-sm p-4"
           style={{ borderRadius: '15px', minHeight: '450px' }}
@@ -310,66 +387,7 @@ const DashboardFinanciero = () => {
             Flujo de Caja Mensual (
             {monedas.find((e) => e.value === moneda.campo)?.simbolo})
           </h6>
-          <div className="col-md-4">
-            <label className="text-white">Seleccionar Moneda </label>
-            <Select
-              placeholder="Busque por código caja..."
-              onChange={(e) => {
-                if (e) {
-                  const nuevoId = e.value;
-                  setMoneda({ campo: nuevoId, valido: 'true' });
-                  localStorage.setItem('moneda', nuevoId);
-                  // Llamamos a la función unificada pasando el nuevo ID directamente
-                  refresh(nuevoId);
-                  listarHistorico(nuevoId);
-                }
-              }}
-              options={monedas}
-              value={monedas.find((opt) => opt.value === moneda.campo) || null}
-              isSearchable={true}
-              isClearable={true}
-              styles={{
-                control: (base) => ({
-                  ...base,
-                  backgroundColor: 'transparent', // Fondo transparente
-                  borderRadius: '10px',
-                  padding: '5px',
-                  borderColor: '#dee2e6',
-                  boxShadow: 'none',
-                  '&:hover': {
-                    borderColor: '#dee2e6',
-                  },
-                }),
-                singleValue: (base) => ({
-                  ...base,
-                  color: '#fff', // Color del texto seleccionado (blanco para que resalte sobre el fondo oscuro)
-                }),
-                placeholder: (base) => ({
-                  ...base,
-                  color: 'rgba(255, 255, 255, 0.7)', // Color del placeholder semi-transparente
-                }),
-                menu: (base) => ({
-                  ...base,
-                  backgroundColor: '#ffffff', // Fondo de la lista desplegable blanco
-                  borderRadius: '10px',
-                  zIndex: 9999, // Asegura que se vea por encima de otros elementos
-                }),
-                option: (base, { isFocused, isSelected }) => ({
-                  ...base,
-                  backgroundColor: isSelected
-                    ? '#10b981' // Color si está seleccionado (verde esmeralda)
-                    : isFocused
-                      ? '#f1f5f9' // Color al pasar el mouse (gris muy claro)
-                      : '#ffffff', // Color por defecto
-                  color: isSelected ? '#fff' : '#333', // Texto oscuro en la lista para legibilidad
-                  cursor: 'pointer',
-                  '&:active': {
-                    backgroundColor: '#10b981',
-                  },
-                }),
-              }}
-            />
-          </div>
+
           <div
             style={{
               width: '100%',
@@ -484,7 +502,7 @@ const DashboardFinanciero = () => {
             className="text-white fw-bold mb-4"
             style={{ fontSize: '1rem', marginBottom: '1rem' }}
           >
-            Tendencia de ingresos mes siguiente
+            Tendencia de utilidad neta mes siguiente
           </h6>
 
           <div
@@ -579,7 +597,14 @@ const DashboardFinanciero = () => {
           </div>
         </div>
 
-        <div className="row g-3 mb-4" style={{ marginBottom: '7rem', marginTop: '3rem' }}>
+        <h6
+          className="text-white fw-bold mb-4 text-center"
+          style={{ fontSize: '1rem', }}
+        >
+          VOLATILIDAD
+        </h6>
+
+        <div className="row g-3 mb-4" style={{ marginBottom: '3rem', paddingBottom: '2rem', borderBottom: '1px solid white', borderTop: '1px solid white' }}>
           <div className="col-md-4 col-sm-6 mb-4">
             <div
               className="card border-0 shadow-sm p-4 text-center"
@@ -590,13 +615,60 @@ const DashboardFinanciero = () => {
                   className="text-white display-5 fw-bold"
                   style={{ fontSize: '2rem' }}
                 >
-                  {volatilidad?.toFixed(2)}
+                  {monedas.find((e) => e.value === moneda.campo)?.simbolo}{' '}    {volatilidad?.toFixed(2)}
                 </h1>
                 <p className="text-white">Volatilidad </p>
               </div>
             </div>
           </div>
 
+          <div className="col-md-4 col-sm-6 mb-4">
+            <div
+              className="card border-0 shadow-sm p-4 text-center"
+              style={{ borderRadius: '15px', height: '100%' }}
+            >
+              <div className="py-4">
+                <h1
+                  className="text-white display-5 fw-bold"
+                  style={{ fontSize: '2rem' }}
+                >
+                  {monedas.find((e) => e.value === moneda.campo)?.simbolo}{' '}    {promedioUtilidad?.toFixed(2)}
+                </h1>
+                <p className="text-white">Promedio Utilidad Neta </p>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-4 col-sm-6 mb-4">
+            <div
+              className="card border-0 shadow-sm p-4 text-center bg-white"
+              style={{ borderRadius: '15px', height: '100%' }}
+            >
+              <div className="py-4">
+                <h1
+                  className="text-white display-5 fw-bold"
+                  style={{ fontSize: '2rem' }}
+                >
+                  {porcentajeRiesgo?.toFixed(2)}%
+                </h1>
+
+                <p
+                  className={`${porcentajeRiesgo > 30 ? 'text-danger' : 'text-success'} display-5 fw-bold `}
+                  style={{ fontSize: '.7rem', padding: '10px' }}
+                >
+                  {porcentajeRiesgo < 31 ? ` Tu saludfinanciera es estable con volatilidad al ${porcentajeRiesgo?.toFixed(2)}%` : `
+                     Sugerencia de ${name}: Sus utilidades presentan una volatilidad alta de ${porcentajeRiesgo?.toFixed(2)}%.
+                      Le recomendamos mantener un Fondo de Emergencia equivalente a 3 meses de gastos fijos para amortiguar los meses de baja actividad.
+                    `}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <div className="row g-3 mb-4" style={{ marginBottom: '7rem', marginTop: '3rem' }}>
           <div className="col-md-4 col-sm-6 mb-4 ">
             <div
               className="card border-0 shadow-sm p-4 text-center"
@@ -609,26 +681,28 @@ const DashboardFinanciero = () => {
                 >
                   {correlacion?.toFixed(2)}
                 </h1>
-                <p className="text-white">Correlación</p>
+                <p className="text-white">Correlación de Pearson</p>
               </div>
             </div>
           </div>
-          <div className="col-md-4 col-sm-6 mb-4 ">
-            <div
-              className="card border-0 shadow-sm p-4 text-center"
-              style={{ borderRadius: '15px', height: '100%' }}
-            >
-              <div className="py-4">
-                <h1
-                  className={`${outliersReales.length > 0 ? 'text-danger' : 'text-success'} display-5 fw-bold `}
-                  style={{ fontSize: '1rem' }}
-                >
-                  {mensajeOutliers}
-                </h1>
-                <p className="text-white">Outlier</p>
+          {outliersReales.length > 0 ?
+            <div className="col-md-4 col-sm-6 mb-4 ">
+              <div
+                className="card border-0 shadow-sm p-4 text-center"
+                style={{ borderRadius: '15px', height: '100%' }}
+              >
+                <div className="py-4">
+                  <h1
+                    className={`${outliersReales.length > 0 ? 'text-danger' : 'text-success'} display-5 fw-bold `}
+                    style={{ fontSize: '1rem' }}
+                  >
+                    {mensajeOutliers}
+                  </h1>
+                  <p className="text-white">Outlier</p>
+                </div>
               </div>
             </div>
-          </div>
+            : null}
 
           <div className="col-md-4 col-sm-6 mb-4 ">
             <div

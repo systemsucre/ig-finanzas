@@ -79,7 +79,7 @@ export const DetallesBoletaIngreso = () => {
                         <div className="banco-info-main">
                             {/* Etiqueta superior sutil */}
                             <p className="banco-label-top">
-                                BOLETA <span className="banco-id-secondary">{codigo}</span>
+                                BOLETA INGRESO<span className="banco-id-secondary">{codigo}</span>
                             </p>
 
                             {/* Identificador Principal (como el saldo) */}

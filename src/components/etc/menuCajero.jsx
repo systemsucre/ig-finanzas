@@ -329,7 +329,7 @@ const NavbarCajero = () => {
                       to={LOCAL_URL + '/nueva-boleta-ingreso'}
                       className="submenu-link"
                     >
-                      Nueva boelta de Ingresos
+                      Nuevo Ingreso
                     </NavLink>
                   </li>
                   <li>

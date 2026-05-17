@@ -549,6 +549,11 @@ button:not(:disabled),
     width: 50%;
   }
 
+  .col-md-8 {
+    flex: 0 0 auto;
+    width: 66.66666667;
+  }
+
   .col-md-10 {
     flex: 0 0 auto;
     width: 83.33333%;
@@ -571,6 +576,11 @@ button:not(:disabled),
     width: 58.33333%;
   }
 
+  .col-lg-10 {
+    flex: 0 0 auto;
+    width: 83.33333%;
+  }
+
   .col-lg-12 {
     flex: 0 0 auto;
     width: 100%;
@@ -586,6 +596,11 @@ button:not(:disabled),
   .col-lg-7 {
     flex: 0 0 auto;
     width: 58.33333%;
+  }
+
+  .col-lg-10 {
+    flex: 0 0 auto;
+    width: 83.33333%;
   }
 
   .col-xl-6 {
@@ -2011,7 +2026,7 @@ main {
 .nav-toggle .bar {
   width: 28px;
   height: 3px;
-  background: #007bff;
+  background: #4b4b4b;
   border-radius: 10px;
   transition: 0.4s ease;
 }
@@ -2990,7 +3005,7 @@ thead {
   border-radius: 28px 28px 0 0;
 }
 
-.cabecera-formulario-gasto h3{
+.cabecera-formulario-gasto h3 {
   color: rgb(62, 62, 62) !important;
 
 }

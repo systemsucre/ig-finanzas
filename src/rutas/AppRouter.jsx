@@ -431,7 +431,6 @@ export default function AppRouter() {
         },
 
 
-
         {
           path: 'boletas-ingreso',
           element: <Check component={ListaBoletaIngreso} roleRequired="all" />,
