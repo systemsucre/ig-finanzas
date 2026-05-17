@@ -208,7 +208,7 @@ export const FormularioBoletaIngreso = () => {
                   </div>
 
                   {/* Campos de Texto y Monto en Grid Limpio */}
-                  <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '20px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
                     <div>
                       <label style={{ display: 'block', color: '#475569', fontSize: '12px', fontWeight: '600', marginBottom: '8px' }}>CONCEPTO / DETALLE</label>
                       <input

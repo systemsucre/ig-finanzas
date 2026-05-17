@@ -171,7 +171,7 @@ export const FormularioBoleta = () => {
                   </div>
 
                   {/* Fila superior: Selección de caja, Monto y Fecha */}
-                  <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: '16px', marginBottom: '16px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '16px' }}>
                     <div>
                       <label style={{ display: 'block', color: '#475569', fontSize: '12px', fontWeight: '600', marginBottom: '8px' }}>CAJA ORIGEN</label>
                       <Select

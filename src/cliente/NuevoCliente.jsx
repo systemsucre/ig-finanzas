@@ -99,7 +99,7 @@ const NuevoCliente = () => {
                         </div>
 
                         {/* Fila 2: CI / NIT y Celular */}
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginBottom: '24px' }}>
+                        <div style={{ display: 'grid',gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '24px', marginBottom: '24px' }}>
                             <div>
                                 <InputUsuarioStandard
                                     estado={estados.ci} cambiarEstado={setters.setCi}
