@@ -599,7 +599,7 @@ const DashboardFinanciero = () => {
 
         <h6
           className="text-white fw-bold mb-4 text-center"
-          style={{ fontSize: '1rem', }}
+          style={{ fontSize: '1rem', margintop:'6rem'}}
         >
           VOLATILIDAD
         </h6>

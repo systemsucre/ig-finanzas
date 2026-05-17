@@ -65,7 +65,7 @@ export const FormularioBoletaIngreso = () => {
   const handleGuardar = async (e) => {
     if (e) e.preventDefault();
 
-    const incompleto = itemsForm.some((i) => !i.monto || !i.detalle);
+    const incompleto = itemsForm.some((i) => (!i.monto || i.monto < 1) || !i.detalle);
     if (incompleto) return toast.error('Por favor, completa todos los campos obligatorios');
 
     try {
@@ -86,7 +86,7 @@ export const FormularioBoletaIngreso = () => {
     control: (provided, state) => ({
       ...provided,
       backgroundColor: '#f8fafc',
-      borderColor: state.isFocused ? '#0f172a' : '#cbd5e1', 
+      borderColor: state.isFocused ? '#0f172a' : '#cbd5e1',
       boxShadow: state.isFocused ? '0 0 0 1px #0f172a' : 'none',
       borderRadius: '12px',
       padding: '4px 8px',
@@ -116,9 +116,9 @@ export const FormularioBoletaIngreso = () => {
   };
 
   return (
-    <main style={{ minHeight: '100vh', background: '#f1f5f9', padding: '40px 20px', fontFamily: 'system-ui, -apple-system, sans-serif', marginTop:'3rem' }}>
+    <main style={{ minHeight: '100vh', background: '#f1f5f9', padding: '40px 20px', fontFamily: 'system-ui, -apple-system, sans-serif', marginTop: '3rem' }}>
       <section style={{ maxWidth: '780px', margin: '0 auto' }}>
-        
+
         {/* CABECERA MINIMALISTA */}
         <div style={{ marginBottom: '28px', display: 'flex', alignItems: 'center', justifyContent: 'between', width: '100%' }}>
           <div>
@@ -138,7 +138,7 @@ export const FormularioBoletaIngreso = () => {
 
         {tramitesFiltradosBoleta.length > 0 ? (
           <form onSubmit={handleGuardar} onKeyDown={(e) => e.key === 'Enter' && e.preventDefault()}>
-            
+
             {/* BLOQUE 1: ORIGEN */}
             <div style={{ background: '#ffffff', borderRadius: '16px', padding: '24px', marginBottom: '24px', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
               <h2 style={{ color: '#64748b', fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '20px', marginTop: 0 }}>
@@ -190,7 +190,7 @@ export const FormularioBoletaIngreso = () => {
 
               {itemsForm.map((item, index) => (
                 <div key={index} style={{ background: '#ffffff', borderRadius: '16px', padding: '24px', marginBottom: '16px', borderLeft: '4px solid #2e7559', boxShadow: '0 1px 3px rgba(0,0,0,0.05)', position: 'relative' }}>
-                  
+
                   {/* Fila control cabecera del item */}
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
                     <span style={{ background: 'rgba(46, 117, 89, 0.1)', color: '#2e7559', fontWeight: '700', fontSize: '11px', padding: '4px 10px', borderRadius: '6px', letterSpacing: '0.5px' }}>
