@@ -76,14 +76,24 @@ const NavbarAdmin = () => {
 
           <div className="nav-item-container has-submenu">
             <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
-              CONFIGURACION  <FontAwesomeIcon icon={faChevronDown} />
+              Usuarios <FontAwesomeIcon icon={faChevronDown} />
             </NavLink>
 
             <ul className="submenu-list">
               <li><NavLink to={LOCAL_URL + "/admin/nuevo-usuario"} className="submenu-link">Nuevo Usuario</NavLink></li>
               <li><NavLink to={LOCAL_URL + "/admin/lista-usuarios"} className="submenu-link">Lista Usuarios</NavLink></li>
+            </ul>
+          </div>
+
+
+          <div className="nav-item-container has-submenu">
+            <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
+              Tipo caja  <FontAwesomeIcon icon={faChevronDown} />
+            </NavLink>
+
+            <ul className="submenu-list">
               <li><NavLink to={LOCAL_URL + "/admin/nuevo-tipo-caja"} className="submenu-link">Nuevo Tipo Caja</NavLink></li>
-              <li><NavLink to={LOCAL_URL + "/admin/lista-tipo-caja"} className="submenu-link">Lista Tipo Cajas</NavLink></li>
+              <li><NavLink to={LOCAL_URL + "/admin/lista-tipo-caja"} className="submenu-link">Listar Tipo Cajas</NavLink></li>
             </ul>
           </div>
 
@@ -156,13 +166,23 @@ const NavbarAdmin = () => {
 
             <div className="nav-item-container has-submenu">
               <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
-                CONFIGURACIONES<FontAwesomeIcon icon={faChevronDown} />
+                Usuarios<FontAwesomeIcon icon={faChevronDown} />
               </NavLink>
               <ul className="submenu-list">
                 <li><NavLink to={LOCAL_URL + "/admin/nuevo-usuario"} className="submenu-link">Nuevo Usuario</NavLink></li>
                 <li><NavLink to={LOCAL_URL + "/admin/lista-usuarios"} className="submenu-link">Lista Usuarios</NavLink></li>
+              </ul>
+            </div>
+
+
+
+            <div className="nav-item-container has-submenu">
+              <NavLink to="#" className="nav-link-item" onClick={(e) => e.preventDefault()}>
+                Tipo de caja<FontAwesomeIcon icon={faChevronDown} />
+              </NavLink>
+              <ul className="submenu-list">
                 <li><NavLink to={LOCAL_URL + "/admin/nuevo-tipo-caja"} className="submenu-link">Nuevo tipo Caja</NavLink></li>
-                <li><NavLink to={LOCAL_URL + "/admin/lista-tipo-caja"} className="submenu-link">Lista tipo Caja</NavLink></li>
+                <li><NavLink to={LOCAL_URL + "/admin/lista-tipo-caja"} className="submenu-link">Lista Caja</NavLink></li>
               </ul>
             </div>
 
