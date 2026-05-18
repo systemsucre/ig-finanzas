@@ -36,7 +36,7 @@ export function ListaBoletaIngreso() {
     const dataFiltrada = boletasFiltradas.filter(b => {
         // Si el filtro es 'MIOS', filtramos por el ID del usuario
         if (filtroEstado === 'MIOS') {
-            return b.usuario_solicita_id === idUsuarioActual;
+            return b.usuario === idUsuarioActual;
         }
         // Si el filtro es 'TODOS', pasan todas
         if (filtroEstado === 'TODOS') return true;
